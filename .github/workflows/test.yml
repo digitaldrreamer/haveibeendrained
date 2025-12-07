@@ -22,31 +22,44 @@ jobs:
     - name: Install Dependencies
       run: bun install
       
-    - name: Setup Solana
-      uses: metadaoproject/setup-solana@v1.0
-      with:
-        solana-cli-version: '1.18.18'
-    
-    - name: Install Rust & Anchor CLI
+    - name: Install Solana
+      run: |
+        sh -c "$(curl -sSfL https://release.solana.com/v1.18.18/install)"
+        echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+        solana --version
+        
+    - name: Install Rust
       run: |
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        source "$HOME/.cargo/env"
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+        export PATH="$HOME/.cargo/bin:$PATH"
+        
+    - name: Install Anchor
+      run: |
+        export PATH="$HOME/.cargo/bin:$PATH"
         cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
         avm install 0.32.1
         avm use 0.32.1
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-        echo "$HOME/.avm/bin" >> $GITHUB_PATH
         
     - name: Verify Installations
       run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
         solana --version
         anchor --version
+        rustc --version
         
     - name: Build Anchor Program
-      run: cd packages/anchor && anchor build
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
+        cd packages/anchor
+        anchor build
       
     - name: Run Anchor Tests
-      run: cd packages/anchor && anchor test --skip-deploy
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
+        cd packages/anchor
+        anchor test --skip-local-validator
       env:
         ANCHOR_PROVIDER_URL: http://127.0.0.1:8899
         
