@@ -19,18 +19,78 @@ jobs:
         
     - run: bun install
     
-    - name: Setup Solana & Anchor
-      uses: solana-developers/github-actions/.github/actions/setup-all@v0.2.7
+    - name: Cache Dependencies
+      uses: actions/cache@v4
       with:
-        solana_version: '1.18.18'
-        anchor_version: '0.32.1'
-        node_version: '20'
+        path: |
+          ~/.cache/solana
+          ~/.local/share/solana
+          ~/.cargo/bin
+          ~/.cargo/registry
+        key: solana-1.18.18-anchor-0.32.1-${{ runner.os }}
+        restore-keys: |
+          solana-1.18.18-anchor-0.32.1-
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+        
+    - name: Install System Dependencies & Fix SSL
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libssl-dev \
+          libudev-dev \
+          pkg-config \
+          zlib1g-dev \
+          llvm \
+          clang \
+          cmake \
+          make \
+          ca-certificates
+        sudo update-ca-certificates --fresh
+        
+    - name: Install Solana CLI
+      run: |
+        if [ ! -d "$HOME/.local/share/solana" ]; then
+          sh -c "$(curl -sSfL https://release.solana.com/v1.18.18/install)"
+        fi
+        echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+      shell: bash
+        
+    - name: Install Anchor CLI
+      run: |
+        if ! command -v anchor &> /dev/null; then
+          cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+          $HOME/.cargo/bin/avm install 0.32.1
+          $HOME/.cargo/bin/avm use 0.32.1
+        fi
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      shell: bash
+        
+    - name: Verify Installations
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
+        solana --version
+        anchor --version
+        cargo --version
+      shell: bash
         
     - name: Build Anchor Program
-      run: cd packages/anchor && anchor build
+      working-directory: packages/anchor
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
+        anchor build
+      shell: bash
       
     - name: Run Anchor Tests
-      run: cd packages/anchor && anchor test
+      working-directory: packages/anchor
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH"
+        anchor test
+      shell: bash
         
     - name: Run API Tests
-      run: cd packages/api && bun test
+      working-directory: packages/api
+      run: bun test
