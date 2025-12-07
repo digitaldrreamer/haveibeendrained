@@ -8,61 +8,71 @@ on:
 
 jobs:
   test:
-    name: Run Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     
     steps:
     - uses: actions/checkout@v4
     
-    # --- Setup Environment ---
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Setup Rust
+      uses: dtolnay/rust-toolchain@stable
+    
+    - name: Cache Cargo & Anchor
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/
+          ~/.cargo/git/
+          packages/anchor/target/
+        key: cargo-anchor-${{ runner.os }}-${{ hashFiles('packages/anchor/Cargo.lock') }}
+    
+    - name: Install Solana CLI
+      run: |
+        if [ ! -d "$HOME/.local/share/solana" ]; then
+          sh -c "$(wget -qO- https://release.solana.com/v1.18.18/install)"
+        fi
+        echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+    
+    - name: Install Anchor CLI
+      run: |
+        if ! command -v anchor &> /dev/null; then
+          cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked --force
+        fi
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
     
     - name: Setup Bun
       uses: oven-sh/setup-bun@v2
       with:
         bun-version: latest
-        
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        
-    - name: Setup Rust
-      uses: dtolnay/rust-toolchain@stable
-
-    # --- Install Solana & Anchor ---
-
-    - name: Install Solana
+    
+    - name: Install Dependencies
       run: |
-        for i in 1 2 3; do
-          sh -c "$(wget -qO- https://release.solana.com/v1.18.18/install)" && break
-          echo "Solana install failed, retrying in 10s..."
-          sleep 10
-        done
-        echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-        export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-        solana --version
-
-    - name: Install Anchor
-      run: |
-        cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
-        avm install 0.32.1
-        avm use 0.32.1
-        
-    # --- Run Tests ---
-
-    - name: Install Project Dependencies
-      run: bun install
-
-    - name: Build Anchor Program
-      run: cd packages/anchor && anchor build
-
+        bun install
+        cd packages/anchor && yarn install && cd ../..
+    
     - name: Run Anchor Tests
-      run: cd packages/anchor && anchor test
+      working-directory: packages/anchor
+      run: anchor test
       env:
         RUST_BACKTRACE: 1
-        ANCHOR_PROVIDER_URL: http://127.0.0.1:8899
-        ANCHOR_WALLET: ~/.config/solana/id.json
-
+    
+    - name: List API Test Files (Debug)
+      working-directory: packages/api
+      run: |
+        echo "=== Current Directory ==="
+        pwd
+        echo ""
+        echo "=== Directory Contents ==="
+        ls -la
+        echo ""
+        echo "=== Looking for test files ==="
+        find . -type f \( -name "*.test.*" -o -name "*.spec.*" -o -name "*_test.*" -o -name "*_spec.*" \) || echo "No test files found"
+    
     - name: Run API Tests
       working-directory: packages/api
       run: bun test
