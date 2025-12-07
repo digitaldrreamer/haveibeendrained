@@ -22,15 +22,25 @@ jobs:
     - name: Install Dependencies
       run: bun install
       
-    - name: Setup Solana CLI (Optimized)
+    - name: Setup Solana
       uses: metadaoproject/setup-solana@v1.0
       with:
         solana-cli-version: '1.18.18'
+    
+    - name: Install Rust & Anchor CLI
+      run: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        source "$HOME/.cargo/env"
+        cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+        avm install 0.32.1
+        avm use 0.32.1
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+        echo "$HOME/.avm/bin" >> $GITHUB_PATH
         
-    - name: Setup Anchor (Optimized)
-      uses: metadaoproject/setup-anchor@v1.0
-      with:
-        anchor-version: '0.32.1'
+    - name: Verify Installations
+      run: |
+        solana --version
+        anchor --version
         
     - name: Build Anchor Program
       run: cd packages/anchor && anchor build
