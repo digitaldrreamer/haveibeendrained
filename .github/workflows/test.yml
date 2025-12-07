@@ -24,7 +24,11 @@ jobs:
       
     - name: Install Solana
       run: |
-        sh -c "$(curl -sSfL https://release.solana.com/v1.18.18/install)"
+        for i in 1 2 3; do
+          sh -c "$(curl -sSfL https://release.solana.com/v1.18.18/install)" && break
+          echo "Solana install failed, retrying in 10s..."
+          sleep 10
+        done
         echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
         export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
         solana --version
