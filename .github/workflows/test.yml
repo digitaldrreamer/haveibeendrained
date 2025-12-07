@@ -57,10 +57,14 @@ jobs:
     
     - name: Run Anchor Tests
       working-directory: packages/anchor
-      run: anchor test
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+        echo "PATH is: $PATH"
+        ls -la $HOME/.local/share/solana/install/active_release/bin
+        which cargo-build-sbf || echo "cargo-build-sbf not found in PATH"
+        anchor test
       env:
         RUST_BACKTRACE: 1
-        PATH: /home/runner/.local/share/solana/install/active_release/bin:/home/runner/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     
     - name: List API Test Files (Debug)
       working-directory: packages/api
