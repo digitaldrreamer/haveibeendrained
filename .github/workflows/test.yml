@@ -25,7 +25,7 @@ jobs:
     - name: Install Solana
       run: |
         for i in 1 2 3; do
-          sh -c "$(curl -sSfL https://release.solana.com/v1.18.18/install)" && break
+          sh -c "$(wget -qO- https://release.solana.com/v1.18.18/install)" && break
           echo "Solana install failed, retrying in 10s..."
           sleep 10
         done
