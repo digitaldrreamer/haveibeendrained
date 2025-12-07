@@ -20,11 +20,11 @@ jobs:
     - run: bun install
     
     - name: Setup Solana & Anchor
-      uses: solana-developers/setup-all@v1
+      uses: solana-developers/github-actions/.github/actions/setup-all@v0.2.7
       with:
-        node-version: 20
-        anchor-version: 0.32.1
-        solana-cli-version: 1.18.18
+        solana_version: '1.18.18'
+        anchor_version: '0.32.1'
+        node_version: '20'
         
     - name: Build Anchor Program
       run: cd packages/anchor && anchor build
