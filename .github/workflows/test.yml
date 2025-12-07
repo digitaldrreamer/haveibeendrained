@@ -33,9 +33,11 @@ jobs:
     
     - name: Install Solana CLI
       run: |
-        if [ ! -d "$HOME/.local/share/solana" ]; then
-          sh -c "$(wget -qO- https://release.solana.com/v1.18.18/install)"
-        fi
+        mkdir -p $HOME/.local/share/solana/install
+        wget -q https://github.com/solana-labs/solana/releases/download/v1.18.18/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+        tar jxf solana-release-x86_64-unknown-linux-gnu.tar.bz2
+        mv solana-release $HOME/.local/share/solana/install/active_release
+        rm solana-release-x86_64-unknown-linux-gnu.tar.bz2
         echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
     
     - name: Install Anchor CLI
