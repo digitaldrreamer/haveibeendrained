@@ -1,0 +1,234 @@
+{
+  "address": "BYbF6QC9PoeHGH4y1pLNC2YHBChpnFBq46vBydyBFxq2",
+  "metadata": {
+    "name": "drainer_registry",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "report_drainer",
+      "docs": [
+        "Report a drainer address to the on-chain registry",
+        "",
+        "This instruction creates or updates a DrainerReport PDA account.",
+        "Requires a 0.01 SOL anti-spam fee."
+      ],
+      "discriminator": [
+        85,
+        75,
+        117,
+        179,
+        126,
+        35,
+        99,
+        201
+      ],
+      "accounts": [
+        {
+          "name": "drainer_report",
+          "docs": [
+            "The DrainerReport PDA account (created if first report, updated if exists)"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  114,
+                  97,
+                  105,
+                  110,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "drainer_address"
+              }
+            ]
+          }
+        },
+        {
+          "name": "reporter",
+          "docs": [
+            "The reporter submitting this report (pays anti-spam fee)"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "program_authority",
+          "docs": [
+            "Program authority that receives anti-spam fees"
+          ],
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "clock",
+          "docs": [
+            "Clock sysvar for timestamps"
+          ],
+          "address": "SysvarC1ock11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "drainer_address",
+          "type": "pubkey"
+        },
+        {
+          "name": "amount_stolen",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "DrainerReport",
+      "discriminator": [
+        128,
+        141,
+        53,
+        82,
+        70,
+        169,
+        131,
+        176
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "DrainerReported",
+      "discriminator": [
+        189,
+        174,
+        41,
+        201,
+        252,
+        36,
+        60,
+        177
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient funds for anti-spam fee (0.01 SOL required)"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidDrainerAddress",
+      "msg": "Invalid drainer address provided"
+    },
+    {
+      "code": 6002,
+      "name": "ReportCountOverflow",
+      "msg": "Report count overflow - maximum reports reached"
+    },
+    {
+      "code": 6003,
+      "name": "AmountOverflow",
+      "msg": "Amount overflow - total reported amount too large"
+    },
+    {
+      "code": 6004,
+      "name": "CannotReportSelf",
+      "msg": "Cannot report yourself as a drainer"
+    },
+    {
+      "code": 6005,
+      "name": "CannotReportSystemProgram",
+      "msg": "Cannot report system program as drainer"
+    }
+  ],
+  "types": [
+    {
+      "name": "DrainerReport",
+      "docs": [
+        "DrainerReport account stores aggregated information about a reported drainer address"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "drainer_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "report_count",
+            "type": "u32"
+          },
+          {
+            "name": "first_seen",
+            "type": "i64"
+          },
+          {
+            "name": "last_seen",
+            "type": "i64"
+          },
+          {
+            "name": "total_sol_reported",
+            "type": "u64"
+          },
+          {
+            "name": "recent_reporters",
+            "type": {
+              "array": [
+                "pubkey",
+                2
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DrainerReported",
+      "docs": [
+        "Event emitted when a drainer is reported"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "drainer_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "reporter",
+            "type": "pubkey"
+          },
+          {
+            "name": "report_count",
+            "type": "u32"
+          },
+          {
+            "name": "amount_stolen",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}
