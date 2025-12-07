@@ -1,0 +1,6 @@
+Tier,Monthly Price,Monthly Credits,RPS Limit,Standard RPC Cost,DAS API Cost,Enhanced Transactions Cost,Historical Data Cost,Sender (sendTransaction),Overage Cost
+Free,$0,1M,10,1 credit,10 credits,100 credits,10 credits,0 credits,N/A
+Developer,$49,10M,50,1 credit,10 credits,100 credits,10 credits,0 credits,$5/M
+Business,$499,100M,200,1 credit,10 credits,100 credits,10 credits,0 credits,$5/M
+Professional,$999,200M,500,1 credit,10 credits,100 credits,10 credits,0 credits,$4/M
+Enterprise,Custom,1B+,Custom,1 credit,10 credits,100 credits,10 credits,0 credits,Custom

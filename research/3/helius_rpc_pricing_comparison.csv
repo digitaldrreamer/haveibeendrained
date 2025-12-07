@@ -1,0 +1,7 @@
+Provider,Free Tier,Entry Paid Plan,Mid-Tier Plan,High-Tier Plan,Key Features
+Helius,"1M credits, 10 RPS","$49/month - 10M credits, 50 RPS","$499/month - 100M credits, 200 RPS","$999/month - 200M credits, 500 RPS","Enhanced APIs, DAS, webhooks, parsed txs"
+QuickNode,"3M requests/month, ~25 RPS","$49/month - 20M requests, ~250 RPS","$199/month - 80M requests, ~400 RPS","$349/month - 140M requests, ~600 RPS","Multi-chain, add-ons marketplace"
+Alchemy,10M credits/month,"$49/month - 80M credits, ~50 RPS","$249/month - 450M credits, ~125 RPS","$499/month - 950M credits, ~250 RPS","Multi-chain, SDK support"
+Triton One,210M CUs/month (~10M calls),"$2,900/month (dedicated)","$2,900-$3,800/month",Custom pricing,"Ultra-low latency, Solana-native"
+Chainstack,3M requests/month,"$49/month - 20M requests, ~250 RPS","$199/month - 80M requests, ~400 RPS","$349/month - 140M requests, ~600 RPS",Unlimited node add-on available
+dRPC,210M CUs/month (~10M calls),$6 per 1M requests PAYG,"PAYG up to 5,000 RPS",Custom enterprise,"Multi-region routing, 99.99% uptime"

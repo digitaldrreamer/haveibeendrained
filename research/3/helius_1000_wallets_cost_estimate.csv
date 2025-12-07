@@ -1,0 +1,4 @@
+Approach,Daily Credits,Monthly Credits,Recommended Tier,Estimated Monthly Cost
+Standard RPC (gSFA + getTx),"510,000","15,300,000",Business ($499/mo - 100M credits),$499 base (within 100M limit)
+Enhanced Transactions API (batch),"5,000,000","150,000,000",Not recommended (too expensive),$749.00
+getTransactionsForAddress (Helius),"100,000","3,000,000",Developer ($49/mo - 10M credits) + autoscaling,"$49 base + ~$2,000 autoscaling = $2,049"
