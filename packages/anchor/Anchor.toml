@@ -7,6 +7,9 @@ skip-lint = false
 [programs.localnet]
 drainer_registry = "BYbF6QC9PoeHGH4y1pLNC2YHBChpnFBq46vBydyBFxq2"
 
+[programs.devnet]
+drainer_registry = "BYbF6QC9PoeHGH4y1pLNC2YHBChpnFBq46vBydyBFxq2"
+
 [registry]
 url = "https://api.apr.dev"
 

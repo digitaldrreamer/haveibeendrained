@@ -657,7 +657,27 @@ bun run anchor:build
 
 ---
 
+## 🚀 Deployment
+
+### Anchor Program (Devnet)
+
+**Program ID:** `BYbF6QC9PoeHGH4y1pLNC2YHBChpnFBq46vBydyBFxq2`
+
+**Deploy Command:**
+```bash
+cd packages/anchor
+anchor deploy --provider.cluster devnet
+```
+
+**Verify:**
+```bash
+solana program show BYbF6QC9PoeHGH4y1pLNC2YHBChpnFBq46vBydyBFxq2 --url devnet
+```
+
+---
+
 ## 📚 Next Steps
+
 
 After setup is complete:
 
