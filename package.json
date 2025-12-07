@@ -1,0 +1,23 @@
+{
+  "name": "haveibeendrained",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "build": "bun run --filter '*' build",
+    "test": "bun test",
+    "anchor:build": "cd packages/anchor && anchor build",
+    "api:dev": "cd packages/api && bun run dev",
+    "frontend:dev": "cd packages/frontend && bun run dev",
+    "db:generate": "cd packages/api && bun run db:generate",
+    "db:migrate": "cd packages/api && bun run db:migrate",
+    "db:studio": "cd packages/api && bun run db:studio"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.3.0"
+  }
+}
