@@ -75,14 +75,4 @@ jobs:
     
     - name: Run API Tests
       working-directory: packages/api
-      run: |
-        if [ -d "src" ]; then
-          bun test src/
-        elif [ -d "tests" ]; then
-          bun test tests/
-        elif [ -d "test" ]; then
-          bun test test/
-        else
-          echo "No test directory found. Running in current directory..."
-          bun test
-        fi
+      run: bun test
