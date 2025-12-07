@@ -7,9 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  anchor-test:
+    uses: solana-developers/github-workflows/.github/workflows/test.yaml@v0.2.9
+    with:
+      program: "anchor"  # Your program folder name in packages/
+      
+  api-test:
     runs-on: ubuntu-22.04
-    
     steps:
     - uses: actions/checkout@v4
     
@@ -19,85 +23,5 @@ jobs:
         
     - run: bun install
     
-    - name: Install Rust
-      uses: dtolnay/rust-toolchain@stable
-    
-    - name: Setup System Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make ca-certificates wget
-    
-    - name: Download and Install Solana (Verbose)
-      run: |
-        set -ex  # Exit on error, print commands
-        
-        # Download installer
-        wget -O solana-install.sh https://release.solana.com/v1.18.18/install
-        
-        # Make executable and run
-        chmod +x solana-install.sh
-        ./solana-install.sh
-        
-        # Verify installation
-        if [ -d "$HOME/.local/share/solana/install/active_release/bin" ]; then
-          echo "✅ Solana directory exists"
-          ls -la "$HOME/.local/share/solana/install/active_release/bin"
-        else
-          echo "❌ Solana directory not found!"
-          exit 1
-        fi
-        
-        # Add to PATH for this step
-        export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
-        
-        # Verify solana command works
-        if command -v solana &> /dev/null; then
-          echo "✅ Solana command found"
-          solana --version
-        else
-          echo "❌ Solana command not found!"
-          echo "PATH: $PATH"
-          exit 1
-        fi
-        
-        # Persist to GITHUB_PATH
-        echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-    
-    - name: Install Anchor
-      run: |
-        set -ex
-        cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
-        export PATH="$HOME/.cargo/bin:$PATH"
-        avm install 0.32.1
-        avm use 0.32.1
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-    
-    - name: Final Verification
-      run: |
-        set -ex
-        echo "=== Environment Check ==="
-        echo "PATH: $PATH"
-        echo ""
-        echo "=== Solana ==="
-        which solana || echo "solana not in PATH"
-        solana --version || echo "solana command failed"
-        echo ""
-        echo "=== Anchor ==="
-        which anchor || echo "anchor not in PATH"
-        anchor --version || echo "anchor command failed"
-    
-    - name: Build Anchor Program
-      working-directory: packages/anchor
-      run: |
-        set -ex
-        anchor build
-      
-    - name: Run Anchor Tests
-      working-directory: packages/anchor
-      run: |
-        set -ex
-        anchor test
-        
-    - name: Run API Tests
-      working-directory: packages/api
+    - working-directory: packages/api
       run: bun test
