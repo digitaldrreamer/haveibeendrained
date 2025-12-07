@@ -1,0 +1,46 @@
+name: Test Suite
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+        
+    - name: Install Dependencies
+      run: bun install
+      
+    - name: Install Solana Tool Suite
+      uses: solana-labs/setup-solana@v1
+      with:
+        solana-version: v1.18.0
+        
+    - name: Install Anchor
+      uses: coral-xyz/setup-anchor@v1
+      with:
+        anchor-version: 0.30.1
+        solana-version: v1.18.0
+        
+    - name: Build Anchor Program
+      run: cd packages/anchor && anchor build
+      
+    - name: Run Anchor Tests
+      run: cd packages/anchor && anchor test
+      env:
+        ANCHOR_PROVIDER_URL: http://127.0.0.1:8899
+        ANCHOR_WALLET: ~/.config/solana/id.json
+        
+    - name: Run API Tests
+      run: cd packages/api && bun test
