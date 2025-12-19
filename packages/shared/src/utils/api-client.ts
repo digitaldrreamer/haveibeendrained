@@ -42,7 +42,8 @@ export class ApiClient {
       timeout: 30000, // 30 seconds default
       ...config,
     };
-    this.fetch = config.fetchImpl ?? globalThis.fetch;
+    // Use fetchImpl if provided, otherwise detect fetch in a way that works in both SSR and browser
+    this.fetch = config.fetchImpl ?? (typeof window !== 'undefined' ? window.fetch.bind(window) : fetch);
   }
 
   /**
