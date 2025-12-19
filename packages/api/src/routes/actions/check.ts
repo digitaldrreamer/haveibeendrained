@@ -5,6 +5,22 @@ import { analyzeWallet } from '../../services/wallet-analysis'
 
 const app = new Hono()
 
+// Helper function to get blockchain ID based on network (CAIP-2 format)
+const getBlockchainId = (): string => {
+  const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet'
+  return network === 'mainnet' 
+    ? 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp' // Solana mainnet CAIP-2 identifier
+    : 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1' // Solana devnet CAIP-2 identifier
+}
+
+// Helper function to get action headers for responses
+const getActionHeaders = () => ({
+  'Content-Type': 'application/json',
+  'X-Action-Version': '2.4.2', // Solana Actions API version (spec 2.x.x)
+  'X-Blockchain-Ids': getBlockchainId(), // CAIP-2 format (mainnet or devnet)
+  'Access-Control-Expose-Headers': 'X-Blockchain-Ids, X-Action-Version', // Expose custom headers for CORS
+})
+
 // Apply CORS middleware to all actions routes
 // Required for Solana Blinks to work across platforms (Twitter, Discord, etc.)
 app.use('/api/actions/*', cors({
@@ -15,8 +31,20 @@ app.use('/api/actions/*', cors({
   credentials: false, // Blinks don't use credentials
 }))
 
+// OPTIONS /api/actions/check - CORS preflight with action headers
+app.options('/api/actions/check', (c) => {
+  return c.text('', 204, {
+    headers: {
+      ...getActionHeaders(),
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Encoding, Accept-Encoding',
+    }
+  })
+})
+
 // GET /api/actions/check - Returns Solana Actions metadata
-// Follows Solana Actions API specification v1.0
+// Follows Solana Actions API specification v2.4.2
 app.get('/api/actions/check', (c) => {
   // Get base URL from request or environment
   const url = new URL(c.req.url)
@@ -52,10 +80,7 @@ app.get('/api/actions/check', (c) => {
     tags: ['security', 'wallet', 'solana', 'drainer-detection'],
     group: 'Security Tools'
   }, {
-    headers: {
-      'X-Action-Version': '1.0', // Solana Actions API version
-      'X-Blockchain-Ids': 'solana', // Solana blockchain identifier
-    }
+    headers: getActionHeaders()
   })
 })
 
@@ -168,10 +193,7 @@ app.post('/api/actions/check', async (c) => {
         recommendations: riskReport.recommendations.slice(0, 3) // Limit to 3 for blinks
       }
     }, {
-      headers: {
-        'X-Action-Version': '1.0', // Solana Actions API version
-        'X-Blockchain-Ids': 'solana', // Solana blockchain identifier
-      }
+      headers: getActionHeaders()
     })
 
   } catch (error) {

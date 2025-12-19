@@ -5,18 +5,46 @@ import { AnchorClient } from '../../services/anchor-client'
 
 const app = new Hono()
 
+// Helper function to get blockchain ID based on network (CAIP-2 format)
+const getBlockchainId = (): string => {
+  const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet'
+  return network === 'mainnet' 
+    ? 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp' // Solana mainnet CAIP-2 identifier
+    : 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1' // Solana devnet CAIP-2 identifier
+}
+
+// Helper function to get action headers for responses
+const getActionHeaders = () => ({
+  'Content-Type': 'application/json',
+  'X-Action-Version': '2.4.2', // Solana Actions API version (spec 2.x.x)
+  'X-Blockchain-Ids': getBlockchainId(), // CAIP-2 format (mainnet or devnet)
+  'Access-Control-Expose-Headers': 'X-Blockchain-Ids, X-Action-Version', // Expose custom headers for CORS
+})
+
 // Apply CORS middleware to all actions routes
 // Required for Solana Blinks to work across platforms (Twitter, Discord, etc.)
 app.use('/api/actions/report', cors({
   origin: '*', // Allow all origins for Blinks
   allowMethods: ['GET', 'POST', 'PUT', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization', 'Content-Encoding', 'Accept-Encoding'],
-  exposeHeaders: ['Content-Type', 'X-Action-Version', 'X-Blockchain-Ids'],
+  exposeHeaders: ['Content-Type', 'X-Action-Version', 'X-Blockchain-Ids'], // Expose custom headers for client access
   credentials: false, // Blinks don't use credentials
 }))
 
+// OPTIONS /api/actions/report - CORS preflight with action headers
+app.options('/api/actions/report', (c) => {
+  return c.text('', 204, {
+    headers: {
+      ...getActionHeaders(),
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Encoding, Accept-Encoding',
+    }
+  })
+})
+
 // GET /api/actions/report - Returns Solana Actions metadata for reporting drainers
-// Follows Solana Actions API specification v1.0
+// Follows Solana Actions API specification v2.4.2
 app.get('/api/actions/report', (c) => {
   // Get base URL from request or environment
   const url = new URL(c.req.url)
@@ -59,10 +87,7 @@ app.get('/api/actions/report', (c) => {
     tags: ['security', 'report', 'drainer', 'community'],
     group: 'Security Tools'
   }, {
-    headers: {
-      'X-Action-Version': '1.0', // Solana Actions API version
-      'X-Blockchain-Ids': 'solana', // Solana blockchain identifier
-    }
+    headers: getActionHeaders()
   })
 })
 
@@ -121,6 +146,7 @@ app.post('/api/actions/report', async (c) => {
 
     // Initialize RPC connection and Anchor client
     const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet'
+    
     const rpcUrl = network === 'mainnet' 
       ? 'https://api.mainnet-beta.solana.com'
       : 'https://api.devnet.solana.com'
@@ -181,6 +207,8 @@ app.post('/api/actions/report', async (c) => {
         amountStolen: amountStolen || null,
         reporter: account,
       }
+    }, {
+      headers: getActionHeaders()
     })
 
   } catch (error) {
