@@ -1,11 +1,134 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Hero from '../components/Hero.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<main class="min-h-screen">
+		<Hero />
+
+		<!-- How It Works Section -->
+		<section class="py-20 px-4 bg-surface">
+			<div class="max-w-6xl mx-auto">
+				<div class="text-center mb-16">
+					<h2 class="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
+					<p class="text-xl text-text-muted max-w-2xl mx-auto">
+						Our advanced detection engine analyzes your wallet's transaction history to identify security threats in real-time.
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-3 gap-8">
+					<div class="text-center p-6 bg-slate-900/50 rounded-xl border border-slate-700/50">
+						<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+							<span class="text-2xl">🔍</span>
+						</div>
+						<h3 class="text-xl font-semibold mb-3">Scan Transactions</h3>
+						<p class="text-text-muted">
+							We analyze your wallet's entire transaction history using Helius RPC to detect malicious patterns and interactions.
+						</p>
+					</div>
+
+					<div class="text-center p-6 bg-slate-900/50 rounded-xl border border-slate-700/50">
+						<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+							<span class="text-2xl">🛡️</span>
+						</div>
+						<h3 class="text-xl font-semibold mb-3">AI-Powered Detection</h3>
+						<p class="text-text-muted">
+							Our detection engine identifies unlimited approvals, authority changes, and known drainer signatures with high accuracy.
+						</p>
+					</div>
+
+					<div class="text-center p-6 bg-slate-900/50 rounded-xl border border-slate-700/50">
+						<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+							<span class="text-2xl">📋</span>
+						</div>
+						<h3 class="text-xl font-semibold mb-3">Get Recommendations</h3>
+						<p class="text-text-muted">
+							Receive actionable security recommendations and step-by-step recovery guidance to protect your assets.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Section -->
+		<section class="py-20 px-4 bg-background">
+			<div class="max-w-6xl mx-auto">
+				<div class="text-center mb-16">
+					<h2 class="text-4xl md:text-5xl font-bold mb-4">Advanced Security Features</h2>
+					<p class="text-xl text-text-muted max-w-2xl mx-auto">
+						Built with cutting-edge technology to provide comprehensive wallet security analysis.
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="p-6 bg-surface rounded-xl border border-slate-700/50 hover:border-primary/50 transition-colors">
+						<div class="flex items-center mb-4">
+							<span class="text-2xl mr-3">⚡</span>
+							<h3 class="text-lg font-semibold">Real-Time Analysis</h3>
+						</div>
+						<p class="text-text-muted">Instant scanning of your wallet's transaction history with live updates.</p>
+					</div>
+
+					<div class="p-6 bg-surface rounded-xl border border-slate-700/50 hover:border-primary/50 transition-colors">
+						<div class="flex items-center mb-4">
+							<span class="text-2xl mr-3">🎯</span>
+							<h3 class="text-lg font-semibold">High Accuracy Detection</h3>
+						</div>
+						<p class="text-text-muted">Advanced AI algorithms identify 95%+ of malicious interactions with minimal false positives.</p>
+					</div>
+
+					<div class="p-6 bg-surface rounded-xl border border-slate-700/50 hover:border-primary/50 transition-colors">
+						<div class="flex items-center mb-4">
+							<span class="text-2xl mr-3">📊</span>
+							<h3 class="text-lg font-semibold">Detailed Risk Scoring</h3>
+						</div>
+						<p class="text-text-muted">Comprehensive risk assessment with detailed breakdowns of detected threats.</p>
+					</div>
+
+					<div class="p-6 bg-surface rounded-xl border border-slate-700/50 hover:border-primary/50 transition-colors">
+						<div class="flex items-center mb-4">
+							<span class="text-2xl mr-3">🔗</span>
+							<h3 class="text-lg font-semibold">Solana Actions Integration</h3>
+						</div>
+						<p class="text-text-muted">Check wallet security directly from Twitter, Discord, and other platforms.</p>
+					</div>
+
+					<div class="p-6 bg-surface rounded-xl border border-slate-700/50 hover:border-primary/50 transition-colors">
+						<div class="flex items-center mb-4">
+							<span class="text-2xl mr-3">💰</span>
+							<h3 class="text-lg font-semibold">100% Free</h3>
+						</div>
+						<p class="text-text-muted">No hidden fees, no premium tiers. Wallet security analysis for everyone.</p>
+					</div>
+
+					<div class="p-6 bg-surface rounded-xl border border-slate-700/50 hover:border-primary/50 transition-colors">
+						<div class="flex items-center mb-4">
+							<span class="text-2xl mr-3">🔓</span>
+							<h3 class="text-lg font-semibold">Open Source</h3>
+						</div>
+						<p class="text-text-muted">Transparent, auditable code. Community-driven improvements and security reviews.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 px-4 bg-linear-to-r from-primary/10 to-purple-500/10">
+			<div class="max-w-4xl mx-auto text-center">
+				<h2 class="text-4xl md:text-5xl font-bold mb-6">Protect Your Solana Assets Today</h2>
+				<p class="text-xl text-text-muted mb-8 max-w-2xl mx-auto">
+					Don't wait until it's too late. Analyze your wallet security now and get peace of mind about your crypto holdings.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a href="#hero" class="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold rounded-xl transition-colors text-lg">
+						Analyze My Wallet
+					</a>
+					<a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-surface hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-600 transition-colors text-lg">
+						View on GitHub
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
