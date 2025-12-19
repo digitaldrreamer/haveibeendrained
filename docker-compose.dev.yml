@@ -51,6 +51,8 @@ services:
       RATE_LIMIT_DURATION: ${RATE_LIMIT_DURATION}
     ports:
       - "3001:3001"
+    volumes:
+      - .:/app
     depends_on:
       postgres:
         condition: service_healthy
@@ -69,6 +71,8 @@ services:
       PUBLIC_API_BASE_URL: ${PUBLIC_API_BASE_URL}
     ports:
       - "3000:3000"
+    volumes:
+      - .:/app
     depends_on:
       api:
         condition: service_started
@@ -77,6 +81,8 @@ services:
     image: solanafoundation/anchor:v0.32.1
     container_name: haveibeendrained-anchor-build
     working_dir: /workspace/packages/anchor
+    volumes:
+      - .:/workspace
     command: >
       bash -c "
         anchor --version &&
@@ -89,3 +95,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+
