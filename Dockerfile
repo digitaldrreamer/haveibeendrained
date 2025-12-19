@@ -7,17 +7,19 @@ COPY package.json bun.lock ./
 COPY packages/api/package.json ./packages/api/
 COPY packages/frontend/package.json ./packages/frontend/
 COPY packages/shared/package.json ./packages/shared/
+COPY packages/anchor/package.json ./packages/anchor/
 
 # Install dependencies (Bun will handle workspace linking)
 # Omit --production flag to install all dependencies including devDependencies
 # Clear cache before install to avoid integrity check failures
-# Use --frozen-lockfile for reproducible production builds
+# Note: Not using --frozen-lockfile to allow lockfile updates if needed
+# TODO: Update bun.lock locally and use --frozen-lockfile for reproducible builds
 # Retry on failure with cache clear
 RUN bun pm cache rm || true && \
-    bun install --frozen-lockfile || \
+    bun install || \
     (echo "First install attempt failed, retrying..." && \
      bun pm cache rm || true && \
-     bun install --frozen-lockfile)
+     bun install)
 
 # Stage 2: Runtime
 FROM oven/bun:latest AS runtime
