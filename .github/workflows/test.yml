@@ -7,11 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  anchor-test:
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: packages/anchor
+  test:
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v4
@@ -34,34 +31,53 @@ jobs:
           packages/anchor/target/
         key: cargo-anchor-${{ runner.os }}-${{ hashFiles('packages/anchor/Cargo.lock') }}
     
+    - name: Install Solana CLI
+      run: |
+        mkdir -p $HOME/.local/share/solana/install
+        wget -q https://github.com/solana-labs/solana/releases/download/v1.18.18/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+        tar jxf solana-release-x86_64-unknown-linux-gnu.tar.bz2
+        mv solana-release $HOME/.local/share/solana/install/active_release
+        rm solana-release-x86_64-unknown-linux-gnu.tar.bz2
+        echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+    
+        echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+
+    - name: Install SBF Tools
+      run: |
+        mkdir -p $HOME/.cache/solana/v1.41
+        wget -q https://github.com/solana-labs/platform-tools/releases/download/v1.41/solana-bpf-tools-linux.tar.bz2
+        tar jxf solana-bpf-tools-linux.tar.bz2 -C $HOME/.cache/solana/v1.41
+        rm solana-bpf-tools-linux.tar.bz2
+
     - name: Install Anchor CLI
       run: |
-        if ! command -v anchor &> /dev/null; then
-          cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked --force
-        fi
+        cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+        avm install 0.32.1
+        avm use 0.32.1
+        echo "$HOME/.avm/bin" >> $GITHUB_PATH
     
-    - name: Install Node Dependencies
-      run: yarn install
-    
-    - name: Run Anchor Tests
-      run: anchor test
-      env:
-        RUST_BACKTRACE: 1
-  
-  api-test:
-    runs-on: ubuntu-22.04
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - uses: oven-sh/setup-bun@v2
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
       with:
         bun-version: latest
     
     - name: Install Dependencies
-      run: bun install
+      run: |
+        bun install
+        cd packages/anchor && yarn install && cd ../..
     
-    - name: List Test Files (Debug)
+    - name: Run Anchor Tests
+      working-directory: packages/anchor
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+        echo "PATH is: $PATH"
+        ls -la $HOME/.local/share/solana/install/active_release/bin
+        which cargo-build-sbf || echo "cargo-build-sbf not found in PATH"
+        anchor test
+      env:
+        RUST_BACKTRACE: 1
+    
+    - name: List API Test Files (Debug)
       working-directory: packages/api
       run: |
         echo "=== Current Directory ==="
@@ -75,14 +91,4 @@ jobs:
     
     - name: Run API Tests
       working-directory: packages/api
-      run: |
-        if [ -d "src" ]; then
-          bun test src/
-        elif [ -d "tests" ]; then
-          bun test tests/
-        elif [ -d "test" ]; then
-          bun test test/
-        else
-          echo "No test directory found. Running in current directory..."
-          bun test
-        fi
+      run: bun test
