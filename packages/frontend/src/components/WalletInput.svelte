@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import ResultCard from './ResultCard.svelte';
-  import { ApiClient, isValidSolanaAddress, type RiskReport } from '@haveibeendrained/shared';
+  import { ApiClient, type RiskReport } from '@haveibeendrained/shared';
 
   const apiClient = new ApiClient({
     baseUrl: import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost:3001'
@@ -10,22 +10,16 @@
   let address = '';
   let isLoading = false;
   let error = '';
-  let isValid = false;
   let showResults = false;
   let result: RiskReport | null = null;
   let includeExperimental = false;
 
-  function handleInput(event: Event) {
-    const target = event.target as HTMLInputElement;
-    address = target.value;
+  function handleInput() {
     error = '';
-    
-    isValid = address.length > 0 && isValidSolanaAddress(address);
   }
 
   async function handleSubmit() {
-    if (!isValid) {
-      error = 'Please enter a valid Solana address';
+    if (!address.trim()) {
       return;
     }
 
@@ -35,7 +29,7 @@
     result = null;
 
     const response = await apiClient.analyzeWallet({ 
-      address,
+      address: address.trim(),
       experimental: includeExperimental 
     });
 
@@ -58,14 +52,7 @@
       
       if (addressParam) {
         address = addressParam.trim();
-        isValid = address.length > 0 && isValidSolanaAddress(address);
-        
-        // Auto-check if address is valid
-        if (isValid) {
-          handleSubmit();
-        } else {
-          error = 'Invalid Solana address in URL';
-        }
+        handleSubmit();
       }
     }
   });
@@ -86,7 +73,7 @@
       
       <button
         on:click={handleSubmit}
-        disabled={!isValid || isLoading}
+        disabled={!address.trim() || isLoading}
         class="absolute right-2 top-2 bottom-2 px-6 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[100px]"
       >
         {#if isLoading}
@@ -125,7 +112,12 @@
       />
       
       <button 
-        on:click={() => { showResults = false; address = ''; }}
+        on:click={() => { 
+          showResults = false; 
+          address = ''; 
+          error = '';
+          result = null;
+        }}
         class="w-full py-3 text-text-muted hover:text-white transition-colors"
       >
         Check Another Wallet
