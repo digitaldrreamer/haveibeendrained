@@ -11,7 +11,7 @@ export const openApiSpec = {
     description: 'Public API for checking Solana wallet security and drainer addresses',
     contact: {
       name: 'API Support',
-      email: 'support@haveibeendrained.com',
+      email: 'support@haveibeendrained.org',
     },
     license: {
       name: 'MIT',
@@ -19,7 +19,7 @@ export const openApiSpec = {
   },
   servers: [
     {
-      url: 'https://api.haveibeendrained.com',
+      url: 'https://api.haveibeendrained.org',
       description: 'Production',
     },
     {

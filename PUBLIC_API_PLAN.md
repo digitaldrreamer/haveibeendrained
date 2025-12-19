@@ -833,7 +833,7 @@ import Layout from '../layouts/Layout.astro';
       // Servers
       servers: [
         {
-          url: 'https://api.haveibeendrained.com',
+          url: 'https://api.haveibeendrained.org',
           description: 'Production',
         },
         {
@@ -917,7 +917,7 @@ SMTP_HOST=...
 SMTP_PORT=...
 SMTP_USER=...
 SMTP_PASS=...
-SMTP_FROM=noreply@haveibeendrained.com
+SMTP_FROM=noreply@haveibeendrained.org
 
 # Feature Flags
 ENABLE_PUBLIC_API=true
@@ -1082,10 +1082,10 @@ ENABLE_API_KEY_SYSTEM=true  # MVP - manual key creation
 
 ```bash
 # Unregistered (lower rate limit)
-curl "https://api.haveibeendrained.com/api/v1/check?address=ABC123..."
+curl "https://api.haveibeendrained.org/api/v1/check?address=ABC123..."
 
 # Registered (higher rate limit)
-curl "https://api.haveibeendrained.com/api/v1/check?address=ABC123..." \
+curl "https://api.haveibeendrained.org/api/v1/check?address=ABC123..." \
   -H "User-Agent: MyApp/1.0.0 (contact@example.com)"
 ```
 
@@ -1093,7 +1093,7 @@ curl "https://api.haveibeendrained.com/api/v1/check?address=ABC123..." \
 
 ```javascript
 const response = await fetch(
-  'https://api.haveibeendrained.com/api/v1/check?address=ABC123...',
+  'https://api.haveibeendrained.org/api/v1/check?address=ABC123...',
   {
     headers: {
       'User-Agent': 'MyApp/1.0.0 (contact@example.com)'
@@ -1115,7 +1115,7 @@ headers = {
 }
 
 response = requests.get(
-    'https://api.haveibeendrained.com/api/v1/check',
+    'https://api.haveibeendrained.org/api/v1/check',
     params={'address': 'ABC123...'},
     headers=headers
 )

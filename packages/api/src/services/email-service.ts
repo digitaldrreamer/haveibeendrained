@@ -74,7 +74,7 @@ export async function sendApiKeyRegenerationEmail(
           
           <p><strong style="color: #EF4444;">Important:</strong> Please update your application immediately. The old key will no longer work.</p>
           
-          <p>If you did not request this change, please contact support immediately at <a href="mailto:support@haveibeendrained.com">support@haveibeendrained.com</a>.</p>
+          <p>If you did not request this change, please contact support immediately at <a href="mailto:support@haveibeendrained.org">support@haveibeendrained.org</a>.</p>
           
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           
@@ -97,7 +97,7 @@ Key ID: ${keyId}
 
 Important: Please update your application immediately. The old key will no longer work.
 
-If you did not request this change, please contact support immediately at support@haveibeendrained.com.
+If you did not request this change, please contact support immediately at support@haveibeendrained.org.
 
 This is an automated message from Have I Been Drained API.
   `;

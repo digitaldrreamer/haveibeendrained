@@ -16,7 +16,7 @@ The Have I Been Drained API uses User-Agent headers for authentication and rate 
 No User-Agent header required, but you'll have the lowest rate limit.
 
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/check?address=..."
+curl "https://api.haveibeendrained.org/api/v1/check?address=..."
 ```
 
 ### Registered Tier
@@ -36,7 +36,7 @@ AppName/Version (contact@example.com)
 
 **Example:**
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/check?address=..." \
+curl "https://api.haveibeendrained.org/api/v1/check?address=..." \
   -H "User-Agent: WalletChecker/2.1.0 (dev@mycompany.com)"
 ```
 
@@ -59,7 +59,7 @@ X-API-Key: hibd_...
 
 **Example:**
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/check?address=..." \
+curl "https://api.haveibeendrained.org/api/v1/check?address=..." \
   -H "User-Agent: EnterpriseApp/3.0.0 (api@company.com; API Key: hibd_abc123...)" \
   -H "X-API-Key: hibd_abc123..."
 ```
@@ -67,7 +67,7 @@ curl "https://api.haveibeendrained.com/api/v1/check?address=..." \
 ## Getting an API Key
 
 <Info>
-  API keys are available for enterprise tier users. Contact support@haveibeendrained.com to request an API key.
+  API keys are available for enterprise tier users. Contact support@haveibeendrained.org to request an API key.
 </Info>
 
 **Requirements:**
@@ -76,7 +76,7 @@ curl "https://api.haveibeendrained.com/api/v1/check?address=..." \
 - Contact information for support
 
 **Process:**
-1. Email support@haveibeendrained.com
+1. Email support@haveibeendrained.org
 2. Describe your use case
 3. Provide contact information
 4. Receive API key via email
@@ -161,7 +161,7 @@ MyApp/1.0.0 (missing contact)
 
 ```javascript
 const response = await fetch(
-  'https://api.haveibeendrained.com/api/v1/check?address=...',
+  'https://api.haveibeendrained.org/api/v1/check?address=...',
   {
     headers: {
       'User-Agent': 'MyApp/1.0.0 (contact@example.com)',
@@ -185,7 +185,7 @@ headers = {
 }
 
 response = requests.get(
-    'https://api.haveibeendrained.com/api/v1/check',
+    'https://api.haveibeendrained.org/api/v1/check',
     params={'address': '...'},
     headers=headers
 )
@@ -197,7 +197,7 @@ print(f"Remaining requests: {rate_limit_remaining}")
 ### cURL
 
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/check?address=..." \
+curl "https://api.haveibeendrained.org/api/v1/check?address=..." \
   -H "User-Agent: MyApp/1.0.0 (contact@example.com)" \
   -H "X-API-Key: hibd_..." \
   -v  # -v shows response headers

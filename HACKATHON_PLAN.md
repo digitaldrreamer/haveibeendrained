@@ -320,7 +320,7 @@
 - Call to action
 
 **Narration:**
-"This is open source. It's deployed on devnet. And it's ready to protect the Solana community. Check your wallet at haveibeendrained.com. Built in 12 days for the Solana Student Hackathon."
+"This is open source. It's deployed on devnet. And it's ready to protect the Solana community. Check your wallet at haveibeendrained.org. Built in 12 days for the Solana Student Hackathon."
 
 ---
 

@@ -62,7 +62,7 @@
             "pages": [
               "api-reference/introduction"
             ],
-            "openapi": "https://api.haveibeendrained.com/api/openapi.json"
+            "openapi": "https://api.haveibeendrained.org/api/openapi.json"
           }
         ]
       },
@@ -89,7 +89,7 @@
         },
         {
           "anchor": "Check Wallet",
-          "href": "https://haveibeendrained.com",
+          "href": "https://haveibeendrained.org",
           "icon": "shield"
         }
       ]
@@ -99,13 +99,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@haveibeendrained.com"
+        "href": "mailto:support@haveibeendrained.org"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Check Wallet",
-      "href": "https://haveibeendrained.com"
+      "href": "https://haveibeendrained.org"
     }
   },
   "contextual": {
@@ -128,7 +128,7 @@
   },
   "api": {
     "openapi": {
-      "source": "https://api.haveibeendrained.com/api/openapi.json"
+      "source": "https://api.haveibeendrained.org/api/openapi.json"
     },
     "playground": {
       "display": "interactive"

@@ -161,7 +161,7 @@
   - GitHub logo with repo URL
   - "Open Source" badge
   - "MIT License" text
-  - Website URL: "haveibeendrained.com"
+  - Website URL: "haveibeendrained.org"
   - Program ID on Solana Explorer
 - All elements fade in sequentially
 - Final frame: Clean logo + tagline

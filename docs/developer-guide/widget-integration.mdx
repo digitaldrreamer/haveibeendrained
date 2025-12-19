@@ -26,7 +26,7 @@ Add the widget script to your HTML page:
   <div id="hibd-widget"></div>
   
   <!-- Widget script -->
-  <script src="https://widget.haveibeendrained.com/v1/widget.js"></script>
+  <script src="https://widget.haveibeendrained.org/v1/widget.js"></script>
   <script>
     HIBDWidget.init({
       containerId: 'hibd-widget'
@@ -44,7 +44,7 @@ Add the widget script to your HTML page:
 HIBDWidget.init({
   containerId: 'hibd-widget',  // Required: DOM element ID
   theme: 'dark',                // Optional: 'light' or 'dark'
-  apiUrl: 'https://api.haveibeendrained.com'  // Optional: API endpoint
+  apiUrl: 'https://api.haveibeendrained.org'  // Optional: API endpoint
 });
 ```
 
@@ -54,7 +54,7 @@ HIBDWidget.init({
 HIBDWidget.init({
   containerId: 'hibd-widget',
   theme: 'dark',
-  apiUrl: 'https://api.haveibeendrained.com',
+  apiUrl: 'https://api.haveibeendrained.org',
   showPoweredBy: true,  // Show attribution
   onResult: function(result) {
     // Callback when analysis completes
@@ -73,7 +73,7 @@ HIBDWidget.init({
 |--------|------|---------|-------------|
 | `containerId` | string | required | ID of the DOM element where widget will render |
 | `theme` | string | `'dark'` | Color theme: `'light'` or `'dark'` |
-| `apiUrl` | string | `'https://api.haveibeendrained.com'` | Base URL for API endpoint |
+| `apiUrl` | string | `'https://api.haveibeendrained.org'` | Base URL for API endpoint |
 | `showPoweredBy` | boolean | `true` | Show "Powered by Have I Been Drained" attribution |
 | `onResult` | function | `undefined` | Callback function called when analysis completes |
 
@@ -181,7 +181,7 @@ function WalletChecker() {
   useEffect(() => {
     // Load widget script
     const script = document.createElement('script');
-    script.src = 'https://widget.haveibeendrained.com/v1/widget.js';
+    script.src = 'https://widget.haveibeendrained.org/v1/widget.js';
     script.onload = () => {
       window.HIBDWidget.init({
         containerId: 'hibd-widget',
@@ -213,7 +213,7 @@ function WalletChecker() {
 export default {
   mounted() {
     const script = document.createElement('script');
-    script.src = 'https://widget.haveibeendrained.com/v1/widget.js';
+    script.src = 'https://widget.haveibeendrained.org/v1/widget.js';
     script.onload = () => {
       window.HIBDWidget.init({
         containerId: 'hibd-widget',
@@ -234,7 +234,7 @@ Add to your theme's `functions.php`:
 function enqueue_hibd_widget() {
     wp_enqueue_script(
         'hibd-widget',
-        'https://widget.haveibeendrained.com/v1/widget.js',
+        'https://widget.haveibeendrained.org/v1/widget.js',
         array(),
         '1.0.0',
         true
@@ -344,7 +344,7 @@ HIBDWidget.init({
   <Card title="API Documentation" icon="code" href="/developer-guide/api-integration">
     Learn about the API.
   </Card>
-  <Card title="Contact Support" icon="envelope" href="mailto:support@haveibeendrained.com">
+  <Card title="Contact Support" icon="envelope" href="mailto:support@haveibeendrained.org">
     Get help with widget integration.
   </Card>
 </CardGroup>

@@ -623,7 +623,7 @@ const app = new Hono();
 
 // CORS
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://haveibeendrained.com'],
+  origin: ['http://localhost:3000', 'https://haveibeendrained.org'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'X-API-Key', 'Authorization'],
   exposeHeaders: ['RateLimit-Limit', 'RateLimit-Remaining', 'RateLimit-Reset'],

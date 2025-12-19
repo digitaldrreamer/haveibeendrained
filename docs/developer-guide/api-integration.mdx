@@ -22,7 +22,7 @@ The Have I Been Drained API provides REST endpoints for checking wallet security
 
 **Example:**
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/check?address=ABC123...&limit=50"
+curl "https://api.haveibeendrained.org/api/v1/check?address=ABC123...&limit=50"
 ```
 
 ### Drainer Check Only
@@ -33,7 +33,7 @@ curl "https://api.haveibeendrained.com/api/v1/check?address=ABC123...&limit=50"
 
 **Example:**
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/drainer/ABC123..."
+curl "https://api.haveibeendrained.org/api/v1/drainer/ABC123..."
 ```
 
 ### Full Analysis Only
@@ -48,7 +48,7 @@ curl "https://api.haveibeendrained.com/api/v1/drainer/ABC123..."
 
 **Example:**
 ```bash
-curl "https://api.haveibeendrained.com/api/v1/analyze/ABC123...?limit=100"
+curl "https://api.haveibeendrained.org/api/v1/analyze/ABC123...?limit=100"
 ```
 
 ## Response Formats
@@ -116,7 +116,7 @@ curl "https://api.haveibeendrained.com/api/v1/analyze/ABC123...?limit=100"
 ```javascript
 class HaveIBeenDrained {
   constructor(apiKey = null) {
-    this.baseUrl = 'https://api.haveibeendrained.com';
+    this.baseUrl = 'https://api.haveibeendrained.org';
     this.apiKey = apiKey;
   }
   
@@ -186,7 +186,7 @@ from typing import Optional, Dict, Any
 
 class HaveIBeenDrained:
     def __init__(self, api_key: Optional[str] = None):
-        self.base_url = 'https://api.haveibeendrained.com'
+        self.base_url = 'https://api.haveibeendrained.org'
         self.api_key = api_key
     
     def check(self, address: str, limit: int = 50, experimental: bool = False) -> Dict[str, Any]:
@@ -258,7 +258,7 @@ type HaveIBeenDrained struct {
 }
 
 func (c *HaveIBeenDrained) Check(address string) (map[string]interface{}, error) {
-    baseURL := "https://api.haveibeendrained.com"
+    baseURL := "https://api.haveibeendrained.org"
     if c.BaseURL != "" {
         baseURL = c.BaseURL
     }
