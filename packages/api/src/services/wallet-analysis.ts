@@ -5,6 +5,7 @@ import { RiskAggregator, RiskReport } from './risk-aggregator';
 import { AnchorClient } from './anchor-client';
 import { getDomainsForAddress } from './drainer-data';
 import { getDemoWallet, demoWalletToRiskReport, isDemoMode } from './demo-mode';
+import { sendWalletDrainAlerts } from './wallet-alert-service.js';
 
 /**
  * Options for wallet analysis
@@ -80,11 +81,31 @@ export async function analyzeWallet(
   }
 
   // Aggregate risk
-  return RiskAggregator.aggregateRisk(detections, {
+  const riskReport = RiskAggregator.aggregateRisk(detections, {
     walletAddress: address,
     transactionCount: transactions.length,
     transactions: transactions,
     includeExperimental,
   });
+
+  // Send email alerts if drain detected (severity is DRAINED or high risk AT_RISK)
+  if (riskReport.severity === 'DRAINED' || (riskReport.severity === 'AT_RISK' && riskReport.overallRisk >= 70)) {
+    // Extract drainer address from detections if available
+    const drainerDetection = detections.find(
+      (d) => d.type === 'KNOWN_DRAINER' && d.drainerAddress
+    );
+    const drainerAddress = drainerDetection?.drainerAddress;
+
+    // Send alerts asynchronously (don't block the response)
+    sendWalletDrainAlerts(address, {
+      drainerAddress,
+      riskScore: riskReport.overallRisk,
+    }).catch((error) => {
+      // Log but don't throw - email alerts are non-critical
+      console.error(`Failed to send wallet drain alerts for ${address}:`, error);
+    });
+  }
+
+  return riskReport;
 }
 

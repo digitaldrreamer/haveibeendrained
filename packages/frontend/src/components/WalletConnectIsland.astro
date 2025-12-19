@@ -1,0 +1,31 @@
+---
+import WalletConnect from './WalletConnect.tsx';
+
+interface Props {
+  onConnected?: (walletAddress: string, email?: string) => void;
+  onDisconnected?: () => void;
+}
+
+const { onConnected, onDisconnected } = Astro.props;
+---
+
+<WalletConnect client:load onConnected={onConnected} onDisconnected={onDisconnected} />
+
+<style>
+  .wallet-connect-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .email-input-container {
+    min-width: 300px;
+    max-width: 400px;
+  }
+
+  .wallet-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>

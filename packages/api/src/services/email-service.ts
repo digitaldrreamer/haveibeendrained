@@ -1,8 +1,9 @@
 /**
- * Email service for sending API key notifications
- * For MVP, this is a placeholder - integrate with your email provider
- * (SendGrid, AWS SES, Resend, etc.)
+ * Email service for sending notifications via SMTP
+ * Uses nodemailer with timeout handling
  */
+
+import nodemailer, { type Transporter } from 'nodemailer';
 
 export interface EmailOptions {
   to: string;
@@ -11,34 +12,159 @@ export interface EmailOptions {
   text?: string;
 }
 
+interface SendEmailResult {
+  success: boolean;
+  messageId?: string;
+}
+
 /**
- * Send email (placeholder - implement with your email provider)
+ * Email service with SMTP support
+ * Supports HTML emails and includes timeout handling
  */
-export async function sendEmail(options: EmailOptions): Promise<void> {
-  // TODO: Implement email sending
-  // Options:
-  // - SendGrid: @sendgrid/mail
-  // - AWS SES: @aws-sdk/client-ses
-  // - Resend: resend
-  // - Nodemailer: nodemailer
-  
-  console.log('📧 Email would be sent:', {
+export class EmailService {
+  private smtpEnabled: boolean;
+  private smtpTransporter?: Transporter;
+  private readonly EMAIL_TIMEOUT_MS = 10000; // 10 seconds timeout
+
+  constructor() {
+    const SMTP_HOST = process.env.SMTP_HOST || process.env.SMTP_HOSTNAME;
+    const SMTP_USER = process.env.SMTP_USER || process.env.SMTP_USERNAME;
+    const SMTP_PASS = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
+    const SMTP_PORT = process.env.SMTP_PORT;
+    const SMTP_FROM = process.env.SMTP_FROM;
+
+    this.smtpEnabled = !!(SMTP_HOST && SMTP_PORT && SMTP_USER && SMTP_PASS && SMTP_FROM);
+
+    // Debug logging for configuration resolution (non-sensitive)
+    console.log('EmailService env resolution:', {
+      smtpHostSet: !!SMTP_HOST,
+      smtpUserSet: !!SMTP_USER,
+      smtpPassSet: !!SMTP_PASS,
+      smtpPortSet: !!SMTP_PORT,
+      smtpFromSet: !!SMTP_FROM,
+      smtpEnabled: this.smtpEnabled,
+    });
+
+    if (this.smtpEnabled) {
+      console.log('EmailService: SMTP enabled');
+    } else {
+      console.warn('EmailService: Disabled (no SMTP config)');
+    }
+  }
+
+  /**
+   * Send email with timeout handling and HTML support
+   * @param {EmailOptions} options - Email parameters
+   * @returns {Promise<SendEmailResult>} Send result with success status and optional message ID
+   * @throws {Error} Throws error with specific message for timeout, configuration, or send failures
+   */
+  async sendEmail(options: EmailOptions): Promise<SendEmailResult> {
+    // Validate required parameters
+    if (!options.to) {
+      const errorMsg = 'Email recipient (to) is required';
+      console.error('EmailService error:', { to: options.to, subject: options.subject, error: errorMsg });
+      throw new Error(errorMsg);
+    }
+
+    if (!options.html && !options.text) {
+      const errorMsg = 'Email body (html or text) is required';
+      console.error('EmailService error:', { to: options.to, subject: options.subject, error: errorMsg });
+      throw new Error(errorMsg);
+    }
+
+    console.log('Attempting to send email:', {
+      to: options.to,
+      subject: options.subject,
+      hasHtml: !!options.html,
+      hasText: !!options.text,
+    });
+
+    // For development without SMTP, just log
+    if (process.env.NODE_ENV === 'development' && !this.smtpEnabled) {
+      console.log('📧 Email would be sent (dev mode, no SMTP):', {
     to: options.to,
     subject: options.subject,
   });
-  
-  // For development, just log
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Email content:', options.html);
-    return;
+      console.log('Email content:', options.html || options.text);
+      return { success: true };
+    }
+
+    // Try SMTP if enabled
+    if (this.smtpEnabled) {
+      try {
+        const result = await Promise.race([
+          this._sendViaSMTP(options),
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error('Email send timeout (SMTP)')), this.EMAIL_TIMEOUT_MS),
+          ),
+        ]);
+
+        console.log('Email sent successfully via SMTP:', {
+          to: options.to,
+          subject: options.subject,
+          messageId: result.messageId,
+        });
+        return result;
+      } catch (error) {
+        const err = error as Error;
+        console.error('SMTP send failed:', { to: options.to, error: err.message });
+        throw new Error(`Email service error: ${err.message}`);
+      }
+    }
+
+    // No email service configured
+    const errorMsg = 'Email service not configured (no SMTP credentials)';
+    console.error('EmailService error:', { to: options.to, subject: options.subject, error: errorMsg });
+    throw new Error(errorMsg);
   }
-  
-  // In production, throw error if email service not configured
-  if (!process.env.EMAIL_SERVICE_ENABLED) {
-    throw new Error('Email service not configured');
+
+  /**
+   * Send email via SMTP
+   * @private
+   */
+  private async _sendViaSMTP(options: EmailOptions): Promise<SendEmailResult> {
+    const host = process.env.SMTP_HOST || process.env.SMTP_HOSTNAME;
+    const user = process.env.SMTP_USER || process.env.SMTP_USERNAME;
+    const pass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
+    const port = Number(process.env.SMTP_PORT || 587);
+    const from = process.env.SMTP_FROM as string;
+
+    if (!host || !user || !pass || !from) {
+      throw new Error('SMTP credentials are incomplete (missing host, user, pass, or from)');
+    }
+
+    if (!this.smtpTransporter) {
+      this.smtpTransporter = nodemailer.createTransport({
+        host,
+        port,
+        secure: port === 465,
+        auth: { user, pass },
+      });
+    }
+
+    const info = await this.smtpTransporter.sendMail({
+      from,
+      to: options.to,
+      subject: options.subject,
+      text: options.text,
+      html: options.html,
+    });
+
+    return {
+      success: true,
+      messageId: info?.messageId,
+    };
   }
-  
-  // Implement actual email sending here
+}
+
+// Export singleton instance
+export const emailService = new EmailService();
+
+/**
+ * Send email (backward compatibility wrapper)
+ */
+export async function sendEmail(options: EmailOptions): Promise<void> {
+  await emailService.sendEmail(options);
 }
 
 /**

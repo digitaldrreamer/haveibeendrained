@@ -8,6 +8,7 @@ import analyzeRoutes from './routes/analyze';
 import reportRoutes from './routes/report';
 import publicApiRoutes from './routes/public-api';
 import internalApiRoutes from './routes/internal-api';
+import walletAlertsRoutes from './routes/wallet-alerts';
 import apiKeysRoutes from './routes/api-keys';
 import openApiRoutes from './routes/openapi';
 
@@ -45,7 +46,7 @@ const corsOrigin = getCorsOrigin();
 // Internal API endpoints - CORS-protected, no rate limits
 app.use('/api/internal/*', cors({
   origin: corsOrigin,
-  allowMethods: ['GET', 'HEAD', 'OPTIONS'],
+  allowMethods: ['GET', 'POST', 'HEAD', 'OPTIONS'],
   allowHeaders: ['Content-Type'],
   credentials: true,
 }));
@@ -139,6 +140,7 @@ app.route('/', apiKeysRoutes); // API key management (/api/v1/keys/*) - public b
 app.route('/', reportRoutes); // Report routes - POST is public, GET /:address is internal
 // Internal routes (WITH CORS - restricted to frontend domain, NO rate limiting):
 app.route('/', internalApiRoutes); // Internal API endpoints (/api/internal/*)
+app.route('/', walletAlertsRoutes); // Wallet alerts endpoints (/api/internal/wallet-alerts/*)
 app.route('/', analyzeRoutes); // Legacy internal analyze endpoint (/api/analyze)
 
 // Start server

@@ -1,4 +1,4 @@
-import { pgTable, uuid, varchar, integer, timestamp, boolean, text } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, varchar, integer, timestamp, boolean, text, index } from 'drizzle-orm/pg-core';
 
 /**
  * API Keys table
@@ -19,4 +19,53 @@ export const apiKeys = pgTable('api_keys', {
 
 export type ApiKey = typeof apiKeys.$inferSelect;
 export type NewApiKey = typeof apiKeys.$inferInsert;
+
+/**
+ * Wallet Alerts table
+ * Stores wallet addresses and associated email addresses for drain notifications
+ * Multiple emails per wallet address are allowed (emails not unique)
+ */
+export const walletAlerts = pgTable(
+  'wallet_alerts',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    walletAddress: varchar('wallet_address', { length: 44 }).notNull(),
+    email: varchar('email', { length: 255 }).notNull(),
+    verified: boolean('verified').notNull().default(false),
+    verificationToken: varchar('verification_token', { length: 255 }),
+    verificationTokenExpiresAt: timestamp('verification_token_expires_at'),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  (table) => ({
+    walletAddressIdx: index('idx_wallet_alerts_wallet_address').on(table.walletAddress),
+    verificationTokenIdx: index('idx_wallet_alerts_verification_token').on(table.verificationToken),
+  })
+);
+
+export type WalletAlert = typeof walletAlerts.$inferSelect;
+export type NewWalletAlert = typeof walletAlerts.$inferInsert;
+
+/**
+ * Nonces table
+ * Stores nonces for signature verification with expiration
+ */
+export const nonces = pgTable(
+  'nonces',
+  {
+    nonce: varchar('nonce', { length: 255 }).primaryKey(),
+    walletAddress: varchar('wallet_address', { length: 44 }).notNull(),
+    expiresAt: timestamp('expires_at').notNull(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+  },
+  (table) => ({
+    walletAddressExpiresAtIdx: index('idx_nonces_wallet_address_expires_at').on(
+      table.walletAddress,
+      table.expiresAt
+    ),
+  })
+);
+
+export type Nonce = typeof nonces.$inferSelect;
+export type NewNonce = typeof nonces.$inferInsert;
 
