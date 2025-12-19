@@ -1,0 +1,199 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">HTML Widget</h1>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto mb-8">
+          Embed a ready-to-use wallet security checker into your website with a simple script tag
+        </p>
+      </div>
+
+      <!-- Installation Section -->
+      <section class="max-w-4xl mx-auto mb-12">
+        <div class="bg-surface rounded-xl border border-slate-700/50 p-6 mb-8">
+          <h2 class="text-2xl font-bold mb-4">Installation</h2>
+          <p class="text-text-muted mb-4">
+            Add the widget to your HTML page by including the script tag in your <code>&lt;head&gt;</code> or before the closing <code>&lt;/body&gt;</code> tag:
+          </p>
+          <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-sm"><code>&lt;script src="https://widget.haveibeendrained.com/v1/widget.js"&gt;&lt;/script&gt;
+&lt;div id="hibd-widget"&gt;&lt;/div&gt;
+&lt;script&gt;
+  HIBDWidget.init({
+    containerId: 'hibd-widget',
+    // Optional configuration
+    theme: 'dark',
+    apiUrl: 'https://api.haveibeendrained.com'
+  });
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Configuration Options -->
+      <section class="max-w-4xl mx-auto mb-12">
+        <div class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Configuration Options</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-slate-700">
+                  <th class="pb-3 pr-4">Option</th>
+                  <th class="pb-3 pr-4">Type</th>
+                  <th class="pb-3 pr-4">Default</th>
+                  <th class="pb-3">Description</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-muted">
+                <tr class="border-b border-slate-800">
+                  <td class="py-3 pr-4 font-mono text-sm">containerId</td>
+                  <td class="py-3 pr-4">string</td>
+                  <td class="py-3 pr-4">required</td>
+                  <td class="py-3">ID of the DOM element where the widget will be rendered</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-3 pr-4 font-mono text-sm">theme</td>
+                  <td class="py-3 pr-4">'light' | 'dark'</td>
+                  <td class="py-3 pr-4">'dark'</td>
+                  <td class="py-3">Color theme for the widget</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-3 pr-4 font-mono text-sm">apiUrl</td>
+                  <td class="py-3 pr-4">string</td>
+                  <td class="py-3 pr-4">'https://api.haveibeendrained.com'</td>
+                  <td class="py-3">Base URL for the API endpoint</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-3 pr-4 font-mono text-sm">showPoweredBy</td>
+                  <td class="py-3 pr-4">boolean</td>
+                  <td class="py-3 pr-4">true</td>
+                  <td class="py-3">Show "Powered by Have I Been Drained" attribution</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4 font-mono text-sm">onResult</td>
+                  <td class="py-3 pr-4">function</td>
+                  <td class="py-3 pr-4">undefined</td>
+                  <td class="py-3">Callback function called when analysis completes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Example Usage -->
+      <section class="max-w-4xl mx-auto mb-12">
+        <div class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Example Usage</h2>
+          
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-lg font-semibold mb-2">Basic Integration</h3>
+              <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+                <pre class="text-sm"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Check Wallet Security&lt;/h1&gt;
+  &lt;div id="wallet-checker"&gt;&lt;/div&gt;
+  
+  &lt;script src="https://widget.haveibeendrained.com/v1/widget.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    HIBDWidget.init({
+      containerId: 'wallet-checker'
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold mb-2">With Custom Callback</h3>
+              <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+                <pre class="text-sm"><code>HIBDWidget.init({
+  containerId: 'hibd-widget',
+  theme: 'light',
+  onResult: function(result) {
+    console.log('Analysis complete:', result);
+    // result.status: 'safe' | 'at_risk' | 'drained'
+    // result.details: { ... }
+    
+    if (result.status === 'drained') {
+      alert('Warning: This wallet has been drained!');
+    }
+  }
+});</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Styling Section -->
+      <section class="max-w-4xl mx-auto mb-12">
+        <div class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Custom Styling</h2>
+          <p class="text-text-muted mb-4">
+            The widget can be styled using CSS. All widget elements use the <code>hibd-widget</code> class prefix:
+          </p>
+          <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-sm"><code>&lt;style&gt;
+  /* Customize widget container */
+  #hibd-widget {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Customize input field */
+  .hibd-widget-input {
+    border-radius: 8px;
+  }
+  
+  /* Customize button */
+  .hibd-widget-button {
+    background-color: #3E5FFF;
+  }
+&lt;/style&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Demo Section -->
+      <section class="max-w-4xl mx-auto mb-12">
+        <div class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Live Demo</h2>
+          <p class="text-text-muted mb-4">
+            See the widget in action. Note: This is a placeholder demo. The actual widget will be available once implemented.
+          </p>
+          <div class="bg-slate-900/50 rounded-lg p-8 text-center border-2 border-dashed border-slate-700">
+            <p class="text-text-muted">
+              Widget demo will appear here once the widget script is implemented.
+            </p>
+            <p class="text-sm text-text-muted mt-2">
+              The widget will provide a wallet input field and display security analysis results.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Support Section -->
+      <section class="max-w-4xl mx-auto">
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
+          <h2 class="text-xl font-bold mb-2">Need Help?</h2>
+          <p class="text-text-muted mb-4">
+            Have questions about integrating the widget? Check out our <a href="/developers/api" class="text-primary hover:underline">API Documentation</a> or 
+            <a href="mailto:support@haveibeendrained.com" class="text-primary hover:underline">contact support</a>.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
