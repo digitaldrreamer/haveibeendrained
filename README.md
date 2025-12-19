@@ -67,6 +67,12 @@ In 2024-2025, Solana wallet drainers stole **$300+ million** from **324,000+ use
    - Anchor IDL and constants
    - API client and validation
 
+5. **Documentation** (`docs/`)
+   - Comprehensive safety education articles
+   - Story-driven security awareness content
+   - Interlinked articles for better navigation
+   - Mintlify-powered documentation site
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -260,9 +266,33 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 - **Anchor Team** - For the excellent framework
 - **Solana Community** - For inspiration and support
 
+## 📚 Documentation
+
+### Safety Education
+
+Comprehensive, story-driven education to protect yourself from crypto scams and hacks:
+
+- **40+ Real-World Stories** - Learn from actual victims' experiences
+- **4 Threat Categories** - Hacks, Frauds, Blackmail, Privacy & Tracking
+- **Interlinked Articles** - Seamless navigation between related topics
+- **Actionable Prevention** - Clear steps to protect yourself
+- **Damage Control Guides** - What to do if you've been affected
+
+**Access:** [Safety Education Documentation](https://docs.haveibeendrained.org/safety-education)
+
+### Technical Documentation
+
+- **API Reference** - Complete API documentation with examples
+- **User Guide** - How to check wallets and report drainers
+- **Developer Guide** - Integration guides and best practices
+
+**Access:** [Full Documentation](https://docs.haveibeendrained.org)
+
 ## 🔗 Links
 
 - **Live Demo:** [Coming Soon]
+- **Documentation:** [docs.haveibeendrained.org](https://docs.haveibeendrained.org)
+- **Safety Education:** [docs.haveibeendrained.org/safety-education](https://docs.haveibeendrained.org/safety-education)
 - **Program Explorer:** [Devnet](https://explorer.solana.com/address/BYbF6QC9PoeHGH4y1pLNC2YHBChpnFBq46vBydyBFxq2?cluster=devnet)
 - **Hackathon Submission:** [Coming Soon]
 
