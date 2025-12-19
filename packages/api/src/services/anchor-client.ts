@@ -14,6 +14,71 @@ export interface DrainerReport {
   recentReporters: PublicKey[];
 }
 
+/**
+ * Load wallet from environment variable or file path
+ * Priority: ANCHOR_WALLET env var (as JSON) > file path > no wallet
+ */
+function loadWallet(walletPath?: string): Wallet | null {
+  // First, try ANCHOR_WALLET environment variable (common production pattern)
+  const envWallet = process.env.ANCHOR_WALLET;
+  if (envWallet) {
+    try {
+      // Check if it's JSON content (starts with '[' or '{')
+      if (envWallet.trim().startsWith('[') || envWallet.trim().startsWith('{')) {
+        const secretKey = JSON.parse(envWallet);
+        const walletKeypair = Keypair.fromSecretKey(Uint8Array.from(secretKey));
+        return new Wallet(walletKeypair);
+      }
+      // If it's a path in env var, fall through to file reading below
+    } catch (error) {
+      console.warn('Failed to parse ANCHOR_WALLET from environment variable:', error);
+    }
+  }
+
+  // Second, try provided walletPath (for backward compatibility)
+  if (walletPath) {
+    try {
+      let secretKey: number[];
+      
+      // Check if walletPath is actually JSON content
+      if (walletPath.trim().startsWith('[') || walletPath.trim().startsWith('{')) {
+        // Direct JSON content
+        secretKey = JSON.parse(walletPath);
+      } else {
+        // File path - read from filesystem
+        const resolvedPath = walletPath.startsWith('/') 
+          ? walletPath 
+          : join(process.cwd(), walletPath);
+        
+        const walletData = readFileSync(resolvedPath, 'utf-8');
+        secretKey = JSON.parse(walletData);
+      }
+      
+      const walletKeypair = Keypair.fromSecretKey(Uint8Array.from(secretKey));
+      return new Wallet(walletKeypair);
+    } catch (error) {
+      console.warn('Failed to load wallet from path:', walletPath, error);
+    }
+  }
+
+  // If env var was a path, try reading it as a file
+  if (envWallet && !envWallet.trim().startsWith('[') && !envWallet.trim().startsWith('{')) {
+    try {
+      const resolvedPath = envWallet.startsWith('/') 
+        ? envWallet 
+        : join(process.cwd(), envWallet);
+      const walletData = readFileSync(resolvedPath, 'utf-8');
+      const secretKey = JSON.parse(walletData);
+      const walletKeypair = Keypair.fromSecretKey(Uint8Array.from(secretKey));
+      return new Wallet(walletKeypair);
+    } catch (error) {
+      console.warn('Failed to load wallet from ANCHOR_WALLET file path:', error);
+    }
+  }
+
+  return null;
+}
+
 export class AnchorClient {
   private program: Program;
   private connection: Connection;
@@ -21,26 +86,7 @@ export class AnchorClient {
 
   constructor(connection: Connection, walletPath?: string) {
     this.connection = connection;
-
-    // Load wallet if path provided
-    if (walletPath) {
-      try {
-        // Handle both absolute and relative paths
-        const resolvedPath = walletPath.startsWith('/') 
-          ? walletPath 
-          : join(process.cwd(), walletPath);
-        
-        const walletData = readFileSync(resolvedPath, 'utf-8');
-        const secretKey = JSON.parse(walletData);
-        const walletKeypair = Keypair.fromSecretKey(
-          Uint8Array.from(secretKey)
-        );
-        this.wallet = new Wallet(walletKeypair);
-      } catch (error) {
-        console.warn('Failed to load wallet from path:', walletPath, error);
-        // Continue without wallet - some operations won't be available
-      }
-    }
+    this.wallet = loadWallet(walletPath);
 
     // Create provider (always use provided connection, wallet is optional)
     // If wallet is provided, use it; otherwise create a dummy wallet for read-only operations

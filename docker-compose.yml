@@ -45,11 +45,17 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
       ANCHOR_PROVIDER_URL: ${ANCHOR_PROVIDER_URL}
+      # ANCHOR_WALLET: Set to wallet JSON array directly (recommended)
+      # Example: ANCHOR_WALLET=[1,2,3,4,...]
+      # The code automatically loads from this env var - no file needed!
+      # For local dev, you can still use a file path if preferred
       ANCHOR_WALLET: ${ANCHOR_WALLET}
     ports:
       - "3001:3001"
     volumes:
       - .:/app
+      # Persistent storage for scraped drainer data (Dokploy-compatible)
+      - api_storage:/app/packages/api/storage
     depends_on:
       postgres:
         condition: service_healthy
@@ -92,3 +98,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  api_storage:
