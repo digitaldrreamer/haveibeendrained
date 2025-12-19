@@ -177,3 +177,5 @@ src/
 7. Test on mobile devices
 8. Verify footer doesn't overlap content
 
+
+

@@ -1,0 +1,426 @@
+---
+title: "Typosquatting: The Art of Domain Deception"
+description: "Understanding how tiny spelling differences in URLs enable massive phishing campaigns"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Phishing & Typosquatting
+
+**Reading time**: 8 minutes  
+**Risk level**: High  
+**Target audience**: All crypto users, especially those connecting wallets to websites
+</Info>
+
+## What Is Typosquatting?
+
+**Typosquatting** (also called URL hijacking) is registering domain names that are nearly identical to legitimate websites, relying on small typos or visual similarities to trick users into visiting fake sites.
+
+In crypto, typosquatted domains are the #1 delivery mechanism for phishing attacks and wallet drainers.
+
+### Examples:
+
+| Legitimate Site | Typosquatted Variants |
+|----------------|----------------------|
+| `metamask.io` | `meta-mask.io`, `metamaask.io`, `metarnask.io`, `metamask.com` |
+| `uniswap.org` | `uniswwap.org`, `uni-swap.org`, `unisvvap.org`, `uniswap.com` |
+| `opensea.io` | `opensae.io`, `open-sea.io`, `opensea.com`, `opensεa.io` (Greek epsilon) |
+
+The difference might be **a single character**—easy to miss when you're in a hurry or on mobile.
+
+---
+
+## The Anatomy of a Typosquat Attack
+
+### Phase 1: Domain Registration
+
+**When:** Immediately after a new crypto project, exchange, or protocol launches
+
+**How:**
+- Scammers monitor announcements on Twitter, Discord, ProductHunt
+- Within hours, they register dozens of typosquatted variants
+- Cost: $10-$50 per domain
+- Profit potential: Thousands to millions per successful campaign
+
+**Example:** When ChatGPT launched, over **600 typosquatted domains** were registered within the first month.
+
+### Phase 2: Website Cloning
+
+**What they copy:**
+- Exact HTML/CSS from the real site
+- Logos, branding, color schemes
+- Layout and user flow
+- Even SSL certificates (HTTPS doesn't mean safe!)
+
+**What they change:**
+- Wallet connection code → points to drainer contract
+- Form submissions → send data to attacker
+- Download links → serve malware instead of legitimate apps
+
+**Time to clone:** 1-4 hours with automation tools
+
+### Phase 3: Traffic Generation
+
+**How users end up on fake sites:**
+
+1. **Organic typos** - Users mistype URLs directly in browsers
+2. **Phishing emails** - Fake notifications with typosquatted links
+3. **Social media ads** - Paid promotion on Twitter, Facebook, Google
+4. **Discord/Telegram DMs** - Fake support sending malicious links
+5. **Search engine poisoning** - Fake sites ranking high for slight misspellings
+
+**Example traffic path:**
+- User googles "metamask wallet"
+- Clicks sponsored link (paid ad from scammer)
+- Goes to `metamaask.io` instead of `metamask.io`
+- Connects wallet → drainer executes
+
+### Phase 4: The Attack
+
+**Variant 1: Wallet Drainer**
+- User connects wallet to fake site
+- Site requests malicious approval
+- Wallet is drained within seconds
+
+**Variant 2: Credential Phishing**
+- User enters exchange login credentials
+- Attacker captures username/password/2FA
+- Account is later drained
+
+**Variant 3: Malware Distribution**
+- User downloads "official wallet app"
+- Actually downloads malware/fake wallet
+- Seed phrase is stolen when user sets up wallet
+
+---
+
+## Common Typosquatting Patterns
+
+### 1. Character Substitution
+
+**Pattern:** Replace letters with visually similar ones
+
+| Type | Example Original | Typosquat |
+|------|------------------|-----------|
+| **Double letters** | `binance.com` | `binnance.com`, `binaance.com` |
+| **Similar letters** | `coinbase.com` | `coinbace.com` (e→c), `coinbaes.com` |
+| **Number substitution** | `crypto.com` | `crypt0.com` (o→0), `ctypto.com` |
+
+### 2. Homoglyph Attacks
+
+**Pattern:** Use characters from different alphabets that look identical
+
+**Examples:**
+- `аmazon.com` - The "а" is Cyrillic, not Latin
+- `аpple.com` - Cyrillic "а"  
+- `googlе.com` - Cyrillic "е"
+
+**Why it's dangerous:** **Visually indistinguishable** from the real domain.
+
+### 3. Missing or Extra Characters
+
+**Pattern:** Add/remove letters
+
+| Type | Original | Typosquat |
+|------|----------|-----------|
+| **Missing letter** | `phantom.app` | `phntom.app`, `phatom.app` |
+| **Extra letter** | `ledger.com` | `leddger.com`, `ledgger.com` |
+| **Wrong order** | `pancakeswap.finance` | `pacnakeswap.finance` |
+
+### 4. Hyphenation & Punctuation
+
+**Pattern:** Add hyphens or dots where they don't belong
+
+- `meta-mask.io` (real: `metamask.io`)
+- `coin.base.com` (real: `coinbase.com`)
+- `uni-swap.org` (real: `uniswap.org`)
+
+### 5. TLD (Top-Level Domain) Variations
+
+**Pattern:** Use different endings
+
+| Original TLD | Typosquat TLDs |
+|--------------|----------------|
+| `.io` | `.com`, `.org`, `.net`, `.co` |
+| `.com` | `.io`, `.net`, `.co`, `.org` |
+| `.org` | `.com`, `.io`, `.finance` |
+
+**Example:** `uniswap.org` is real, but `uniswap.com` could be a scam.
+
+### 6. Subdomain Tricks
+
+**Pattern:** Put the real
+
+ domain in a subdomain
+
+- `coinbase.scam-site.com` (looks like "coinbase" but isn't)
+- `https://metamask.io.fake-wallet.com`
+
+**Why it fools people:** The real brand name appears in the URL, but it's not the actual domain.
+
+---
+
+## Case Studies
+
+### Case Study 1: The Uniswap Phishing (2023)
+
+**What happened:**
+- Scammers registered `uniswwap.org` (extra "w")
+- Cloned the real Uniswap interface
+- Ran Google Ads targeting "Uniswap" searches
+- Users connected wallets, approved malicious contracts
+- **Estimated losses:** $500,000+ before shutdown
+
+**Red flag users missed:** The double "ww" in the URL
+
+### Case Study 2: MetaMask Fake Extension
+
+**What happened:**
+- Fake "MetaMask" extension uploaded to Chrome Web Store
+- Name: "MetaMask" (identical)
+- Icon: Identical to real extension
+- Downloaded by 10,000+ users before removal
+- All seed phrases entered were sent to attackers
+
+**How it worked:** Used typosquatted publisher name and similar extension ID
+
+### Case Study 3: The Ammatina Grant Scam (Lisa's Story)
+
+**What happened:**
+- Real grant program: `ammatina-funds.com`
+- Typosquat: `arnrnatina-funds.com` (double "r", missing "i")
+- Email phishing campaign targeted grant applicants
+- Victims connected wallets to fake claim portal
+- **Individual losses:** $50,000-$200,000 per victim
+
+**Full story:** [Grant Phishing: Lisa's $180,000 Lesson](/safety-education/articles/grant-phishing-lisa)
+
+---
+
+## How to Protect Yourself
+
+### Before Visiting ANY Crypto Site
+
+<Steps>
+  <Step title="Type URLs Manually or Use Bookmarks">
+    **Never click links** in emails, DMs, or social media for important sites. Type them directly into the browser or use saved bookmarks.
+    
+    **Pro tip:** Create a "Crypto - Verified" bookmark folder with all your important sites the FIRST time you verify them.
+  </Step>
+  
+  <Step title="Verify Character-by-Character">
+    Before hitting Enter, examine the URL:
+    - Count letters (uniswap = 7 letters, not 8)
+    - Check for hyphens or dots that shouldn't be there
+    - Verify the TLD (.io vs .com vs .org)
+    - Look for subtle character swaps
+  </Step>
+  
+  <Step title="Use Browser Security Extensions">
+    Install anti-phishing tools:
+    - **MetaMask** - Has built-in phishing detection
+    - **Wallet Guard** - Browser extension that warns about scam sites
+    - **Google Safe Browsing** - Built into Chrome/Firefox
+    - **Netcraft Extension** - Phishing protection
+  </Step>
+  
+  <Step title="Check Domain Age and Registration">
+    Use WHOIS lookup tools:
+    - [who.is](https://who.is)
+    - [whois.domaintools.com](https://whois.domaintools.com)
+    
+    **Red flags:**
+    - Domain registered within last few weeks/months
+    - Privacy protection hiding owner info
+    - Registration date doesn't match project launch date
+  </Step>
+  
+  <Step title="Verify SSL Certificate Details">
+    Click the padlock icon in the browser:
+    - Check the certificate is issued to the right company
+    - Verify the domain exactly matches
+    - Look for extended validation (EV) certificates (show company name)
+    
+    **NOTE:** HTTPS/SSL does NOT mean safe—scammers get certificates too!
+  </Step>
+</Steps>
+
+### Red Flags Checklist
+
+<Warning>
+- [ ] URL came from an **email, DM, or unsolicited message**
+- [ ] Domain has **extra/missing/different letters** when compared to official
+- [ ] TLD is different (`.com` instead of expected `.io`)
+- [ ] Domain has **hyphens or dots** in unexpected places
+- [ ] Site appeared in **sponsored search results** (ads, not organic)
+- [ ] WHOIS shows **domain registered very recently**
+- [ ] Site asks you to **connect wallet immediately** without clear context
+- [ ] SSL certificate shows **different company name** than expected
+- [ ] Site has **no "About," "Team," or "Contact"** pages (just the main function)
+</Warning>
+
+---
+
+## Tools & Resources
+
+### Domain Verification
+
+<CardGroup cols={2}>
+  <Card title="WHOIS Lookup" icon="search">
+    Check domain registration details:
+    - [who.is](https://who.is)
+    - [whois.domaintools.com](https://whois.domaintools.com)
+  </Card>
+  
+  <Card title="URL Scanners" icon="shield-check">
+    Scan suspicious URLs before visiting:
+    - [VirusTotal](https://www.virustotal.com)
+    - [URLScan.io](https://urlscan.io)
+  </Card>
+  
+  <Card title="SSL Checkers" icon="lock">
+    Verify certificate details:
+    - [SSL Labs](https://www.ssllabs.com/ssltest/)
+    - Browser padlock → cert details
+  </Card>
+  
+  <Card title="Phishing Databases" icon="database">
+    Check if URL is known scam:
+    - [PhishTank](https://www.phishtank.com)
+    - [OpenPhish](https://openphish.com)
+  </Card>
+</CardGroup>
+
+### Browser Extensions
+
+- **MetaMask** - Built-in phishing detection for crypto sites
+- **Wallet Guard** - Real-time scam site warnings
+- **Netcraft Extension** - Phishing and fraud protection
+- **uBlock Origin** - Ad blocker (prevents malicious ads)
+
+---
+
+## Real-World Statistics
+
+<CardGroup cols={2}>
+  <Card title="6,000+ Typosquats" icon="link">
+    Over 6,000 typosquatted domains targeting Amazon alone have been identified.
+    
+    *Source: CYFIRMA Research*
+  </Card>
+  
+  <Card title="600+ in First Month" icon="clock">
+    ChatGPT had over 600 typosquatted domains registered within the first month of launch.
+    
+    *Source: Domain monitoring services*
+  </Card>
+  
+  <Card title="#1 Phishing Vector" icon="chart-line">
+    Typosquatting is the most common delivery method for crypto phishing attacks.
+    
+    *Source: Security research firms*
+  </Card>
+  
+  <Card title="$100M+ Annual Losses" icon="sack-dollar">
+    Estimated annual losses to typosquatting-based crypto scams exceed $100 million globally.
+    
+    *Source: Blockchain forensics analysis*
+  </Card>
+</CardGroup>
+
+---
+
+## What to Do If You Visited a Fake Site
+
+<Steps>
+  <Step title="If You Connected Your Wallet">
+    **IMMEDIATELY:**
+    1. Visit [Revoke.cash](https://revoke.cash)
+    2. Revoke ALL approvals from the suspicious contract
+    3. Create a new wallet with fresh seed phrase
+    4. Transfer remaining assets to new wallet
+  </Step>
+  
+  <Step title="If You Entered Credentials">
+    **IMMEDIATELY:**
+    1. Change password on the REAL site (typed manually)
+    2. Enable/reset 2FA
+    3. Check for unauthorized login sessions and terminate them
+    4. Monitor account for suspicious activity
+  </Step>
+  
+  <Step title="If You Downloaded Software">
+    **IMMEDIATELY:**
+    1. Do NOT run the downloaded file
+    2. Run full antivirus/malware scan
+    3. If you already installed it, disconnect from internet and seek malware removal help
+    4. Create new wallets and transfer funds (assume seed phrases compromised)
+  </Step>
+  
+  <Step title="Report the Fake Site">
+    Help protect others:
+    - **ChainAbuse** - Report the address/URL
+    - **Google Safe Browsing** - [Report phishing site](https://safebrowsing.google.com/safebrowsing/report_phish/)
+    - **PhishTank** - Community phishing database
+    - **Twitter** - Report the account/tweet that linked to it
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    Real story of typosquatting leading to $180K loss
+  </Card>
+  
+  <Card 
+    title="NFT Mint Drainer" 
+    icon="image"
+    href="/safety-education/articles/nft-drainer-mint"
+  >
+    How fake NFT project sites use drainers
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all phishing and wallet drainer attacks
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses/domains are reported
+  </Card>
+</CardGroup>
+
+---
+
+## Key Takeaways
+
+1. **Always type important URLs manually** or use bookmarks—never click links in emails/DMs
+2. **Examine URLs character-by-character** before hitting Enter or connecting wallets
+3. **HTTPS/SSL does NOT mean safe** - Scammers get certificates too
+4. **Use security extensions** that warn about known phishing sites
+5. **When in doubt, pause** - There's no rush worth risking your funds
+
+**Remember:** Scammers rely on speed and distraction. Slow down, verify, and protect yourself.
+
+---
+
+## References
+
+1. [Trust Wallet - Typosquatting in Crypto Explained](https://trustwallet.com/blog/security/typosquatting-in-crypto-explained)
+2. [CYFIRMA - Typosquatting Unmasked](https://www.cyfirma.com/outofband/typosquatting-unmasked-exposing-the-threats-of-misplaced-keystrokes/)
+3. [Kaspersky - What is Typosquatting?](https://www.kaspersky.com/resource-center/definitions/what-is-typosquatting)
+4. [Proofpoint - Phishing Schemes Target Cryptocurrency](https://www.proofpoint.com/us/blog/threat-insight/follow-money-phishing-schemes-go-after-cryptocurrency)
+5. [Telefonica Tech - Typosquatting Detection and Protection](https://telefonicatech.com/en/blog/typosquatting-how-to-detect-and-protect-yourself)

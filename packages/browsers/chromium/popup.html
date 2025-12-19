@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Have I Been Drained?</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#3E5FFF" stroke="#3E5FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="#3E5FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#3E5FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>Have I Been Drained?</h1>
+      </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="Settings" title="Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v6m0 6v6m5.66-14.66l-4.24 4.24m-2.83 2.83l-4.24 4.24M23 12h-6m-6 0H1m14.66 5.66l-4.24-4.24m-2.83-2.83l-4.24-4.24"></path>
+        </svg>
+      </button>
+    </header>
+
+    <main class="content">
+      <div id="checkForm">
+        <label for="address" class="input-label">Wallet Address</label>
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="address" 
+            placeholder="Enter Solana wallet address..."
+            aria-label="Wallet address input"
+            autocomplete="off"
+          />
+          <button id="pasteBtn" class="paste-btn" aria-label="Paste from clipboard" title="Paste">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+        <button id="checkBtn" class="primary-btn">
+          <span class="btn-text">Check Address</span>
+          <span class="btn-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Analyzing wallet...</p>
+      </div>
+
+      <div id="results" class="results hidden"></div>
+
+      <div id="settings" class="settings hidden">
+        <h3>Settings</h3>
+        <div class="setting-item">
+          <label for="apiUrl">API Endpoint</label>
+          <input 
+            type="text" 
+            id="apiUrl" 
+            placeholder="https://api.haveibeendrained.org"
+          />
+          <small>Default: https://api.haveibeendrained.org</small>
+        </div>
+        <div class="setting-actions">
+          <button id="saveSettings" class="primary-btn">Save</button>
+          <button id="cancelSettings" class="secondary-btn">Cancel</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <a href="https://docs.haveibeendrained.org" target="_blank" rel="noopener noreferrer">Help</a>
+      <a href="https://github.com/digitaldrreamer/haveibeendrained" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

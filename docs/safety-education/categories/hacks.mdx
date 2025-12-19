@@ -1,0 +1,249 @@
+---
+title: "Hacks"
+description: "Understanding technical exploits, phishing, wallet drainers, and unauthorized access attacks"
+---
+
+## Definition
+
+**Pronunciation:** /haks/
+
+**Hacks** are user-facing incidents where crypto assets are lost due to unauthorized access, malicious software, or tricking users into signing/approving transactions that enable theft. While the term "hack" traditionally implies technical exploitation, most crypto "hacks" against individual users involve sophisticated social engineering combined with wallet transaction manipulation.
+
+## What It Covers
+
+This category includes attacks that:
+
+- Compromise wallets through phishing or malicious approvals
+- Install malware or fake applications to steal credentials
+- Manipulate users into granting unauthorized permissions
+- Exploit trust to gain access to accounts or private keys
+- Use technical tricks to intercept or redirect transactions
+
+## What It Does NOT Cover
+
+- **Investment scams** where users willingly send funds (see [Frauds](/safety-education/categories/frauds))
+- **Threat-based extortion** demanding payment (see [Blackmail](/safety-education/categories/blackmail))
+- **Privacy surveillance** without immediate asset loss (see [Privacy & Tracking](/safety-education/categories/privacy-tracking))
+
+## Why It Matters
+
+Hacks represent the **largest category of individual crypto losses** by volume. Unlike traditional financial systems with chargebacks or fraud protection, blockchain transactions are irreversible. Once a hacker gains control of your wallet or approvals, your funds are gone permanently.
+
+According to industry research:
+- Wallet drainer campaigns have stolen **$59M+ from individual users** in single operations
+- Phishing attacks are the **#1 attack vector** against crypto users
+- Over **10,000+ victims** have fallen for drainer scams in major campaigns
+
+## Subcategories & Scam Types
+
+### Phishing & Typosquatting
+
+**Description:** Attacks that use fake websites, emails, or domains to trick users into entering credentials or connecting wallets to malicious contracts.
+
+**Common scam types:**
+- **Typosquatting domains** - Look-alike URLs with tiny spelling differences (e.g., `arnrnatina.com` vs `ammatina.com`)
+- **Email/message phishing** - Fake support emails, grant notifications, or airdrop claims
+- **QR code replacement** - Swapping legitimate payment QRs with attacker addresses
+- **Fake login pages** - Cloned exchange or wallet sites designed to steal credentials
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing: Lisa's Story" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    How a typosquatted domain and wallet drainer led to $180,000 loss
+  </Card>
+  <Card 
+    title="Typosquatting Deep-Dive" 
+    icon="link"
+    href="/safety-education/articles/typosquatting-domains"
+  >
+    Understanding domain mimicry and how to protect yourself
+  </Card>
+</CardGroup>
+
+---
+
+### Wallet Drainers & Malicious Contracts
+
+**Description:** Smart contracts or scripts designed to drain all tokens from a wallet after the user approves a seemingly legitimate transaction.
+
+**Common scam types:**
+- **Unlimited token approvals** - Contracts requesting `setApprovalForAll` or unlimited spending rights
+- **"Sign to verify" traps** - Malicious signature requests disguised as ownership verification
+- **NFT mint drainers** - Fake NFT minting sites that drain wallets during the "mint" process
+- **Fake DEX/router approvals** - Counterfeit DeFi platforms requesting dangerous permissions
+
+<CardGroup cols={1}>
+  <Card 
+    title="NFT Mint Drainer Attack" 
+    icon="image"
+    href="/safety-education/articles/nft-drainer-mint"
+  >
+    How fake NFT projects use Discord and malicious mint contracts
+  </Card>
+</CardGroup>
+
+**Key insight:** Modern wallets show transaction popups, but many users don't understand what "approve" means. Drainers exploit this by making dangerous approvals look routine.
+
+---
+
+### Malware & Fake Applications
+
+**Description:** Software that infects devices to steal wallet credentials, modify clipboard contents, or monitor user activity.
+
+**Common scam types:**
+- **Fake wallet apps/extensions** - Counterfeit versions of MetaMask, Phantom, or other wallets on app stores
+- **Clipboard hijackers** - Malware that replaces copied wallet addresses with attacker addresses
+- **Keyloggers & screen capture** - Programs that record keystrokes or screenshots to steal seed phrases
+- **Remote access trojans** - Software granting attackers full device control
+
+**Prevention:** Only download wallets from official sources, verify publisher certificates, and use hardware wallets for large holdings.
+
+---
+
+### Account Takeover
+
+**Description:** Attacks that compromise Web2 accounts (email, phone, exchange accounts) to gain access to crypto holdings.
+
+**Common scam types:**
+- **SIM swap attacks** - Hijacking phone numbers to bypass 2FA and reset exchange passwords
+- **Email compromise** - Hacking email accounts to reset passwords or authorize withdrawals
+- **Fake 2FA reset support** - Social engineering to convince support teams to disable 2FA
+- **Session hijacking** - Stealing active login sessions through browser exploits
+
+**Note:** Even if your crypto is on-chain, many users store funds on centralized exchanges vulnerable to account takeover.
+
+---
+
+## User Safety Basics
+
+<AccordionGroup>
+  <Accordion title="Before Connecting Your Wallet" icon="plug">
+    - **Bookmark official sites** and only access them from bookmarks, never email links
+    - **Verify URLs character-by-character** - look for extra letters, swapped characters, or wrong TLDs
+    - **Use separate wallets** - Keep a "hot wallet" with small amounts for testing new sites; store bulk funds in cold storage
+    - **Check contract addresses** on blockchain explorers - verify age, verification status, and other interactions
+  </Accordion>
+  
+  <Accordion title="During Wallet Interactions" icon="hand-raised">
+    - **Read every approval carefully** - Never approve "unlimited" spending unless you know exactly why
+    - **Enable transaction simulation** - Use wallets like Rabby or Fire that show what a transaction will do
+    - **Question urgency** - Legitimate projects rarely demand immediate action with countdown timers
+    - **Verify through multiple channels** - If you receive a notification, log into the official platform independently
+  </Accordion>
+  
+  <Accordion title="After Suspicious Activity" icon="triangle-exclamation">
+    - **Revoke approvals immediately** - Use tools like Revoke.cash or Etherscan's token approval checker
+    - **Move remaining funds** to a fresh wallet with a new seed phrase
+    - **Report the address** to ChainAbuse and your wallet provider
+    - **Document everything** - Save URLs, transaction hashes, emails, and screenshots
+  </Accordion>
+</AccordionGroup>
+
+## Relatable Examples
+
+> **The Grant Applicant:** Lisa applied to Web3 grants for her business. She received an email claiming approval and clicked to "verify her wallet." The URL looked right at a glance: `arnrnatina-funds.com` instead of `ammatina-funds.com`. She approved what she thought was a verification, but it was unlimited token approval. Within minutes, **$180,000 was gone.**
+> 
+> [Read Lisa's full story →](/safety-education/articles/grant-phishing-lisa)
+
+> **The NFT Collector:** A Discord server claimed to be launching an exclusive NFT project. The mint link was shared by accounts that looked official. During the "mint," the site requested approval. The collector lost **all NFTs and tokens** from their wallet—the contract was a drainer.
+>
+> [Read the NFT drainer case →](/safety-education/articles/nft-drainer-mint)
+
+## Recommended Controls
+
+### For Individuals
+- **Hardware wallets** (Ledger, Trezor) for holdings over $1,000
+- **Multi-sig wallets** for business or team funds
+- **Browser extensions** with phishing detection (MetaMask Snaps, Wallet Guard)
+- **Regular approval audits** - Revoke old/unused permissions quarterly
+
+### For Teams & Organizations
+- **Security training** on phishing and approval risks
+- **Transaction approval processes** requiring multiple reviews for large amounts
+- **Whitelist-only wallet connections** - Pre-approve trusted dApp domains
+- **Incident response plan** with clear steps for compromise scenarios
+
+## Real-World Statistics
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| **MS Drainer total stolen** | $59M+ | Chainalysis, 2024 |
+| **Victims in major drainer campaigns** | 10,000+ | TRM Labs |
+| **Fake wallet app downloads** | 10,000+ before removal | Check Point Research |
+| **Typosquatted domains (Amazon example)** | 6,000+ | CYFIRMA |
+| **#1 attack vector** | Phishing | FBI IC3 |
+
+## What To Do If You've Been Hacked
+
+<Steps>
+  <Step title="Stop Using the Compromised Wallet">
+    Do NOT send more transactions from the affected wallet - the attacker may be monitoring it.
+  </Step>
+  
+  <Step title="Revoke All Approvals">
+    Use Revoke.cash, Etherscan, or your wallet's approval manager to revoke permissions immediately. Start with high-value tokens (USDC, USDT, WETH).
+  </Step>
+  
+  <Step title="Move Remaining Assets">
+    Transfer any remaining funds to a **brand new wallet** with a fresh seed phrase. Never reuse the compromised wallet.
+  </Step>
+  
+  <Step title="Report the Attack">
+    - Report to ChainAbuse: Flag the attacker's address
+    - Report to your wallet provider: Help prevent others from falling victim
+    - Report to law enforcement: FBI IC3 (ic3.gov) for US victims
+    - Check your wallet: [Have I Been Drained?](https://haveibeendrained.org)
+  </Step>
+  
+  <Step title="Preserve Evidence">
+    Screenshot everything: URLs, transaction hashes, emails, messages. This helps investigations and warns others.
+  </Step>
+  
+  <Step title="Share Your Story">
+    Consider sharing anonymously to help educate others. Your experience can prevent future victims.
+  </Step>
+</Steps>
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Report a Drainer" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Add malicious addresses to the on-chain registry
+  </Card>
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if your wallet has been compromised
+  </Card>
+  <Card 
+    title="Frauds Category" 
+    icon="alert-triangle"
+    href="/safety-education/categories/frauds"
+  >
+    Learn about investment scams and romance frauds
+  </Card>
+  <Card 
+    title="Privacy & Tracking" 
+    icon="eye"
+    href="/safety-education/categories/privacy-tracking"
+  >
+    Understand dusting attacks and surveillance
+  </Card>
+</CardGroup>
+
+## References
+
+1. [Chainalysis - Crypto Drainers Report (2024)](https://www.chainalysis.com/blog/crypto-drainers/)
+2. [TRM Labs - Drainware Analysis](https://www.trmlabs.com/resources/blog/drainware-unfortunately-coming-to-a-cryptocurrency-wallet-near-you)
+3. [Check Point Research - Wallet Scam Case Study](https://research.checkpoint.com/2024/wallet-scam-a-case-study-in-crypto-drainer-tactics/)
+4. [Trust Wallet - Typosquatting Explained](https://trustwallet.com/blog/security/typosquatting-in-crypto-explained)
+5. [CYFIRMA - Typosquatting Unmasked](https://www.cyfirma.com/outofband/typosquatting-unmasked-exposing-the-threats-of-misplaced-keystrokes/)

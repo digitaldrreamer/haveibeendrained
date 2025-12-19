@@ -2,39 +2,25 @@
 import WalletInput from './WalletInput.svelte';
 ---
 
-<section id="hero" class="relative min-h-[calc(100vh-4rem)] md:min-h-[80vh] flex flex-col items-center justify-center px-4 py-12 overflow-hidden">
-  <!-- Background Effects -->
-  <div class="absolute inset-0 bg-gradient-to-b from-background to-surface -z-10"></div>
-  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] -z-10"></div>
-  <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-[96px] -z-10"></div>
-
-  <div class="max-w-4xl mx-auto text-center space-y-8">
-    <div class="space-y-4">
-      <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
-        Have I Been Drained?
-      </h1>
-      <p class="text-xl md:text-2xl text-text-muted max-w-2xl mx-auto">
-        Analyze your Solana wallet for malicious interactions, unlimited approvals, and known drainer signatures.
-      </p>
-    </div>
-
-    <div class="py-8 w-full">
+<section id="hero" class="flex flex-col items-center justify-center px-4 py-16 md:py-24">
+  <div class="max-w-2xl mx-auto text-center space-y-6">
+    <h1 class="text-4xl md:text-5xl font-bold">
+      <span class="text-white">Have I Been</span>{' '}
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">Drained?</span>
+    </h1>
+    <p class="text-lg md:text-xl text-text-muted">
+      Check if your Solana wallet has been compromised by drainers
+    </p>
+    
+    <div class="pt-4 w-full">
       <WalletInput client:load />
     </div>
-
-    <div class="flex flex-wrap justify-center gap-8 text-sm text-text-muted">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-green-500"></span>
-        <span>Real-time Analysis</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-        <span>Helius RPC Powered</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-        <span>100% Free & Open Source</span>
-      </div>
-    </div>
+    
+    <p class="text-sm text-text-muted pt-2">
+      Using Have I Been Drained is subject to the{' '}
+      <a href="https://docs.haveibeendrained.org" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+        terms of use
+      </a>
+    </p>
   </div>
 </section>

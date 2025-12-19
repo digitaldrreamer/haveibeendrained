@@ -1,0 +1,359 @@
+---
+title: "NFT Mint Drainer: The Discord Trap"
+description: "How fake NFT projects use Discord servers and malicious mint contracts to drain wallets"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Wallet Drainers + Phishing
+
+**Reading time**: 7 minutes  
+**Risk level**: High  
+**Target audience**: NFT collectors, Discord users, anyone minting NFTs
+</Info>
+
+## Meet Bola
+
+Bola is a 26-year-old graphic designer and NFT collector from Port Harcourt. He's been collecting NFTs for over a year, owns pieces from several established projects, and actively participates in Discord communities to discover new artists and drops.
+
+His wallet holds about $12,000 worth of NFTs plus 2.5 ETH (~$8,000) reserved for future mints. He's security-conscious—uses a hardware wallet for long-term holdings and a MetaMask wallet for active minting and trading.
+
+## What Happened
+
+### Week 1: The Discord Invite
+
+Bola was browsing Twitter when he saw a thread about an upcoming NFT project: "CyberPunks Reborn" - described as a "spiritual successor to CryptoPunks with modern art and utility."
+
+The thread showed impressive artwork, a roadmap with DAO governance and metaverse integration, and testimonials from "early whitelisted members." The project had 15,000 Twitter followers and an active Discord with 8,500 members.
+
+Bola clicked the Discord invite link in the Twitter bio and joined the server.
+
+The Discord looked legitimate:
+- Organized channels (announcements, whitelist, general chat, art showcase)
+- Active conversations (dozens of messages per hour)
+- Verified bot showing mint countdown
+- "Team" members with colored roles
+- Partnerships with other NFT projects
+
+Bola filled out the whitelist form (name, Twitter handle, wallet address, why he wanted to join). Two days later, he received a DM:
+
+> *"🎉 Congratulations @Bola! You've been whitelisted for CyberPunks Reborn. Mint goes live in 48 hours. Whitelist mint: 0.08 ETH. Public: 0.15 ETH. Get ready!"*
+
+### Day of Mint: The Announcement
+
+On mint day, the announcement channel exploded with excitement. The team posted:
+
+> *"🚀 MINT IS LIVE! Whitelist members click here: [link]  
+> ⏰ Whitelist window: 2 hours  
+> 💎 Price: 0.08 ETH  
+> 🔥 10,000 supply - don't miss out!*"
+
+Bola clicked the link. It took him to `cyberpunksreborn.art/mint`
+
+The site looked polished:
+- Clean design matching the Discord branding
+- Live mint counter showing "3,287 / 10,000 minted"
+- Gallery of the NFT artwork
+- "Connect Wallet" button
+
+He connected his MetaMask. A popup showed: *"Sign message to verify whitelist status"*
+
+He signed. The site confirmed: *"✅ Whitelist verified! You can mint up to 3 NFTs."*
+
+### The Malicious Mint
+
+Bola selected "Mint 2" and clicked confirm. Total: 0.16 ETH.
+
+A MetaMask popup appeared, but instead of a simple ETH transfer, it showed a contract interaction with dense technical details.
+
+**Red flag #1:** The contract address didn't match the one shown on the website's "Contract" page.
+
+But Bola was in a rush—the mint was selling out fast according to the counter. He clicked "Confirm."
+
+Within seconds, his wallet started sending transactions he didn't authorize:
+
+**Transaction 1:** Transfer NFT "Bored Ape #4521" → 0x9f8e...bc43  
+**Transaction 2:** Transfer NFT "Doodle #892" → 0x9f8e...bc43  
+**Transaction 3:** Transfer 2.5 ETH → 0x9f8e...bc43  
+**Transaction 4-8:** Transfer USDC, USDT, and other tokens → 0x9f8e...bc43
+
+Before Bola could react, **his entire wallet was empty.**
+
+The "mint" page displayed a generic error: *"Transaction failed. Please try again."*
+
+### The Aftermath
+
+Panicking, Bola checked Etherscan. The address he "minted" from (0x9f8e...bc43) was flagged as **"NFT Drainer - Reported 1,247 times."**
+
+He rushed back to Discord—**the entire server had vanished.** Deleted.
+
+He checked Twitter—the @CyberPunksReborn account was **gone.**
+
+The website `cyberpunksreborn.art` showed **"Domain not found."**
+
+He searched for "CyberPunks Reborn scam" and found dozens of tweets from other victims who lost funds in the exact same way, all posted within the past hour.
+
+**Total loss:**
+- 12 valuable NFTs worth ~$10,000
+- 2.5 ETH (~$8,000)
+- Various tokens (~$2,000)
+- **Total: ~$20,000**
+
+---
+
+## Where the Scammer Won
+
+<AccordionGroup>
+  <Accordion title="1. Fake Community Building" icon="users">
+**What Bola saw:** 8,500-member Discord, active chats, partnerships, testimonials
+
+**The reality:** Most members were bots. "Active" conversations were scripted or from sock puppet accounts. The partnerships were fake (other scam projects or impersonation).
+
+**The tactic:** Build social proof at scale. Large membership + activity = perceived legitimacy. Many victims said they joined "because so many others already had."
+  </Accordion>
+
+  <Accordion title="2. Time Pressure & FOMO" icon="clock">
+**The sequence:**
+- Whitelist forms (creates commitment)
+- Countdown timers (creates urgency)
+- Live mint counter (creates scarcity fear)
+- "Selling out fast!" messages (triggers panic buying)
+
+**Why it works:** Under time pressure, people skip security checks. Bola noticed the contract mismatch but clicked anyway to "not miss out."
+  </Accordion>
+
+  <Accordion title="3. The Malicious "SetApprovalForAll"" icon="file-contract">
+**What Bola thought he signed:** Mint transaction for 0.16 ETH
+
+**What he actually signed:** `setApprovalForAll` granting the drainer contract permission to transfer ALL his NFTs and tokens
+
+**How drainers hide it:**
+- Popup happens fast during high-pressure mint moment
+- Technical details in hex format look normal to inexperienced users
+- Legitimate mints ALSO use contract interactions, so it doesn't seem unusual
+
+**The execution:** Once approved, the backend script automatically called `transferFrom` for every valuable asset.
+  </Accordion>
+
+  <Accordion title="4. The Quick Disappearance" icon="ghost">
+**Timeline:** Discord/Twitter/Website all deleted within 30 minutes of mint going live
+
+**Why:** Scammers know victims will try to warn others. By disappearing immediately, they:
+- Prevent warnings from spreading
+- Make evidence harder to gather
+- Move to the next fake project quickly
+
+**Scale:** Same scam operation likely runs dozens of fake projects simultaneously.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Red Flags Bola Missed
+
+<Warning>
+- [ ] **Contract address mismatch** - Site showed one address, MetaMask showed different one
+- [ ] **New project with huge following** - 8,500 Discord members for a project that launched 2 weeks ago
+- [ ] **Anonymous team** - No real names, no verifiable track records
+- [ ] **Rushed whitelist process** - Form → whitelist → mint in under 72 hours
+- [ ] **Generic website domain** - `.art` TLD instead of established `.com` or `.io`
+- [ ] **No smart contract audit** - Claimed to be audited but no report link
+- [ ] **Too-good-to-be-true roadmap** - Every trendy feature (DAO, metaverse, P2E, staking) promised
+- [ ] **SetApprovalForAll request** - This permission is dangerous; mints should be simple ETH transfers
+</Warning>
+
+---
+
+## How NFT Drainer Scams Work
+
+### Step 1: Infrastructure Setup (24-48 hours)
+- Register domain (cheap, $10-$50/year)
+- Clone templates from real NFT projects
+- Deploy malicious smart contract to blockchain
+- Set up Discord server with bot population
+- Create Twitter account, buy followers (~$500 for 15K followers)
+
+### Step 2: Social Engineering (1-2 weeks)
+- Post impressive (stolen) artwork
+- Build fake whitelist hype
+- Partner with other scam projects for cross-promotion
+- Use bots to simulate active community
+- Run fake "alpha" channels offering "insider info"
+
+### Step 3: The Drainer Contract
+```solidity
+// Simplified example - real drainers are more sophisticated
+function mint(uint256 quantity) external payable {
+    // Looks like a normal mint function
+    require(msg.value >= price * quantity, "Insufficient payment");
+    
+    // But when called, it requests setApprovalForAll
+    // This grants permission to transfer ALL victim's NFTs/tokens
+}
+
+function drain(address victim) external onlyOwner {
+    // After victim approves, owner can drain everything
+    IERC721(valuableNFT).transferFrom(victim, attacker, tokenId);
+    IERC20(USDC).transferFrom(victim, attacker, balance);
+    // Repeat for all valuable assets
+}
+```
+
+### Step 4: Mint Day Execution
+- Create urgency with timers and "selling fast" messaging
+- Victims connect wallets and approve malicious contracts
+- Backend script monitors for new approvals
+- Automatically drains valuable assets within seconds
+- Counter shows fake "minted" numbers to maintain illusion
+
+### Step 5: Disappear & Repeat
+- Delete Discord, Twitter, website
+- Move funds through mixers
+- Cash out via DEXs and exchanges
+- Launch next fake project with new name/brand
+
+**Repeat time:** 2-4 weeks per project
+
+---
+
+## What Bola Should Have Done
+
+### Before Minting
+
+<Check>**Verify the contract address independently** - Check official announcements, compare with Etherscan, don't trust addresses shown on random websites</Check>
+
+<Check>**Research the team** - Real names, portfolio history, previous successful projects. Anonymous teams + new project = extreme caution</Check>
+
+<Check>**Check for smart contract audit** - Reputable audit from CertiK, Trail of Bits, OpenZeppelin, etc. with publicly accessible report</Check>
+
+<Check>**Look for community warnings** - Search "[project name] + scam" on Twitter and Google before minting</Check>
+
+<Check>**Verify social accounts** - Check when Twitter account was created, follower quality (many bots?), engagement authenticity</Check>
+
+### During The Mint
+
+<Check>**READ the transaction details carefully** - Never rush. If it's `setApprovalForAll` or similar permission request, STOP and investigate</Check>
+
+<Check>**Verify contract address matches** -Compare what MetaMask shows vs. what official sources say</Check>
+
+<Check>**Question urgency** - Real projects don't pressure you to mint immediately without time to verify</Check>
+
+<Check>**Use a mint-only wallet** - Separate wallet with only ETH for minting, not your valuable NFT collection</Check>
+
+### If You've Been Hit
+
+<Check>**Revoke approvals immediately** - [Revoke.cash](https://revoke.cash) or Etherscan token approval tool</Check>
+
+<Check>**Create new wallet** - Move any remaining assets to fresh wallet; compromised one is unsafe</Check>
+
+<Check>**Report everywhere:**
+- ChainAbuse - Flag the contract and attacker addresses
+- OpenSea / Blur - Report the fake collection
+- Discord - Report the server (if still up)
+- Twitter - Report the account
+- Have I Been Drained - Check if already reported
+</Check>
+
+<Check>**Document everything** - Screenshots, transaction hashes, Discord messages before they disappear</Check>
+
+---
+
+## Real-World Context
+
+<CardGroup cols={2}>
+  <Card title="Pink Drainer: $15M" icon="droplet">
+    The "Pink Drainer" operation stole over $15 million through fake NFT mints and phishing sites before being disrupted.
+    
+    *Source: Blockchain security firms, 2023*
+  </Card>
+  
+  <Card title="10,000+ Victims" icon="users">
+    MS Drainer alone affected over 10,000 victims across hundreds of fake NFT projects.
+    
+    *Source: Chain analysis*
+  </Card>
+  
+  <Card title="Average: $2,000-$5,000" icon="wallet">
+    Average individual loss in NFT drainer scams ranges from $2,000 to $5,000 per victim.
+    
+    *Source: Security research*
+  </Card>
+  
+  <Card title="48-Hour Projects" icon="stopwatch">
+    Scammers can set up a convincing fake NFT project in under 48 hours using templates and automation.
+    
+    *Source: Dark web marketplace analysis*
+  </Card>
+</CardGroup>
+
+---
+
+## Action Steps: Protect Yourself
+
+### Setup (Do This Before Your Next Mint)
+
+1. **Create a dedicated minting wallet** - Only keep ETH for minting, never your NFT collection
+2. **Bookmark trusted tools:**
+   - Revoke.cash (for approval management)
+   - Etherscan (for contract verification)
+   - ChainAbuse (for address screening)
+3. **Join legitimate NFT security communities** - Real collectors share warnings about scams
+4. **Enable wallet transaction simulation** - Use wallets that show what transactions will do in plain language
+
+### When Evaluating Projects
+
+1. **Research the team thoroughly** - Real names, LinkedIn profiles, previous projects
+2. **Verify audit reports** - Click through to auditor's site, confirm project is listed
+3. **Check contract on Etherscan:**
+   - When was it deployed?
+   - Is it verified?
+   - How many holders?
+   - Any warning flags?
+4. **Search for scam warnings** - Google "[project] scam", check r/NFT, ask in trusted communities
+5. **Be suspicious of perfection** - Amazing art + huge community + perfect roadmap + anonymous team = likely scam
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    Similar wallet drainer pattern in grant/airdrop context
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all wallet drainer and phishing attack types
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if contracts/addresses you interacted with are flagged
+  </Card>
+  
+  <Card 
+    title="Typosquatting Deep-Dive" 
+    icon="link"
+    href="/safety-education/articles/typosquatting-domains"
+  >
+    How fake domains trick users into scam sites
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. [ZeroFox - NFT Drainer Analysis](https://www.zerofox.com/intelligence/flash-report-nft-drainer-claims-to-bypass-cryptocurrency-wallet-update/)
+2. [Chainalysis - Crypto Drainer Report](https://www.chainalysis.com/blog/crypto-drainers/)
+3. [Check Point Research - Wallet Drainer Case Study](https://research.checkpoint.com/2024/wallet-scam-a-case-study-in-crypto-drainer-tactics/)
+4. [Confiant - Drainer Template Analysis](https://blog.confiant.com/how-one-crypto-drainer-template-facilitates-tens-of-millions-of-dollars-in-theft-66f3794aea4b)

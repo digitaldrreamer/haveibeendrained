@@ -72,6 +72,37 @@
         ]
       },
       {
+        "tab": "Safety Education",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "safety-education/index"
+            ]
+          },
+          {
+            "group": "Threat Categories",
+            "pages": [
+              "safety-education/categories/hacks",
+              "safety-education/categories/frauds",
+              "safety-education/categories/blackmail",
+              "safety-education/categories/privacy-tracking"
+            ]
+          },
+          {
+            "group": "Stories & Case Studies",
+            "pages": [
+              "safety-education/articles/grant-phishing-lisa",
+              "safety-education/articles/typosquatting-domains",
+              "safety-education/articles/pig-butchering-romance",
+              "safety-education/articles/recovery-scam-trap",
+              "safety-education/articles/dusting-attack-privacy",
+              "safety-education/articles/nft-drainer-mint"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Contributing",
         "groups": [
           {

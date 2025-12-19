@@ -1,0 +1,264 @@
+---
+title: "Privacy & Tracking Attacks"
+description: "Understanding surveillance, dusting attacks, scam tokens, and on-chain tracking that sets you up as a future target"
+---
+
+## Definition
+
+**Pronunciation:** /ˈpraɪ.və.si ənd ˈtræk.ɪŋ əˌtæks/ ("PRY-vuh-see and TRACK-ing uh-TAKS")
+
+**Privacy and tracking attacks** are behaviors where scammers, analytics tools, or adversaries try to follow your on-chain activity, cluster your wallets, or tempt you into risky interactions that reveal more about your identity and holdings. These attacks might not steal funds immediately, but they **set you up as a future target** for phishing, fraud, or extortion.
+
+## What It Covers
+
+This category includes attacks that:
+
+- Send tiny "dust" amounts of crypto to trace how you move funds and cluster addresses
+- Airdrop scam tokens or NFTs to tempt you into connecting to malicious contracts
+- Use on-chain data combined with social media to deanonymize wallet owners
+- Deploy data-harvesting "free tools" that monitor wallets and build user profiles
+- Track spending patterns to identify high-value targets for sophisticated attacks
+
+## What It Does NOT Cover
+
+- **Direct theft** via fraud or technical hacks (see [Frauds](/safety-education/categories/frauds) and [Hacks](/safety-education/categories/hacks))
+- **Legitimate analytics** or block explorers with clear privacy policies used for research
+- **Normal blockchain transparency** that's inherent to public ledgers
+
+## Why It Matters
+
+In crypto, **your addresses are public by design**. Every transaction you make is permanently recorded on the blockchain for anyone to see. While this transparency powers trustless systems, it also creates privacy risks.
+
+Attackers can combine tiny clues—like:
+- Dust transactions you ignore
+- Scam tokens sitting in your wallet
+- Social media posts mentioning transactions
+- Patterns in when and how you transact
+
+...to build a detailed profile on you. That profile helps them:
+- **Target you with tailored phishing** that references your real activity
+- **Identify high-value wallets** worth attacking with sophisticated techniques
+- **Link your wallet** to your real identity for doxxing or extortion
+- **Time attacks** for when you're most likely to be less vigilant
+
+## Subcategories & Scam Types
+
+### Dusting Attacks
+
+**Description:** Sending a tiny amount of crypto ("dust") to your wallet to track how it moves or to tempt you into interacting with a malicious address. Often used to cluster multiple addresses as belonging to the same user.
+
+**Common scam types:**
+- **Bitcoin-style dusting** - Tiny BTC amounts sent to link addresses when you consolidate UTXOs
+- **Token dusting on EVM chains** - Random tokens sent to bait you into DEX interactions or "cleanup" sites
+- **Cross-chain dusting** - Coordinated dusting across multiple blockchains to build identity graphs
+- **Dust with phishing messages** - Token names or memo fields containing scam URLs
+
+<CardGroup cols={1}>
+  <Card 
+    title="Dusting Attack for Privacy Tracking" 
+    icon="eye"
+    href="/safety-education/articles/dusting-attack-privacy"
+  >
+    How tiny transactions can deanonymize wallet owners
+  </Card>
+</CardGroup>
+
+**How it works:**
+1. Attacker sends 0.00001 BTC or 1 random token to thousands of addresses
+2. When you later consolidate or move funds, dust mixes with your real transactions
+3. Attacker traces the dust to link multiple addresses as belonging to same person
+4. Profile built over time reveals patterns, wealth, and potentially identity
+
+**Key insight:** The dust itself isn't directly harmful—it's the **tracking and profiling** it enables that creates risk.
+
+---
+
+### Scam Airdrops & Malicious Tokens
+
+**Description:** Airdropped tokens or NFTs that appear in your wallet without consent, where interacting with them (selling, swapping, "claiming rewards") routes you through malicious contracts or phishing sites.
+
+**Common scam types:**
+- **Airdropped tokens leading to drainer sites** - Token appears with instructions to "claim value" on a scam website
+- **Suspicious NFTs with phishing URLs** - NFT metadata contains links to fake marketplaces
+- **"Honeypot" tokens** - Can be bought but not sold; attempts to sell fail or route through drainer
+- **Fake high-value tokens** - Appear worth thousands in your wallet, but selling requires dangerous approvals
+
+**Typical flow:**
+1. Wake up to 10,000 "UltraGainToken" or a suspicious NFT in your wallet
+2. Check price—wallet shows it's "worth" $5,000
+3. Try to sell on a DEX or fake site linked in token info
+4. Approval requested seems normal but drains your wallet
+
+**Important:** You **cannot prevent** random tokens from appearing in your wallet—anyone can send tokens to any address. The danger is in **interacting** with them.
+
+---
+
+### On-Chain OSINT & Targeting
+
+**Description:** Using open blockchain data combined with social media and off-chain clues to identify who controls a wallet, how wealthy they are, and which attacks they're most vulnerable to.
+
+**Common scam types:**
+- **"Whale" wallet targeting** - Identifying large holders for SIM swap attacks and sophisticated drainer campaigns
+- **Social media correlation** - Matching wallet addresses to Twitter/X profiles that post transaction screenshots
+- **Deanonymization through patterns** - Identifying users through transaction timing, amounts, and recipient patterns
+- **NFT holder profiling** - Tracking NFT collectors across platforms to build marketing or attack profiles
+
+**Real-world example:** A trader tweets "Just bought 10 ETH of [token]" → Blockchain analysts find matching transaction → Link address to Twitter profile → Build complete trading history → Craft personalized phishing email referencing specific trades.
+
+**Why it works:** Most users don't realize how much their on-chain activity reveals, especially when combined with public social media posts.
+
+---
+
+## User Safety Basics
+
+<AccordionGroup>
+  <Accordion title="Wallet Hygiene" icon="wallet">
+    - **Never assume your wallet address is private** - Treat it like a public username, not a password
+    - **Use different wallets for different purposes** - Separate public activity (NFT minting, social interactions) from private holdings
+    - **Create fresh wallets for sensitive holdings** - Don't reuse addresses that are linked to your identity
+    - **Label wallets clearly** - Know which ones are "public" vs "private"
+  </Accordion>
+  
+  <Accordion title="Handling Unexpected Tokens" icon="coins">
+    - **Ignore unexpected airdropped tokens and NFTs** - Don't try to "clean" or sell them
+    - **Do NOT click links** in token names, NFT descriptions, or transaction memos
+    - **Use wallet "hide" features** - Most wallets let you hide spam tokens from view
+    - **Only use trusted cleanup tools** - If absolutely necessary, use well-known services like Phantom's burn feature (Solana)
+    - **Never connect to unknown sites** promising to "remove spam tokens for free"
+  </Accordion>
+  
+  <Accordion title="Social Media & Public Sharing" icon="share-nodes">
+    - **Avoid posting wallet addresses** publicly unless necessary for your work/brand
+    - **Don't share transaction screenshots** that reveal addresses or amounts
+    - **Be cautious about posting balances** or portfolio wins
+    - **Use privacy tools** when sharing on-chain activity (strip metadata, crop carefully)
+    - **Consider pseudonymous accounts** for crypto activity separate from main identity
+  </Accordion>
+</AccordionGroup>
+
+## Relatable Examples
+
+> **The Dust Trap:** Ngozi wakes up to hundreds of random tokens in her wallet. Annoyed, she googles "how to remove dust tokens" and finds a site promising "auto-sell all spam tokens." She connects her wallet, approves what seems like a cleanup transaction, and **her entire wallet is drained.** The "cleanup" site was a drainer.
+
+> **The Whale Target:** A prominent trader regularly posts their wallet address on X to show portfolio performance. Months later, they receive targeted phishing emails that reference **specific trades they made**, making the scam feel legitimate. The attacker built a complete profile using public blockchain data.
+
+> **The NFT Phishing Airdrop:** An artist receives an NFT called "Exclusive Collab Invitation" with a link to a "verification portal." Excited about the opportunity, they click and connect their wallet to verify ownership. The portal was a drainer—**all NFTs and tokens stolen.**
+
+## Recommended Controls
+
+### For Individuals
+- **Separate public and private wallets** - Keep a "face" wallet for social interactions and a secure wallet for holdings
+- **Use privacy tools when necessary** - Mixers, privacy coins, or privacy-focused chains (understand legal/regulatory implications)
+- **Hide spam tokens immediately** - Don't let them distract or tempt you
+- **Review what you share publicly** - Audit your social media for wallet addresses, transaction screenshots, and balance posts
+- **Assume observers** - If you're transacting large amounts, assume someone is watching and planning
+
+### For High-Profile Users
+- **Dedicated hot wallet** - Use a small-balance wallet for all public interactions and testing
+- **Cold storage for holdings** - Hardware wallets or multi-sig for anything significant
+- **OPSEC discipline** - Never link cold storage addresses to your public identity
+- **Privacy-focused practices** - Use fresh addresses, avoid address reuse, consider privacy protocols
+- **Security audit** - Periodic review of what's publicly knowable about your holdings
+
+### For Projects & Communities
+- **Educate users about dust** - Explain that random tokens appearing is normal but interaction is dangerous
+- **Official communication channels** - Make it clear official airdrops NEVER require approval or payment
+- **Verified contract addresses** - Publish official contract addresses on verified channels
+- **Warning systems** - Alert community when scam airdrops targeting your users are discovered
+
+## Real-World Statistics
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| **Addresses tracked by dusting (single campaign)** | 294,000+ | Kaspersky, 2019 |
+| **Common dust amounts** | 0.00000546 BTC (typical) | Binance Academy |
+| **Percentage of users who interact with scam tokens** | ~15% (estimated) | Industry analysis |
+| **Wallet deanonymization success rate** | High for users who post addresses | Academic research |
+
+## What To Do About Privacy & Tracking
+
+<Steps>
+  <Step title="Accept That Public Blockchains Are Transparent">
+    You cannot prevent people from viewing your transactions. Privacy comes from **separation, not secrecy**.
+  </Step>
+  
+  <Step title="Separate Your Wallets Immediately">
+    Create distinct wallets:
+    - **Public/Social**: For NFT minting, community activity, small transactions
+    - **Private/Holdings**: For long-term savings, never linked to your identity
+    - **Testing**: For trying new dApps with minimal funds
+  </Step>
+  
+  <Step title="Hide or Ignore Spam Tokens">
+    Use your wallet's built-in features to hide unwanted tokens. DO NOT:
+    - Click links in token names or NFT metadata
+    - Connect to "cleanup" sites
+    - Try to sell or swap spam tokens
+  </Step>
+  
+  <Step title="Audit Your Public Footprint">
+    Search for:
+    - Social media posts mentioning your wallet addresses
+    - Screenshots with visible addresses or transaction hashes
+    - Forum posts where you shared wallet info
+    
+    Consider deleting or editing to reduce linkability.
+  </Step>
+  
+  <Step title="Use Privacy Tools Responsibly">
+    If you need enhanced privacy:
+    - Fresh wallets for each major use case
+    - Privacy protocols like Tornado Cash (be aware of legal/regulatory status)
+    - Non-custodial privacy wallets
+    
+    **Important**: Privacy ≠ Anonymity for illegal activity. Follow local laws.
+  </Step>
+  
+  <Step title="Stay Vigilant for Targeted Attacks">
+    If you're a known crypto user, expect:
+    - Personalized phishing mentioning your real activity
+    - Social engineering attacks using public information
+    - Higher-effort scams because you're a valuable target
+  </Step>
+</Steps>
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Learn about wallet drainers and phishing attacks
+  </Card>
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  <Card 
+    title="Understanding Risk Scores" 
+    icon="gauge"
+    href="/user-guide/risk-scores"
+  >
+    How we assess wallet security threats
+  </Card>
+  <Card 
+    title="Report Suspicious Addresses" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Add malicious addresses to community registry
+  </Card>
+</CardGroup>
+
+## References
+
+1. [Wikipedia - Dusting Attack](https://en.wikipedia.org/wiki/Dusting_attack)
+2. [Trezor - Dusting Attacks & Airdrop Scam Tokens](https://trezor.io/support/troubleshooting/coins-tokens/dusting-attacks-airdrop-scam-tokens)
+3. [OKX Learn - Crypto Dusting Attack Guide](https://www.okx.com/learn/crypto/crypto-dusting-attack-guide)
+4. [Binance Academy - What Are Dusting Attacks?](https://academy.binance.com/en/articles/what-is-a-dusting-attack)
+5. [Kaspersky - Dusting Attack Analysis](https://www.kaspersky.com/blog/bitcoin-dusting-attack/)
