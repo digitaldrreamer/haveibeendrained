@@ -6,7 +6,6 @@ import { clusterApiUrl } from '@solana/web3.js';
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-  BackpackWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import bs58 from 'bs58';
 
@@ -264,7 +263,6 @@ export default function WalletConnect({ onConnected, onDisconnected }: WalletCon
     () => [
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter(),
-      new BackpackWalletAdapter(),
     ],
     []
   );
