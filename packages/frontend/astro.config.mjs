@@ -12,6 +12,9 @@ export default defineConfig({
       tailwindcss({
         // Tailwind v4 automatically scans for classes in these file types
       })
-    ]
+    ],
+    server: {
+      allowedHosts: ['haveibeendrained.org', 'www.haveibeendrained.org']
+    }
   }
 });

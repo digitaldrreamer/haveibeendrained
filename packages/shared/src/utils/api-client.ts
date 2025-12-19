@@ -52,7 +52,9 @@ export class ApiClient {
    */
   async analyzeWallet(request: AnalyzeWalletRequest & { experimental?: boolean }): Promise<AnalyzeWalletResponse> {
     try {
-      const url = new URL('/api/analyze', this.config.baseUrl);
+      // Use internal, CORS-protected, non-rate-limited endpoint for the frontend
+      // Mirrors the public /api/v1/check behavior but without public rate limits
+      const url = new URL('/api/internal/check', this.config.baseUrl);
       url.searchParams.set('address', request.address);
 
       if (request.options?.limit) {
@@ -87,10 +89,12 @@ export class ApiClient {
 
       const json = await response.json();
 
+      // Internal /api/internal/check returns:
+      // { success: boolean, type: 'drainer' | 'wallet_analysis', data: RiskReport, ... }
       return {
-        success: json.success || true,
-        data: json.data || json,
-        timestamp: json.timestamp || Date.now(),
+        success: json.success ?? true,
+        data: (json.data ?? json) as RiskReport,
+        timestamp: json.timestamp ?? Date.now(),
       };
     } catch (error) {
       return {
