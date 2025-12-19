@@ -49,9 +49,7 @@ jobs:
         bun-version: latest
     
     - name: Install Dependencies
-      run: |
-        bun install
-        cd packages/anchor && yarn install && cd ../..
+      run: bun install
     
     - name: Run Anchor Tests
       working-directory: packages/anchor
