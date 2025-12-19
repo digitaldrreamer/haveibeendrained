@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import checkAction from './routes/actions/check';
 import analyzeRoutes from './routes/analyze';
 import reportRoutes from './routes/report';
+import publicApiRoutes from './routes/public-api';
 
 const app = new Hono();
 
@@ -13,6 +14,7 @@ app.get('/', (c) => {
 app.route('/', analyzeRoutes);
 app.route('/', reportRoutes);
 app.route('/', checkAction);
+app.route('/', publicApiRoutes); // Public API v1 routes
 
 // Start server
 const port = parseInt(process.env.API_PORT || '3001', 10);
