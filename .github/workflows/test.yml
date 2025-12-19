@@ -51,6 +51,13 @@ jobs:
     - name: Install Dependencies
       run: bun install
     
+    - name: Setup Solana Keypair for Testing
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+        mkdir -p ~/.config/solana
+        solana-keygen new --no-bip39-passphrase --force -o ~/.config/solana/id.json
+        solana config set --url localhost
+    
     - name: Run Anchor Tests
       working-directory: packages/anchor
       run: |
