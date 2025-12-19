@@ -35,17 +35,17 @@ services:
     container_name: haveibeendrained-api
     working_dir: /app/packages/api
     command: ["bun", "run", "dev"]
-    env_file:
-      - .env  # Root .env with shared vars
-      - packages/api/.env  # API-specific vars
     environment:
-      # Reference root .env vars
       HELIUS_API_KEY: ${HELIUS_API_KEY}
       SOLANA_NETWORK: ${SOLANA_NETWORK}
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
       ANCHOR_PROVIDER_URL: ${ANCHOR_PROVIDER_URL}
       ANCHOR_WALLET: ${ANCHOR_WALLET}
+      API_PORT: ${API_PORT}
+      API_BASE_URL: ${API_BASE_URL}
+      RATE_LIMIT_POINTS: ${RATE_LIMIT_POINTS}
+      RATE_LIMIT_DURATION: ${RATE_LIMIT_DURATION}
     ports:
       - "3001:3001"
     volumes:
@@ -61,11 +61,8 @@ services:
     container_name: haveibeendrained-frontend
     working_dir: /app/packages/frontend
     command: ["bun", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000"]
-    env_file:
-      - .env  # Root .env with shared vars
-      - packages/frontend/.env  # Frontend-specific vars
     environment:
-      PUBLIC_API_BASE_URL: ${PUBLIC_API_BASE_URL:-http://api:3001}
+      PUBLIC_API_BASE_URL: ${PUBLIC_API_BASE_URL}
     ports:
       - "3000:3000"
     volumes:
