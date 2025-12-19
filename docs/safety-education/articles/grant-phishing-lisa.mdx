@@ -1,5 +1,5 @@
 ---
-title: "Grant Phishing + Wallet Drainer: Lisa's $180,000 Lesson"
+title: "Grant Phishing + Wallet Drainer: Lisa's ₦180,000 Lesson"
 description: "How a typosquatted domain and malicious approval led to total wallet drainage"
 ---
 
@@ -8,353 +8,360 @@ description: "How a typosquatted domain and malicious approval led to total wall
 
 <Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Phishing & Typosquatting</Badge> <Badge color="blue" size="sm">Wallet Drainers</Badge>
 
-**Reading time**: 8 minutes  
-**Risk level**: High  
-**Target audience**: Founders, SMBs, grant applicants, anyone connecting wallets to new sites
+**Reading time**: 12 minutes  
+**Risk level**: Critical  
+**Target audience**: Founders, SMBs, grant applicants, ops teams
 </Info>
 
 ## Meet Lisa
 
-Lisa runs three online businesses from Ife, Nigeria. She manages crypto wallets for each business, using USDC and USDT to pay contractors globally and accepting crypto payments from international clients. She's tech-savvy, security-conscious, and regularly applies to Web3 accelerators and grant programs to fund expansion.
+Lisa is a 32-year-old business owner running two successful e-commerce ventures in Ife, Nigeria. She manages crypto wallets for business operations, pays international contractors in stablecoins, and actively applies to Web3 accelerators and grant programs to fund expansion. She's careful about security—or so she thought.
 
-She uses MetaMask for daily operations, keeps separate wallets for each business, and has basic security practices in place—or so she thought.
+She uses MetaMask for her wallets, follows crypto news, and knows the basics of DeFi. But like many business owners, she's busy. She manages multiple applications across different programs simultaneously, so when grant emails come in, she doesn't always verify every detail before clicking.
 
 ## What Happened
 
 ### The Hook
 
-On a Tuesday morning, Lisa checked her email and saw a message with the subject line: **"Congratulations! Ammatina Fund Grant Approved – Action Required"**.
+On a Tuesday morning at 9:47 AM, Lisa receives an email in her business inbox:
 
-Her heart jumped. She'd applied to Ammatina three weeks earlier after seeing the program mentioned in a founder WhatsApp group. The email looked perfect:
-- Official Ammatina logo in the header
-- Professional formatting and tone
-- Legitimate-sounding grant amount: $25,000 USD
-- Personalized greeting using her application name
+**Subject:** "Congratulations! Ammatina Fund Grant Approved – Action Required"
 
-The body read:
+The email looks professional:
+- Correct Ammatina Fund logo (top left)
+- Proper business formatting
+- Reference to the grant tier she applied for ("Growth Stage – $25,000")
+- Urgent but professional tone
 
-> *"Dear Lisa, Congratulations! Your grant application has been approved for $25,000 USD. To receive funds, please verify your wallet address within 48 hours by connecting to our secure disbursement portal. Failure to verify will result in grant cancellation."*
+Lisa had applied to Ammatina three weeks earlier through their official website. She was hopeful but skeptical about chances. This email came as a surprise but a pleasant one.
 
-A prominent blue button said: **"Connect Wallet to Claim Grant"**.
+The email content:
+
+> "Dear Lisa,
+> 
+> Congratulations on your application success! Your venture has been selected for a ₦4,500,000 grant ($25,000 USD equivalent) from Ammatina Fund's Growth Stage program.
+> 
+> **IMPORTANT:** To verify your wallet and disburse funds, you must complete verification within 48 hours. Failure to do so will result in forfeiture of your grant.
+> 
+> Please click the button below to proceed:
+> 
+> [VERIFY WALLET & CLAIM GRANT]
+> 
+> The verification process is simple and takes 2 minutes.
+> 
+> Best regards,  
+> Ammatina Fund Team"
+
+The urgency is deliberate. The 48-hour window pressures Lisa into acting without full verification. Urgency is one of the most effective social engineering tactics.
 
 ### Building Trust
 
-Lisa clicked the button. The page loaded instantly—clean, professional design with Ammatina branding everywhere. A progress indicator showed "3,847 grants disbursed this quarter." Testimonials from other founders she recognized scrolled across the bottom.
+Lisa clicks the button.
 
-She glanced at the URL in her browser: `https://arnrnatina-funds.com/grant-claim`
+She's taken to a website. The URL in her browser reads:
 
-Everything seemed legitimate. She didn't notice:
-- The **double "r"** in "arnr**r**natina"
-- The **missing "i"** in what should be "am**m**atina"
-- The hyphen in "funds" that the real site doesn't use
+> `https://arnrnatina-funds.com/grant-claim`
 
-**The reality:** Typosquatters had registered the domain two days after the real Ammatina announced their grant round. They scraped the list of applicants from public Twitter threads where founders mentioned applying, then sent mass phishing emails.
+She doesn't notice the typo:
+- Real domain: `ammatina-funds.com`
+- Fake domain: `arnrnatina-funds.com`
 
-### The First Signature
+The extra "r" and the missing "i" are easy to miss, especially on a phone or when skimming quickly. Typosquatting exploits this visual similarity.
 
-A MetaMask popup appeared: *"Connect to Ammatina Grant Portal?"*
+The page she lands on looks almost identical to Ammatina's official branding:
+- Same green and white color scheme
+- Professional layout
+- Progress bar showing "Step 1 of 3: Verify Wallet"
+- A MetaMask logo and "Connect Wallet" button
+- Text explaining: "We use Web3 wallets to ensure secure, decentralized verification"
 
-Lisa reviewed it quickly—the site was requesting to "view your account address and balance." This seemed normal for grant verification. She clicked **"Connect"**.
-
-A second popup appeared: *"Sign message to verify wallet ownership"*
-
-The message contained some text about confirming she controlled the wallet. Again, this seemed like standard procedure. She clicked **"Sign"**.
-
-**What Actually Happened:** These first two steps were relatively harmless—they only confirmed her wallet address. But they primed her to keep clicking "approve" without deep scrutiny.
+Everything looks legitimate because the attacker copied Ammatina's design pixel-for-pixel.
 
 ### The Trap
 
-A third popup appeared. This one was different—dense with hexadecimal code. The header said: *"Approve USDC for Grant Disbursement"*.
+Lisa clicks "Connect Wallet."
 
-The popup showed:
-```
-Spending Cap: Unlimited
-Spender: 0x85f2...9a3c
-Token: USD Coin (USDC)
-```
+MetaMask pops up, asking:
 
-Lisa hesitated for a second. The technical details looked confusing, but she assumed this was how grant platforms verify they can send tokens to her wallet. The site displayed reassuring text: *"We need approval to send USDC to your wallet. This is standard for all grant payments."*
+> "Do you want to connect your wallet to arnrnatina-funds.com?"
 
-She clicked **"Confirm"**.
+She doesn't carefully read the domain. She's in a hurry and trusts the branding. She clicks "Connect."
 
-**What she actually signed:** An unlimited `setApprovalForAll` permission, granting the attacker's smart contract full control over **every USDC token** in her wallet—not just receiving tokens, but **spending** all of them.
+MetaMask displays her account address and asks which account to connect. She selects her Business Wallet B (the one with ₦4.5M in stablecoins and some ETH for operations).
 
-Within 90 seconds of the approval:
+The fake website now shows:
 
-**Business Wallet A (Operations):**
-- $87,000 USDC → **GONE**
-- Sent to 0x85f2...9a3c
+> "Step 2 of 3: Verify Ownership"
+> 
+> "To prove you own this wallet, please sign the following message."
 
-**Business Wallet B (Payroll):**
-- $61,000 USDT → **GONE**  
-- Sent to 0x85f2...9a3c
+A MetaMask signature request appears:
 
-**Personal Wallet:**
-- $32,000 in ETH and various tokens → **GONE**  
-- Sent to 0x85f2...9a3c
+> "Sign this message to verify your wallet ownership and process your grant disbursement."
 
-**Total loss: $180,000**
+The message content is a hexadecimal-looking string that looks like standard blockchain gibberish. Lisa doesn't read it carefully—most users don't. She clicks "Sign."
 
-The "grant portal" displayed: *"Grant processing. Funds will arrive in 3-5 business days. You will receive an email confirmation."*
+**Critical mistake:** What Lisa actually signed was not just a harmless message. She signed a transaction that called `setApprovalForAll()` on her ERC-20 tokens, granting unlimited transfer rights to a smart contract controlled by the attacker.
 
-### The Aftermath
+The fake website now displays:
 
-Lisa felt relieved. She closed her laptop and went back to work.
+> "Step 3 of 3: Processing Disbursement"
+> 
+> "Your grant is being processed. Funds will arrive in your wallet within 3-5 business days."
 
-That evening, she checked Etherscan to see if the grant had arrived. Instead, she saw **twelve outbound transactions** she never authorized. Her wallets were empty.
+It shows a fake progress bar and a reassuring message. Lisa feels her anxiety ease. The process felt legitimate, and now she's just waiting.
 
-The destination address `0x85f2...9a3c` was flagged on ChainAbuse as **"Wallet Drainer – Reported 847 times"**.
+### The Theft
 
-She frantically searched for the Ammatina email to contact support. That's when she noticed the typo in the sender domain: `amnl@arnrnatina-funds.com`. The real Ammatina domain was `ammatina.org`.
+She never had to provide her seed phrase or private key. But it didn't matter.
 
-The consequences hit immediately:
-- **Payroll missed:** She couldn't pay contractors that week
-- **Supplier invoices unpaid:** Two key suppliers cut off service
-- **Operations halted:** Business checking account only had $3,200
-- **Personal savings depleted:** The personal wallet held her emergency fund
+At 10:34 AM—just 47 minutes after she signed—her wallet receives a notification:
 
-Within a month, two of her three businesses had folded. The third survived only because a friend provided a bridge loan.
+**Outbound Transaction 1:** ₦1,200,000 USDC to `0x4c2b...` (unknown address)
 
-She filed reports with:
-- Local Nigerian police (cybercrime unit)
-- FBI IC3 (international cybercrime reporting)
-- ChainAbuse (flagged the drainer address)
+**Outbound Transaction 2:** ₦950,000 USDT to `0x4c2b...` (unknown address)
 
-**Funds recovered:** $0
+**Outbound Transaction 3:** ₦1,850,000 in ETH/other tokens to `0x4c2b...` (unknown address)
 
-The blockchain is irreversible. The drainer had already moved funds through a mixer and cashed out via multiple exchanges.
+Within 90 seconds, the attacker's script has executed three transfers totaling ₦4,000,000 (~$2,200 USD).
+
+All transactions were executed using the approval Lisa signed. She authorized them by clicking "Sign."
+
+The fake grant portal now displays an error message and goes offline. The domain stops responding.
+
+**Total loss: ₦4,000,000** — nearly all of Business Wallet B's operational funds.
+
+Her business cannot make payroll. Supplier payments are missed. One of her ventures is forced to shut down temporarily.
 
 ---
 
 ## Where the Scammer Won
 
-Let's break down exactly where Lisa's defenses failed:
+<Warning>
+1. **Email impersonation:** The email looked professional and referenced legitimate details about her actual application.
+2. **Typosquatted domain:** `arnrnatina-funds.com` (with extra letters) instead of `ammatina-funds.com`. The visual similarity is intentional.
+3. **Cloned UI:** The website's design matched Ammatina's branding perfectly, lowering her skepticism.
+4. **Approval obfuscation:** The MetaMask signature request looked like a simple "prove ownership" message. The hexadecimal content appeared to be blockchain standard. Lisa didn't know she was granting unlimited token access.
+5. **Urgency and authority:** The "48-hour deadline" pressured quick action. Ammatina's official branding and professional tone seemed authoritative.
+6. **No visible warning:** MetaMask showed the signature request but didn't clearly warn that she was approving unlimited spending. This is a known UX gap that drainer attacks exploit.
+</Warning>
+
+---
+
+## What Lisa Could Have Done (Prevention)
+
+### Before Clicking the Email Link
+
+<Check>**Never click links in emails for financial actions.** Instead, go directly to the official website by typing the URL manually in your browser.</Check>
+
+<Check>**Verify sender email domain.** Check that the email came from `@ammatina.com` or an officially listed domain, not from a generic provider like Gmail or an unknown address.</Check>
+
+<Check>**Check for grants on the official website.** If Lisa had logged into ammatina-funds.com directly (not via email link), she would have seen her grant status in her account dashboard.</Check>
+
+### Before Connecting Your Wallet
+
+<Check>**Verify the URL carefully:** Type it slowly and check the domain spelling. `arnrnatina` vs. `ammatina` is easy to miss, but critical.</Check>
+
+<Check>**Use a bookmark:** For any site you visit repeatedly, bookmark it on your first visit. Then always use the bookmark, never links in emails.</Check>
+
+<Check>**Hover over links before clicking:** In emails, hover over links to see the real URL. If it doesn't match the stated destination, don't click.</Check>
+
+<Check>**Use browser security tools:** Some wallets and browser extensions (e.g., MetaMask phishing detector, Rabby Wallet) flag known phishing sites. These aren't perfect but help.</Check>
+
+### Before Signing Any Request
+
+<Check>**Read what you're signing.** Modern wallets and plugins (Rabby, Fire Wallet, MetaMask Snaps with simulators) can show you what a transaction actually does in human-readable language.</Check>
+
+<Check>**Assume "sign to verify" is dangerous.** If a site asks you to sign anything, stop and verify it's a legitimate action:
+- Real verification usually involves a one-time code, not a blockchain signature.
+- If they require a signature, use a wallet with transaction simulation to see what it's really doing.</Check>
+
+<Check>**Never approve "unlimited" spending.** Even if a dApp legitimately needs an approval, set a specific limit (e.g., the exact amount of tokens you're trading), not unlimited.</Check>
+
+<Check>**Check the contract address.** If MetaMask shows you're approving a contract, verify it's the official contract for the protocol. Use BscScan or EtherScan to search the contract address and confirm it's legitimate.</Check>
+
+### Best Practice: Hot vs. Cold Wallet
+
+<Check>**Use a "hot wallet" (small amount) for connecting to unknown or new sites.** Keep operational funds here: ₦100K–₦500K for daily use.</Check>
+
+<Check>**Use a hardware wallet or multisig for bulk holdings.** Most of Lisa's ₦4.5M should have been in a device that requires physical confirmation for transactions, not a software wallet vulnerable to web exploits.</Check>
+
+<Check>**Test withdrawals before depositing large amounts.** If Lisa had sent a small test amount (₦50K) first and requested a test withdrawal, she would have discovered the scam before losing everything.</Check>
+
+---
+
+## Red Flags Lisa Missed
+
+<Warning>
+- [ ] **Email urgency:** "Action required within 48 hours." Legitimate programs don't lock access with artificial deadlines.
+- [ ] **Typosquatted domain:** `arnrnatina-funds.com` vs. `ammatina-funds.com`. The extra characters were easy to miss.
+- [ ] **Domain not matching email sender:** The email claimed to be from Ammatina, but the link went to a different domain (if she had checked).
+- [ ] **Signature request during "verification":** Legitimate identity verification doesn't use blockchain signatures.
+- [ ] **Hex content in signature:** The signature message looked like random blockchain data instead of readable English. This should have triggered caution.
+- [ ] **No reference to specific wallet:** Real grant programs might reference your submitted wallet address. This portal didn't.
+- [ ] **Vague next steps:** "Processing. Funds in 3-5 days." Real platforms show transaction hashes, block explorers, or specific status.
+</Warning>
+
+---
+
+## If You Already Signed/Approved
+
+<Steps>
+  <Step title="Revoke Approvals Immediately">
+    Use Revoke.cash or your blockchain explorer:
+    - Go to Revoke.cash (or EtherScan's token approve function).
+    - Connect your wallet.
+    - Find the malicious contract approval (usually labeled as "Unlimited" or with a huge allowance).
+    - Click "Revoke" and confirm the transaction.
+    - This action costs a small gas fee but prevents further drains.
+  </Step>
+  
+  <Step title="Move Remaining Funds Quickly">
+    Create a fresh wallet with a new seed phrase. Send all remaining tokens to the new wallet. Do this immediately before the attacker finds another vector.
+  </Step>
+  
+  <Step title="Preserve Evidence">
+    Screenshots of the fake website. The phishing email (including headers if possible). Transaction hashes from the blockchain (showing the drain). URLs and domain registrations.
+  </Step>
+  
+  <Step title="Report">
+    The domain: Report to ChainAbuse (chainabuse.com) with the fake domain URL and wallet addresses. Your bank/exchange: If you funded the wallet via a local transfer, report the transaction to your bank (they may flag the receiving account). Law enforcement: File a report with your country's cybercrime unit (Nigeria: EFCC, efcc.gov.ng). The real Ammatina Fund: Email their official support to warn them of the phishing campaign.
+  </Step>
+  
+  <Step title="Do NOT Pay Recovery Scammers">
+    Within days, you may receive DMs offering to "recover" your funds for a fee. These are secondary scams (see [Recovery Scam Trap](/safety-education/articles/recovery-scam-trap)). Ignore them completely.
+  </Step>
+</Steps>
+
+---
+
+## How the Scam Actually Worked (Technical Breakdown)
+
+**The attack combines:**
+
+1. **Email spoofing/phishing:** A convincing email that impersonates Ammatina Fund.
+2. **Domain typosquatting:** A domain registration (`arnrnatina-funds.com`) that looks similar to the real one.
+3. **UI cloning:** A website that perfectly copies Ammatina's design.
+4. **Malicious smart contract:** A contract designed to be called via `setApprovalForAll()`.
+5. **Approval obfuscation:** The MetaMask signature request makes the actual approval operation invisible to the user.
+6. **Automated drainage:** Once approved, a backend script calls `transferFrom()` repeatedly to move all ERC-20 tokens.
+7. **Laundering:** The stolen tokens are moved through mixers (Tornado Cash, TornadoRouter) or immediately swapped to other coins, then cashed out at decentralized exchanges.
+
+**Timeline:**
+- Email sent at 9:47 AM
+- User clicks at 9:51 AM
+- User signs approval at 10:08 AM
+- Script executes drain at 10:09 AM
+- Tokens moved to mixer at 10:12 AM
+- Website goes offline at 10:15 AM
+
+The entire attack takes 28 minutes from first click to completion.
+
+---
+
+## Action Steps: Protect Yourself
+
+### Prevention
 
 <AccordionGroup>
-  <Accordion title="1. The Typosquatted Domain" icon="link">
-**What Lisa saw:** `arnrnatina-funds.com`  
-**What it should have been:** `ammatina.org`
-
-**The tactic:** Attackers register domains with tiny spelling differences because users skim URLs quickly. The human brain autocorrects small typos, especially when the page design looks perfect.
-
-**How they got it:** Monitored Twitter/X for the grant announcement, immediately registered look-alike domains, set up a cloned website within hours.
+  <Accordion title="Type URLs Manually" icon="keyboard">
+**Rule:** Type URLs manually from official documentation, not email links.
   </Accordion>
 
-  <Accordion title="2. The Urgency Weapon" icon="clock">
-**What Lisa saw:** "Verify within 48 hours or grant will be canceled"
-
-**The tactic:** Urgency bypasses critical thinking. Scammers know that fear of missing out (FOMO) and deadline pressure make people act without careful review.
-
-**Real grant programs:** Actually give days or weeks for claims and send notifications through official platforms, not just email.
+  <Accordion title="Use Bookmarks" icon="bookmark">
+**Rule:** Use bookmarks for sites you visit repeatedly.
   </Accordion>
 
-  <Accordion title="3. The Approval Deception" icon="shield-alert">
-**What Lisa thought:** "They need approval to *send* me tokens"  
-**What actually happened:** She gave approval to *spend* all her tokens
-
-**The tactic:** Wallet drainers disguise malicious approvals as necessary steps. The popup said "for grant disbursement," implying it was required to receive funds. In reality, you never need to approve spending rights to receive tokens—tokens can be sent to any address without permission.
-
-**Technical detail:** The contract requested `setApprovalForAll` or `approve(uint256(-1))` which grants **unlimited** spending power.
+  <Accordion title="Enable Wallet Transaction Simulation" icon="flask">
+**Rule:** Enable wallet transaction simulation (Rabby, Fire Wallet, or MetaMask Snaps) to see what you're actually approving.
   </Accordion>
 
-  <Accordion title="4. The Multi-Step Priming" icon="right-left">
-**The sequence:**  
-1. Connect wallet (harmless)  
-2. Sign message (harmless)  
-3. Approve spending (DANGEROUS)
+  <Accordion title="Set Token Approval Limits" icon="ban">
+**Rule:** Set token approval limits to specific amounts, never "unlimited."
+  </Accordion>
 
-**The tactic:** By getting Lisa to click "approve" twice on harmless requests, the scammer created psychological momentum. Each "yes" makes the next one easier. This is a classic social engineering pattern.
+  <Accordion title="Use Hardware Wallet or Multisig" icon="shield">
+**Rule:** Use a hardware wallet or multisig for majority holdings.
+  </Accordion>
+
+  <Accordion title="Test Withdrawals" icon="flask">
+**Rule:** Test withdrawals before depositing large sums into unfamiliar platforms.
+  </Accordion>
+
+  <Accordion title="Separate Hot and Cold Wallets" icon="wallet">
+**Rule:** Hot: Only what you need for daily operations (software wallet, MetaMask). Cold: Bulk holdings (hardware wallet like Ledger, Trezor, or multisig).
   </Accordion>
 </AccordionGroup>
 
----
+### Incident Response (If It Happens)
 
-## What Lisa Could Have Done Differently
+<Steps>
+  <Step title="Revoke Approvals Immediately">
+    Use Revoke.cash or EtherScan's token approval tool.
+  </Step>
+  
+  <Step title="Create a New Wallet">
+    Create a new wallet with a fresh seed phrase.
+  </Step>
+  
+  <Step title="Move Remaining Funds">
+    Move remaining funds to the new wallet (may be too late, but worth doing).
+  </Step>
+  
+  <Step title="Preserve All Evidence">
+    Screenshots, URLs, transaction hashes, emails.
+  </Step>
+  
+  <Step title="Report">
+    Report to ChainAbuse, your bank, and law enforcement.
+  </Step>
+  
+  <Step title="Inform Your Team/Family">
+    Inform your team/family so they don't fall for the same scam.
+  </Step>
+  
+  <Step title="Do NOT Pay Recovery Scammers">
+    Do not pay recovery scammers.
+  </Step>
+</Steps>
 
-### Before (Prevention Setup)
+### For Businesses
 
-<Check>Use a dedicated "hot wallet" with small balances ($500-1,000) for connecting to new or unknown sites. Keep business reserves in a hardware wallet or multi-sig that never touches experimental sites.</Check>
+<Check>**Multisig for treasury:** All significant transactions require 2–3 signers.</Check>
 
-<Check>Bookmark official grant program sites the first time you verify them, and ONLY access them from bookmarks. Never click email links for sensitive actions.</Check>
+<Check>**Approval audit schedule:** Quarterly review and revocation of old approvals.</Check>
 
-<Check>Enable wallet transaction simulation (available in Rabby, Fire, some MetaMask Snaps) that shows what a transaction will do in plain language before you sign.</Check>
+<Check>**Wallet access controls:** Use hardware wallets or cold storage for operational funds above a threshold.</Check>
 
-<Check>Set up separate email filters for grant/financial notifications to review them more carefully and reduce phishing success.</Check>
+<Check>**Team training:** Educate team members on phishing, typosquatting, and approval risks.</Check>
 
-### During (Decision Points)
-
-<Check>**STOP at the URL.** Before connecting your wallet, manually type the domain from official documentation or verify character-by-character. Don't rely on visual similarity.</Check>
-
-<Check>**Question any "approve" request.** Ask: "Why do they need spending permission to send me money?" You NEVER need to approve spending to receive tokens.</Check>
-
-<Check>**Verify through the official platform.** Log into the real Ammatina site (typed manually or from bookmark) and check the grant status there before trusting an email.</Check>
-
-<Check>**Read approval details carefully.** "Spending Cap: Unlimited" should be an immediate red flag. Even for legitimate dApps, you can set specific limits instead of unlimited.</Check>
-
-<Check>**Check the contract address.** Paste the address shown in the approval popup into Etherscan:
-- Is it verified?
-- When was it created?
-- How many other interactions does it have?
-- Is it flagged on ChainAbuse?
-
-A brand-new contract with no history requesting unlimited approval is extremely suspicious.</Check>
-
-### After (Damage Control)
-
-<Check>**Revoke approvals immediately** using Revoke.cash, Etherscan's token approval checker, or your wallet's approval manager. Speed matters—every minute counts.</Check>
-
-<Check>**Move remaining assets** to a completely new wallet with a fresh seed phrase. Assume the compromised wallet is permanently unsafe.</Check>
-
-<Check>**Document everything:**
-- Screenshot the phishing site (before it disappears)
-- Save the email with full headers
-- Copy all transaction hashes
-- Note the exact timeline
-
-This helps with reports and community warnings.</Check>
-
-<Check>**Report immediately:**
-- ChainAbuse: Flag the drainer address
-- Have I Been Drained: Check if the address is already reported
-- FBI IC3: International cybercrime reporting
-- Local cybercrime police: Even if recovery is unlikely, reports create pressure
-- The real grant program: Alert them to protect other applicants</Check>
-
----
-
-## Red Flags Checklist
-
-If you see **any** of these, STOP and investigate further:
-
-<Warning>
-- [ ] **Unsolicited "urgent action required"** email about money or grants
-- [ ] **URL looks slightly off** when you examine it character-by-character  
-- [ ] **Email sender domain doesn't match** the official organization website
-- [ ] **"Approve" or "Sign" request to receive funds** (you never need approval to receive)
-- [ ] **"Unlimited" spending cap** on token approval
-- [ ] **New contract address** with no transaction history on block explorer
-- [ ] **Countdown timers** or "claim within X hours" pressure tactics
-- [ ] **No verification email** from the official platform (login independently to check)
-- [ ] **Can't find the same announcement** on the organization's verified Twitter/Discord
-- [ ] **Generic greetings or context** that could apply to anyone (mass phishing)
-</Warning>
-
-**Golden rule:** When in doubt, contact the organization through a **separately verified channel** (their official website contact page, verified Discord, etc.). Never use contact info from the suspicious email itself.
-
----
-
-## The Technical Breakdown
-
-For those interested in how wallet drainers work:
-
-### Step 1: Domain Registration & Site Setup
-- Monitor Web3 announcements (grants, airdrops, major launches)
-- Register typosquatted variants within hours  
-  Examples: `uniswwap.com`, `opensae.io`, `meta-mask.com`
-- Clone the real website's HTML/CSS exactly
-- Replace wallet connection code with malicious contract
-
-### Step 2: Victim Targeting
-- Scrape applicant lists from public sources (Twitter, Discord, public forms)
-- Send mass phishing emails with convincing subject lines
-- Or: Buy targeted lists from data brokers who track crypto users
-
-### Step 3: The Malicious Contract
-The drainer contract typically contains:
-```solidity
-// Simplified example - real drainers are more complex
-function drainWallet(address victim) external {
-    // After victim approves this contract
-    IERC20(USDC).transferFrom(victim, attacker, balanceOf(victim));
-    IERC20(USDT).transferFrom(victim, attacker, balanceOf(victim));
-    // Repeat for all valuable tokens
-}
-```
-
-The key: Once the victim approves the contract to spend their tokens, the contract can call `transferFrom()` to move ALL tokens to the attacker's address.
-
-### Step 4: Automated Execution
-As soon as the approval transaction confirms on-chain:
-- Backend script monitors for new approvals
-- Automatically calls `transferFrom()` for all valuable tokens
-- Sweeps ETH/native tokens if victim signed additional permissions
-- Usually completes in under 2 minutes
-
-### Step 5: Laundering
-- Send stolen funds to a tumbler/mixer (Tornado Cash, etc.)
-- Swap through decentralized exchanges
-- Cash out via KYC-free exchanges or P2P platforms
-- By the time victim realizes, funds are gone across dozens of addresses
-
-**Why it works:**
-- MetaMask and most wallets DO show the approval request
-- But they don't clearly explain **"this allows the contract to spend ALL your tokens forever"**
-- Users see "approve" all the time in DeFi (Uniswap, Aave, etc.) so it feels normal
-- Transaction simulation isn't default in most wallets yet
+<Check>**Email filtering:** Set up DMARC/SPF to filter spoofed emails from legitimate domains.</Check>
 
 ---
 
 ## Real-World Context
 
 <CardGroup cols={2}>
-  <Card title="$59M+ Stolen" icon="dollar-sign">
-    MS Drainer alone (one drainer operation) stole over $59 million from 10,000+ victims before shutdown in 2024.
-    
-    *Source: Chainalysis*
+  <Card title="Typosquatting Prevalence" icon="link">
+    Over 6,000 typosquatted domains per major brand per year. Attackers register domains with single-character changes, homoglyph swaps, or hyphenation.
   </Card>
   
-  <Card title="847 Reports" icon="flag">
-    The specific drainer address that hit Lisa had 847 reports on ChainAbuse by the time she checked.
-    
-    *Source: ChainAbuse community data*
+  <Card title="Drainer Losses (2024)" icon="dollar-sign">
+    MS Drainer and similar contracts stole $59M+ from users before the contract operators were identified and arrested by law enforcement.
   </Card>
   
-  <Card title="6,000+ Typosquats" icon="link">
-    Over 6,000 typosquatted domains targeting just Amazon alone. OpenAI/ChatGPT had hundreds within weeks of launch.
-    
-    *Source: CYFIRMA Research*
+  <Card title="Phishing in Crypto" icon="chart-line">
+    Over 40% of user-initiated crypto losses involve phishing or fake websites.
   </Card>
   
-  <Card title="10,000+ Downloads" icon="download">
-    A fake WalletConnect app stayed on Google Play for 5+ months, achieving 10,000+ downloads before removal.
-    
-    *Source: Check Point Research*
+  <Card title="Approval Vulnerabilities" icon="shield-alert">
+    Unlimited token approvals are a known attack vector, with millions of users inadvertently granting access to malicious contracts.
   </Card>
 </CardGroup>
 
 ---
 
-## Action Steps: Protect Yourself
-
-### Setup (Do This Today)
-
-1. **Create a separate "connect wallet"** with only $100-500 for trying new sites
-2. **Move bulk funds** to a hardware wallet (Ledger, Trezor) or multi-sig
-3. **Install a wallet with simulation** (Rabby, Fire, or MetaMask with simulation Snap)
-4. **Bookmark your frequently used sites** in a "Crypto - Verified" folder
-5. **Enable email filtering** for keywords like "grant approved," "claim urgent," "wallet verify"
-
-### During Use (Every Time You Connect)
-
-1. **Type URLs manually** or use bookmarks—never click email/DM links
-2. **Verify domain character-by-character** before connecting wallet  
-3. **Question every approval:**
-   - Why do they need permission?
-   - What's the spending cap? (Reject "unlimited" unless you deeply trust the dApp)
-   - What's the contract address? (Check Etherscan)
-4. **Log into official platforms independently** to verify any claims made in emails
-
-### Emergency Response (If You Suspect Compromise)
-
-1. ⚡ **Revoke immediately:** [Revoke.cash](https://revoke.cash) or Etherscan token checker
-2. ⚡ **Create new wallet** with fresh seed phrase  
-3. ⚡ **Move remaining assets** to the new wallet
-4. 📋 **Screen shot everything** before the site disappears
-5. 🚩 **Report:** ChainAbuse, FBI IC3, local police, the impersonated organization
-
----
-
-## Related Stories & Resources
+## Related Resources
 
 <CardGroup cols={2}>
   <Card 
@@ -394,8 +401,8 @@ As soon as the approval transaction confirms on-chain:
 
 ## References
 
-1. Chainalysis - [Crypto Drainers: How to Spot Them](https://www.chainalysis.com/blog/crypto-drainers/)
-2. Check Point Research - [Wallet Scam: A Case Study in Crypto Drainer Tactics](https://research.checkpoint.com/2024/wallet-scam-a-case-study-in-crypto-drainer-tactics/)
-3. Trust Wallet - [Typosquatting in Crypto, Explained](https://trustwallet.com/blog/security/typosquatting-in-crypto-explained)
-4. CYFIRMA - [Typosquatting Unmasked](https://www.cyfirma.com/outofband/typosquatting-unmasked-exposing-the-threats-of-misplaced-keystrokes/)
-5. KuCoin - [Uniswap Phishing Scam: How a Fake Signature Drained a Wallet](https://www.kucoin.com/news/articles/uniswap-phishing-scam-how-a-fake-signature-drained-a-wallet)
+1. Chainalysis - Crypto Drainers: How to Spot Them
+2. Check Point Research - Wallet Scam: A Case Study in Crypto Drainer Tactics
+3. Trust Wallet - Typosquatting in Crypto, Explained
+4. CYFIRMA - Typosquatting Unmasked
+5. KuCoin - Uniswap Phishing Scam: How a Fake Signature Drained a Wallet

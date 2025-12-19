@@ -1,0 +1,280 @@
+---
+title: "The App Store Impostor: Sola's ₦1.8M 'MetaMask Lite' Loss"
+description: "How a fake wallet app on Google Play stole seed phrases and drained wallets"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Malware, Fake Wallets & Device Compromise
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Malware</Badge> <Badge color="blue" size="sm">Fake Wallet Apps</Badge>
+
+**Reading time**: 11 minutes  
+**Risk level**: Critical  
+**Target audience**: Mobile users, app store users
+</Info>
+
+## Meet Sola
+
+Sola is a 24-year-old student in Abuja. She's new to crypto and wants to start investing. She searches for "MetaMask" on Google Play and finds an app called "MetaMask Lite" with:
+- A MetaMask-like logo (slightly modified)
+- 4.7-star rating (from 8,000+ reviews)
+- 500K+ downloads
+- Description: "Fast and secure crypto wallet for Ethereum and BSC"
+
+The publisher name looks official-ish. The reviews are positive. She downloads it.
+
+The app looks and feels like MetaMask. She creates a new wallet and writes down her seed phrase on paper.
+
+Everything seems fine for a few days as she practices small transactions.
+
+Then, one morning, her wallet is empty.
+
+## What Happened
+
+### Step 1: The Fake App
+
+The "MetaMask Lite" app was not created by ConsenSys (MetaMask's maker). It was a counterfeit app created by scammers.
+
+Google Play's app review process catches many malicious apps but not all. Fake wallet apps regularly slip through by:
+- Using nearly-identical names to real apps
+- Buying fake positive reviews to boost ratings
+- Waiting for approval, then modifying the app's backend to steal keys
+- Operating briefly before Google removes them
+
+This particular app was on Google Play for 3 months before being removed.
+
+### Step 2: The Seed Phrase Capture
+
+When Sola created a wallet in the fake app, the seed phrase she entered (or that the app generated) was logged by the app's backend.
+
+Fake wallet apps typically:
+1. Let the user create a wallet normally (to seem legitimate).
+2. Silently capture the seed phrase/private keys.
+3. Send the keys to the attacker's server.
+4. Wait for funds to be added to the wallet.
+
+### Step 3: The Drain
+
+Once Sola had funded her wallet with ₦1.8 million worth of crypto (over a few weeks of small purchases), the attacker (who had her seed phrase) imported her wallet into their own client and drained everything.
+
+By the time Sola realized what happened, the funds were gone and moving through a mixer.
+
+The app was still on her phone, working normally, unaware of the theft. She only found out when she tried to send funds and discovered a zero balance.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **App store impersonation:** The fake app had a near-identical name and icon to MetaMask.
+2. **Fake reviews:** The high rating (4.7 stars from thousands of reviews) created legitimacy.
+3. **Time delay:** The app functioned normally for weeks before stealing, lowering user suspicion.
+4. **Silent key capture:** The seed phrase was stolen without any indication.
+5. **Difficult recovery:** Once the seed phrase is captured, recovery is nearly impossible.
+</Warning>
+
+---
+
+## What Sola Could Have Done (Prevention)
+
+### Before Downloading
+
+<Check>**Verify the publisher:** Tap the publisher name in the app store. Real MetaMask is published by **ConsenSys** (verify this by going to metamask.io and checking). If the publisher is an unknown person or entity, it's fake.</Check>
+
+<Check>**Check the official website:** Go to metamask.io and find the download link. Compare the link to what you found on the app store.</Check>
+
+<Check>**Look for the official checkmark:** Many app stores have an "official" badge for verified publishers.</Check>
+
+<Check>**Search "[app name] fake" on Reddit or Twitter.** If the app has issues, people will have reported it.</Check>
+
+<Check>**Check reviews for warnings:** Search reviews for "seed phrase stolen," "lost funds," "scam." If present, it's a fake.</Check>
+
+### If You Must Use a Mobile Wallet
+
+<Check>**Use only official links from the company's website.** Not search results, not ads, not links from strangers.</Check>
+
+<Check>**Use a hardware wallet instead.** For significant holdings, use a hardware wallet (Ledger, Trezor) with a Bluetooth connection to your phone. Hardware wallets never expose the seed phrase.</Check>
+
+<Check>**Keep mobile wallets small.** Only keep the amount you'll spend in a week on a mobile wallet. Store bulk holdings elsewhere.</Check>
+
+### If You've Already Imported a Seed Phrase Into an Unknown Wallet
+
+<Check>**Assume the seed phrase is compromised.**</Check>
+
+<Check>**Create a new seed phrase in an official wallet** (Ledger, Trezor, or verified MetaMask on desktop).</Check>
+
+<Check>**Move all remaining funds to the new wallet immediately.**</Check>
+
+<Check>**Never use the old seed phrase again.**</Check>
+
+---
+
+## Red Flags Sola Missed
+
+<Warning>
+- [ ] **Publisher name:** The real MetaMask is published by ConsenSys, not a random individual.
+- [ ] **Suspicious reviews:** All positive reviews might indicate fake reviews (real apps have some 1-star reviews).
+- [ ] **Similar but different name:** "MetaMask Lite" is suspiciously similar to "MetaMask."
+- [ ] **No official verification badge:** Official app store pages often have badges indicating the publisher is verified.
+</Warning>
+
+---
+
+## How Fake Wallet Apps Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Creation" icon="code">
+**What happens:** Scammers clone the official wallet app's UI and code.
+  </Accordion>
+
+  <Accordion title="Step 2: Modification" icon="screwdriver-wrench">
+**What happens:** They add a backend function that silently logs seed phrases or private keys.
+  </Accordion>
+
+  <Accordion title="Step 3: Publishing" icon="upload">
+**What happens:** They submit to app stores with a similar name, fake reviews, and a fake publisher account.
+  </Accordion>
+
+  <Accordion title="Step 4: Approval" icon="check-circle">
+**What happens:** The app passes initial review (sometimes through obfuscated code).
+  </Accordion>
+
+  <Accordion title="Step 5: Distribution" icon="users">
+**What happens:** The app gains downloads through search results and word-of-mouth.
+  </Accordion>
+
+  <Accordion title="Step 6: Key Capture" icon="key">
+**What happens:** User seeds and keys are logged server-side.
+  </Accordion>
+
+  <Accordion title="Step 7: Drain" icon="droplet">
+**What happens:** Once a user adds funds, the attacker imports the wallet and drains it.
+  </Accordion>
+
+  <Accordion title="Step 8: Removal" icon="trash">
+**What happens:** Eventually, the app is reported and removed from the app store, but damage is done.
+  </Accordion>
+</AccordionGroup>
+
+### Notable Incidents
+
+<CardGroup cols={1}>
+  <Card title="Fake Wallet Apps on App Stores" icon="mobile-screen-button">
+    Multiple fake MetaMask, Trust Wallet, and Exodus apps have been found on Google Play, Apple App Store, and third-party app stores. Fake apps can remain on stores for weeks to months before removal.
+  </Card>
+</CardGroup>
+
+---
+
+## Action Steps
+
+### Prevention
+
+<AccordionGroup>
+  <Accordion title="Download from Official Sources" icon="download">
+**Rule:** Download wallets ONLY from official websites, not app stores (unless you've verified the publisher).
+  </Accordion>
+
+  <Accordion title="Verify the Publisher" icon="user-check">
+**Rule:** Verify the publisher on the app store page (must match the official company).
+  </Accordion>
+
+  <Accordion title="Use Hardware Wallets" icon="shield">
+**Rule:** For significant holdings, use a hardware wallet (Ledger, Trezor) instead of mobile wallets.
+  </Accordion>
+
+  <Accordion title="Keep Mobile Wallets Small" icon="wallet">
+**Rule:** Keep mobile wallet balances small (spending money only, not holdings).
+  </Accordion>
+
+  <Accordion title="Update from Official Sources" icon="arrow-up">
+**Rule:** Update your wallet app regularly but only from the official source.
+  </Accordion>
+</AccordionGroup>
+
+### If You Downloaded a Fake Wallet
+
+<Steps>
+  <Step title="Do NOT Create New Wallet">
+    Do NOT create a new wallet in the fake app.
+  </Step>
+  
+  <Step title="Do NOT Import Seed Phrase">
+    Do NOT import a seed phrase into the fake app.
+  </Step>
+  
+  <Step title="Uninstall Immediately">
+    Uninstall immediately.
+  </Step>
+  
+  <Step title="Report the App">
+    Report the app to the app store.
+  </Step>
+</Steps>
+
+### If You Already Created/Imported in a Fake Wallet
+
+<Steps>
+  <Step title="Assume Compromise">
+    Assume your seed phrase is compromised.
+  </Step>
+  
+  <Step title="Create New Wallet">
+    Create a new wallet in an official, verified wallet.
+  </Step>
+  
+  <Step title="Move All Funds">
+    Move all funds to the new wallet immediately.
+  </Step>
+  
+  <Step title="Never Use Old Seed Phrase">
+    Never use the compromised seed phrase again.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Fake Wallet Login" 
+    icon="key"
+    href="/safety-education/articles/fake-wallet-login-tunde"
+  >
+    How fake login pages steal credentials
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of malware and device compromise
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  
+  <Card 
+    title="Report a Scam" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Report fraudulent apps and addresses
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Fake wallet app incidents on Google Play and App Store
+2. Hardware wallets (Ledger, Trezor) as safer alternatives
+3. Official wallet download links: metamask.io, trustwallet.com, etc.
+

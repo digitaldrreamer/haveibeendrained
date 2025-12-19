@@ -1,0 +1,165 @@
+---
+title: "The Eth2 Staking That Wasn't: Bukola's Fake Lido Impersonation"
+description: "How a fake Lido staking site used approval to drain ETH"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Wallet Drainers & Malicious Token Approvals
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Wallet Drainers</Badge> <Badge color="blue" size="sm">Staking Scams</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: Stakers, Ethereum users
+</Info>
+
+## Meet Bukola
+
+Bukola has ₦5 million in ETH and wants to stake it to earn rewards. She sees an ad on Google for "Lido Staking – Earn 3.5% on your ETH":
+
+**Link:** `lido-staking-easy.com`
+
+She clicks and lands on a professional-looking page that explains Lido staking and asks her to "deposit ETH to stake."
+
+She deposits ₦5 million worth of ETH.
+
+She's asked to approve a "staking contract" to process the deposit.
+
+She approves.
+
+The contract drains all her ETH.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Google ad spoofing:** The ad appeared in search results, making it seem legitimate.
+- **Domain typosquatting:** `lido-staking-easy.com` vs. real `lido.fi`.
+- **Staking approval:** The approval request seemed normal for staking operations.
+- **Professional design:** The site looked official and trustworthy.
+</Warning>
+
+---
+
+## Red Flags Bukola Missed
+
+<Warning>
+- [ ] **Official Lido domain is `lido.fi`, not `lido-staking-easy.com`.**
+- [ ] **Google ads can be spoofed.** Attackers bid on ads for legitimate protocols and link to fakes.
+- [ ] **Contract address wasn't verified** before approval.
+- [ ] **No official verification** from Lido's official channels.
+</Warning>
+
+---
+
+## How Staking Scams Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Ad Spoofing" icon="megaphone">
+**What happens:** Scammer creates Google ads targeting searches for legitimate staking protocols, linking to fake sites.
+  </Accordion>
+
+  <Accordion title="Step 2: Fake Staking Site" icon="globe">
+**What happens:** Professional-looking site created that clones official staking protocol design.
+  </Accordion>
+
+  <Accordion title="Step 3: Deposit Request" icon="arrow-down">
+**What happens:** Site asks user to deposit ETH and approve "staking contract."
+  </Accordion>
+
+  <Accordion title="Step 4: Malicious Approval" icon="key">
+**What happens:** Approval is granted to drainer contract, not legitimate staking contract.
+  </Accordion>
+
+  <Accordion title="Step 5: Drain" icon="droplet">
+**What happens:** Once approved, drainer contract moves all ETH to attacker's address.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never click Google ads for financial services.** Go directly to the official website.</Check>
+
+<Check>**Verify the domain in your browser's address bar.**</Check>
+
+<Check>**Use official staking interfaces:** Lido's official site is lido.fi.</Check>
+
+<Check>**Verify contract addresses** on EtherScan before approving.</Check>
+
+<Check>**Check official channels:** Verify staking offers on official website or verified social accounts.</Check>
+
+---
+
+## If You Already Deposited and Lost ETH
+
+<Steps>
+  <Step title="Revoke Approval Immediately">
+    Use Revoke.cash to revoke the staking contract approval.
+  </Step>
+  
+  <Step title="Check for Remaining Funds">
+    Check if any ETH remains in your wallet.
+  </Step>
+  
+  <Step title="Report the Site">
+    Report the fake site to ChainAbuse and alert Lido.
+  </Step>
+  
+  <Step title="Report the Google Ad">
+    Report the fake Google ad to Google Ads.
+  </Step>
+  
+  <Step title="Report the Contract">
+    Report the drainer contract address to ChainAbuse.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="DEX Drainer Clone" 
+    icon="chart-line"
+    href="/safety-education/articles/dex-drainer-pancakeswap-chioma"
+  >
+    How fake DEX clones drain wallets
+  </Card>
+  
+  <Card 
+    title="DeFi Yield Farm Drainer" 
+    icon="chart-line"
+    href="/safety-education/articles/defi-yield-farm-drainer-adekunle"
+  >
+    How fake yield farms drain wallets
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of wallet drainers and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Lido - Official Website and Staking
+2. Google Ads - How to Report Fraudulent Ads
+3. ChainAbuse - Report Scam Addresses
+

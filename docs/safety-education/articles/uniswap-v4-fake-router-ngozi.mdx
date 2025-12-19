@@ -1,0 +1,155 @@
+---
+title: "The Uniswap V4 That Wasn't: Ngozi's Router Approval Scam"
+description: "How a fake Uniswap upgrade scam used router approval to drain tokens"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Wallet Drainers & Malicious Token Approvals
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Wallet Drainers</Badge> <Badge color="blue" size="sm">Router Scams</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: Ethereum/Uniswap users
+</Info>
+
+## Meet Ngozi
+
+Ngozi actively trades on Uniswap V3. She follows official Uniswap announcements and sees (via a Twitter link) that Uniswap V4 is launching with a new router contract.
+
+The tweet directs her to a "migration portal" where she can swap her V3 positions to V4.
+
+She clicks the link and lands on what appears to be an official Uniswap site.
+
+The page explains the V4 benefits and asks her to "approve the new V4 router" to migrate her liquidity.
+
+She approves what she thinks is the official Uniswap V4 router contract.
+
+Actually, it's a fake contract that drains all her tokens.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Twitter link:** The link came from what appeared to be an official announcement, but was actually a fake account or compromised account.
+- **Migration language:** "Migrate to V4" sounded legitimate and necessary.
+- **Official-looking site:** The fake site perfectly cloned Uniswap's design.
+- **Router approval:** Approving a router contract sounds normal for protocol upgrades.
+</Warning>
+
+---
+
+## Red Flags Ngozi Missed
+
+<Warning>
+- [ ] **Official Uniswap would announce upgrades on uniswap.org, not Twitter links to third-party sites.**
+- [ ] **"Migrate" and "upgrade" language is weaponized by scammers** to sound legitimate.
+- [ ] **Router contract address wasn't verified** on EtherScan before approval.
+- [ ] **No official announcement** on Uniswap's verified channels.
+</Warning>
+
+---
+
+## How Router Upgrade Scams Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Fake Announcement" icon="megaphone">
+**What happens:** Scammer posts fake announcement about protocol upgrade, often via compromised Twitter account or fake account.
+  </Accordion>
+
+  <Accordion title="Step 2: Migration Portal" icon="globe">
+**What happens:** Fake site created claiming to be official migration portal for protocol upgrade.
+  </Accordion>
+
+  <Accordion title="Step 3: Router Approval Request" icon="key">
+**What happens:** Site asks user to approve "new router contract" for migration, which is actually a drainer contract.
+  </Accordion>
+
+  <Accordion title="Step 4: Drain" icon="droplet">
+**What happens:** Once approved, drainer contract moves all tokens from user's wallet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Always go to the official website directly.** For Uniswap: app.uniswap.org (not via Twitter link).</Check>
+
+<Check>**Verify contract addresses** for any "migration" or "upgrade."</Check>
+
+<Check>**Check official channels:** Verify upgrades on official website, GitHub, or verified social accounts.</Check>
+
+<Check>**Never trust Twitter links for protocol upgrades:** Always navigate to official site manually.</Check>
+
+<Check>**Use transaction simulation:** Modern wallets can show what router approvals actually do.</Check>
+
+---
+
+## If You Already Approved the Fake Router
+
+<Steps>
+  <Step title="Revoke Approval Immediately">
+    Use Revoke.cash to revoke the router contract approval.
+  </Step>
+  
+  <Step title="Move Remaining Funds">
+    Create a new wallet and move all remaining funds immediately.
+  </Step>
+  
+  <Step title="Report the Fake Site">
+    Report to ChainAbuse and alert Uniswap's official team.
+  </Step>
+  
+  <Step title="Report the Twitter Account">
+    Report the fake Twitter account that posted the link.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="DEX Drainer Clone" 
+    icon="chart-line"
+    href="/safety-education/articles/dex-drainer-pancakeswap-chioma"
+  >
+    How fake DEX clones drain wallets
+  </Card>
+  
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    See how phishing leads to wallet drains
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of wallet drainers and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Uniswap - Official Website and Router Contracts
+2. EtherScan - How to Verify Contract Addresses
+3. ChainAbuse - Report Scam Addresses
+

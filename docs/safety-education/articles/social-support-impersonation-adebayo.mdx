@@ -1,0 +1,215 @@
+---
+title: "Not the Support Team: Adebayo's Fake Uniswap Telegram Rescue"
+description: "How a fake support account on Telegram used a real problem to drain a wallet"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Phishing & Typosquatting
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Phishing & Typosquatting</Badge> <Badge color="blue" size="sm">Support Impersonation</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: DeFi users, Telegram users
+</Info>
+
+## Meet Adebayo
+
+Adebayo is a 31-year-old day trader who actively uses Uniswap on Ethereum. One day, he's trying to swap tokens but the transaction keeps failing with a vague error message. He's frustrated.
+
+He posts in a public Telegram crypto trading group:
+
+> "Anyone having issues with Uniswap swaps failing? Getting error code 0x12345. Any solutions?"
+
+Within 5 minutes, he receives a direct message on Telegram from an account called "Uniswap_Support":
+
+> "Hey! We saw your message about Uniswap issues. I'm from the official Uniswap support team. Let me help you troubleshoot. What's the error you're seeing?"
+
+The account has:
+- A Uniswap logo as the profile picture
+- "Official Support" in the bio
+- A few hundred followers (making it seem established)
+
+Adebayo thinks: "Great! Official support is helping me."
+
+## What Happened
+
+### Step 1: Building Rapport
+
+The fake support account asks Adebayo detailed questions:
+- "Which wallet are you using?"
+- "Which tokens are you swapping?"
+- "What's your wallet address?" (for technical investigation)
+
+Adebayo provides all this information. The account seems genuinely helpful—it's asking exactly the questions a real support person would ask.
+
+### Step 2: The Solution Offer
+
+The fake account says:
+
+> "I see the issue. There's a bug in the router contract that's affecting your wallet. The fix requires you to approve a new contract that will route your transactions correctly. It's a one-time approval."
+
+They send a link to what they claim is an official Uniswap fix site.
+
+The URL looks legitimate: `uniswap-fix.io` (a fake domain, but with the Uniswap name).
+
+Adebayo clicks the link. A professional-looking page explains the "router fix" and asks him to connect his wallet.
+
+He connects.
+
+### Step 3: The Approval
+
+The page requests an approval to "enable the new router contract."
+
+The MetaMask popup shows:
+
+> "Approve [contract address] to spend your tokens?"
+
+Adebayo approves, thinking he's fixing the issue.
+
+### Step 4: The Drain
+
+Within seconds, the "fix" site goes offline.
+
+His wallet starts draining. The approval he granted was not for a legitimate fix but for a malicious contract that now has access to all his tokens.
+
+Adebayo lost ₦800,000 in the drain.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Referencing a real problem:** Adebayo was frustrated and posted publicly. The scammer exploited that genuine issue.
+- **Authority impersonation:** A fake "official support" account seemed credible.
+- **Plausible solution:** A contract fix sounded like a real technical solution.
+- **Isolation from community:** Moving to DM isolated Adebayo from others who might have warned him.
+</Warning>
+
+---
+
+## Red Flags Adebayo Missed
+
+<Warning>
+- [ ] **Official support never DMs first.** Legitimate support teams respond in public channels or via verified official accounts.
+- [ ] **The account age and followers weren't verified.** Adebayo didn't check if the account was officially recognized.
+- [ ] **The "fix" required an approval.** Real bug fixes would be deployed on the official platform, not requiring user approvals.
+- [ ] **The domain was new and unverified.** `uniswap-fix.io` is not an official Uniswap domain.
+</Warning>
+
+---
+
+## How Support Impersonation Scams Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Monitoring Public Channels" icon="eye">
+**What happens:** Scammer monitors Telegram/Discord groups for users reporting problems or asking for help.
+  </Accordion>
+
+  <Accordion title="Step 2: Impersonation" icon="user-ninja">
+**What happens:** Scammer creates fake support account with official branding, logo, and "Official Support" in bio.
+  </Accordion>
+
+  <Accordion title="Step 3: DM Outreach" icon="envelope">
+**What happens:** Scammer DMs victim claiming to be official support, offering to help with their reported issue.
+  </Accordion>
+
+  <Accordion title="Step 4: Building Trust" icon="handshake">
+**What happens:** Scammer asks technical questions, seems knowledgeable, builds rapport by appearing helpful.
+  </Accordion>
+
+  <Accordion title="Step 5: Malicious Solution" icon="link">
+**What happens:** Scammer provides link to fake "fix" site that requests wallet connection and token approval.
+  </Accordion>
+
+  <Accordion title="Step 6: Drain" icon="droplet">
+**What happens:** Once approval granted, malicious contract drains all tokens from victim's wallet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Block all unsolicited DMs offering help with wallet issues.**</Check>
+
+<Check>**Report fake support accounts** immediately to the platform.</Check>
+
+<Check>**Contact support via official channels only:** the official website, verified social accounts, or email.</Check>
+
+<Check>**Verify account legitimacy:** Check if the account is verified by the platform or listed on the official website.</Check>
+
+<Check>**Never approve contracts from support links:** Real support teams don't send links requiring approvals.</Check>
+
+---
+
+## If You Already Connected and Approved
+
+<Steps>
+  <Step title="Revoke Approvals Immediately">
+    Use Revoke.cash or EtherScan's token approval tool.
+  </Step>
+  
+  <Step title="Move Remaining Funds">
+    Create a new wallet and move all remaining funds immediately.
+  </Step>
+  
+  <Step title="Report the Fake Account">
+    Report to Telegram/Discord for impersonation.
+  </Step>
+  
+  <Step title="Report the Site">
+    Report the fake site to ChainAbuse.
+  </Step>
+  
+  <Step title="Warn the Community">
+    Post in the group where you originally asked for help to warn others.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    See how typosquatting and approvals lead to wallet drains
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of phishing and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  
+  <Card 
+    title="Report a Scam" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Report fraudulent support accounts and addresses
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Uniswap - Official Support Channels
+2. Telegram - How to Report Impersonation
+3. ChainAbuse - Report Scam Addresses
+

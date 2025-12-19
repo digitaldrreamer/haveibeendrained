@@ -1,0 +1,149 @@
+---
+title: "The Shared Laptop That Wasn't Shared: Tunde's Cached Password Nightmare"
+description: "How using a shared device led to exchange account compromise"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Account Takeover (CEX, Email, SIM Swap)
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Account Takeover</Badge> <Badge color="blue" size="sm">Shared Device</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: Exchange users, shared device users
+</Info>
+
+## Meet Tunde
+
+Tunde works in a co-working space and sometimes uses a shared office laptop for work. One day, he quickly checks his Binance account on the shared laptop to verify his holdings.
+
+He logs in using the browser's "Remember me" feature, checks his balance, and closes the tab without logging out.
+
+He assumes the session is closed and leaves the laptop.
+
+A colleague (or someone with access to the office) discovers that Binance is still logged in on the browser. They notice the high balance and withdraw all funds to a personal wallet before Tunde has a chance to notice.
+
+**Loss: ₦1.85 million in just minutes.**
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Shared device access:** The laptop was accessible to multiple people.
+- **Session persistence:** The "Remember me" feature kept the session active even after closing the tab.
+- **No explicit logout:** Tunde didn't log out, leaving the session active.
+- **High balance visibility:** The attacker could see the account balance and act quickly.
+</Warning>
+
+---
+
+## Red Flags Tunde Missed
+
+<Warning>
+- [ ] **Never use shared devices for crypto accounts.**
+- [ ] **Never use "Remember me" on public/shared devices.**
+- [ ] **Always log out explicitly** (not just closing the tab).
+- [ ] **Clear browser cache/cookies** after using on shared devices.
+</Warning>
+
+---
+
+## How Shared Device Compromise Works
+
+<AccordionGroup>
+  <Accordion title="Step 1: Login on Shared Device" icon="laptop">
+**What happens:** User logs into exchange account on shared/public device, possibly using "Remember me."
+  </Accordion>
+
+  <Accordion title="Step 2: Session Persistence" icon="clock">
+**What happens:** Browser keeps session active even after tab is closed, if "Remember me" was used.
+  </Accordion>
+
+  <Accordion title="Step 3: Unauthorized Access" icon="user-xmark">
+**What happens:** Another person accesses the device and finds the active session.
+  </Accordion>
+
+  <Accordion title="Step 4: Fund Theft" icon="droplet">
+**What happens:** Attacker withdraws all funds to their own wallet before user notices.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Use only your personal device for exchange logins.**</Check>
+
+<Check>**If you must use a shared device, use incognito/private browsing** (doesn't cache credentials).</Check>
+
+<Check>**Always log out explicitly.**</Check>
+
+<Check>**Change your exchange password** if you suspect someone accessed a shared device.</Check>
+
+<Check>**Never use "Remember me" on shared or public devices.**</Check>
+
+---
+
+## If You Already Used a Shared Device
+
+<Steps>
+  <Step title="Log Out Immediately">
+    If still on the device, log out immediately from all accounts.
+  </Step>
+  
+  <Step title="Change Password">
+    Change your exchange password immediately from a secure device.
+  </Step>
+  
+  <Step title="Check Account Activity">
+    Review recent transactions and withdrawals for unauthorized activity.
+  </Step>
+  
+  <Step title="Enable 2FA">
+    Ensure 2FA is enabled on your exchange account.
+  </Step>
+  
+  <Step title="Report Unauthorized Access">
+    If funds were stolen, report to exchange support and law enforcement.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Email Account Takeover" 
+    icon="envelope"
+    href="/safety-education/articles/email-takeover-ada"
+  >
+    How email compromise leads to account takeover
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of account takeover attacks
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Browser session security best practices
+2. Shared device security guidelines
+3. Exchange account security recommendations
+

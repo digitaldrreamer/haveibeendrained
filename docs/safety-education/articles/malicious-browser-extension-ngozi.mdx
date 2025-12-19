@@ -1,0 +1,178 @@
+---
+title: "The 'Helper' Extension: Ngozi's Wallet Access Hijack"
+description: "How a malicious browser extension intercepted wallet transactions"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Malware, Fake Wallets & Device Compromise
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Malware</Badge> <Badge color="blue" size="sm">Browser Extensions</Badge>
+
+**Reading time**: 9 minutes  
+**Risk level**: High  
+**Target audience**: Browser users, DeFi users
+</Info>
+
+## Meet Ngozi
+
+Ngozi uses Chrome and frequently trades on DEXs. She sees an ad for "Gas Fee Optimizer" — an extension that supposedly reduces Ethereum gas fees.
+
+She installs it from the Chrome Web Store.
+
+The extension works for a few days, seeming to help with gas optimization.
+
+Then, one day, her MetaMask is drained.
+
+## What Happened
+
+### Step 1: The Malicious Extension
+
+The "Gas Fee Optimizer" was a malicious extension that requested broad permissions:
+- "Access your data on all websites"
+- "Modify data you send to websites"
+- "Read your browser history"
+
+Ngozi approved these permissions without reading them carefully (most users do).
+
+### Step 2: The Wallet Compromise
+
+The extension, with its broad permissions, could:
+- Intercept MetaMask transactions.
+- Modify transaction data before sending.
+- Capture wallet data and seed phrases (if displayed).
+- Redirect wallet interactions to malicious sites.
+
+### Step 3: The Theft
+
+The extension redirected Ngozi's MetaMask requests to a fake wallet interface controlled by the attacker.
+
+When Ngozi logged into MetaMask, she was actually logging into a phishing site created by the extension.
+
+Her credentials were captured, and the attacker drained her wallet.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Broad permissions:** The extension requested access to all websites, allowing it to intercept any data.
+- **Legitimate-sounding purpose:** "Gas Fee Optimizer" seemed useful and legitimate.
+- **Chrome Web Store listing:** Being on the official store made it seem trustworthy.
+- **Silent operation:** The extension worked normally while secretly intercepting data.
+</Warning>
+
+---
+
+## Red Flags Ngozi Missed
+
+<Warning>
+- [ ] **Extensions asking for broad permissions** ("Access all websites," "Modify data").
+- [ ] **Extensions from unknown developers.**
+- [ ] **Recent extensions** (newly published or updated).
+- [ ] **Too many permissions for stated purpose:** A gas optimizer shouldn't need access to all websites.
+</Warning>
+
+---
+
+## How Malicious Browser Extensions Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Extension Creation" icon="code">
+**What happens:** Scammer creates extension with legitimate-sounding purpose, requests broad permissions.
+  </Accordion>
+
+  <Accordion title="Step 2: Store Approval" icon="check-circle">
+**What happens:** Extension is submitted to Chrome Web Store, passes initial review.
+  </Accordion>
+
+  <Accordion title="Step 3: User Installation" icon="download">
+**What happens:** User installs extension and grants broad permissions without reading carefully.
+  </Accordion>
+
+  <Accordion title="Step 4: Data Interception" icon="eye">
+**What happens:** Extension intercepts wallet transactions, modifies data, or redirects to phishing sites.
+  </Accordion>
+
+  <Accordion title="Step 5: Theft" icon="droplet">
+**What happens:** Attacker captures credentials or modifies transactions to drain wallet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Only install extensions from trusted sources** (major companies, GitHub projects with community backing).</Check>
+
+<Check>**Review permissions carefully.** If an extension asks for "access to all websites," question why it needs that.</Check>
+
+<Check>**Limit wallet access.** Don't use MetaMask on untrusted networks or with suspicious extensions.</Check>
+
+<Check>**Audit extensions regularly.** Remove any you don't actively use.</Check>
+
+<Check>**Check extension reviews:** Look for warnings about data theft or suspicious behavior.</Check>
+
+---
+
+## If You Already Installed a Malicious Extension
+
+<Steps>
+  <Step title="Remove Extension Immediately">
+    Remove the extension from your browser immediately.
+  </Step>
+  
+  <Step title="Change All Passwords">
+    Change passwords for all accounts accessed while extension was installed.
+  </Step>
+  
+  <Step title="Revoke Wallet Approvals">
+    Use Revoke.cash to revoke any approvals made while extension was active.
+  </Step>
+  
+  <Step title="Report the Extension">
+    Report the extension to Chrome Web Store.
+  </Step>
+  
+  <Step title="Monitor Accounts">
+    Monitor all accounts for unauthorized activity.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Clipboard Hijacker" 
+    icon="clipboard"
+    href="/safety-education/articles/clipboard-hijacker-marcus"
+  >
+    How clipboard malware steals wallet addresses
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of malware and device compromise
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Chrome Web Store - How to Report Malicious Extensions
+2. Browser Extension Security Best Practices
+3. MetaMask - Extension Security Guidelines
+

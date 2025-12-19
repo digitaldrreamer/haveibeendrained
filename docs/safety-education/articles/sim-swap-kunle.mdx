@@ -1,0 +1,254 @@
+---
+title: "No Signal = No Wallet: Kunle's ₦3.2M SIM Swap Drain"
+description: "How a SIM swap attack bypassed SMS 2FA and drained an exchange account"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Account Takeover (CEX, Email, SIM Swap)
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Account Takeover</Badge> <Badge color="blue" size="sm">SIM Swap</Badge>
+
+**Reading time**: 12 minutes  
+**Risk level**: Critical  
+**Target audience**: Exchange users, mobile users
+</Info>
+
+## Meet Kunle
+
+Kunle is a successful trader with ₦3.2 million on a major crypto exchange (Binance). He uses SMS-based 2FA to secure his account.
+
+One afternoon, his phone suddenly shows "No Service" and all calls/texts fail.
+
+He assumes it's a temporary carrier issue and waits.
+
+Two hours later, he still has no signal. He calls his mobile provider from a friend's phone to investigate.
+
+## What Happened
+
+### Step 1: The SIM Swap
+
+What Kunle doesn't know is that an attacker called his mobile carrier's support line, claiming to be Kunle.
+
+The attacker provided:
+- Kunle's phone number
+- His name
+- Some personal information (possibly from a data breach or social media)
+- A fabricated story ("I lost my SIM card," "I'm switching to a new phone")
+
+Mobile carriers' security procedures vary, but many rely on:
+- Verifying the phone number you're calling from (the attacker called from a spoofed number)
+- Asking security questions (the attacker had answers from public information)
+- Asking for the last 4 digits of a credit card (possibly from a breach)
+
+The carrier representative, under social pressure and with insufficient verification, authorized the SIM swap.
+
+The carrier moved Kunle's phone number to a SIM card in the attacker's possession.
+
+### Step 2: The Account Takeover
+
+Now, the attacker controls Kunle's phone number.
+
+All SMS messages intended for Kunle now go to the attacker.
+
+The attacker goes to Binance's password reset page and enters Kunle's email address.
+
+Binance sends a password reset SMS code to the phone number on file (which is now the attacker's SIM).
+
+The attacker receives the code, resets the password, and logs into Kunle's Binance account.
+
+### Step 3: The Withdrawal
+
+With access to Kunle's account, the attacker:
+1. Disables 2FA (the SMS codes are still going to the attacker's SIM).
+2. Initiates a withdrawal of all holdings (₦3.2M in BTC, ETH, stablecoins).
+3. Moves the funds to another exchange to cash out.
+
+By the time Kunle regains phone service (once the attacker finishes draining), the funds are gone.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **Mobile carrier social engineering:** The attacker convinced the carrier to perform an unauthorized SIM swap.
+2. **SMS 2FA vulnerability:** SMS-based 2FA is vulnerable to SIM swaps. Binance's reliance on SMS made the account easy to compromise once the phone number was hijacked.
+3. **Poor carrier verification:** Carriers don't always verify identities rigorously.
+4. **Information leakage:** The attacker had enough personal information to pass verification (from public data or breaches).
+</Warning>
+
+---
+
+## What Kunle Could Have Done (Prevention)
+
+### Before a SIM Swap Happens
+
+<Check>**Use app-based 2FA (TOTP) instead of SMS.** Authenticator apps (Google Authenticator, Authy) are not vulnerable to SIM swaps because they don't rely on SMS. On Binance: Settings → Security → Two-Factor Authentication → switch from SMS to Google Authenticator.</Check>
+
+<Check>**Add a PIN or password to your mobile account.** Call your carrier and ask to set a PIN for account changes. Any future changes to the account require the PIN.</Check>
+
+<Check>**Monitor your phone signal.** If you suddenly lose service for no reason, assume a SIM swap and act immediately.</Check>
+
+<Check>**Use a hardware security key (optional but best).** Some exchanges support hardware keys (U2F/FIDO2), which cannot be compromised via SIM swap.</Check>
+
+<Check>**Keep high-value funds off exchanges.** Move the majority of holdings to a hardware wallet (Ledger, Trezor) that cannot be compromised via exchange account takeover.</Check>
+
+### If You Suspect a SIM Swap
+
+<Check>**Try calling your mobile provider immediately** to ask what happened.</Check>
+
+<Check>**Change your email password** from a different device (if you still have access to your email).</Check>
+
+<Check>**Disable recovery methods on critical accounts** (email, exchange) to prevent further changes.</Check>
+
+<Check>**Enable additional security** on your email (security keys, backup codes).</Check>
+
+---
+
+## Red Flags (What Kunle Missed)
+
+<Warning>
+- [ ] **Sudden loss of phone service without explanation.** If your phone suddenly goes out of service, assume a SIM swap until proven otherwise.
+- [ ] **Security question verification for SIM swaps:** Carriers shouldn't rely solely on public information (full name, last 4 of SSN) to authorize a SIM swap.
+</Warning>
+
+---
+
+## How SIM Swaps Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Intelligence Gathering" icon="magnifying-glass">
+**What happens:** Attacker collects personal info (name, phone number, address) from social media, data breaches, or public records.
+  </Accordion>
+
+  <Accordion title="Step 2: Carrier Call" icon="phone">
+**What happens:** Attacker calls the carrier's support line, claiming to be the victim.
+  </Accordion>
+
+  <Accordion title="Step 3: Social Engineering" icon="user-ninja">
+**What happens:** Attacker convinces support to issue a new SIM card on the victim's line.
+  </Accordion>
+
+  <Accordion title="Step 4: Account Access" icon="key">
+**What happens:** Victim's phone number is now on the attacker's SIM. SMS 2FA codes go to the attacker.
+  </Accordion>
+
+  <Accordion title="Step 5: Account Takeover" icon="user-xmark">
+**What happens:** Attacker resets passwords on email, exchange, and other accounts using the intercepted SMS codes.
+  </Accordion>
+
+  <Accordion title="Step 6: Theft" icon="droplet">
+**What happens:** Attacker transfers funds out of accounts.
+  </Accordion>
+</AccordionGroup>
+
+### Notable Incidents
+
+<CardGroup cols={1}>
+  <Card title="SIM Swap Statistics" icon="chart-line">
+    SIM swaps have been used in multiple high-profile cryptocurrency thefts. Average SIM swap attack results in $5,000–$100,000+ in losses for crypto victims. Estimates suggest $300M+ annually lost to SIM swaps globally.
+  </Card>
+</CardGroup>
+
+---
+
+## Action Steps
+
+### Prevention (Before Attack)
+
+<AccordionGroup>
+  <Accordion title="Enable App-Based 2FA" icon="mobile-screen-button">
+**Rule:** Enable app-based 2FA (TOTP) on all critical accounts (email, exchange, wallet).
+  </Accordion>
+
+  <Accordion title="Add PIN to Mobile Account" icon="lock">
+**Rule:** Add a PIN or password to your mobile carrier account. Call and ask for this service.
+  </Accordion>
+
+  <Accordion title="Use Hardware Security Key" icon="key">
+**Rule:** Use a hardware security key on critical accounts (if supported).
+  </Accordion>
+
+  <Accordion title="Keep Bulk Funds in Cold Storage" icon="wallet">
+**Rule:** Keep bulk funds in cold storage (hardware wallet), not on exchanges.
+  </Accordion>
+
+  <Accordion title="Monitor Phone Service" icon="eye">
+**Rule:** Monitor your phone service. If it drops unexpectedly, investigate immediately.
+  </Accordion>
+</AccordionGroup>
+
+### If You Suspect a SIM Swap Is Happening
+
+<Steps>
+  <Step title="Call Mobile Carrier Immediately">
+    Call your mobile carrier immediately from a different phone to report it.
+  </Step>
+  
+  <Step title="Ask for Account Confirmation">
+    Ask them to confirm your account hasn't been modified.
+  </Step>
+  
+  <Step title="Change All Critical Passwords">
+    Change all critical passwords (email, exchange) from a different device.
+  </Step>
+  
+  <Step title="Disable Withdrawals">
+    Disable withdrawals on exchange and contact support.
+  </Step>
+</Steps>
+
+### If Funds Were Already Stolen
+
+<Steps>
+  <Step title="Report to Exchange">
+    Report to your exchange and law enforcement.
+  </Step>
+  
+  <Step title="Report to ChainAbuse">
+    Report to ChainAbuse with wallet addresses of the thief.
+  </Step>
+  
+  <Step title="Expect Difficult Recovery">
+    Expect the case to be difficult; SIM swaps often involve stolen funds being moved through mixers.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Email Account Takeover" 
+    icon="envelope"
+    href="/safety-education/articles/email-takeover-ada"
+  >
+    How email compromise leads to account takeover
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of account takeover attacks
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. SIM swap overview and cryptocurrency impact
+2. SIM swap statistics and losses
+3. App-based 2FA (TOTP) vs. SMS 2FA security comparison
+4. Hardware security keys (U2F/FIDO2) for cryptocurrency exchange protection
+

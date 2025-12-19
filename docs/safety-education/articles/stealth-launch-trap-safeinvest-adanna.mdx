@@ -1,0 +1,241 @@
+---
+title: "The Stealth Launch That Wasn't Stealth: Adanna's 'SafeInvest' Disaster"
+description: "How a stealth launch token used pre-mining to dump on retail traders"
+---
+
+<Info>
+**Category**: [Frauds](/safety-education/categories/frauds) → Rug Pulls & Fake Projects
+
+<Badge color="orange" size="sm">Frauds</Badge> <Badge color="blue" size="sm">Rug Pulls & Fake Projects</Badge> <Badge color="blue" size="sm">Stealth Launch</Badge>
+
+**Reading time**: 9 minutes  
+**Risk level**: High  
+**Target audience**: Retail traders, telegram group members
+</Info>
+
+## Meet Adanna
+
+Adanna is a 24-year-old university student interested in crypto. She follows several Telegram channels that share "early" token launches. One channel called "CryptoGems Hunters" posts:
+
+> "SafeInvest token — stealth launching NOW on PancakeSwap. No presale, fair launch. Locked liquidity. Real team. Get in early!"
+
+A "stealth launch" usually means a token launched without pre-announcement, allowing early insiders to accumulate cheaply before hype drives the price up.
+
+Adanna thinks: "This could be the one."
+
+She sends ₦100,000 to the DEX address provided and receives SafeInvest tokens.
+
+## What Happened
+
+### Hour 1: The Rush
+
+The token appears on PancakeSwap. Price is still cheap: ₦0.00001 per token. Adanna has 10 billion tokens for her ₦100,000.
+
+She watches as other people buy. The chart shows tiny green candles. Volume is low but active.
+
+The price starts climbing: ₦0.00002, then ₦0.00005, then ₦0.0001.
+
+Adanna's position is up 10x in 30 minutes.
+
+### Hour 2–6: Hype Builds
+
+The "CryptoGems Hunters" channel explodes with messages:
+
+> "SafeInvest mooning!"
+> "₦0.001 incoming"
+> "HODL 💎🚀"
+
+More people buy. Volume increases. The chart looks healthy.
+
+Adanna sees her position worth ₦1,000,000.
+
+She considers selling but holds—everyone is saying it's just getting started.
+
+### Hour 7: The Cliff
+
+Suddenly, the price drops 80% in seconds.
+
+Adanna panics and tries to sell. The slippage is insane (50%+), and she only gets ₦150,000 out, netting a ₦50,000 loss.
+
+She checks on-chain.
+
+A massive wallet (holding 40% of the token supply) just moved their tokens to a DEX and sold them all in one transaction.
+
+That wallet was identified as the "team" or "founder" wallet when the contract was created.
+
+Adanna digs deeper.
+
+She uses BscScan to check the token's creation block. She discovers:
+
+1. **The contract was created 1 hour before the "stealth launch."** This means the creator minted tokens for themselves instantly upon deployment.
+
+2. **The creator wallet received 40% of all tokens.** The remaining 60% went to the liquidity pool.
+
+3. **The "locked liquidity" was never locked.** The creator was just waiting for price to climb before extracting value.
+
+Adanna realizes: a "stealth launch" in this context was just a token created by one person, with them giving themselves a 40% pre-mine. They waited for retail to pump the price, then dumped their pre-mined bag on retail.
+
+This is called a **stealth launch rug pull**: the creator mines tokens for themselves before launch, waits for hype to pump the price, then exits with huge gains while retail losses pile up.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Pre-mine:** 40% of tokens created at deploy, given to creator.
+- **Stealth timing:** No pre-announcement means the creator gets in first, before anyone else.
+- **No lock:** "Locked liquidity" was a false claim; the creator had full control and timing.
+- **Hype channel:** Using Telegram "gem hunter" groups to flood new buyers with urgency.
+</Warning>
+
+---
+
+## What Adanna Could Have Done (Prevention)
+
+### Before Buying
+
+<Check>**Check contract creation:** On BscScan, look at the token's creation block. Check:
+- When was it created (less than 1 day old is risky)?
+- What was the first transaction (did the creator mint a large % of tokens)?
+- Is the creator's wallet visible on the holders list?</Check>
+
+<Check>**Check holder distribution:** On BscScan, view "Token Holders." If one wallet holds > 20% (other than the liquidity pool), assume it's a dump risk.</Check>
+
+<Check>**Verify "locked liquidity":** Even if they claim liquidity is locked, verify on Pinksale, Unicrypt, or the contract. A claim without proof is worthless.</Check>
+
+<Check>**Be skeptical of "stealth launches."** The mechanics are designed to benefit insiders over retail. Real projects announce launches publicly and give everyone equal access.</Check>
+
+### If You Bought Anyway
+
+<Check>**Exit on the first major dump.** If price drops > 20% in one candle, don't hold hoping for recovery. Get out.</Check>
+
+<Check>**Track large wallet movements.** If the creator's wallet shows massive sells, that's your signal to exit immediately.</Check>
+
+---
+
+## Red Flags Checklist
+
+<Warning>
+- [ ] **Token created < 1 day ago.**
+- [ ] **One wallet holds > 20% of supply.**
+- [ ] **"Stealth launch" = insiders got in before public announcement.**
+- [ ] **Locked liquidity claimed but not verifiable on-chain.**
+- [ ] **Large sudden sell orders from early wallets.**
+- [ ] **Hype comes from Telegram "gem hunter" channels, not official announcements.**
+</Warning>
+
+---
+
+## How Stealth Launch Rug Pulls Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Pre-Mine" icon="coins">
+**What happens:** Creator deploys contract and mints large percentage of tokens to their own wallet before public launch.
+  </Accordion>
+
+  <Accordion title="Step 2: Stealth Launch" icon="rocket">
+**What happens:** Token is launched without pre-announcement. Creator and insiders buy first at lowest price.
+  </Accordion>
+
+  <Accordion title="Step 3: Hype Phase" icon="megaphone">
+**What happens:** Telegram channels and social media hype the token. Retail buyers flood in, driving price up.
+  </Accordion>
+
+  <Accordion title="Step 4: Dump" icon="arrow-down">
+**What happens:** Once price is high enough, creator dumps their pre-mined tokens in one large transaction.
+  </Accordion>
+
+  <Accordion title="Step 5: Collapse" icon="chart-line-down">
+**What happens:** Price crashes 80-99%. Retail holders cannot exit due to low liquidity and high slippage.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Action Steps
+
+### Prevention
+
+<AccordionGroup>
+  <Accordion title="Check Contract Age" icon="clock">
+**Rule:** If token is less than 1 day old, be extremely cautious. Check creation block and first transactions.
+  </Accordion>
+
+  <Accordion title="Verify Holder Distribution" icon="chart-pie">
+**Check:** Use BscScan/EtherScan to view top holders. If creator holds > 20%, it's a dump risk.
+  </Accordion>
+
+  <Accordion title="Avoid Stealth Launches" icon="ban">
+**Rule:** Stealth launches are designed to benefit insiders. Prefer projects with public, fair launches.
+  </Accordion>
+
+  <Accordion title="Set Stop-Loss" icon="target">
+**Rule:** If you do buy, set a stop-loss. Exit immediately if price drops > 20% in one candle.
+  </Accordion>
+</AccordionGroup>
+
+### If You're Already Involved
+
+<Steps>
+  <Step title="Check On-Chain Immediately">
+    Verify contract age, holder distribution, and creator wallet activity.
+  </Step>
+  
+  <Step title="Exit on First Major Dump">
+    If price drops > 20% suddenly, exit immediately. Don't hold hoping for recovery.
+  </Step>
+  
+  <Step title="Monitor Creator Wallet">
+    Track the creator's wallet for sell activity. If they're selling, exit.
+  </Step>
+  
+  <Step title="Report the Token">
+    Report to ChainAbuse and warn others in Telegram channels.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Liquidity Rug Pull" 
+    icon="droplet"
+    href="/safety-education/articles/liquidity-rugpull-greenyield-emeka"
+  >
+    See how fake liquidity locks lead to complete drains
+  </Card>
+  
+  <Card 
+    title="Pump-and-Dump Scam" 
+    icon="chart-line"
+    href="/safety-education/articles/pump-dump-moonrocket-chioma"
+  >
+    How coordinated dumps trap retail traders
+  </Card>
+  
+  <Card 
+    title="Frauds Category" 
+    icon="alert-triangle"
+    href="/safety-education/categories/frauds"
+  >
+    Explore all types of rug pulls and fake projects
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Stealth launch rug pulls and pre-mine mechanics
+2. BscScan token holder analysis to spot pre-mines
+

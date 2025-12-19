@@ -1,0 +1,156 @@
+---
+title: "The 50% APY That Cost 100%: Adekunle's Curve Clone Deposit"
+description: "How a fake Curve Finance clone used yield farming approval to drain tokens"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Wallet Drainers & Malicious Token Approvals
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Wallet Drainers</Badge> <Badge color="blue" size="sm">Yield Farm Scams</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: Yield farmers, DeFi users
+</Info>
+
+## Meet Adekunle
+
+Adekunle is a 33-year-old DeFi farmer. He searches for high-yield opportunities and comes across what looks like Curve Finance:
+
+**Domain:** `curve-finance-dao.io`  
+**Offer:** "50% APY on stablecoin pools"
+
+He connects his wallet and deposits ₦1 million worth of USDC to the pool.
+
+He's asked to approve the deposit (standard for yield farming).
+
+The approval is granted to a contract that claims to be Curve's router.
+
+Within minutes, instead of receiving LP tokens, all his USDC is drained to the attacker's address.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Unrealistic APY:** 50% APY is far higher than legitimate Curve pools (typically 2-8%).
+- **Domain typosquatting:** `curve-finance-dao.io` vs. real `curve.fi`.
+- **Yield farming approval:** The approval request seemed normal for DeFi farming.
+- **Greed:** The high APY promise overrode skepticism.
+</Warning>
+
+---
+
+## Red Flags Adekunle Missed
+
+<Warning>
+- [ ] **50% APY is unrealistically high.** Real Curve pools offer 2-8% APY typically.
+- [ ] **Domain:** `curve-finance-dao.io` vs. real `curve.fi`.
+- [ ] **No mention of audit or security.** Fake sites avoid discussing security.
+- [ ] **Contract address wasn't verified** before approval.
+</Warning>
+
+---
+
+## How Yield Farm Drainers Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Fake Yield Farm Site" icon="globe">
+**What happens:** Scammer creates fake yield farming site with unrealistically high APY promises to attract victims.
+  </Accordion>
+
+  <Accordion title="Step 2: Deposit Request" icon="arrow-down">
+**What happens:** Site asks user to deposit tokens to "farm" rewards, requiring standard approval.
+  </Accordion>
+
+  <Accordion title="Step 3: Malicious Approval" icon="key">
+**What happens:** Approval is granted to drainer contract, not legitimate farming contract.
+  </Accordion>
+
+  <Accordion title="Step 4: Drain" icon="droplet">
+**What happens:** Once approved, drainer contract immediately moves all deposited tokens to attacker's address.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Verify the contract address** on Etherscan.</Check>
+
+<Check>**Check historical APY data** on official dashboards (defillama.com).</Check>
+
+<Check>**Assume "too good to be true" offers are scams.**</Check>
+
+<Check>**Verify the domain:** Official Curve Finance is `curve.fi`, not variations.</Check>
+
+<Check>**Research the project:** Check if the yield farm is listed on DeFi aggregators and has real liquidity.</Check>
+
+---
+
+## If You Already Deposited and Lost Funds
+
+<Steps>
+  <Step title="Revoke Approval Immediately">
+    Use Revoke.cash to revoke the farming contract approval.
+  </Step>
+  
+  <Step title="Check for Remaining Funds">
+    Check if any tokens remain in your wallet or the farming contract.
+  </Step>
+  
+  <Step title="Report the Site">
+    Report the fake site to ChainAbuse and alert Curve Finance.
+  </Step>
+  
+  <Step title="Report the Contract">
+    Report the drainer contract address to ChainAbuse.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="DEX Drainer Clone" 
+    icon="chart-line"
+    href="/safety-education/articles/dex-drainer-pancakeswap-chioma"
+  >
+    How fake DEX clones drain wallets
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of wallet drainers and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  
+  <Card 
+    title="Report a Scam" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Report fraudulent yield farms and addresses
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Curve Finance - Official Website and Pools
+2. DeFiLlama - Historical APY Data
+3. ChainAbuse - Report Scam Addresses
+

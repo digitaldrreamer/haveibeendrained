@@ -1,0 +1,163 @@
+---
+title: "The Swap That Wasn't: Ngozi's Fake Protocol Update QR Code"
+description: "How a fake QR code in a Discord channel led to wallet drainage"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Phishing & Typosquatting
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Phishing & Typosquatting</Badge> <Badge color="blue" size="sm">QR Code Phishing</Badge>
+
+**Reading time**: 9 minutes  
+**Risk level**: High  
+**Target audience**: DeFi users, social media users
+</Info>
+
+## Meet Ngozi
+
+Ngozi is an active Curve Finance user. She sees a post in a Curve Discord channel:
+
+> "Curve Protocol Emergency Update – Please scan the QR code below to migrate to the new contract. You must do this within 24 hours or your liquidity will be at risk!"
+
+Below is a QR code. The post looks official (similar formatting to real Curve announcements).
+
+Ngozi scans the QR code with her phone.
+
+It takes her to a URL that looks like Curve's site but is actually a fake. When she connects her wallet, the attacker gains approval access and drains her liquidity provider tokens.
+
+**Loss: ₦600,000 in LP tokens.**
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **QR code hides the real URL:** People scan without seeing the actual destination.
+- **Official-looking post:** The formatting matched real Curve announcements.
+- **Urgency pressure:** "Within 24 hours or your liquidity will be at risk" created FOMO.
+- **Trust in community:** The post was in an official Discord channel, making it seem legitimate.
+</Warning>
+
+---
+
+## Red Flags Ngozi Missed
+
+<Warning>
+- [ ] **Official protocols post updates on official channels, not QR codes in Discord.**
+- [ ] **QR codes hide the real URL.** Never scan QR codes for financial transactions.
+- [ ] **"Act within 24 hours or lose funds" is urgency-based pressure.**
+- [ ] **The post may have been from a compromised account or fake admin.**
+</Warning>
+
+---
+
+## How QR Code Phishing Works
+
+<AccordionGroup>
+  <Accordion title="Step 1: Fake Announcement" icon="megaphone">
+**What happens:** Scammer posts fake announcement in Discord/Telegram with QR code, claiming urgent protocol update needed.
+  </Accordion>
+
+  <Accordion title="Step 2: QR Code Creation" icon="qrcode">
+**What happens:** QR code links to fake website that looks like the official protocol site.
+  </Accordion>
+
+  <Accordion title="Step 3: Victim Scans" icon="mobile-screen-button">
+**What happens:** Victim scans QR code without seeing the actual URL, trusting the community post.
+  </Accordion>
+
+  <Accordion title="Step 4: Wallet Connection" icon="plug">
+**What happens:** Fake site asks to connect wallet, then requests token approval.
+  </Accordion>
+
+  <Accordion title="Step 5: Drain" icon="droplet">
+**What happens:** Once approval granted, malicious contract drains all tokens from victim's wallet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never scan QR codes for wallet connections or transactions.**</Check>
+
+<Check>**Always manually type URLs for critical actions.**</Check>
+
+<Check>**Verify announcements on official websites, not via QR codes.**</Check>
+
+<Check>**Check if the post is from a verified admin:** Look for verification badges or check admin list.</Check>
+
+<Check>**Official protocols don't use QR codes for updates:** Real updates are posted on official websites and GitHub.</Check>
+
+---
+
+## If You Already Scanned and Connected
+
+<Steps>
+  <Step title="Revoke Approvals Immediately">
+    Use Revoke.cash or EtherScan's token approval tool.
+  </Step>
+  
+  <Step title="Move Remaining Funds">
+    Create a new wallet and move all remaining funds immediately.
+  </Step>
+  
+  <Step title="Report the Post">
+    Report the fake post to Discord/Telegram moderators.
+  </Step>
+  
+  <Step title="Report the Site">
+    Report the fake site to ChainAbuse.
+  </Step>
+  
+  <Step title="Warn the Community">
+    Post a warning in the channel to protect others.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    See how phishing leads to wallet drains
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of phishing and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  
+  <Card 
+    title="Report a Scam" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Report fraudulent posts and addresses
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Curve Finance - Official Website and Announcements
+2. Discord - How to Report Scam Posts
+3. ChainAbuse - Report Scam Addresses
+

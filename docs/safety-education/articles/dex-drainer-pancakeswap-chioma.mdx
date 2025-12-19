@@ -1,0 +1,347 @@
+---
+title: "The Swap That Drained Everything: Chioma's PancakeSwap Clone Loss"
+description: "How a fake PancakeSwap clone used malicious approvals to drain a wallet"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Wallet Drainers & Malicious Token Approvals
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Wallet Drainers</Badge> <Badge color="blue" size="sm">Malicious Approvals</Badge>
+
+**Reading time**: 12 minutes  
+**Risk level**: Critical  
+**Target audience**: DeFi users, swap traders, BSC users
+</Info>
+
+## Meet Chioma
+
+Chioma is a 26-year-old DeFi trader active on Binance Smart Chain (BSC). She trades regularly on PancakeSwap, looking for yield opportunities and token swaps. She's comfortable with wallets, knows what approvals are, and has been using DeFi for about a year.
+
+One afternoon, she sees a post on Twitter about a new token "OptiMoon" that's launching on PancakeSwap. The chart looks bullish, and early traders are sharing screenshots of trades.
+
+She wants to buy some.
+
+She searches "PancakeSwap" in Google and clicks what appears to be the official link.
+
+## What Happened
+
+### Step 1: The Clone Site
+
+The site Chioma lands on looks like PancakeSwap:
+- Same color scheme (purple and green)
+- Same layout
+- Same token search functionality
+- Same trading interface
+
+But the URL is slightly different:
+
+**Real:** `pancakeswap.finance`  
+**Fake:** `pancakswap-finance.io`
+
+The attacker removed an "e" from "pancake," making it "pancak." It's easy to miss, especially on mobile.
+
+The site is fully functional. It even connects to a real blockchain backend (for transparency and to avoid suspicion). But the swap interface routes trades through a hidden drainer contract.
+
+### Step 2: The First Swap Attempt
+
+Chioma connects her MetaMask wallet to what she thinks is PancakeSwap.
+
+She searches for "OptiMoon" token and finds a trading pair: OptiMoon/BUSD.
+
+She wants to buy ₦500,000 worth of OptiMoon.
+
+She enters the amount and clicks "Approve" to allow PancakeSwap to spend her BUSD.
+
+MetaMask pops up:
+
+> "Do you want to give permission for spending your BUSD?
+> 
+> Spender: 0x1234abcd... (Token Spend Approval)
+> 
+> Amount: Unlimited"
+
+Chioma notices the amount is "Unlimited" instead of the specific ₦500,000 she requested. This is already a red flag, but it's common for dApps to request unlimited approvals. She's seen this before.
+
+She clicks "Approve."
+
+### Step 3: The Hidden Trap
+
+What Chioma doesn't realize is that the "spender" contract address is not PancakeSwap's router. It's a custom drainer contract controlled by the attacker.
+
+By clicking "Approve," she's granted unlimited spending rights to the attacker's contract, not to PancakeSwap.
+
+The fake site processes the approval and then displays:
+
+> "Swap confirmed. You will receive OptiMoon tokens in 1-2 minutes."
+
+But that's a lie. No swap is happening.
+
+Instead, the attacker's script immediately uses the approval to drain her wallet:
+
+**Transaction 1:** Move all BUSD to attacker's address  
+**Transaction 2:** Move all USDC to attacker's address  
+**Transaction 3:** Move all ETH to attacker's address  
+**Transaction 4:** Move any other tokens to attacker's address
+
+Within 90 seconds, Chioma's wallet—which had ₦2.8 million across various tokens—is empty.
+
+### Step 4: The Realization
+
+Chioma's wallet notifications show multiple outbound transactions she didn't initiate.
+
+She realizes the fake site drained her. She checks BscScan and sees her address has been the target of unauthorized `transferFrom()` calls using the approval she signed.
+
+She lost ₦2.8 million, mostly BUSD and USDC stablecoins that she had been holding as operational capital.
+
+This is the exact pattern of wallet drainer scams that exploded in 2023-2024. The attack is simple: clone a popular dApp, trick users into approving a malicious contract, then drain everything.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **Domain typosquatting:** `pancakswap-finance.io` vs. `pancakeswap.finance` — a single letter difference.
+2. **Perfect UI clone:** The website was a pixel-perfect copy of PancakeSwap, lowering skepticism.
+3. **Real blockchain backend:** The site was functional for basic operations, making it appear legitimate.
+4. **Unlimited approval:** The drainer contract requested unlimited access, which is common enough to seem normal.
+5. **No visible warning:** MetaMask showed the approval request but didn't warn that she was approving a non-standard contract.
+6. **Automated drainage:** The backend script executed the drain instantly, before Chioma could investigate.
+</Warning>
+
+---
+
+## What Chioma Could Have Done (Prevention)
+
+### Before Connecting Your Wallet
+
+<Check>**Verify the domain extremely carefully.** Don't just glance—read it character by character.
+- Real: `pancakeswap.finance`
+- Fake: `pancakswap-finance.io` (missing "e", different TLD)</Check>
+
+<Check>**Use a bookmark.** The safest method is to bookmark PancakeSwap when you first use it, then always use the bookmark. Never use search results or shared links.</Check>
+
+<Check>**Check the SSL certificate:** Click the lock icon in your browser address bar. The certificate should be issued to the real domain owner.</Check>
+
+<Check>**Use wallet security tools:** MetaMask has a phishing detector (though not perfect). Rabby Wallet is more aggressive about detecting fake dApps.</Check>
+
+### Before Approving Any Contract
+
+<Check>**Use transaction simulation.** Modern wallets (Rabby, Fire Wallet, MetaMask Snaps) can show you what a transaction actually does:
+- "You are approving Contract X to spend unlimited BUSD"
+- Instead of the hex data, you see human-readable effects.</Check>
+
+<Check>**Verify the spender contract address.** If MetaMask shows a contract address:
+- Copy it and paste it into BscScan or EtherScan.
+- Search for the contract.
+- Does it belong to PancakeSwap? Is it a legitimate router contract?
+- If the contract is newly deployed (seconds old) or is unknown, it's a red flag.</Check>
+
+<Check>**Never approve "unlimited" unless necessary.** For a ₦500,000 swap, approve exactly ₦500,000 (or slightly more like ₦600,000 for buffer), not unlimited.</Check>
+
+<Check>**Test with small amounts first.** Before depositing ₦2.8M, test the site with ₦10,000. If something goes wrong, the loss is manageable.</Check>
+
+### Best Practice: Verification Workflow
+
+<Steps>
+  <Step title="Verify the Domain">
+    Verify the domain by manually typing it.
+  </Step>
+  
+  <Step title="Check the SSL Certificate">
+    Check the SSL certificate (click the lock).
+  </Step>
+  
+  <Step title="Use Transaction Simulation">
+    Use a wallet with transaction simulation to see what you're actually approving.
+  </Step>
+  
+  <Step title="Check the Contract Address">
+    Check the contract address on BscScan/EtherScan.
+  </Step>
+  
+  <Step title="Test with Small Amount">
+    Test with a small amount before doing a large transaction.
+  </Step>
+  
+  <Step title="Keep Most Funds in Cold Storage">
+    Keep most funds in cold storage so the hot wallet being drained is minimal impact.
+  </Step>
+</Steps>
+
+---
+
+## Red Flags Chioma Missed
+
+<Warning>
+- [ ] **Domain typo:** Missing "e" in "pancakeswap" → "pancakswap".
+- [ ] **Unusual TLD:** `.io` instead of `.finance` (attackers often use alternative TLDs).
+- [ ] **Unlimited approval request:** Though common, should be a secondary flag alongside other issues.
+- [ ] **No transaction simulation:** The wallet didn't show what the approval was really doing.
+- [ ] **Search engine result:** She found the site via Google search. Attackers bid on ads and manipulate SEO. Never trust search results for financial sites.
+</Warning>
+
+---
+
+## If You Already Approved a Malicious Contract
+
+<Steps>
+  <Step title="Revoke the Approval Immediately">
+    Every second counts. Go to **Revoke.cash** (revoke.cash) or use your blockchain explorer's token approval function. Connect your wallet, find the malicious contract approval in the list, click "Revoke" and confirm the transaction (costs a small gas fee). This prevents further drains, though tokens already moved are gone.
+  </Step>
+  
+  <Step title="Move Remaining Funds to a New Wallet Immediately">
+    Create a fresh wallet (new seed phrase). Transfer all remaining tokens from the compromised wallet to the new one. Do this as a priority because the attacker may scan for additional opportunities.
+  </Step>
+  
+  <Step title="Preserve Evidence">
+    Screenshots of the fake website (domain, UI). MetaMask transaction history (showing the approval and drains). BscScan records of the outbound transactions. Any referral links or social posts that led you to the fake site.
+  </Step>
+  
+  <Step title="Report">
+    **ChainAbuse:** Report the attacker's wallet addresses and the drainer contract. **The real PancakeSwap:** Alert them to the clone (they track phishing sites). **Google:** Report the search result/ad that led to the fake site. **Your local law enforcement:** If the amount is significant (₦1M+), file a cybercrime report.
+  </Step>
+  
+  <Step title="Do Not Engage with Recovery Services">
+    Do not engage with "recovery" services that DM you later.
+  </Step>
+</Steps>
+
+---
+
+## How Wallet Drainers Work (Technical Breakdown)
+
+A drainer attack follows this sequence:
+
+<AccordionGroup>
+  <Accordion title="Step 1: Site Creation" icon="globe">
+**What happens:** Clone a popular dApp and host it at a typosquatted domain.
+  </Accordion>
+
+  <Accordion title="Step 2: Contract Deployment" icon="code">
+**What happens:** Deploy a drainer smart contract on BSC/Ethereum with `transferFrom()` or `transferFromBatch()` functions.
+  </Accordion>
+
+  <Accordion title="Step 3: Approval Request" icon="key">
+**What happens:** When user swaps (or attempts to), request approval for the drainer contract with unlimited allowance.
+  </Accordion>
+
+  <Accordion title="Step 4: Automated Drainage" icon="droplet">
+**What happens:** Once approved, the backend script calls the drainer contract repeatedly, moving all ERC-20 tokens to the attacker's wallet.
+  </Accordion>
+
+  <Accordion title="Step 5: Laundering" icon="shuffle">
+**What happens:** Tokens are moved through mixers (Tornado Cash, TornadoRouter) or swapped to other coins, then cashed out.
+  </Accordion>
+</AccordionGroup>
+
+### Notable Drainer Example
+
+<CardGroup cols={1}>
+  <Card title="MS Drainer (2023)" icon="droplet">
+    Single drainer contract that stole $59M+ before the operator was identified by law enforcement. Used compromised Twitter accounts and ads to promote fake dApps.
+  </Card>
+</CardGroup>
+
+---
+
+## Action Steps
+
+### Prevention
+
+<AccordionGroup>
+  <Accordion title="Use Browser Bookmarks" icon="bookmark">
+**Rule:** Use browser bookmarks for all financial websites. Never use search results or links for the first visit.
+  </Accordion>
+
+  <Accordion title="Type Domains Manually" icon="keyboard">
+**Rule:** Type domains manually if you must. Spell it out: p-a-n-c-a-k-e-s-w-a-p.
+  </Accordion>
+
+  <Accordion title="Use Wallet Transaction Simulation" icon="flask">
+**Rule:** Use wallet transaction simulation (Rabby or MetaMask Snaps) for every swap/approval.
+  </Accordion>
+
+  <Accordion title="Verify Contract Addresses" icon="magnifying-glass">
+**Rule:** Verify contract addresses on BscScan or EtherScan before approving.
+  </Accordion>
+
+  <Accordion title="Approve Specific Amounts" icon="ban">
+**Rule:** Approve specific amounts, not unlimited.
+  </Accordion>
+
+  <Accordion title="Test with Small Amounts" icon="flask">
+**Rule:** Test with small amounts before using unfamiliar sites.
+  </Accordion>
+
+  <Accordion title="Keep Hot Wallet Balance Minimal" icon="wallet">
+**Rule:** Keep hot wallet balance minimal. Use cold storage for bulk holdings.
+  </Accordion>
+</AccordionGroup>
+
+### If Drained
+
+<Steps>
+  <Step title="Revoke Approvals">
+    Revoke approvals via Revoke.cash immediately.
+  </Step>
+  
+  <Step title="Create New Wallet">
+    Create a new wallet and move remaining funds.
+  </Step>
+  
+  <Step title="Report">
+    Report to ChainAbuse, real dApp team, and law enforcement.
+  </Step>
+  
+  <Step title="Preserve Evidence">
+    Preserve all evidence for potential recovery efforts.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    See how phishing leads to wallet drains
+  </Card>
+  
+  <Card 
+    title="NFT Mint Drainer" 
+    icon="image"
+    href="/safety-education/articles/nft-drainer-mint"
+  >
+    Similar wallet drainer tactics
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of wallet drainers and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Wallet drainer case study: MS Drainer, $59M stolen
+2. Transaction simulation tools: Rabby Wallet, Fire Wallet, MetaMask Snaps
+3. Token approval verification: BscScan, EtherScan, Revoke.cash
+4. Domain verification: SSL certificates, manual typing, bookmarks
+

@@ -1,0 +1,223 @@
+---
+title: "The Bot That Drained Everything: Oyekunle's Telegram Auto-Airdrop Trap"
+description: "How a malicious Telegram bot stole private keys and drained wallets"
+---
+
+<Info>
+**Category**: [Frauds](/safety-education/categories/frauds) → Giveaway & Airdrop Frauds
+
+<Badge color="orange" size="sm">Frauds</Badge> <Badge color="blue" size="sm">Giveaway & Airdrop Frauds</Badge> <Badge color="blue" size="sm">Malicious Bots</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: Critical  
+**Target audience**: Telegram users, Discord members, airdrop hunters
+</Info>
+
+## Meet Oyekunle
+
+Oyekunle is a 29-year-old developer who actively participates in Telegram crypto communities. He's part of several airdrop hunting groups where bots automatically alert members of new airdrops.
+
+One day, in a Telegram group focused on Polygon airdrops, a new bot appears:
+
+> **PolyAirdropBot**
+> 
+> "Automate your Polygon airdrop claims! Just send your private key or seed phrase to activate auto-claiming. We claim for you 24/7!"
+
+The bot has been added to the group by (supposedly) the group admin.
+
+Oyekunle is intrigued. The idea of automatic airdrop claiming sounds convenient.
+
+## What Happened
+
+### Step 1: The Deceptive Pitch
+
+The bot's description sounds legitimate to someone who doesn't think deeply:
+- It claims to "automate" airdrop claiming.
+- It promises round-the-clock service.
+- It's in an official group (seeming to have been vetted).
+
+Oyekunle doesn't realize that no legitimate service would ever ask for a private key or seed phrase. This is a fundamental rule of crypto security.
+
+### Step 2: The Credential Request
+
+Oyekunle messages the bot: "/start"
+
+The bot responds with a form asking for:
+- Wallet address
+- Private key (or seed phrase)
+- Network (Polygon, Ethereum, etc.)
+
+Oyekunle thinks: "It needs my private key to sign transactions on my behalf. That makes sense."
+
+He enters his private key.
+
+### Step 3: The Theft
+
+The moment Oyekunle sends his private key, the bot's backend captures it.
+
+The attacker now has full control of his wallet.
+
+Within minutes, the attacker:
+1. Drains all stablecoins and tokens from the wallet.
+2. Moves them to a mixer service or exchange.
+3. Disappears.
+
+Oyekunle's wallet, which held ₦2,500,000 in various tokens, is now empty.
+
+He realizes too late: he gave his private key to a scammer's bot.
+
+### Step 4: The Aftermath
+
+Oyekunle tries to trace the funds. They've been moved through a mixer to unknown exchanges. There's no recovery path.
+
+He checks if the bot is still active in the group. The group admin says the bot was not approved and was added by someone who hacked the admin account.
+
+The bot has been removed, but it's too late for Oyekunle and likely dozens of others who interacted with it.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **Trust in the community:** The bot was in an "official" group, which seemed to vet it.
+2. **Plausible functionality:** The idea of automated airdrop claiming sounds reasonable to people who don't think about the security implications.
+3. **No-friction credential collection:** The bot just asked directly, and people complied.
+4. **Scalability:** One bot in a large group can collect dozens of private keys in a single session.
+</Warning>
+
+---
+
+## What Oyekunle Could Have Done (Prevention)
+
+### Before Using Any Bot
+
+<Check>**No legitimate service ever asks for your private key or seed phrase.** This is absolute. If any bot, website, or person asks for this, they are scammers.</Check>
+
+<Check>**Do not use bots that claim to manage your wallet.** If you want to participate in airdrops, do it manually or use verified, audited services that hold keys in a multisig or custodian model.</Check>
+
+<Check>**Verify bot legitimacy.** Even if a bot is in an official group, verify independently:
+- Is the bot open-source? Can you view the code on GitHub?
+- Has the bot been audited by a reputable firm?
+- Do multiple sources recommend it (not just the group where you saw it)?</Check>
+
+---
+
+## Red Flags Checklist
+
+<Warning>
+- [ ] **Bot asks for private key or seed phrase.**
+- [ ] **Bot promises to "manage" your wallet or sign transactions.**
+- [ ] **Bot is newly added to a group.**
+- [ ] **Bot has no verifiable creator or source code.**
+</Warning>
+
+---
+
+## If You Already Gave Your Private Key
+
+<Steps>
+  <Step title="Move to a New Wallet Immediately">
+    Create a fresh seed phrase and move all remaining funds.
+  </Step>
+  
+  <Step title="Assume the Old Wallet is Compromised">
+    Do not use it for anything, even receiving funds.
+  </Step>
+  
+  <Step title="Report the Bot">
+    Report to Telegram/Discord for harvesting credentials.
+  </Step>
+  
+  <Step title="Warn the Group">
+    Warn others so they don't interact with the bot.
+  </Step>
+</Steps>
+
+---
+
+## How Malicious Bot Scams Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Bot Creation" icon="robot">
+**What happens:** Scammer creates Telegram/Discord bot with legitimate-sounding name and description. Bot promises automation or convenience.
+  </Accordion>
+
+  <Accordion title="Step 2: Group Infiltration" icon="users">
+**What happens:** Bot is added to legitimate crypto groups, either by compromised admin account or by creating fake admin account.
+  </Accordion>
+
+  <Accordion title="Step 3: Credential Harvesting" icon="key">
+**What happens:** Bot asks users for private keys or seed phrases, claiming it needs them to "automate" airdrop claims or manage wallets.
+  </Accordion>
+
+  <Accordion title="Step 4: Wallet Drain" icon="droplet">
+**What happens:** Scammer uses captured credentials to access wallets and drain all funds. Funds are moved to mixer or exchange.
+  </Accordion>
+
+  <Accordion title="Step 5: Disappearance" icon="ghost">
+**What happens:** Bot is removed from group or deleted. Scammer disappears with stolen funds.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Key Learning
+
+<Warning>
+**Never, under any circumstance, share your private key or seed phrase with any bot, website, or person.**
+
+Even if they claim to be:
+- An official service
+- In an official group
+- Offering to automate something for you
+- A trusted friend
+
+If they ask for your private key, they are scammers.
+</Warning>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Fake Airdrop Claim Site" 
+    icon="link"
+    href="/safety-education/articles/fake-airdrop-site-chinedu"
+  >
+    See how fake airdrop sites drain wallets
+  </Card>
+  
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    Similar wallet drainer tactics
+  </Card>
+  
+  <Card 
+    title="Frauds Category" 
+    icon="alert-triangle"
+    href="/safety-education/categories/frauds"
+  >
+    Explore all types of giveaway and airdrop frauds
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Telegram - How to Report Malicious Bots
+2. MetaMask - Never Share Your Seed Phrase
+3. ChainAbuse - Report Scam Addresses
+

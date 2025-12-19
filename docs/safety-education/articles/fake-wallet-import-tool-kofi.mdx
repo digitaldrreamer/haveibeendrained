@@ -1,0 +1,160 @@
+---
+title: "The 'Recovery' Tool That Stole: Kofi's Batch Import Trap"
+description: "How a fake wallet import tool stole private keys and drained wallets"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Malware, Fake Wallets & Device Compromise
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Malware</Badge> <Badge color="blue" size="sm">Fake Import Tools</Badge>
+
+**Reading time**: 9 minutes  
+**Risk level**: Critical  
+**Target audience**: Wallet users
+</Info>
+
+## Meet Kofi
+
+Kofi has accounts on several exchanges and wallets. He finds a tool called "Wallet Key Recovery Helper" that claims to:
+- Batch import multiple wallet keys
+- Consolidate holdings across wallets
+- Simplify portfolio management
+
+He downloads the tool and runs it.
+
+The tool asks for his private keys to "import" them into a unified interface.
+
+He provides the keys.
+
+The tool processes them and then displays an interface showing all his holdings consolidated.
+
+But the tool has silently uploaded his keys to the attacker's server.
+
+Within hours, all his wallets are drained.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Plausible functionality:** The tool's claimed features (batch import, consolidation) sounded useful.
+- **Professional appearance:** The tool looked legitimate and functional.
+- **Direct key request:** The tool asked for private keys directly, which users shouldn't provide.
+- **Silent exfiltration:** Keys were uploaded without user knowledge.
+</Warning>
+
+---
+
+## Red Flags Kofi Missed
+
+<Warning>
+- [ ] **Tools asking for private keys or seed phrases.**
+- [ ] **"Recovery" or "consolidation" tools from unknown sources.**
+- [ ] **No official verification or audit of the tool.**
+- [ ] **Tool promises to "manage" multiple wallets.**
+</Warning>
+
+---
+
+## How Fake Import Tools Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Tool Creation" icon="code">
+**What happens:** Scammer creates tool with legitimate-sounding features (batch import, consolidation, portfolio management).
+  </Accordion>
+
+  <Accordion title="Step 2: Promotion" icon="megaphone">
+**What happens:** Tool is promoted via forums, social media, or ads as helpful utility.
+  </Accordion>
+
+  <Accordion title="Step 3: Key Collection" icon="key">
+**What happens:** Tool asks user to input private keys or seed phrases to "import" wallets.
+  </Accordion>
+
+  <Accordion title="Step 4: Silent Upload" icon="upload">
+**What happens:** Tool silently uploads captured keys to attacker's server while displaying fake interface.
+  </Accordion>
+
+  <Accordion title="Step 5: Drain" icon="droplet">
+**What happens:** Attacker uses captured keys to access all wallets and drain funds.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never use third-party tools for key/seed phrase import.**</Check>
+
+<Check>**Only import keys into official, verified wallets** (MetaMask, Ledger Live, Trezor Suite).</Check>
+
+<Check>**Create new wallets and move funds instead** of importing keys into consolidation tools.</Check>
+
+<Check>**Verify tool legitimacy:** Check if tool is open-source, audited, or from trusted developer.</Check>
+
+<Check>**Never share private keys or seed phrases** with any tool, website, or person.</Check>
+
+---
+
+## If You Already Used a Fake Import Tool
+
+<Steps>
+  <Step title="Assume All Keys Are Compromised">
+    Assume all private keys/seed phrases provided to the tool are compromised.
+  </Step>
+  
+  <Step title="Create New Wallets Immediately">
+    Create new wallets with fresh seed phrases for all compromised wallets.
+  </Step>
+  
+  <Step title="Move All Funds">
+    Move all funds from compromised wallets to new wallets immediately.
+  </Step>
+  
+  <Step title="Never Use Old Keys Again">
+    Never use the compromised keys or seed phrases again.
+  </Step>
+  
+  <Step title="Report the Tool">
+    Report the fake tool to relevant authorities and warn others.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Fake Wallet App" 
+    icon="mobile-screen-button"
+    href="/safety-education/articles/fake-wallet-app-sola"
+  >
+    How fake wallet apps steal seed phrases
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of malware and device compromise
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Wallet Security Best Practices
+2. Official Wallet Import Methods
+3. Private Key Security Guidelines
+

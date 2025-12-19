@@ -1,0 +1,173 @@
+---
+title: "The Staking Reward That Wasn't: Marcus's Binance Phishing Email"
+description: "How email spoofing and fake verification links led to exchange account compromise"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Phishing & Typosquatting
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Phishing & Typosquatting</Badge> <Badge color="blue" size="sm">Email Spoofing</Badge>
+
+**Reading time**: 9 minutes  
+**Risk level**: High  
+**Target audience**: Exchange users, retail
+</Info>
+
+## Meet Marcus
+
+Marcus uses Binance and stakes some ETH. One day, he receives an email:
+
+**Subject:** "Your Staking Reward Unlock Notification – Action Required"
+
+The email looks like it's from Binance:
+- Uses Binance's logo
+- References his actual staking
+- Says his staking rewards are locked and require "account verification"
+- Includes a link to verify: `https://binance-verify-account.com/unlock-staking`
+
+Marcus clicks and enters his credentials on the fake site.
+
+The attacker now has his email and password (or exchange credentials if he used the same password).
+
+## What Happened
+
+The attacker logs into Marcus's real Binance account (if he reused the password) or uses the email to reset his password.
+
+They withdraw his funds to another wallet or exchange.
+
+**Loss: ₦2.5M in holdings.**
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Email spoofing:** The email looked like it came from Binance, using their branding and referencing real account activity.
+- **Fake domain:** `binance-verify-account.com` looked legitimate but was not an official Binance domain.
+- **Plausible scenario:** Using real features (staking) made the email seem legitimate.
+- **Credential harvesting:** The fake site captured login credentials.
+</Warning>
+
+---
+
+## Red Flags Marcus Missed
+
+<Warning>
+- [ ] **Email sender domain:** Check if it's actually `@binance.com`, not `@binance-verify.com` or similar.
+- [ ] **The link domain:** `binance-verify-account.com` is not a Binance domain.
+- [ ] **Requested verification:** Binance doesn't ask for login verification via email links.
+- [ ] **Urgency language:** "Action Required" is a common phishing tactic.
+</Warning>
+
+---
+
+## How Email Domain Spoofing Works
+
+<AccordionGroup>
+  <Accordion title="Step 1: Email Spoofing" icon="envelope">
+**What happens:** Scammer sends email that appears to be from legitimate exchange, using spoofed sender address or similar domain.
+  </Accordion>
+
+  <Accordion title="Step 2: Fake Site Creation" icon="globe">
+**What happens:** Scammer creates fake website with domain similar to official exchange, cloning the login page design.
+  </Accordion>
+
+  <Accordion title="Step 3: Credential Harvesting" icon="key">
+**What happens:** Fake site captures login credentials when victim enters them.
+  </Accordion>
+
+  <Accordion title="Step 4: Account Takeover" icon="user-xmark">
+**What happens:** Attacker uses captured credentials to log into real exchange account.
+  </Accordion>
+
+  <Accordion title="Step 5: Fund Withdrawal" icon="arrow-right">
+**What happens:** Attacker withdraws all funds from exchange to their own wallet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Check email headers:** Look at the actual sender email, not just the display name.</Check>
+
+<Check>**Use SPF/DMARC checking:** Some email providers show warnings if the email's domain authentication fails.</Check>
+
+<Check>**Never click account verification links in emails.** Go directly to the site.</Check>
+
+<Check>**Enable 2FA on exchanges** with a non-SMS method (authenticator app or hardware key).</Check>
+
+<Check>**Verify domain carefully:** Official Binance domains are `binance.com`, `binance.us`, etc. Check the exact domain.</Check>
+
+---
+
+## If You Already Entered Credentials
+
+<Steps>
+  <Step title="Change Password Immediately">
+    Log into the real exchange and change your password immediately.
+  </Step>
+  
+  <Step title="Enable 2FA">
+    Enable two-factor authentication if not already enabled.
+  </Step>
+  
+  <Step title="Check Account Activity">
+    Review recent transactions and withdrawals. Report any unauthorized activity.
+  </Step>
+  
+  <Step title="Revoke API Keys">
+    If you had API keys, revoke them immediately.
+  </Step>
+  
+  <Step title="Report the Phishing Email">
+    Report to your email provider and the official exchange.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    See how phishing leads to wallet drains
+  </Card>
+  
+  <Card 
+    title="Fake Wallet Login" 
+    icon="key"
+    href="/safety-education/articles/fake-wallet-login-tunde"
+  >
+    How fake login pages steal credentials
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of phishing and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Binance - Official Website and Security
+2. Binance - How to Identify Phishing Emails
+3. Email Security - SPF and DMARC
+

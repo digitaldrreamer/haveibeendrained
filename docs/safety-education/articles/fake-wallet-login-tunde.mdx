@@ -1,0 +1,173 @@
+---
+title: "The Fake Recovery Email: Tunde's MetaMask Seed Phrase Theft"
+description: "How a fake wallet recovery email led to complete wallet compromise"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Phishing & Typosquatting
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Phishing & Typosquatting</Badge> <Badge color="blue" size="sm">Fake Login Pages</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: Critical  
+**Target audience**: MetaMask users, wallet users
+</Info>
+
+## Meet Tunde
+
+Tunde is a 27-year-old trader who uses MetaMask regularly. One evening, he receives an email:
+
+**Subject:** "URGENT: Verify Your MetaMask Account – Unusual Activity Detected"
+
+The email:
+- Uses MetaMask's logo
+- Claims unusual activity was detected on his account
+- Says he needs to verify his account immediately
+- Includes a link: `https://metamask-verify.io/confirm-identity`
+
+Tunde is alarmed. He clicks the link.
+
+## What Happened
+
+He lands on a page that looks identical to MetaMask's official site. It asks him to "verify" by entering his seed phrase or password.
+
+Tunde enters his seed phrase.
+
+The page processes and then displays: "Verification complete. Your account is secure."
+
+But it wasn't verification. The attacker captured his seed phrase.
+
+Within minutes, the attacker imports his seed into a new MetaMask instance and drains his wallet (which had ₦1.2M in various tokens).
+
+Tunde's wallet is empty before he realizes what happened.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Email urgency:** "URGENT" and "Unusual Activity" created fear and bypassed critical thinking.
+- **Perfect UI cloning:** The fake site looked identical to MetaMask's official site.
+- **Fake domain:** `metamask-verify.io` looked legitimate but was not an official MetaMask domain.
+- **Authority:** Using MetaMask's logo and branding made it seem official.
+</Warning>
+
+---
+
+## Red Flags Tunde Missed
+
+<Warning>
+- [ ] **Official MetaMask never emails about account verification.**
+- [ ] **No wallet ever asks for your seed phrase via email or website.**
+- [ ] **The domain is fake:** `metamask-verify.io` instead of `metamask.io`.
+- [ ] **Email sender domain doesn't match:** Check if it's actually from MetaMask.
+</Warning>
+
+---
+
+## How Fake Wallet Login Scams Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Email Phishing" icon="envelope">
+**What happens:** Scammer sends email claiming to be from wallet provider, using urgency ("URGENT", "Unusual Activity") to create fear.
+  </Accordion>
+
+  <Accordion title="Step 2: Fake Site Creation" icon="globe">
+**What happens:** Scammer creates website that perfectly clones the official wallet site's design and branding.
+  </Accordion>
+
+  <Accordion title="Step 3: Credential Harvesting" icon="key">
+**What happens:** Fake site asks for seed phrase or password, claiming it's needed for "verification" or "security."
+  </Accordion>
+
+  <Accordion title="Step 4: Wallet Compromise" icon="droplet">
+**What happens:** Attacker uses captured seed phrase to import wallet and drain all funds.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never enter seed phrase into any website.**</Check>
+
+<Check>**Official MetaMask domains are `metamask.io` and `app.uniswap.org` (for connected apps).**</Check>
+
+<Check>**Verify emails by going directly to the official website, not clicking email links.**</Check>
+
+<Check>**Check email sender domain:** Verify the email is actually from the official domain, not a look-alike.</Check>
+
+<Check>**No legitimate service emails about account verification:** Wallet providers don't send emails asking you to verify your account.</Check>
+
+---
+
+## If You Already Entered Your Seed Phrase
+
+<Steps>
+  <Step title="Create New Wallet Immediately">
+    Create a completely new wallet with a fresh seed phrase.
+  </Step>
+  
+  <Step title="Move All Funds">
+    Move all remaining funds from the compromised wallet to the new wallet immediately.
+  </Step>
+  
+  <Step title="Assume Old Wallet is Compromised">
+    Never use the old wallet again, even for receiving funds.
+  </Step>
+  
+  <Step title="Report the Fake Site">
+    Report to ChainAbuse and the official wallet provider.
+  </Step>
+  
+  <Step title="Report the Email">
+    Report the phishing email to your email provider.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    See how phishing leads to wallet drains
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of phishing and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  
+  <Card 
+    title="Report a Scam" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Report fraudulent sites and addresses
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. MetaMask - Official Website and Support
+2. MetaMask - Never Share Your Seed Phrase
+3. ChainAbuse - Report Scam Addresses
+

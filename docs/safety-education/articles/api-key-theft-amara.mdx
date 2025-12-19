@@ -1,0 +1,167 @@
+---
+title: "The API Key Left in Code: Amara's Binance Auto-Withdrawal"
+description: "How a leaked API key led to unauthorized exchange withdrawals"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Account Takeover (CEX, Email, SIM Swap)
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Account Takeover</Badge> <Badge color="blue" size="sm">API Key Theft</Badge>
+
+**Reading time**: 9 minutes  
+**Risk level**: High  
+**Target audience**: Developers, automated traders
+</Info>
+
+## Meet Amara
+
+Amara is a developer who wrote a trading bot for automated cryptocurrency trades. She created a Binance API key to give her bot trading permissions.
+
+She hardcoded the API key in her bot's code:
+
+```
+API_KEY = "a1b2c3d4e5f6..."
+```
+
+She published the code to GitHub (publicly) to show friends.
+
+## What Happened
+
+### Step 1: The Leaked API Key
+
+GitHub has automated bots that scan public repositories for leaked secrets (API keys, passwords, etc.).
+
+Attackers also scan for leaked keys.
+
+The API key was discovered.
+
+### Step 2: The Unauthorized Access
+
+An attacker used the API key to:
+- Access Amara's Binance account programmatically.
+- Create a withdrawal request to a personal wallet.
+- Withdraw all holdings (₦2.1 million in BTC and USDT).
+
+The withdrawal went through because the API key had "Withdrawal" permission enabled.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **API keys hardcoded in public code:** The key was visible in a public GitHub repository.
+- **Overly permissive API key permissions:** "Enable Withdrawal" was enabled when only trading was needed.
+- **No IP whitelisting:** The API key wasn't restricted to specific IP addresses.
+</Warning>
+
+---
+
+## Red Flags Amara Missed
+
+<Warning>
+- [ ] **API keys hardcoded in public code.**
+- [ ] **Overly permissive API key permissions** ("Enable Withdrawal" when only trading is needed).
+- [ ] **No IP whitelisting** on the API key.
+- [ ] **No monitoring** of API key usage.
+</Warning>
+
+---
+
+## How API Key Theft Works
+
+<AccordionGroup>
+  <Accordion title="Step 1: Key Exposure" icon="key">
+**What happens:** API key is exposed in public code repository, commit history, or shared files.
+  </Accordion>
+
+  <Accordion title="Step 2: Discovery" icon="magnifying-glass">
+**What happens:** Automated bots or attackers discover the exposed key.
+  </Accordion>
+
+  <Accordion title="Step 3: Unauthorized Access" icon="user-xmark">
+**What happens:** Attacker uses API key to access exchange account programmatically.
+  </Accordion>
+
+  <Accordion title="Step 4: Fund Theft" icon="droplet">
+**What happens:** Attacker uses API key permissions to withdraw funds to their wallet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never commit API keys to code repositories.** Use environment variables or .env files (add to .gitignore).</Check>
+
+<Check>**Use API keys with minimal permissions.** If your bot only needs to trade, don't enable Withdrawal.</Check>
+
+<Check>**Whitelist IP addresses** for API keys (if the exchange supports it).</Check>
+
+<Check>**Rotate API keys regularly.** Delete old keys and create new ones.</Check>
+
+<Check>**Monitor API key usage** for suspicious activity.</Check>
+
+---
+
+## If Your API Key Was Leaked
+
+<Steps>
+  <Step title="Revoke API Key Immediately">
+    Go to exchange settings and delete/revoke the compromised API key immediately.
+  </Step>
+  
+  <Step title="Check Account Activity">
+    Review all recent transactions and withdrawals for unauthorized activity.
+  </Step>
+  
+  <Step title="Create New API Key">
+    Create a new API key with minimal permissions and IP whitelisting.
+  </Step>
+  
+  <Step title="Remove Key from Code">
+    Remove the key from any public code repositories and commit history.
+  </Step>
+  
+  <Step title="Report Unauthorized Access">
+    If funds were stolen, report to exchange support and law enforcement.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Email Account Takeover" 
+    icon="envelope"
+    href="/safety-education/articles/email-takeover-ada"
+  >
+    How email compromise leads to account takeover
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of account takeover attacks
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. API key security best practices
+2. GitHub secret scanning and prevention
+3. Exchange API key management guidelines
+

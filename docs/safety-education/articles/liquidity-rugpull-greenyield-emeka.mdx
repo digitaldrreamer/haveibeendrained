@@ -1,0 +1,314 @@
+---
+title: "The Green That Wasn't: Emeka's GreenYield Token Loss"
+description: "How a fake liquidity lock and audit badge led to a complete liquidity pool rug pull"
+---
+
+<Info>
+**Category**: [Frauds](/safety-education/categories/frauds) → Rug Pulls & Fake Projects
+
+<Badge color="orange" size="sm">Frauds</Badge> <Badge color="blue" size="sm">Rug Pulls & Fake Projects</Badge> <Badge color="blue" size="sm">Liquidity Rug Pull</Badge>
+
+**Reading time**: 12 minutes  
+**Risk level**: High  
+**Target audience**: DeFi users, liquidity providers, token traders
+</Info>
+
+## Meet Emeka
+
+Emeka is a 30-year-old software developer in Lagos who made decent returns on Bitcoin and Ethereum. He's started getting into DeFi—liquidity providing, yield farming, and small-cap tokens with growth potential.
+
+One day, he sees a tweet about "GreenYield," a new token focused on sustainable finance. The pitch:
+- Environmental impact focus
+- 8% reflections to holders
+- Liquidity locked for 2 years
+- Audit completed by "CertiK"
+- Team doxxed (faces and names visible)
+
+The website looks professional. The whitepaper explains the mechanics. The Telegram group has 5,000 members posting excited messages.
+
+Emeka does what he thinks is due diligence:
+- Checks the website
+- Reads the whitepaper
+- Sees the audit badge
+- Confirms liquidity "locked"
+
+He thinks it's safe.
+
+## What Happened
+
+### Step 1: Launch Hype
+
+GreenYield launches on PancakeSwap (Binance Smart Chain). The price climbs immediately. The chart looks healthy.
+
+Emeka buys ₦500,000 worth at launch. Within 48 hours, it's worth ₦750,000 (50% gain).
+
+He feels smart.
+
+### Step 2: The Community Grows
+
+The Telegram group explodes to 20,000 members. Daily updates:
+- "Partnership with [fake brand]"
+- "Listing on [exchange] next week"
+- "NFT collection coming"
+- "Mobile app Q4"
+
+Every message is bullish. The admins (and the founder, whose face is on the website) respond quickly and seem engaged.
+
+Emeka adds more: ₦1,000,000 more.
+
+### Step 3: The First Signal
+
+In Week 3, a smart developer in the Telegram group asks:
+
+> "Can you show us proof of the LP lock? 2-year lock on which platform—Unicrypt or Pinksale?"
+
+The founder responds:
+
+> "Locked on Pinksale. We'll provide proof soon."
+
+But "soon" never comes.
+
+The developer pushes:
+
+> "Provide the lock URL. I want to verify directly on Pinksale."
+
+The founder stops responding in the group.
+
+The developer is removed from the group for "FUD."
+
+Emeka should have taken this seriously. But the price is still going up. The auditor badge is still there.
+
+### Step 4: The Rug Pull
+
+One week later, the price suddenly spikes 300% in 30 minutes. Emeka thinks it's about to moon.
+
+Then, just as suddenly, it crashes 99%.
+
+He checks on-chain.
+
+The LP (liquidity pool) has been drained. All funds have been transferred to a single wallet.
+
+The Telegram group is locked (no new messages allowed).
+
+The website is still up, but the social media accounts are gone.
+
+Emeka checks the smart contract on BscScan (Binance blockchain scanner).
+
+The contract owner is not the "auditor." The liquidity was never locked. The founder had full control over the LP the entire time.
+
+The fake audit badge was just an image on the website—not a real CertiK audit.
+
+The "team" photos on the website were likely stolen from LinkedIn or Google Images.
+
+Emeka lost his entire ₦1.5 million investment.
+
+He realizes that what he thought was "locked liquidity" was just a promise with no on-chain verification.
+
+This is a classic rug pull pattern: creators control the liquidity, hype the token, then drain the LP and disappear. Real case studies include Squid Game (where liquidity was drained instantly) and projects where LP was supposedly "locked" but the creator had a backdoor.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Fake audit badge:** Displayed "CertiK audit" without ever submitting to CertiK. The badge was just an image.
+- **Liquidity not actually locked:** The whitepaper claimed 2-year lock, but on-chain, the creator had full control (no lock contract registered).
+- **Stolen identity:** "Team" photos were likely fabricated or stolen, lowering the scammer's personal risk.
+- **Rapid price action:** Quick gains attracted retail who didn't verify anything on-chain.
+- **Removing questioners:** When someone asked for proof, they were removed from the community, suppressing due diligence.
+</Warning>
+
+---
+
+## What Emeka Could Have Done (Prevention)
+
+### Before Buying
+
+<Check>**Verify the lock directly on-chain:** If liquidity is "locked," check Pinksale, Unicrypt, or the contract source code. Do not trust screenshots or website claims.</Check>
+
+<Check>**Check the audit:** Go to CertiK's website directly and search for the token. If it's not there, the audit is fake.</Check>
+
+<Check>**Verify team identities:** Reverse-image-search the team photos. If they're on Google Images or LinkedIn (and don't match the person), it's a red flag.</Check>
+
+<Check>**Check contract ownership:** Use BscScan or EtherScan to view the contract. Look for:
+- Whether the creator has `burn` or `drain` functions.
+- Whether liquidity is really locked (check for Unicrypt/Pinksale entries).
+- How many wallets hold the token and their share (if one wallet holds 30%+, it's risky).</Check>
+
+### During the Hype
+
+<Check>**Stop when questioners are removed:** If the community silences skeptics, that's a major red flag.</Check>
+
+<Check>**Do not chase price spikes:** A 300% pump often precedes a dump and rug. Rug pulls often feature sudden price surges before the drain.</Check>
+
+<Check>**Assume no audit unless you verify it:** Every rug-pull token displays fake audits.</Check>
+
+---
+
+## Red Flags Checklist
+
+<Warning>
+- [ ] **Liquidity claimed as "locked" but no verifiable lock contract visible** on BscScan/EtherScan.
+- [ ] **Audit badge displayed, but not found on the auditor's official website.**
+- [ ] **Team photos that can be reverse-image-searched** (i.e., stolen).
+- [ ] **Rapid price spikes** (100%+ in days) before a crash.
+- [ ] **Admins removing community members** who ask critical questions.
+- [ ] **Roadmap with vague deliverables** ("coming soon," "Q4," etc.) and no concrete progress.
+- [ ] **No GitHub repository or proof-of-concept** for claimed tech.
+- [ ] **Founder holds large wallet share (> 20%)** or creator wallet shows pattern of selling into peaks.
+</Warning>
+
+---
+
+## If You Already Bought
+
+<Steps>
+  <Step title="Accept the Loss Quickly">
+    Do not wait for "recovery." Rugpulled tokens do not recover.
+  </Step>
+  
+  <Step title="Preserve Evidence">
+    Screenshot the contract and on-chain data (BscScan/EtherScan). Keep all Telegram/Discord messages. Record the wallet addresses involved.
+  </Step>
+  
+  <Step title="Report">
+    The token address to ChainAbuse. The creator wallet(s) to law enforcement (if large loss).
+  </Step>
+  
+  <Step title="Do Not Pay Recovery Scammers">
+    See [Recovery Scam Trap](/safety-education/articles/recovery-scam-trap) for more.
+  </Step>
+</Steps>
+
+---
+
+## How Rug Pulls Actually Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Creation" icon="code">
+**What happens:** Developer creates a token contract with hidden owner controls (like a "drain" function).
+  </Accordion>
+
+  <Accordion title="Step 2: Launch" icon="rocket">
+**What happens:** Token is listed on a DEX (PancakeSwap, Uniswap, etc.) with liquidity paired to USDT or BUSD.
+  </Accordion>
+
+  <Accordion title="Step 3: Hype" icon="megaphone">
+**What happens:** Team/influencers hype the token, price climbs.
+  </Accordion>
+
+  <Accordion title="Step 4: Trust Signals" icon="badge-check">
+**What happens:** Fake audits, stolen team photos, false partnerships, and lock promises make it look legitimate.
+  </Accordion>
+
+  <Accordion title="Step 5: Drain" icon="droplet">
+**What happens:** When price is high and/or volume is sufficient, the creator uses the hidden function to drain the LP wallet. All liquidity is converted and sent to the creator's address.
+  </Accordion>
+
+  <Accordion title="Step 6: Collapse" icon="chart-line-down">
+**What happens:** Price crashes 99.99%. Holders cannot sell (no liquidity left).
+  </Accordion>
+
+  <Accordion title="Step 7: Exit" icon="ghost">
+**What happens:** Creator cashes out via exchanges; social accounts disappear.
+  </Accordion>
+</AccordionGroup>
+
+### Notable Examples
+
+<CardGroup cols={2}>
+  <Card title="Squid Game Token (2021)" icon="gamepad">
+    $2.1M stolen. Price surged to $2,862 then crashed to near-zero. Sold out in hours. Liquidity was drained by creators who held exclusive sell rights.
+  </Card>
+  
+  <Card title="SafeMoon Pattern" icon="warning">
+    While not a full rug (it still exists), it was designed with rug-pull mechanics and struggled with token taxes that made selling difficult for early investors.
+  </Card>
+</CardGroup>
+
+---
+
+## Action Steps
+
+### To Avoid Rug Pulls
+
+<AccordionGroup>
+  <Accordion title="Always Verify On-Chain" icon="magnifying-glass">
+**Check:**
+- Check liquidity lock status directly (Pinksale, Unicrypt, or contract).
+- Confirm audit by visiting the auditor's website directly.
+- View contract on BscScan/EtherScan for ownership, functions, and holder distribution.
+  </Accordion>
+
+  <Accordion title="Apply the DYOR Checklist" icon="clipboard-check">
+**Verify:**
+- Team identity verified (LinkedIn, public records)?
+- Whitepaper explains actual utility (not just hype)?
+- GitHub with active commits, or proof-of-concept?
+- Roadmap with specific, testable milestones?
+- Community that welcomes questions (not removes questioners)?
+  </Accordion>
+
+  <Accordion title="Risk Management" icon="shield">
+**Rules:**
+- Never put in more than you can afford to lose on a small-cap token.
+- Diversify across multiple projects.
+- Withdraw early profits to offset losses on dead projects.
+- Set a stop-loss price (e.g., "if it drops 50%, I sell").
+  </Accordion>
+
+  <Accordion title="Report Rug Pulls" icon="flag">
+**Report:**
+- Token address to ChainAbuse (chainabuse.com).
+- Creator wallet to public blockchain monitoring services.
+- Your loss to local law enforcement (they track patterns).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Pump-and-Dump Scam" 
+    icon="chart-line"
+    href="/safety-education/articles/pump-dump-moonrocket-chioma"
+  >
+    See how coordinated dumps trap retail traders
+  </Card>
+  
+  <Card 
+    title="Frauds Category" 
+    icon="alert-triangle"
+    href="/safety-education/categories/frauds"
+  >
+    Explore all types of rug pulls and fake projects
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+  
+  <Card 
+    title="Report a Scam" 
+    icon="flag"
+    href="/user-guide/reporting-drainers"
+  >
+    Report fraudulent tokens and addresses
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. [SEC - Squid Game Token Rug Pull](https://www.sec.gov/files/litigation/complaints/2023/comp-pr2023-229.pdf)
+2. [BBC - Squid Game Cryptocurrency Scam](https://www.bbc.com/news/business-59129466)
+3. [CNN - Squid Game Cryptocurrency Scam](https://www.cnn.com/2021/11/01/investing/squid-game-cryptocurrency-scam)
+4. [TRM Labs - On the Trail of the Squid Game Scammers](https://www.trmlabs.com/resources/blog/on-the-trail-of-the-squid-game-scammers)
+

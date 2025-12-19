@@ -1,0 +1,182 @@
+---
+title: "Copy-Paste Sabotage: Marcus's ₦500K Clipboard Swap Disaster"
+description: "How clipboard hijacker malware replaced wallet addresses to steal funds"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Malware, Fake Wallets & Device Compromise
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Malware</Badge> <Badge color="blue" size="sm">Clipboard Hijacker</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: Desktop users, traders
+</Info>
+
+## Meet Marcus
+
+Marcus is an active crypto trader on his Windows laptop. He frequently copies and pastes wallet addresses when sending tokens.
+
+One day, he downloads what claims to be a "Trading Bot" tool from a crypto forum. The tool supposedly automates small profitable trades.
+
+He installs it.
+
+## What Happened
+
+### Step 1: The Malware Installation
+
+The "Trading Bot" is actually a clipboard hijacker. Once installed, it runs silently in the background.
+
+The malware's job: whenever Marcus copies a crypto wallet address to his clipboard, the malware replaces it with a different address (one controlled by the scammer).
+
+### Step 2: The Swap
+
+A few days later, Marcus wants to sell some tokens. He copies a recipient address (his own wallet on another exchange) to his clipboard.
+
+He's about to paste it into a DEX interface to initiate the token swap.
+
+But before he pastes, he (fortunately) decides to visually verify the address is correct by checking it manually.
+
+He notices: the address he's about to paste doesn't match what he copied.
+
+His original address started with `0x1A2B...` but the clipboard now shows `0x9Z8Y...`
+
+He realizes his clipboard has been hijacked.
+
+### Step 3: The Investigation
+
+Marcus runs an antivirus scan and discovers the "Trading Bot" malware.
+
+He removes it immediately, but realizes that if he hadn't double-checked that address, he would have sent ₦500,000 to the scammer's wallet instead of his own.
+
+**Potential loss prevented:** ₦500,000+
+
+---
+
+## Where the Scammer Almost Won
+
+<Warning>
+- **Legitimate-sounding tool:** The "Trading Bot" seemed plausible.
+- **Silent malware:** Clipboard hijackers run invisibly.
+- **No obvious indication:** Marcus's clipboard was modified without notification.
+- **Easy target:** Traders copy addresses frequently, making them prime targets.
+</Warning>
+
+---
+
+## What Marcus Did Right (and Could Have Done Earlier)
+
+<Check>**He visually verified the address before sending.** This saved him.</Check>
+
+<Check>**He could have prevented this by:**
+- Not installing untrusted software.
+- Running antivirus/antimalware regularly.
+- Typing critical addresses manually instead of copying and pasting.
+- Using a hardware wallet (less vulnerable to clipboard malware).</Check>
+
+---
+
+## Red Flags
+
+<Warning>
+- [ ] **Software from untrusted sources:** Crypto forums, Telegram links, Reddit downloads.
+- [ ] **Too-good-to-be-true tools:** "Trading bot," "mining software," "airdrop helpers."
+- [ ] **Clipboard changes:** If you copy an address and it looks different when you paste, malware is present.
+</Warning>
+
+---
+
+## How Clipboard Hijackers Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Malware Installation" icon="download">
+**What happens:** User installs malicious software (often disguised as legitimate tool) that includes clipboard hijacker.
+  </Accordion>
+
+  <Accordion title="Step 2: Background Monitoring" icon="eye">
+**What happens:** Malware runs silently in background, monitoring clipboard for crypto wallet addresses.
+  </Accordion>
+
+  <Accordion title="Step 3: Address Replacement" icon="arrow-right-arrow-left">
+**What happens:** When user copies a wallet address, malware immediately replaces it with attacker's address.
+  </Accordion>
+
+  <Accordion title="Step 4: Unauthorized Transfer" icon="arrow-right">
+**What happens:** User pastes the modified address and sends funds to attacker's wallet instead of intended recipient.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never install software from untrusted sources.**</Check>
+
+<Check>**Use antivirus/antimalware** (Windows Defender is built-in; add Malwarebytes for extra scanning).</Check>
+
+<Check>**Verify addresses visually** before sending funds (compare first and last 4 characters at minimum).</Check>
+
+<Check>**Type critical addresses manually** or use QR codes from trusted sources.</Check>
+
+<Check>**Use a hardware wallet** to minimize exposure to desktop malware.</Check>
+
+---
+
+## If Your Address Was Modified
+
+<Steps>
+  <Step title="Do NOT Send Funds">
+    Do NOT send funds to the pasted address.
+  </Step>
+  
+  <Step title="Run Full Scan">
+    Run a full antivirus/malware scan immediately.
+  </Step>
+  
+  <Step title="Change Critical Passwords">
+    Change all critical passwords (email, exchange, wallet backups).
+  </Step>
+  
+  <Step title="Monitor Accounts">
+    Monitor your crypto accounts for unauthorized activity.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Keylogger/RAT Malware" 
+    icon="keyboard"
+    href="/safety-education/articles/keylogger-rat-emeka"
+  >
+    How keyloggers and remote access trojans compromise systems
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of malware and device compromise
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Clipboard hijacker malware detection and removal
+2. Antivirus software recommendations
+3. Hardware wallet security benefits
+

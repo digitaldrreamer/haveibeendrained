@@ -1,0 +1,239 @@
+---
+title: "The Free Tokens That Cost Everything: Chinedu's Fake Airdrop Wallet Drain"
+description: "How a fake airdrop claim site used wallet connection to drain all tokens"
+---
+
+<Info>
+**Category**: [Frauds](/safety-education/categories/frauds) → Giveaway & Airdrop Frauds
+
+<Badge color="orange" size="sm">Frauds</Badge> <Badge color="blue" size="sm">Giveaway & Airdrop Frauds</Badge> <Badge color="blue" size="sm">Fake Airdrop Sites</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: Critical  
+**Target audience**: Airdrop hunters, retail
+</Info>
+
+## Meet Chinedu
+
+Chinedu is a 24-year-old airdrop hunter. He searches for new projects and airdrops, hoping to claim free tokens that might become valuable. He has a portfolio of maybe 50 different small-cap tokens from airdrops.
+
+One day, he gets a notification from a Telegram airdrop bot:
+
+> "🎁 Ethereum Classic Airdrop Distribution
+> 
+> Claim your FREE ETC tokens now!
+> 
+> Eligible: All ETH holders before [date]
+> 
+> Click here to claim: [link to fake site]"
+
+Chinedu remembers owning some ETH at that date. He's eligible!
+
+He clicks the link and is taken to a professional-looking website:
+- Domain: ethereumclassicdrop.io
+- UI matches legitimate airdrop sites
+- Clear instructions: "Connect Wallet" button
+- Explanation of the airdrop
+
+He connects his MetaMask wallet.
+
+## What Happened
+
+### Step 1: The Connection Trap
+
+The website asks MetaMask to connect. MetaMask displays:
+
+> "ethereumclassicdrop.io would like to:
+> 
+> - View your account address and balances
+> 
+> - Suggest transactions to you
+> 
+> OK | Cancel"
+
+Chinedu clicks OK.
+
+### Step 2: The Approval Request
+
+The site displays: "Verifying your eligibility... This may require one approval transaction."
+
+MetaMask pops up:
+
+> "ethereumclassicdrop.io is requesting your signature.
+> 
+> Message to sign: 'Verify airdrop eligibility for [his address]'
+> 
+> Sign | Reject"
+
+Chinedu signs.
+
+### Step 3: The Hidden Trap
+
+What Chinedu doesn't realize is that the "sign" request was not a simple message—it was a transaction. Specifically, it was calling `setApprovalForAll()` on a malicious contract, granting the website's contract unlimited access to move all his tokens.
+
+MetaMask's UI showed "Sign message" but the actual operation was a token approval.
+
+The moment Chinedu signed, the website's contract gained the ability to move any of his ERC-20 tokens.
+
+The site then displays: "Airdrop claimed! Your tokens will arrive in 24 hours."
+
+But that was a lie.
+
+### Step 4: The Drain
+
+Within minutes, the website's backend script uses the approval to call `transferFrom()` on all the tokens in Chinedu's wallet.
+
+His USDC is drained. His small-cap airdrop tokens are drained. Any stablecoins are drained.
+
+Total loss: ~₦1,200,000 in various tokens.
+
+Chinedu only realizes this happened when he tries to move tokens later and sees a "zero balance" error.
+
+He checks BscScan and sees dozens of outbound transfers to unknown addresses, all signed with transactions that look like he authorized them.
+
+He was socially engineered into approving his own wallet's drainage.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **Legitimate-looking site:** Professional UI, correct domain setup (fake but close to real).
+2. **Approval trick:** The "sign message" request was actually a token approval. MetaMask displayed it as a harmless signature, but it granted full access.
+3. **Airdrop FOMO:** People want free tokens, so they don't verify carefully.
+4. **No clear indication of danger:** The MetaMask popup didn't explicitly warn that he was granting access.
+</Warning>
+
+---
+
+## What Chinedu Could Have Done (Prevention)
+
+### Before Connecting
+
+<Check>**Verify the airdrop officially.** Check the legitimate project's official website, not a Telegram bot link. The real Ethereum Classic would announce airdrops on their official channels.</Check>
+
+<Check>**Never connect a wallet with significant funds to an unknown site.** Even if it looks legitimate.</Check>
+
+<Check>**Use a separate "test" wallet** for airdrop hunting, with minimal funds.</Check>
+
+### Before Approving
+
+<Check>**Read what you're signing.** If MetaMask says "Sign message" but the content looks like a contract interaction, stop.</Check>
+
+<Check>**Be suspicious of "approval" requests during airdrops.** Legitimate airdrops do not ask you to approve contracts.</Check>
+
+<Check>**Look for human-readable information.** Modern wallets (Rabby, FireWallet) show what you're actually doing. If a wallet or site tries to hide the action, it's hostile.</Check>
+
+---
+
+## Red Flags Checklist
+
+<Warning>
+- [ ] **Airdrop site asks to connect a wallet.**
+- [ ] **Site requests signatures or approvals before claiming.**
+- [ ] **Domain is similar to but not exactly the real project's domain.**
+- [ ] **Airdrop announced on Telegram bots, not official channels.**
+</Warning>
+
+---
+
+## If You Already Connected and Approved
+
+<Steps>
+  <Step title="Revoke Approvals Immediately">
+    Use Revoke.cash or EtherScan's token approval tool to revoke all approvals.
+  </Step>
+  
+  <Step title="Move Remaining Funds">
+    Move remaining funds to a new wallet (fresh seed phrase).
+  </Step>
+  
+  <Step title="Report the Site">
+    Report to ChainAbuse.
+  </Step>
+  
+  <Step title="Report to Law Enforcement">
+    If the loss is significant, report to local authorities.
+  </Step>
+</Steps>
+
+---
+
+## How Fake Airdrop Sites Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Fake Site Creation" icon="globe">
+**What happens:** Scammer creates professional-looking website with domain similar to legitimate project. Site mimics real airdrop claim pages.
+  </Accordion>
+
+  <Accordion title="Step 2: Promotion" icon="megaphone">
+**What happens:** Fake airdrop is promoted via Telegram bots, Discord, or social media. Claims eligibility for holders of popular tokens.
+  </Accordion>
+
+  <Accordion title="Step 3: Wallet Connection" icon="plug">
+**What happens:** Site asks user to connect wallet. This seems normal for airdrop claims.
+  </Accordion>
+
+  <Accordion title="Step 4: Hidden Approval" icon="key">
+**What happens:** Site requests "signature" that is actually `setApprovalForAll()` granting unlimited token access. User signs thinking it's just verification.
+  </Accordion>
+
+  <Accordion title="Step 5: Drain" icon="droplet">
+**What happens:** Site's backend uses approval to transfer all tokens from user's wallet. Funds are moved to scammer's address.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Key Learning
+
+<Warning>
+**Never approve unknown contracts, even "temporarily" for an airdrop.** If a site asks for an approval during an airdrop, it's 99% a scam.
+</Warning>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Send-to-Receive Giveaway" 
+    icon="gift"
+    href="/safety-education/articles/send-to-receive-giveaway-ola"
+  >
+    See how fake giveaways steal funds
+  </Card>
+  
+  <Card 
+    title="Grant Phishing + Wallet Drainer" 
+    icon="shield-alert"
+    href="/safety-education/articles/grant-phishing-lisa"
+  >
+    Similar wallet drainer tactics
+  </Card>
+  
+  <Card 
+    title="Frauds Category" 
+    icon="alert-triangle"
+    href="/safety-education/categories/frauds"
+  >
+    Explore all types of giveaway and airdrop frauds
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. MetaMask - How to Identify Scam Sites
+2. Revoke.cash - How to Revoke Token Approvals
+3. ChainAbuse - Report Scam Addresses
+

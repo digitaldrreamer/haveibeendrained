@@ -1,0 +1,192 @@
+---
+title: "The Free NFT That Cost Everything: Ifeoma's Approval Trap"
+description: "How a fake NFT mint site used hidden approvals to drain an entire NFT collection"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Wallet Drainers & Malicious Token Approvals
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Wallet Drainers</Badge> <Badge color="blue" size="sm">NFT Approvals</Badge>
+
+**Reading time**: 11 minutes  
+**Risk level**: Critical  
+**Target audience**: NFT collectors, Discord users
+</Info>
+
+## Meet Ifeoma
+
+Ifeoma is a 28-year-old NFT collector. She owns a few thousand dollars worth of NFTs and follows various projects. She's active in Discord communities for art NFTs.
+
+One day, in a Discord server, someone posts:
+
+> "Free NFT drop! Mint now: [link] — First 100 minters get a valuable art NFT. No gas fees (we're covering them). Connect wallet to claim."
+
+The link takes her to a clean website with a "Mint" button.
+
+She connects her MetaMask wallet.
+
+## What Happened
+
+### Step 1: The Mint Page
+
+The page looks professional:
+- Project branding
+- Mint progress bar (showing "47/100 minted")
+- "Mint" button
+- "No gas fees" banner
+
+She clicks "Mint."
+
+### Step 2: The Hidden Approval
+
+MetaMask pops up with a transaction:
+
+> "Mint1NFT Contract
+> 
+> Do you want to call mintNFT?
+> 
+> Gas: 0.005 ETH"
+
+It looks like a normal mint transaction. Ifeoma approves.
+
+What she doesn't know: the transaction also includes a call to `setApprovalForAll()`, which grants the attacker's contract unlimited rights to transfer any of her NFTs.
+
+### Step 3: The Drain
+
+Once approved, the attacker's contract immediately:
+1. Searches her wallet for all NFTs.
+2. Transfers every NFT to the attacker's address.
+3. Sells the NFTs on OpenSea or another marketplace.
+
+Ifeoma loses her entire NFT portfolio—worth ₦4.5 million.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Hidden approval:** The `setApprovalForAll()` was buried in the mint transaction, not clearly visible.
+- **Legitimate-sounding mint:** "Free NFT" sounds reasonable; mints are normal in the NFT space.
+- **Professional UI:** The website looked official.
+- **"No gas fees" promise:** Made the offer seem generous and legitimate.
+</Warning>
+
+---
+
+## Red Flags Ifeoma Missed
+
+<Warning>
+- [ ] **"No gas fees" claim:** Projects that claim to cover gas fees are suspicious (it's technically possible but rare).
+- [ ] **Discord links to unseen projects:** Always verify project credibility independently.
+- [ ] **Approval request:** Even for NFT mints, verify the smart contract before approving.
+- [ ] **Hidden `setApprovalForAll()`:** The approval was buried in the transaction, not clearly shown.
+</Warning>
+
+---
+
+## How NFT Approval Drainers Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Fake Mint Site" icon="globe">
+**What happens:** Scammer creates professional-looking NFT mint site with "free" or "no gas" offer to attract victims.
+  </Accordion>
+
+  <Accordion title="Step 2: Hidden Approval" icon="key">
+**What happens:** Mint transaction includes hidden `setApprovalForAll()` call that grants unlimited NFT transfer rights.
+  </Accordion>
+
+  <Accordion title="Step 3: NFT Drain" icon="droplet">
+**What happens:** Once approved, attacker's contract searches wallet and transfers all NFTs to attacker's address.
+  </Accordion>
+
+  <Accordion title="Step 4: Sale" icon="dollar-sign">
+**What happens:** Attacker sells stolen NFTs on OpenSea or other marketplaces for immediate profit.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Check the contract address** on OpenSea or EtherScan before minting.</Check>
+
+<Check>**Look for `setApprovalForAll()` in the transaction details.** If present, it's a red flag unless you're absolutely sure it's necessary.</Check>
+
+<Check>**Use wallets with simulation** (Rabby) that show what a transaction will do.</Check>
+
+<Check>**Verify project legitimacy:** Check if the project has official website, verified Twitter, and real community.</Check>
+
+<Check>**Be suspicious of "free" mints:** Real projects rarely offer completely free mints with no gas fees.</Check>
+
+---
+
+## If You Already Approved and Lost NFTs
+
+<Steps>
+  <Step title="Revoke Approval Immediately">
+    Use Revoke.cash or EtherScan to revoke the `setApprovalForAll()` approval.
+  </Step>
+  
+  <Step title="Check Remaining NFTs">
+    Check if any NFTs remain in your wallet. If so, move them to a new wallet immediately.
+  </Step>
+  
+  <Step title="Report to OpenSea">
+    Report the stolen NFTs to OpenSea so they can be flagged.
+  </Step>
+  
+  <Step title="Report the Contract">
+    Report the drainer contract to ChainAbuse.
+  </Step>
+  
+  <Step title="Monitor Marketplaces">
+    Monitor OpenSea and other marketplaces for your stolen NFTs being sold.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="NFT Mint Drainer" 
+    icon="image"
+    href="/safety-education/articles/nft-drainer-mint"
+  >
+    See how NFT drainers target collectors
+  </Card>
+  
+  <Card 
+    title="DEX Drainer Clone" 
+    icon="chart-line"
+    href="/safety-education/articles/dex-drainer-pancakeswap-chioma"
+  >
+    How fake DEX clones drain wallets
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of wallet drainers and technical exploits
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. OpenSea - How to Report Stolen NFTs
+2. Revoke.cash - How to Revoke NFT Approvals
+3. ChainAbuse - Report Scam Addresses
+

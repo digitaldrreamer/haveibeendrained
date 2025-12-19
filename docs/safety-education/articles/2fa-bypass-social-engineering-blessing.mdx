@@ -1,0 +1,186 @@
+---
+title: "The Fake Support That Bypassed 2FA: Blessing's Social Engineering Loss"
+description: "How social engineering bypassed 2FA to compromise an exchange account"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Account Takeover (CEX, Email, SIM Swap)
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Account Takeover</Badge> <Badge color="blue" size="sm">2FA Bypass</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: High  
+**Target audience**: Exchange users, support chat users
+</Info>
+
+## Meet Blessing
+
+Blessing has strong security on her Binance account:
+- Long, unique password.
+- 2FA enabled (TOTP via Google Authenticator).
+- Email verified.
+
+One day, she gets a message on Telegram from someone claiming to be "Binance Support":
+
+> "Hi, we noticed unusual activity on your account. For your security, we need to verify your identity. Can you confirm your current password?"
+
+Blessing is suspicious (legitimate support never asks for passwords) and ignores the message.
+
+A few days later, she gets a similar message from what appears to be an official Binance support account (with a Binance-looking profile picture and name like "BinanceSupport_Official").
+
+This time, the message says:
+
+> "Your account is locked due to multiple failed login attempts. Click here to unlock."
+
+Blessing clicks and is taken to a login page. She enters her credentials out of concern.
+
+The page then asks for her 2FA code (saying it's needed to "unlock the account").
+
+She enters the 2FA code from her authenticator app.
+
+## What Happened
+
+### Step 1: The Phishing and 2FA Code Capture
+
+The attacker has now captured:
+- Blessing's password
+- Her 2FA code (which is valid for 30 seconds)
+
+### Step 2: The Rapid Takeover
+
+The attacker immediately:
+1. Goes to Binance's login page (the real one).
+2. Enters Blessing's email and password.
+3. When prompted for 2FA, enters the code she provided (it's still within the 30-second window).
+4. Logs in successfully.
+5. Disables 2FA.
+6. Withdraws all funds.
+
+By the time Blessing checks her account, it's empty.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+- **Phishing site:** The fake login page looked legitimate and captured credentials.
+- **2FA code timing:** The attacker used the 2FA code within its 30-second validity window.
+- **Social engineering:** The "account locked" message created urgency and bypassed skepticism.
+- **Fake support account:** The impersonated support account looked official.
+</Warning>
+
+---
+
+## Red Flags Blessing Should Have Heeded
+
+<Warning>
+- [ ] **Unsolicited messages asking for credentials or 2FA codes.**
+- [ ] **Legitimate support never asks for passwords or 2FA codes.**
+- [ ] **"Account locked" urgency messages are common phishing tactics.**
+- [ ] **Telegram DMs from "support" are almost always scams.**
+</Warning>
+
+---
+
+## How 2FA Bypass via Social Engineering Works
+
+<AccordionGroup>
+  <Accordion title="Step 1: Phishing Setup" icon="fish">
+**What happens:** Attacker creates fake login page that looks like legitimate exchange site.
+  </Accordion>
+
+  <Accordion title="Step 2: Social Engineering" icon="user-ninja">
+**What happens:** Attacker sends message claiming account is locked or needs verification, creating urgency.
+  </Accordion>
+
+  <Accordion title="Step 3: Credential Capture" icon="key">
+**What happens:** Victim enters password and 2FA code on fake site, which attacker captures.
+  </Accordion>
+
+  <Accordion title="Step 4: Rapid Login" icon="arrow-right">
+**What happens:** Attacker immediately uses captured credentials and 2FA code (within 30-second window) to log into real site.
+  </Accordion>
+
+  <Accordion title="Step 5: Account Takeover" icon="user-xmark">
+**What happens:** Attacker disables 2FA and withdraws all funds.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Prevention
+
+<Check>**Never enter 2FA codes on websites** (except the official login page).</Check>
+
+<Check>**Block unsolicited support messages.** Report them immediately.</Check>
+
+<Check>**Contact support independently** (via official website) if you need help.</Check>
+
+<Check>**Assume any DM offering help is a scam.**</Check>
+
+<Check>**Verify URLs carefully:** Always check the domain before entering credentials.</Check>
+
+---
+
+## If You Already Entered Credentials on a Fake Site
+
+<Steps>
+  <Step title="Change Password Immediately">
+    Change your exchange password immediately from the official site.
+  </Step>
+  
+  <Step title="Regenerate 2FA">
+    Disable and re-enable 2FA to generate new codes.
+  </Step>
+  
+  <Step title="Check Account Activity">
+    Review all recent transactions and withdrawals for unauthorized activity.
+  </Step>
+  
+  <Step title="Report the Phishing Site">
+    Report the fake site to the exchange and browser security teams.
+  </Step>
+  
+  <Step title="Report Unauthorized Access">
+    If funds were stolen, report to exchange support and law enforcement.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Social Support Impersonation" 
+    icon="user-ninja"
+    href="/safety-education/articles/social-support-impersonation-adebayo"
+  >
+    How fake support accounts target users
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of account takeover attacks
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. 2FA security best practices
+2. Phishing detection and prevention
+3. Exchange support verification guidelines
+

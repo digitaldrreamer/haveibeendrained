@@ -1,0 +1,229 @@
+---
+title: "The Forgotten Password That Wasn't: Ada's Email Compromise Chain"
+description: "How email account takeover led to cascading compromise of all linked accounts"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Account Takeover (CEX, Email, SIM Swap)
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Account Takeover</Badge> <Badge color="blue" size="sm">Email Takeover</Badge>
+
+**Reading time**: 11 minutes  
+**Risk level**: Critical  
+**Target audience**: Email users, exchange users
+</Info>
+
+## Meet Ada
+
+Ada is a 30-year-old business manager who uses one email address for everything: crypto exchange accounts, wallet recovery, banking, business accounts.
+
+That email is `ada.business@gmail.com`.
+
+One day, she receives a notification from Google: "Your account recovery email has been changed."
+
+She didn't change it. Someone else did.
+
+## What Happened
+
+### Step 1: The Email Takeover
+
+The attacker:
+1. Went to the Google account recovery page.
+2. Entered Ada's email address.
+3. Clicked "Forgot password?"
+4. Google asked for identity verification (usually: recovery email, recovery phone, or security questions).
+
+The attacker didn't have access to these initially. But they used social engineering:
+- Called Google support claiming to be Ada.
+- Provided some personal information (found online or from a breach).
+- Convinced support to confirm their identity via alternative methods.
+
+Alternatively, the attacker may have:
+- Found her recovery email/phone in a data breach.
+- Intercepted an SMS or email recovery code through other means (compromised secondary email, etc.).
+
+Regardless, the attacker reset Ada's Gmail password and took control of her email account.
+
+### Step 2: The Cascade of Compromise
+
+With control of Ada's email, the attacker:
+
+1. **Accessed her crypto exchange account** (Binance):
+   - Went to Binance's password reset page.
+   - Entered Ada's email.
+   - Binance sent a password reset link to the email.
+   - The attacker received it and reset the password.
+   - Binance 2FA: If it was SMS, the attacker could perform a SIM swap. If it was email-based, the attacker already had the email.
+
+2. **Accessed her wallet backup emails** (MetaMask recovery, etc.):
+   - Any wallet recovery email codes were intercepted.
+
+3. **Accessed secondary financial accounts** (PayPal, banking apps):
+   - All linked to the same email.
+
+4. **Disabled Ada's security options** on her Google account:
+   - Removed her phone as a recovery method.
+   - Removed alternative emails.
+   - Changed the password.
+   - Enabled "less secure apps" access.
+
+5. **Drained her crypto holdings:**
+   - Using access to her exchange account, the attacker withdrew ₦4.2 million.
+
+Ada lost everything before she even knew her email was compromised.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **Email as the master key:** A single email account controls access to nearly everything.
+2. **Social engineering against Google:** The attacker convinced Google support to reset the account.
+3. **Cascading compromise:** Each compromised account led to access of others.
+</Warning>
+
+---
+
+## What Ada Could Have Done (Prevention)
+
+### Email Security (Most Critical)
+
+<Check>**Use a strong, unique password for email.** The email account is the master key; it must be fortress-grade protected.</Check>
+
+<Check>**Enable 2FA on your email** with a hardware security key (Yubikey, Titan) or authenticator app. **Avoid SMS 2FA for email** — it's vulnerable to SIM swaps and social engineering.</Check>
+
+<Check>**Use a secondary, lesser-known email for sensitive accounts.** Create a separate Gmail specifically for crypto/financial accounts, and don't use it for anything else.</Check>
+
+<Check>**Add a recovery email AND phone to your account**, but make sure you control both. Use a second phone number (perhaps a family member's or a business line) as a secondary recovery method.</Check>
+
+<Check>**Set up a Google Account PIN.** Go to myaccount.google.com → Security → Recovery options → Add a PIN. This PIN is required for account changes, making social engineering harder.</Check>
+
+### Account Cascading
+
+<Check>**Never use the same email for multiple high-value accounts.** Use different emails for:
+- Personal email (general use)
+- Crypto/financial email (separate Gmail, never used for other purposes)
+- Work email (if available)</Check>
+
+<Check>**Regularly review account recovery options:**
+- On Gmail: myaccount.google.com → Security → How you sign in
+- On Binance: Account → API, Security → Security Options
+- On any exchange: Account → Recovery Methods</Check>
+
+<Check>**Disable "less secure app access"** on Gmail (if you're not using it).</Check>
+
+---
+
+## Red Flags Ada Missed
+
+<Warning>
+- [ ] **Account recovery email changed without her action.** This is the first sign of compromise.
+- [ ] **No alerts on her phone.** She had 2FA on some accounts but not on her email.
+</Warning>
+
+---
+
+## How Email Takeover Works
+
+<AccordionGroup>
+  <Accordion title="Step 1: Account Recovery Attempt" icon="key">
+**What happens:** Attacker goes to email provider's password reset page and initiates recovery process.
+  </Accordion>
+
+  <Accordion title="Step 2: Social Engineering" icon="user-ninja">
+**What happens:** Attacker uses social engineering or breached data to bypass recovery verification.
+  </Accordion>
+
+  <Accordion title="Step 3: Password Reset" icon="lock">
+**What happens:** Attacker successfully resets email password and gains control of account.
+  </Accordion>
+
+  <Accordion title="Step 4: Security Disabling" icon="shield-slash">
+**What happens:** Attacker disables 2FA, removes recovery methods, and locks out original owner.
+  </Accordion>
+
+  <Accordion title="Step 5: Cascading Compromise" icon="arrow-right">
+**What happens:** Attacker uses email access to reset passwords on all linked accounts (exchange, wallet, banking).
+  </Accordion>
+
+  <Accordion title="Step 6: Fund Theft" icon="droplet">
+**What happens:** Attacker drains funds from all compromised accounts.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## If Your Email Is Compromised
+
+<Steps>
+  <Step title="Access Email from Clean Device">
+    Access your email from a different, clean device immediately.
+  </Step>
+  
+  <Step title="Change Password">
+    Change your Gmail password to something very long and unique.
+  </Step>
+  
+  <Step title="Remove Unauthorized Recovery Methods">
+    Remove all recovery emails and phones except ones you control.
+  </Step>
+  
+  <Step title="Enable 2FA with Hardware Key">
+    Enable 2FA with a hardware key.
+  </Step>
+  
+  <Step title="Review Account Activity">
+    Review recent account activity (myaccount.google.com → Security → Your devices → Manage your Google Account).
+  </Step>
+  
+  <Step title="Sign Out All Other Sessions">
+    Sign out all other sessions (Security → Your devices → Manage all sessions).
+  </Step>
+  
+  <Step title="Change All Critical Passwords">
+    Change passwords on all critical accounts (exchange, wallet, banking) from the recovered email.
+  </Step>
+  
+  <Step title="Check Linked Apps">
+    Check all linked apps/services and revoke access to suspicious ones (Security → Third-party apps → Manage).
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="SIM Swap Attack" 
+    icon="mobile-screen-button"
+    href="/safety-education/articles/sim-swap-kunle"
+  >
+    How SIM swaps bypass SMS 2FA
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of account takeover attacks
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. Email account takeover as a vector for cryptocurrency theft
+2. Google account recovery vulnerabilities and social engineering
+3. Email 2FA and hardware keys for protection
+

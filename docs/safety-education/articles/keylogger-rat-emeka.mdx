@@ -1,0 +1,180 @@
+---
+title: "The 'Cracked' Software That Cost ₦2.2M: Emeka's RAT Infection"
+description: "How a remote access trojan hidden in cracked software led to complete system compromise"
+---
+
+<Info>
+**Category**: [Hacks](/safety-education/categories/hacks) → Malware, Fake Wallets & Device Compromise
+
+<Badge color="red" size="sm">Hacks</Badge> <Badge color="blue" size="sm">Malware</Badge> <Badge color="blue" size="sm">Keylogger/RAT</Badge>
+
+**Reading time**: 10 minutes  
+**Risk level**: Critical  
+**Target audience**: Software users, traders
+</Info>
+
+## Meet Emeka
+
+Emeka is a developer who wanted to use Adobe Creative Suite but didn't want to pay the subscription. He searched for "Adobe Photoshop crack" and found a download link.
+
+He downloaded and installed what appeared to be a cracked version of Photoshop.
+
+It functioned normally for a few days. But it was actually a RAT (Remote Access Trojan).
+
+## What Happened
+
+### Step 1: The RAT Installation
+
+The "cracked Photoshop" included a hidden RAT program. RATs are malware that give attackers remote control of the infected computer.
+
+Once installed, the RAT:
+- Logs all keyboard inputs (keylogger function).
+- Captures screen screenshots.
+- Records webcam feed.
+- Accesses files and passwords.
+- Can run arbitrary commands.
+
+### Step 2: The Credential Theft
+
+The RAT captured Emeka's MetaMask password as he typed it while accessing his wallet.
+
+It also recorded screenshots of him entering his 2FA code, and captured his email password.
+
+### Step 3: The Compromise
+
+The attacker, using the stolen credentials, logged into Emeka's email and changed the password, locking him out.
+
+Then they:
+1. Accessed his MetaMask account (password known).
+2. Checked his blockchain holdings.
+3. Initiated a withdrawal to another wallet.
+
+Emeka's wallet contained ₦2.2 million in various tokens. Within 30 minutes, the attacker had drained it.
+
+By the time Emeka realized something was wrong, the tokens were moving through a mixer.
+
+---
+
+## Where the Scammer Won
+
+<Warning>
+1. **Pirated software:** The trojan was hidden in cracked software.
+2. **System access:** A RAT gives full remote control.
+3. **Credential capture:** All passwords and 2FA codes were logged.
+4. **No alerting:** The RAT ran silently; Emeka had no idea he was compromised.
+</Warning>
+
+---
+
+## Prevention
+
+<Check>**Never download cracked software.** It's the #1 vector for RATs and keyloggers.</Check>
+
+<Check>**Use legitimate, paid software** or open-source alternatives.</Check>
+
+<Check>**Run antivirus/antimalware regularly** and keep it updated.</Check>
+
+<Check>**Use a password manager** so you don't type passwords (harder for keyloggers to capture).</Check>
+
+<Check>**Enable 2FA with TOTP (authenticator app)** instead of SMS or email codes (reduces one vector of compromise).</Check>
+
+<Check>**Keep your operating system and applications updated.** Updates patch security vulnerabilities.</Check>
+
+---
+
+## How RATs and Keyloggers Work
+
+<AccordionGroup>
+  <Accordion title="Step 1: Malware Delivery" icon="download">
+**What happens:** Malware is hidden in cracked software, fake downloads, or malicious email attachments.
+  </Accordion>
+
+  <Accordion title="Step 2: Silent Installation" icon="ghost">
+**What happens:** RAT installs silently in background, often disguised as legitimate system process.
+  </Accordion>
+
+  <Accordion title="Step 3: Keylogging" icon="keyboard">
+**What happens:** RAT logs all keyboard input, capturing passwords, seed phrases, and other sensitive data.
+  </Accordion>
+
+  <Accordion title="Step 4: Screen Capture" icon="camera">
+**What happens:** RAT takes screenshots of sensitive information (2FA codes, wallet balances, etc.).
+  </Accordion>
+
+  <Accordion title="Step 5: Remote Access" icon="laptop">
+**What happens:** Attacker gains full remote control of infected system, can access files and execute commands.
+  </Accordion>
+
+  <Accordion title="Step 6: Credential Theft" icon="key">
+**What happens:** Attacker uses captured credentials to access accounts and drain funds.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## If You Suspect a RAT Infection
+
+<Steps>
+  <Step title="Disconnect from Internet Immediately">
+    Disconnect from the internet immediately to prevent further data exfiltration.
+  </Step>
+  
+  <Step title="Change All Critical Passwords">
+    Change all critical passwords from a different, clean device.
+  </Step>
+  
+  <Step title="Assume All Data is Compromised">
+    Assume all data on the computer is compromised (passwords, keys, documents).
+  </Step>
+  
+  <Step title="Move Crypto to New Wallets">
+    Move all crypto to new wallets with new seed phrases (from a clean device).
+  </Step>
+  
+  <Step title="Run Full Malware Scan">
+    Run a full malware scan or wipe the computer completely.
+  </Step>
+  
+  <Step title="Report Stolen Funds">
+    Report stolen funds to law enforcement and ChainAbuse.
+  </Step>
+</Steps>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card 
+    title="Clipboard Hijacker" 
+    icon="clipboard"
+    href="/safety-education/articles/clipboard-hijacker-marcus"
+  >
+    How clipboard malware steals wallet addresses
+  </Card>
+  
+  <Card 
+    title="Hacks Category" 
+    icon="shield-halved"
+    href="/safety-education/categories/hacks"
+  >
+    Explore all types of malware and device compromise
+  </Card>
+  
+  <Card 
+    title="Check Your Wallet" 
+    icon="shield-check"
+    href="https://haveibeendrained.org"
+  >
+    Verify if addresses are reported as malicious
+  </Card>
+</CardGroup>
+
+---
+
+## References
+
+1. RAT and keylogger malware detection
+2. Antivirus and antimalware recommendations
+3. Password manager security benefits
+
