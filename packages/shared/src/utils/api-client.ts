@@ -1,4 +1,5 @@
 import type { RiskReport, DetectionResult } from '../types';
+import { getMockWalletData } from './client-mock';
 
 /**
  * Configuration for the API client
@@ -7,6 +8,8 @@ export interface ApiClientConfig {
   baseUrl: string;
   timeout?: number;
   fetchImpl?: typeof fetch;
+  enableClientMock?: boolean; // Enable client-side mocking (default: true)
+  mockLoadingDelay?: boolean; // Simulate loading delay for mocks (default: true)
 }
 
 /**
@@ -40,6 +43,8 @@ export class ApiClient {
   constructor(config: ApiClientConfig) {
     this.config = {
       timeout: 30000, // 30 seconds default
+      enableClientMock: true, // Enable client-side mocking by default
+      mockLoadingDelay: true, // Simulate loading delay by default
       ...config,
     };
     // Use fetchImpl if provided, otherwise detect fetch in a way that works in both SSR and browser
@@ -53,6 +58,21 @@ export class ApiClient {
    */
   async analyzeWallet(request: AnalyzeWalletRequest & { experimental?: boolean }): Promise<AnalyzeWalletResponse> {
     try {
+      // Check for mock address first (client-side mocking)
+      if (this.config.enableClientMock) {
+        const mockData = await getMockWalletData(
+          request.address,
+          this.config.mockLoadingDelay ?? true
+        );
+        if (mockData) {
+          return {
+            success: true,
+            data: mockData,
+            timestamp: Date.now(),
+          };
+        }
+      }
+
       // * Use public /api/v1/check endpoint for client-side requests
       // * This endpoint works from any origin (no CORS restrictions) and is rate-limited
       // * The /api/internal/check endpoint is CORS-protected and only works from same origin

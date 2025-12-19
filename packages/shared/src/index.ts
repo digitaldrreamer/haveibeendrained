@@ -6,3 +6,4 @@ export * from "./constants";
 export * from "./types";
 export * from "./utils/address";
 export * from "./utils/api-client";
+export * from "./utils/client-mock";
