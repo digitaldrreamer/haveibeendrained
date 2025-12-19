@@ -1,0 +1,19 @@
+{
+	"reportId": "87cd00c7-d0db-4296-a7bd-a27ed01be370",
+	"title": "",
+	"description": "On November 23–24, 2025, I was defrauded via a fake “Shido official” Telegram account . The scammer tricked me into approving transactions and/or sending funds directly, resulting in the theft of the following assets from my wallets:• Solana: 3.52 SOL + ~8,300 BULLISH (~663 CAD)  • Ethereum: ETH, JOE, SHIDO, TEL tokens (~535 CAD total)  • Stellar: 497.98 XLM (~177 CAD)  • XRPL: 1,159.28 XRP (~3,407 CAD)  Total estimated loss: ≈ 4,594 CADKey scammer-controlled addresses • Solana: EkaajdZSwf4SAWLdYUdh2Zq1bzLYuJ6jZ3BXRNqB8  • Ethereum main collection wallet: 0x7773b2D4d8C490F4adbb8fAc029d33995aa068  • Stellar destination: GAWJGLPF5MNORZBKNS44YFQFXKFBEP7HWJITYCLU45W7  • XRPL destination: r4rVA3GZZ3bJh1zJrYrVDPBnfsYKXP23SeAll transactions occurred within hours on Nov 23–24, 2025. Funds were rapidly swapped (Jupiter Aggregator, Uniswap V3) and bridged/laundered.\n\nOn November 23–24, 2025, I was defrauded via a fake “Shido official” Telegram account . The scammer tricked me into approving transactions and/or sending funds directly, resulting in the theft of the following assets from my wallets:\n\n• Solana: 3.52 SOL + ~8,300 BULLISH (~663 CAD)\n\n• Ethereum: ETH, JOE, SHIDO, TEL tokens (~535 CAD total)\n\n• Stellar: 497.98 XLM (~177 CAD)\n\n• XRPL: 1,159.28 XRP (~3,407 CAD)\n\nTotal estimated loss: ≈ 4,594 CAD\n\nKey scammer-controlled addresses\n\n• Solana: EkaajdZSwf4SAWLdYUdh2Zq1bzLYuJ6jZ3BXRNqB8\n\n• Ethereum main collection wallet: 0x7773b2D4d8C490F4adbb8fAc029d33995aa068\n\n• Stellar destination: GAWJGLPF5MNORZBKNS44YFQFXKFBEP7HWJITYCLU45W7\n\n• XRPL destination: r4rVA3GZZ3bJh1zJrYrVDPBnfsYKXP23Se\n\nAll transactions occurred within hours on Nov 23–24, 2025. Funds were rapidly swapped (Jupiter Aggregator, Uniswap V3) and bridged/laundered.\n\nAmount lost",
+	"addresses": [
+		"EkaajdZSZwf4SAWL1dYUdh22q1bzLYuJ6jZ3BXRNqB8",
+		"r4rVA3GZZ3bJh1zJrYrVDPBnfsYKXP23Se"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/EkaajdZSZwf4SAWL1dYUdh22q1bzLYuJ6jZ3BXRNqB8",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/87cd00c7-d0db-4296-a7bd-a27ed01be370?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:59:00.171Z"
+}

@@ -1,0 +1,19 @@
+{
+	"reportId": "994404d1-1908-4bff-8fb6-6bdbcd6e511c",
+	"title": "",
+	"description": "I was the victim of unauthorized access to my Solana wallet. My funds were transferred without my permission to the scammer’s address.Attacker address:FcwYnoSQqHovJjMf3eAPYDZueCVtPs7d3LewAKgaaMvKVictim address:H5G2GAWwVY3BCDEv1s1ctKbHMrjK9T1DAmpEqpw8sqP5Transaction hash (theft):qT59ZHLreHM2CiY6bo3gCWBfy9W4hASrzNVsYNCodvKEzRReyaiqBAfULumWDzyT64jzdcjphLe1PiHzxJqUBefThe attacker drained 83.914985593 SOL (about $11,052.49 USD at the time).I am attaching full transaction screenshots and the scammer’s wallet page.Please flag this wallet as malicious and notify exchanges in case the attacker attempts to transfer or liquidate the stolen funds.\n\nI was the victim of unauthorized access to my Solana wallet. My funds were transferred without my permission to the scammer’s address.\n\nAttacker address:\n\nFcwYnoSQqHovJjMf3eAPYDZueCVtPs7d3LewAKgaaMvK\n\nVictim address:\n\nH5G2GAWwVY3BCDEv1s1ctKbHMrjK9T1DAmpEqpw8sqP5\n\nTransaction hash (theft):\n\nqT59ZHLreHM2CiY6bo3gCWBfy9W4hASrzNVsYNCodvKEzRReyaiqBAfULumWDzyT64jzdcjphLe1PiHzxJqUBef\n\nThe attacker drained 83.914985593 SOL (about $11,052.49 USD at the time).\n\nI am attaching full transaction screenshots and the scammer’s wallet page.\n\nPlease flag this wallet as malicious and notify exchanges in case the attacker attempts to transfer or liquidate the stolen funds.\n\nAmount lost\n\n11052.49 USD",
+	"amountLost": "11052.49 USD",
+	"addresses": [
+		"FcwYnoSQqHovJjMf3eAPYDZueCVtPs7d3LewAKgaaMvK"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/FcwYnoSQqHovJjMf3eAPYDZueCVtPs7d3LewAKgaaMvK",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "3 days ago",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/994404d1-1908-4bff-8fb6-6bdbcd6e511c?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:54:21.042Z"
+}

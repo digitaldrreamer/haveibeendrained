@@ -1,0 +1,63 @@
+---
+---
+
+<nav class="w-full border-b border-slate-800/50 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo/Brand -->
+      <div class="flex-shrink-0">
+        <a href="/" class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500 hover:from-primary-hover hover:to-purple-400 transition-all">
+          Have I Been Drained?
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="/" class="text-text-muted hover:text-white transition-colors">
+          Home
+        </a>
+        <a href="/api" class="text-text-muted hover:text-white transition-colors">
+          API
+        </a>
+        <a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-white transition-colors">
+          GitHub
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-text-muted hover:text-white transition-colors" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+      <a href="/" class="block px-3 py-2 text-text-muted hover:text-white hover:bg-surface rounded-md transition-colors">
+        Home
+      </a>
+      <a href="/api" class="block px-3 py-2 text-text-muted hover:text-white hover:bg-surface rounded-md transition-colors">
+        API
+      </a>
+      <a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 text-text-muted hover:text-white hover:bg-surface rounded-md transition-colors">
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>
+

@@ -1,0 +1,19 @@
+{
+	"reportId": "43649758-a4d4-4145-9bba-deca66566e02",
+	"title": "",
+	"description": "My syrax token was swap to solana and transferred to another wallet without my authorization.\n\nMy syrax token was swap to solana and transferred to another wallet without my authorization.\n\nAmount lost",
+	"amountLost": "217.02 USD",
+	"addresses": [
+		"9ERkhPKyPecfshR6VLhuQYamC7Z8fCo2Bp2AcizF2BR8"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/9ERkhPKyPecfshR6VLhuQYamC7Z8fCo2Bp2AcizF2BR8",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "2 days ago",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/43649758-a4d4-4145-9bba-deca66566e02?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:54:20.181Z"
+}

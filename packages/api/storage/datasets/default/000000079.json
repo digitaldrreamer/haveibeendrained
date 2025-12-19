@@ -1,0 +1,19 @@
+{
+	"reportId": "d304deec-a173-46a2-ae4d-1104d5647860",
+	"title": "",
+	"description": "My wallet address is:\nDzuMtDJzKgU6Cn8dXKkgWoEVcHBJ7UybuqtW7dMeE7Rk\nRecently, I discovered that funds were transferred from my wallet to another unknown address without any approval from my side. I did not share my seed phrase or private key with anyone, and I did not authorize any transaction at the time this incident occurred.\n\nThe suspicious recipient address is:\nAtx9tLeZ8Z5Bg4a713nsDRoavfqB8pU187oNqbuwaxZ3\n\nI have already checked my wallet activity on Solscan and confirmed that the transaction was indeed executed without my action. This suggests that my wallet may have been compromised or a connected dApp exploited it.\n\nI kindly request your assistance in:\n\n1. Investigating this unauthorized transaction.\n\n\n2. Identifying if the recipient wallet is associated with any known scam or exchange.\n\n\n3. Taking immediate action if possible to freeze or trace the transferred funds.\n\n\n\nI am attaching all the necessary transaction details, screenshots, and timestamps for your review.\n\nThank you for your prompt attention to this matter.\nPlease let me know if any additional information or verification is required from my side.\n\nMy wallet address is:\nDzuMtDJzKgU6Cn8dXKkgWoEVcHBJ7UybuqtW7dMeE7Rk\n\nRecently, I discovered that funds were transferred from my wallet to another unknown address without any approval from my side. I did not share my seed phrase or private key with anyone, and I did not authorize any transaction at the time this incident occurred.\n\nThe suspicious recipient address is:\nAtx9tLeZ8Z5Bg4a713nsDRoavfqB8pU187oNqbuwaxZ3\n\nI have already checked my wallet activity on Solscan and confirmed that the transaction was indeed executed without my action. This suggests that my wallet may have been compromised or a connected dApp exploited it.\n\nI kindly request your assistance in:\n\n1. Investigating this unauthorized transaction.\n\n\n2. Identifying if the recipient wallet is associated with any known scam or exchange.\n\n\n3. Taking immediate action if possible to freeze or trace the transferred funds.\n\n\n\nI am attaching all the necessary transaction details, screenshots, and timestamps for your review.\n\nThank you for your prompt attention to this matter.\nPlease let me know if any additional information or verification is required from my side.\n\nAmount lost",
+	"amountLost": "2.00 USD",
+	"addresses": [
+		"Atx9tLeZ8Z5Bg4a713nsDRoavfqB8pU187oNqbuwaxZ3"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/Atx9tLeZ8Z5Bg4a713nsDRoavfqB8pU187oNqbuwaxZ3",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/d304deec-a173-46a2-ae4d-1104d5647860?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:03:34.120Z"
+}

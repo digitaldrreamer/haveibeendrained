@@ -1,15 +1,21 @@
+---
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="../styles/global.css" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Have I Been Drained? - Solana Wallet Security Checker</title>
 	</head>
-	<body>
+	<body class="flex flex-col min-h-screen">
+		<Navigation />
 		<slot />
+		<Footer />
 	</body>
 </html>
 

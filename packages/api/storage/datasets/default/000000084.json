@@ -1,0 +1,18 @@
+{
+	"reportId": "35907803-292e-49cf-8f89-64f5b88b8f11",
+	"title": "",
+	"description": "I saw a collectibles banner on Phantom, when I clicked it I was directed to the https://ipfs.io/ipfs/QmRfZPJth42hAUMYseCgSrdwZnJFYzUmBLbrHhqME2cXZa, after opening it I was asked to connect my wallet, it turned out my money was gone.\n\nI saw a collectibles banner on Phantom, when I clicked it I was directed to the https://ipfs.io/ipfs/QmRfZPJth42hAUMYseCgSrdwZnJFYzUmBLbrHhqME2cXZa, after opening it I was asked to connect my wallet, it turned out my money was gone.\n\nAmount lost\n\n1536.00 USD\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://ipfs.io/ipfs/QmRfZPJth42hAUMYseCgSrdwZnJFYzUmBLbrHhqME2cXZa",
+	"amountLost": "1536.00 USD",
+	"addresses": [
+		"AYo7ae3bnJN7966BJeEp8TjJqoyn3xv8S7PktZKmTCMX",
+		"D12Lho9ZGAzNA6QxypnVa1DRR2civprhqTSRjU9q3kfu",
+		"5oxRZFv5t37epUALUH3U2rLzPPkXnyWnM8TQ659r5L11"
+	],
+	"domains": [
+		"https://ipfs.io/ipfs/QmRfZPJth42hAUMYseCgSrdwZnJFYzUmBLbrHhqME2cXZa"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/35907803-292e-49cf-8f89-64f5b88b8f11?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:04:35.539Z"
+}

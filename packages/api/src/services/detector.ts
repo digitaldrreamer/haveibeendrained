@@ -6,6 +6,7 @@ export interface DetectionResult {
     confidence: number; // 0-100
     affectedAccounts: string[];
     suspiciousRecipients: string[];
+    domains?: string[]; // Associated domains from reports
     recommendations: string[];
     timestamp: number;
     signature: string;
@@ -122,13 +123,15 @@ export class DrainerDetector {
      */
     static async detectKnownDrainer(
         tx: ParsedTransactionWithMeta,
-        checkDrainer: (address: string) => Promise<boolean>
+        checkDrainer: (address: string) => Promise<boolean>,
+        getDomains?: (address: string) => Promise<string[]>
     ): Promise<DetectionResult | null> {
         if (!tx.meta || !tx.transaction) return null;
 
         const message = tx.transaction.message;
         const accountKeys = message.accountKeys.map(k => k.pubkey.toString());
         const suspiciousRecipients: string[] = [];
+        const allDomains: string[] = [];
 
         // A simpler approach: Check all accounts that are NOT the fee payer
         const feePayer = message.accountKeys[0].pubkey.toString();
@@ -138,6 +141,12 @@ export class DrainerDetector {
 
             if (await checkDrainer(address)) {
                 suspiciousRecipients.push(address);
+                
+                // Get domains for this drainer if function provided
+                if (getDomains) {
+                    const domains = await getDomains(address);
+                    allDomains.push(...domains);
+                }
             }
         }
 
@@ -148,6 +157,7 @@ export class DrainerDetector {
                 confidence: 100,
                 affectedAccounts: [feePayer], // Assuming fee payer is the victim
                 suspiciousRecipients: [...new Set(suspiciousRecipients)],
+                domains: [...new Set(allDomains)], // Unique domains
                 recommendations: [
                     '🚨 CRITICAL: Interaction with Known Drainer Detected!',
                     'This transaction involves a wallet address flagged as a malicious drainer.',

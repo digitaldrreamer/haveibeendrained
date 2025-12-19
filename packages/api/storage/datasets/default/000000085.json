@@ -1,0 +1,17 @@
+{
+	"reportId": "c194cf3a-2b5b-4ea0-a0a1-fa119544788d",
+	"title": "",
+	"description": "Y received an email about a token drop from Audius and asked to connect my wallet. I did.Then my wallet was drained...\n\nY received an email about a token drop from Audius and asked to connect my wallet. I did.\n\nThen my wallet was drained...\n\nAmount lost\n\n40000.00 USD\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://audius-check.com/",
+	"amountLost": "40000.00 USD",
+	"addresses": [
+		"6SJaS6HgaPhfPeukBKBZU3PGxCR7YZ8pbPvC2KsJkcr6",
+		"5oxRZFv5t37epUALUH3U2rLzPPkXnyWnM8TQ659r5L11"
+	],
+	"domains": [
+		"https://audius-check.com/"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/c194cf3a-2b5b-4ea0-a0a1-fa119544788d?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:04:38.040Z"
+}

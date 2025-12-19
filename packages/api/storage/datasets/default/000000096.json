@@ -1,0 +1,19 @@
+{
+	"reportId": "3c6aee38-6931-41e5-aede-de1719224ecc",
+	"title": "",
+	"description": "I made a bridge transaction on jumper exchange from an EVM wallet to Solana wallet A. I did that successfully and sent a small amount from Solana wallet A to Solana wallet B. Solana wallet B was hacked by this same hacker about a month ago, but I had a token there that I wanted to transfer to Solana wallet A. After sending that small amount to B, I swapped the token for SOL and transferred it to A. I was just about to transfer SOL from A to a CEX when I noticed that the balance reduced to 0. I checked the transaction history and saw that it was transferred out; a transaction which I did not make. I checked wallet B and saw the same thing; zero balance, a send transaction that I did not make and to the same wallet address.D9wHtmY3wyonSM3JHHWQj8dRXpmTCuSXUVvbDhjJLPkZ (hacker's address).\n\nI made a bridge transaction on jumper exchange from an EVM wallet to Solana wallet A. I did that successfully and sent a small amount from Solana wallet A to Solana wallet B. Solana wallet B was hacked by this same hacker about a month ago, but I had a token there that I wanted to transfer to Solana wallet A. After sending that small amount to B, I swapped the token for SOL and transferred it to A. I was just about to transfer SOL from A to a CEX when I noticed that the balance reduced to 0. I checked the transaction history and saw that it was transferred out; a transaction which I did not make. I checked wallet B and saw the same thing; zero balance, a send transaction that I did not make and to the same wallet address.\n\nD9wHtmY3wyonSM3JHHWQj8dRXpmTCuSXUVvbDhjJLPkZ (hacker's address).\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\njumper.exchange\n\njumper.exchange",
+	"amountLost": "12.00 USD",
+	"addresses": [
+		"D9wHtmY3wyonSM3JHHWQj8dRXpmTCuSXUVvbDhjJLPkZ"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/D9wHtmY3wyonSM3JHHWQj8dRXpmTCuSXUVvbDhjJLPkZ",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/3c6aee38-6931-41e5-aede-de1719224ecc?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:06:18.661Z"
+}

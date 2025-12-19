@@ -1,0 +1,16 @@
+{
+	"reportId": "430aa920-8a57-42bd-9578-3e2a3fc047be",
+	"title": "",
+	"description": "I approved a weird transaction on autopilot, it said something along the lines of +1 token. No warning from phantom, new draining method.\n\nI approved a weird transaction on autopilot, it said something along the lines of +1 token. No warning from phantom, new draining method.\n\nAmount lost\n\n2400.00 USD\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://4pump.fun/coin/MamxpvRnaMizqB9uo6nJFMMkWEJ1jpfznuHXdwVpump",
+	"amountLost": "2400.00 USD",
+	"addresses": [
+		"5SdNC5758Sc1VcTw1UocrUpwjZPcuAJz1qjY6UVK89NV"
+	],
+	"domains": [
+		"https://4pump.fun/coin/MamxpvRnaMizqB9uo6nJFMMkWEJ1jpfznuHXdwVpump"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/430aa920-8a57-42bd-9578-3e2a3fc047be?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:55:46.745Z"
+}

@@ -1,0 +1,19 @@
+{
+	"reportId": "6860909b-fb45-4009-a2f3-e75932e7e864",
+	"title": "",
+	"description": "Transaction happenes without my permision no idea how\n\nTransaction happenes without my permision no idea how\n\nAmount lost",
+	"amountLost": "100.00 USD",
+	"addresses": [
+		"HGqtb9u3DWXKVsiyUQHjHq2fgHdGzoxMBQoDbNPLAjqH"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/HGqtb9u3DWXKVsiyUQHjHq2fgHdGzoxMBQoDbNPLAjqH",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/6860909b-fb45-4009-a2f3-e75932e7e864?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:00:21.916Z"
+}

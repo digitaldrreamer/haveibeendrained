@@ -1,0 +1,21 @@
+{
+	"reportId": "b03475ec-4f95-4eaf-83f8-0f8adeba386a",
+	"title": "",
+	"description": "My Phantom wallet was hacked, my funds were stolen. I request that you freeze any funds related to these transactions and cooperate with law enforcement.\n\nMy Phantom wallet was hacked, my funds were stolen. I request that you freeze any funds related to these transactions and cooperate with law enforcement.\n\nAmount lost",
+	"amountLost": "932.00 USD",
+	"addresses": [
+		"9ERkhPKyPecfshR6VLhuQYamC7Z8fCo2Bp2AcizF2BR8",
+		"8NneapF1JMjBsWx3YLZDCbaSs8gWUejLGhBBwawQooBH"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/9ERkhPKyPecfshR6VLhuQYamC7Z8fCo2Bp2AcizF2BR8",
+		"https://solana.fm/address/8NneapF1JMjBsWx3YLZDCbaSs8gWUejLGhBBwawQooBH",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/b03475ec-4f95-4eaf-83f8-0f8adeba386a?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:00:42.230Z"
+}

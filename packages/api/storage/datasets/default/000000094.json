@@ -1,0 +1,19 @@
+{
+	"reportId": "0c73a998-fd23-41a2-a5b7-f71c03a083c4",
+	"title": "",
+	"description": "I saw a video on the official Solana youtube account talking about how they were airdroping 15 Sol to people. Since i saw it was on the official youtube account, i thought it was real. I downloaded phantom wallet, loaded it up with 2.1 Sol (about $350 USD) because it said i needed at least 2 Sol in the account for the airdrop, and scanned the QR code on the website \"airdropsolan.com\". Next thing i know, I don't have $350 in my account. I have 16 cents.\n\nI saw a video on the official Solana youtube account talking about how they were airdroping 15 Sol to people. Since i saw it was on the official youtube account, i thought it was real. I downloaded phantom wallet, loaded it up with 2.1 Sol (about $350 USD) because it said i needed at least 2 Sol in the account for the airdrop, and scanned the QR code on the website \"airdropsolan.com\". Next thing i know, I don't have $350 in my account. I have 16 cents.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nAirdropsolan.com\n\nAirdropsolan.com",
+	"amountLost": "350.00 USD",
+	"addresses": [
+		"32msn8MYqc7AU4BRKipjY9cVvzVmFtXLz7yC1f8ZkbCU"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/32msn8MYqc7AU4BRKipjY9cVvzVmFtXLz7yC1f8ZkbCU",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/0c73a998-fd23-41a2-a5b7-f71c03a083c4?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:06:12.090Z"
+}

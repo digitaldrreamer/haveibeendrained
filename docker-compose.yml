@@ -30,6 +30,65 @@ services:
       timeout: 5s
       retries: 5
 
+  api:
+    image: oven/bun:latest
+    container_name: haveibeendrained-api
+    working_dir: /app/packages/api
+    command: ["bun", "run", "dev"]
+    env_file:
+      - .env  # Root .env with shared vars
+      - packages/api/.env  # API-specific vars
+    environment:
+      # Reference root .env vars
+      HELIUS_API_KEY: ${HELIUS_API_KEY}
+      SOLANA_NETWORK: ${SOLANA_NETWORK}
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: ${REDIS_URL}
+      ANCHOR_PROVIDER_URL: ${ANCHOR_PROVIDER_URL}
+      ANCHOR_WALLET: ${ANCHOR_WALLET}
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    image: oven/bun:latest
+    container_name: haveibeendrained-frontend
+    working_dir: /app/packages/frontend
+    command: ["bun", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000"]
+    env_file:
+      - .env  # Root .env with shared vars
+      - packages/frontend/.env  # Frontend-specific vars
+    environment:
+      PUBLIC_API_BASE_URL: ${PUBLIC_API_BASE_URL:-http://api:3001}
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      api:
+        condition: service_started
+
+  anchor-build:
+    image: solanafoundation/anchor:v0.32.1
+    container_name: haveibeendrained-anchor-build
+    working_dir: /workspace/packages/anchor
+    volumes:
+      - .:/workspace
+    command: >
+      bash -c "
+        anchor --version &&
+        solana --version &&
+        cargo-build-sbf --version &&
+        anchor build &&
+        cp target/idl/drainer_registry.json ../shared/src/idl/drainer_registry.json
+      "
+
 volumes:
   postgres_data:
   redis_data:

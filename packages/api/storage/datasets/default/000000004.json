@@ -1,0 +1,19 @@
+{
+	"reportId": "486f9967-90f5-4fb4-b2b4-fcd318999a15",
+	"title": "Fake Return Scams: Secure Your Crypto Investments",
+	"description": "Phishing scam operating via Twitch live streams impersonating 'ThreadGuy' and pump.fun founder Alon. The stream broadcasts pre-recorded footage and uses an overlay directing viewers to a malicious website (cashback.padretrade.fun) to claim a fake 8 SOL reward. Connecting a wallet to this site triggers a malicious transaction that drains user funds. The scammer frequently creates new Twitch accounts (currently: threadguyofflclailive) to evade platform bans.\n\nPhishing scam operating via Twitch live streams impersonating 'ThreadGuy' and pump.fun founder Alon. The stream broadcasts pre-recorded footage and uses an overlay directing viewers to a malicious website (cashback.padretrade.fun) to claim a fake 8 SOL reward. Connecting a wallet to this site triggers a malicious transaction that drains user funds. The scammer frequently creates new Twitch accounts (currently: threadguyofflclailive) to evade platform bans.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\ncashback.padretrade.fun",
+	"amountLost": "131.00 USD",
+	"addresses": [
+		"4zgFukCKd6gLNh9jJJ7nQWAQBbmYhWuMWrh43NYL1LSN"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/4zgFukCKd6gLNh9jJJ7nQWAQBbmYhWuMWrh43NYL1LSN",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "1 day ago",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/486f9967-90f5-4fb4-b2b4-fcd318999a15?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:53:58.814Z"
+}

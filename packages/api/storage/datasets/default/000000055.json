@@ -1,0 +1,23 @@
+{
+	"reportId": "f46bc9ba-d89b-49d4-bd95-0c5ea93d0262",
+	"title": "",
+	"description": "Hacker accessed my account without me giving my passphrase to anyone.\n\nHacker accessed my account without me giving my passphrase to anyone.\n\nAmount lost\n\n7733.90 USD",
+	"amountLost": "7733.90 USD",
+	"addresses": [
+		"9ERkhPKyPecfshR6VLhuQYamC7Z8fCo2Bp2AcizF2BR8",
+		"7gzZ7HWZh3qZk2UvHk6ci3aPbMVtj8GngFuwzvW1CzcR",
+		"7uTT8Xi5RWXzy7h9XL244GRgEycDYDhLjr3ZyNdXi8pZ"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/9ERkhPKyPecfshR6VLhuQYamC7Z8fCo2Bp2AcizF2BR8",
+		"https://solana.fm/address/7gzZ7HWZh3qZk2UvHk6ci3aPbMVtj8GngFuwzvW1CzcR",
+		"https://solana.fm/address/7uTT8Xi5RWXzy7h9XL244GRgEycDYDhLjr3ZyNdXi8pZ",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/f46bc9ba-d89b-49d4-bd95-0c5ea93d0262?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:00:41.547Z"
+}

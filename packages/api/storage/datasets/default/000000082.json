@@ -1,0 +1,17 @@
+{
+	"reportId": "a7192bd5-72f2-4a47-b7d4-e875f03ba401",
+	"title": "",
+	"description": "https://solscan.io/tx/2jJCwWkU4AkopWwWoESWJwnhigqAQSy9FMomR7LfRpMnnPCcEwRuYeqXbpPXuyz1ftXMh66xU2QnywmU3DXBMN7s\n\nhttps://solscan.io/tx/2jJCwWkU4AkopWwWoESWJwnhigqAQSy9FMomR7LfRpMnnPCcEwRuYeqXbpPXuyz1ftXMh66xU2QnywmU3DXBMN7s\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://solscan.io/tx/2jJCwWkU4AkopWwWoESWJwnhigqAQSy9FMomR7LfRpMnnPCcEwRuYeqXbpPXuyz1ftXMh66xU2QnywmU3DXBMN7s",
+	"amountLost": "381.00 USD",
+	"addresses": [
+		"3r48UBkA7xfngjquPamioiUfyMD6wX3e2m6nkEx6ctUt",
+		"3xfqcx9nW8TkRZF5RRgnwNDSrME6hrU5Cfw1vRZFSV74"
+	],
+	"domains": [
+		"https://solscan.io/tx/2jJCwWkU4AkopWwWoESWJwnhigqAQSy9FMomR7LfRpMnnPCcEwRuYeqXbpPXuyz1ftXMh66xU2QnywmU3DXBMN7s"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/a7192bd5-72f2-4a47-b7d4-e875f03ba401?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:04:28.738Z"
+}

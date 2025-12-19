@@ -92,6 +92,89 @@
           }
         }
       ]
+    },
+    {
+      "name": "update_ai_metadata",
+      "docs": [
+        "Update AI-generated metadata for a drainer report",
+        "",
+        "This instruction allows the program authority to update AI-analyzed metadata",
+        "including attack category, methods, summary, and associated domains."
+      ],
+      "discriminator": [
+        32,
+        138,
+        2,
+        135,
+        101,
+        42,
+        137,
+        227
+      ],
+      "accounts": [
+        {
+          "name": "drainer_report",
+          "docs": [
+            "The DrainerReport PDA account to update"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  114,
+                  97,
+                  105,
+                  110,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "drainer_report.drainer_address",
+                "account": "DrainerReport"
+              }
+            ]
+          }
+        },
+        {
+          "name": "program_authority",
+          "docs": [
+            "Program authority (only authority can update AI metadata)",
+            "In production, this should validate against a stored authority address",
+            "For MVP, we require a signer - the actual authority is managed off-chain"
+          ],
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "category",
+          "type": "u8"
+        },
+        {
+          "name": "methods",
+          "type": "bytes"
+        },
+        {
+          "name": "summary",
+          "type": "string"
+        },
+        {
+          "name": "domains",
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "confidence",
+          "type": "u8"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -158,41 +241,132 @@
   ],
   "types": [
     {
+      "name": "AttackCategory",
+      "docs": [
+        "Attack categories enum (1 byte)"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Phishing"
+          },
+          {
+            "name": "FakeAirdrop"
+          },
+          {
+            "name": "SocialEngineering"
+          },
+          {
+            "name": "MaliciousApproval"
+          },
+          {
+            "name": "SetAuthority"
+          },
+          {
+            "name": "Unknown"
+          }
+        ]
+      }
+    },
+    {
       "name": "DrainerReport",
       "docs": [
-        "DrainerReport account stores aggregated information about a reported drainer address"
+        "DrainerReport account stores aggregated information about a reported drainer address",
+        "",
+        "This account is a PDA derived from seeds: [\"drainer\", drainer_address]",
+        "Total size: ~1,156 bytes (8 discriminator + 1,148 data)"
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
             "name": "drainer_address",
+            "docs": [
+              "The address being reported as a drainer (32 bytes)"
+            ],
             "type": "pubkey"
           },
           {
             "name": "report_count",
+            "docs": [
+              "Total number of reports received for this address (4 bytes)"
+            ],
             "type": "u32"
           },
           {
             "name": "first_seen",
+            "docs": [
+              "Timestamp of the first report (Unix timestamp in seconds) (8 bytes)"
+            ],
             "type": "i64"
           },
           {
             "name": "last_seen",
+            "docs": [
+              "Timestamp of the most recent report (Unix timestamp in seconds) (8 bytes)"
+            ],
             "type": "i64"
           },
           {
             "name": "total_sol_reported",
+            "docs": [
+              "Total amount of SOL reported as stolen (in lamports) (8 bytes)"
+            ],
             "type": "u64"
           },
           {
             "name": "recent_reporters",
+            "docs": [
+              "Last 2 reporter addresses (for tracking) (64 bytes: 2 * 32)"
+            ],
             "type": {
               "array": [
                 "pubkey",
                 2
               ]
             }
+          },
+          {
+            "name": "attack_category",
+            "docs": [
+              "Attack category identified by AI (1 byte)"
+            ],
+            "type": {
+              "defined": {
+                "name": "AttackCategory"
+              }
+            }
+          },
+          {
+            "name": "attack_methods",
+            "docs": [
+              "Attack methods used (Vec<u8> - array of enum values, max 10) (4 + 10 = 14 bytes)"
+            ],
+            "type": "bytes"
+          },
+          {
+            "name": "ai_summary",
+            "docs": [
+              "AI-generated summary (max 500 chars) (4 + 500 = 504 bytes)"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "key_domains",
+            "docs": [
+              "Key domains associated with this drainer (max 5 domains, 100 chars each) (4 + 500 = 504 bytes)"
+            ],
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "ai_confidence",
+            "docs": [
+              "AI confidence score (0-100) (1 byte)"
+            ],
+            "type": "u8"
           }
         ]
       }

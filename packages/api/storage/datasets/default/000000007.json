@@ -1,0 +1,16 @@
+{
+	"reportId": "5a71810d-448c-48b8-b801-eb50fe1e96aa",
+	"title": "Fake Return Scams: Secure Your Crypto Investments",
+	"description": "he website xjembet.com induced cryptocurrency transfers by falsely claiming that deposits were required for AML/KYC verification and withdrawal activation.After each payment, new undisclosed requirements were introduced, including wallet verification and VIP status deposits.The operator justified these demands by referencing non-existent FATF/AML rules. Withdrawals remain blocked unless further payments are made.This matches known withdrawal-lock scam patterns.\n\nhe website xjembet.com induced cryptocurrency transfers by falsely claiming that deposits were required for AML/KYC verification and withdrawal activation.\n\nAfter each payment, new undisclosed requirements were introduced, including wallet verification and VIP status deposits.\n\nThe operator justified these demands by referencing non-existent FATF/AML rules. Withdrawals remain blocked unless further payments are made.\n\nThis matches known withdrawal-lock scam patterns.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://xjembet.com/",
+	"amountLost": "526.21 USD",
+	"addresses": [
+		"H24F7Eb1uN1N2K1t4PYWWakH3cSoLakZfp1ndPjoRXWE"
+	],
+	"domains": [
+		"https://xjembet.com/"
+	],
+	"submitted": "1 day ago",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/5a71810d-448c-48b8-b801-eb50fe1e96aa?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:54:12.291Z"
+}

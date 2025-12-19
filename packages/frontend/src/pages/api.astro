@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">API Documentation</h1>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto mb-8">
+          Public API for checking Solana wallet security and drainer addresses
+        </p>
+      </div>
+
+      <!-- API Information Section -->
+      <div class="max-w-4xl mx-auto mb-12 space-y-8">
+        <!-- Overview -->
+        <section class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Overview</h2>
+          <p class="text-text-muted mb-4">
+            The Have I Been Drained API provides programmatic access to our wallet security analysis engine. 
+            Check if addresses are known drainers or perform comprehensive wallet security analysis.
+          </p>
+          <div class="grid md:grid-cols-2 gap-4 mt-6">
+            <div class="p-4 bg-slate-900/50 rounded-lg">
+              <h3 class="font-semibold mb-2">🔍 Unified Endpoint</h3>
+              <p class="text-sm text-text-muted">
+                Single endpoint checks drainer status first, then performs full analysis if needed
+              </p>
+            </div>
+            <div class="p-4 bg-slate-900/50 rounded-lg">
+              <h3 class="font-semibold mb-2">⚡ Fast & Cached</h3>
+              <p class="text-sm text-text-muted">
+                Cached responses bypass rate limits for optimal performance
+              </p>
+            </div>
+            <div class="p-4 bg-slate-900/50 rounded-lg">
+              <h3 class="font-semibold mb-2">🛡️ Rate Limited</h3>
+              <p class="text-sm text-text-muted">
+                Tier-based rate limiting based on User-Agent format
+              </p>
+            </div>
+            <div class="p-4 bg-slate-900/50 rounded-lg">
+              <h3 class="font-semibold mb-2">🔑 API Keys</h3>
+              <p class="text-sm text-text-muted">
+                Enterprise tier available for higher rate limits (1000+ req/hour)
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Rate Limits -->
+        <section class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Rate Limits</h2>
+          <p class="text-text-muted mb-4">
+            Rate limits are based on how you identify your application in the User-Agent header.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-slate-700">
+                  <th class="pb-3 pr-4">Tier</th>
+                  <th class="pb-3 pr-4">User-Agent Format</th>
+                  <th class="pb-3 pr-4">Rate Limit</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-muted">
+                <tr class="border-b border-slate-800">
+                  <td class="py-3 pr-4 font-semibold">Unregistered</td>
+                  <td class="py-3 pr-4">Missing or invalid format</td>
+                  <td class="py-3">10 requests/hour</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-3 pr-4 font-semibold">Registered</td>
+                  <td class="py-3 pr-4"><code class="text-xs">AppName/Version (contact@example.com)</code></td>
+                  <td class="py-3">100 requests/hour</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4 font-semibold">Enterprise</td>
+                  <td class="py-3 pr-4"><code class="text-xs">AppName/Version (contact@example.com; API Key: your-key)</code></td>
+                  <td class="py-3">1000 requests/hour</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+            <p class="text-sm text-blue-300">
+              <strong>Note:</strong> Cached responses do not count toward rate limits. Good faith usage is expected - 
+              excessive requests per second may trigger stricter limits affecting all consumers.
+            </p>
+          </div>
+        </section>
+
+        <!-- Authentication -->
+        <section class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Authentication</h2>
+          <p class="text-text-muted mb-4">
+            For registered and enterprise tiers, include your User-Agent in the request header:
+          </p>
+          <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-sm"><code>User-Agent: MyApp/1.0.0 (contact@example.com)</code></pre>
+          </div>
+          <p class="text-text-muted mt-4 mb-4">
+            For enterprise tier with API key, include it in the User-Agent or as a header:
+          </p>
+          <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto mb-4">
+            <pre class="text-sm"><code>User-Agent: MyApp/1.0.0 (contact@example.com; API Key: hibd_...)
+# OR
+X-API-Key: hibd_...</code></pre>
+          </div>
+          <p class="text-sm text-text-muted">
+            Need higher rate limits? <a href="mailto:support@haveibeendrained.com" class="text-primary hover:underline">Contact us</a> to request an API key.
+          </p>
+        </section>
+
+        <!-- Base URL -->
+        <section class="bg-surface rounded-xl border border-slate-700/50 p-6">
+          <h2 class="text-2xl font-bold mb-4">Base URL</h2>
+          <div class="space-y-2">
+            <div>
+              <span class="text-text-muted">Production:</span>
+              <code class="ml-2 text-primary">https://api.haveibeendrained.com</code>
+            </div>
+            <div>
+              <span class="text-text-muted">Development:</span>
+              <code class="ml-2 text-primary">http://localhost:3001</code>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Interactive API Reference -->
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-bold mb-2">Interactive API Reference</h2>
+          <p class="text-text-muted">
+            Explore endpoints, try requests, and view responses below
+          </p>
+        </div>
+        <div id="scalar-api-reference" class="mt-8"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+  <script>
+    Scalar.createApiReference('#scalar-api-reference', {
+      // OpenAPI spec URL (served from API)
+      url: '/api/openapi.json',
+      
+      // Configuration
+      theme: 'dark',
+      layout: 'modern',
+      hideClientButton: false,
+      showSidebar: true,
+      
+      // Customization
+      metaData: {
+        title: 'Have I Been Drained API',
+        description: 'Public API for checking Solana wallet security and drainer addresses',
+      },
+      
+      // Servers
+      servers: [
+        {
+          url: 'https://api.haveibeendrained.com',
+          description: 'Production',
+        },
+        {
+          url: 'http://localhost:3001',
+          description: 'Development',
+        },
+      ],
+      
+      // Authentication
+      authentication: {
+        apiKey: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'X-API-Key',
+        },
+      },
+      
+      // Custom CSS to match your theme
+      customCss: `
+        :root {
+          --scalar-color-1: #3E5FFF;
+          --scalar-color-2: #10B981;
+          --scalar-color-3: #F59E0B;
+          --scalar-color-danger: #EF4444;
+        }
+      `,
+    });
+  </script>
+</Layout>
+

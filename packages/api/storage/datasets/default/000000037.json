@@ -1,0 +1,16 @@
+{
+	"reportId": "64ea25b8-71d0-4989-a2cc-2eba0cc6037d",
+	"title": "",
+	"description": "On Nov 27, 2025, I attempted to create a Solana meme token through the website https://memsolcoins.org. During the process, I was instructed to send 2.9 SOL to a wallet address provided by the website: 25NxjFrBuCAZyiWVPSCN52GjXYdeJ3R4nVTSuc7ZxXZc. I later realized the website may be fraudulent, and the SOL was sent to a wallet I do not control. The transaction hash is 4yuxVWcYd2YkKmjczFtiD1Xx7MScXEwm5MBGwNSYvLtSDECWd3ujiT53S5JTTaU4RKRrcqtRsAwoDNLU9bxWZFwW.The total value lost was 2.9 SOL (~$410.65) at the time of the transaction. The scam appears to be a rug pull or fraudulent token creation platform. I am reporting this to alert the community, provide all relevant details for investigation, and seek guidance on whether the destination wallet can be monitored or flagged.Evidence includes screenshots of the transaction on Solscan and the website interface showing the wallet address instructions.\n\nOn Nov 27, 2025, I attempted to create a Solana meme token through the website https://memsolcoins.org\n\n. During the process, I was instructed to send 2.9 SOL to a wallet address provided by the website: 25NxjFrBuCAZyiWVPSCN52GjXYdeJ3R4nVTSuc7ZxXZc. I later realized the website may be fraudulent, and the SOL was sent to a wallet I do not control. The transaction hash is 4yuxVWcYd2YkKmjczFtiD1Xx7MScXEwm5MBGwNSYvLtSDECWd3ujiT53S5JTTaU4RKRrcqtRsAwoDNLU9bxWZFwW.\n\nThe total value lost was 2.9 SOL (~$410.65) at the time of the transaction. The scam appears to be a rug pull or fraudulent token creation platform. I am reporting this to alert the community, provide all relevant details for investigation, and seek guidance on whether the destination wallet can be monitored or flagged.\n\nEvidence includes screenshots of the transaction on Solscan and the website interface showing the wallet address instructions.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://memsolcoins.org/",
+	"amountLost": "410.65 USD",
+	"addresses": [
+		"25NxjFrBuCAZyiWVPSCN52GjXYdeJ3R4nVTSuc7ZxXZc"
+	],
+	"domains": [
+		"https://memsolcoins.org/"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/64ea25b8-71d0-4989-a2cc-2eba0cc6037d?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:58:38.259Z"
+}

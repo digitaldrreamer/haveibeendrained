@@ -1,0 +1,21 @@
+{
+	"reportId": "4034eee2-d2da-46a5-98b7-53e8f3e226cb",
+	"title": "",
+	"description": "In the app Phantom wallet, I saw a section called “Collectibles” showing that I had something there. I clicked on it, and it redirected me to a website called depump.top. The site asked to connect my wallet, so I clicked once to do that. Then it showed a transaction saying I would receive some amount in USD or another currency. I clicked “Confirm,” and suddenly my wallet was empty.\n\nIn the app Phantom wallet, I saw a section called “Collectibles” showing that I had something there. I clicked on it, and it redirected me to a website called depump.top. The site asked to connect my wallet, so I clicked once to do that. Then it showed a transaction saying I would receive some amount in USD or another currency. I clicked “Confirm,” and suddenly my wallet was empty.\n\nAmount lost\n\n1595.00 USD\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.",
+	"amountLost": "1595.00 USD",
+	"addresses": [
+		"D12Lho9ZGAzNA6QxypnVa1DRR2civprhqTSRjU9q3kfu",
+		"5oxRZFv5t37epUALUH3U2rLzPPkXnyWnM8TQ659r5L11"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/D12Lho9ZGAzNA6QxypnVa1DRR2civprhqTSRjU9q3kfu",
+		"https://solana.fm/address/5oxRZFv5t37epUALUH3U2rLzPPkXnyWnM8TQ659r5L11",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/4034eee2-d2da-46a5-98b7-53e8f3e226cb?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:01:40.628Z"
+}

@@ -1,4 +1,6 @@
 import { DetectionResult } from './detector';
+import { ParsedTransactionWithMeta } from '@solana/web3.js';
+import { AssetExtractor } from './asset-extractor';
 
 export interface RiskReport {
     overallRisk: number; // 0-100
@@ -10,26 +12,65 @@ export interface RiskReport {
         sol: number;
     };
     recommendations: string[];
+    walletAddress?: string;
+    transactionCount?: number;
+    analyzedAt?: number;
 }
 
 export class RiskAggregator {
     /**
      * Aggregate multiple detection results into a single risk report
      */
-    static aggregateRisk(detections: DetectionResult[]): RiskReport {
+    static aggregateRisk(
+        detections: DetectionResult[],
+        context?: { 
+            walletAddress?: string; 
+            transactionCount?: number;
+            transactions?: ParsedTransactionWithMeta[];
+            includeExperimental?: boolean;
+        }
+    ): RiskReport {
         let overallRisk = 0;
         const allRecommendations: string[] = [];
         const affectedTokens: string[] = [];
         const affectedNFTs: string[] = [];
         let affectedSOL = 0;
 
+        // Extract assets from transactions if provided
+        if (context?.transactions && context?.walletAddress) {
+            const includeExperimental = context.includeExperimental || false;
+            
+            for (const tx of context.transactions) {
+                const assets = AssetExtractor.extractAll(
+                    tx,
+                    context.walletAddress,
+                    includeExperimental
+                );
+
+                affectedSOL += assets.sol;
+
+                if (includeExperimental) {
+                    // Collect unique token mints
+                    assets.tokens.forEach(token => {
+                        if (!affectedTokens.includes(token.mint)) {
+                            affectedTokens.push(token.mint);
+                        }
+                    });
+
+                    // Collect unique NFT mints
+                    assets.nfts.forEach(nft => {
+                        if (!affectedNFTs.includes(nft)) {
+                            affectedNFTs.push(nft);
+                        }
+                    });
+                }
+            }
+        }
+
         // Calculate base risk from detections
         for (const detection of detections) {
             // Add recommendations
             allRecommendations.push(...detection.recommendations);
-
-            // Aggregate affected assets (placeholder logic for now)
-            // In a real implementation, we would parse the transaction to find exact amounts
 
             // Calculate risk contribution
             let riskContribution = 0;
@@ -76,6 +117,9 @@ export class RiskAggregator {
                 sol: affectedSOL,
             },
             recommendations: uniqueRecommendations,
+            walletAddress: context?.walletAddress,
+            transactionCount: context?.transactionCount,
+            analyzedAt: Date.now(),
         };
     }
 }

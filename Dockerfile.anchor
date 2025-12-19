@@ -1,0 +1,9 @@
+# Use official Solana Foundation Anchor image
+# Includes: Rust, Solana CLI 2.3.0, Anchor CLI 0.32.1, cargo-build-sbf, and all dependencies
+# Pre-configured, tested, and maintained by Solana Foundation
+FROM solanafoundation/anchor:v0.32.1
+
+WORKDIR /workspace
+
+
+

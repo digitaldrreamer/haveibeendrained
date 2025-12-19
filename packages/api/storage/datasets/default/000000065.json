@@ -1,0 +1,31 @@
+{
+	"reportId": "aa871ff5-eb28-4ee0-b2cc-6bc73ad61338",
+	"title": "",
+	"description": "I might have clicked on an e-mail link, which looked legit to receive an airdrop yesterday evening, and wondered what I was supposed to do, as nothing happened. Today I see that all my funds are gone\n\nI might have clicked on an e-mail link, which looked legit to receive an airdrop yesterday evening, and wondered what I was supposed to do, as nothing happened. Today I see that all my funds are gone\n\nAmount lost",
+	"amountLost": "832.68 USD",
+	"addresses": [
+		"BhGLKKvpoGVCEGHB5bbGVDUVsameWgwpinKmRWEmhtmG",
+		"816hj1m9LHkhzFUu2vmhiPCyRZPZjbakAQ5sMTgWWMTX",
+		"CamXQtqSVC8LT3CHvCqhsxXXG2TZzjadzfXNAFuQVpcf",
+		"EAigbbvC2FYEiy58JsxGJQKrWCpq53N4RWAULYva8gqP",
+		"gywtmsHdh6Y6CSRRPiah3FkX65xXmHikXbNpXPJxBeE",
+		"CiUgdmB2LArXNscmAfgr2ZonkppZpiPFpS8vV92hvGnM",
+		"EsXv6AuRKVBmbKzebpmfNFfF1Pane8HGdrutfUVn5vxg"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/BhGLKKvpoGVCEGHB5bbGVDUVsameWgwpinKmRWEmhtmG",
+		"https://solana.fm/address/816hj1m9LHkhzFUu2vmhiPCyRZPZjbakAQ5sMTgWWMTX",
+		"https://solana.fm/address/CamXQtqSVC8LT3CHvCqhsxXXG2TZzjadzfXNAFuQVpcf",
+		"https://solana.fm/address/EAigbbvC2FYEiy58JsxGJQKrWCpq53N4RWAULYva8gqP",
+		"https://solana.fm/address/gywtmsHdh6Y6CSRRPiah3FkX65xXmHikXbNpXPJxBeE",
+		"https://solana.fm/address/CiUgdmB2LArXNscmAfgr2ZonkppZpiPFpS8vV92hvGnM",
+		"https://solana.fm/address/EsXv6AuRKVBmbKzebpmfNFfF1Pane8HGdrutfUVn5vxg",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/aa871ff5-eb28-4ee0-b2cc-6bc73ad61338?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:01:48.681Z"
+}

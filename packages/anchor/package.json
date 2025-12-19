@@ -4,10 +4,12 @@
   "license": "ISC",
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "build": "anchor build && bun run scripts/fix-idl.ts",
+    "fix-idl": "bun run scripts/fix-idl.ts"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "^0.32.1"
+    "@coral-xyz/anchor": "0.32.1"
   },
   "devDependencies": {
     "chai": "^4.3.4",
