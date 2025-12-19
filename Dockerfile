@@ -10,8 +10,14 @@ COPY packages/shared/package.json ./packages/shared/
 
 # Install dependencies (Bun will handle workspace linking)
 # Omit --production flag to install all dependencies including devDependencies
-# Note: Not using --frozen-lockfile to allow lockfile updates during build
-RUN bun install
+# Clear cache before install to avoid integrity check failures
+# Use --frozen-lockfile for reproducible production builds
+# Retry on failure with cache clear
+RUN bun pm cache rm || true && \
+    bun install --frozen-lockfile || \
+    (echo "First install attempt failed, retrying..." && \
+     bun pm cache rm || true && \
+     bun install --frozen-lockfile)
 
 # Stage 2: Runtime
 FROM oven/bun:latest AS runtime
