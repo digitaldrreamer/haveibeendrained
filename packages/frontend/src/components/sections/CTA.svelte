@@ -65,7 +65,7 @@
       <p class="text-xl text-text-muted mb-8 max-w-2xl mx-auto">
         Don't wait until it's too late. Analyze your wallet security now and get peace of mind about your crypto holdings.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
         <a href="#hero" class="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold rounded-xl transition-colors text-lg">
           Analyze My Wallet
         </a>
@@ -75,7 +75,13 @@
         >
           Get Email Alerts (Free)
         </button>
-        <a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-surface hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-600 transition-colors text-lg">
+        <a href="https://docs.haveibeendrained.org/user-guide/browser-extensions" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-colors text-lg">
+          Browser Extension
+        </a>
+        <a href="https://chainabuse.com/report" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors text-lg">
+          Report to ChainAbuse
+        </a>
+        <a href="https://github.com/digitaldrreamer/haveibeendrained" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-surface hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-600 transition-colors text-lg">
           View on GitHub
         </a>
       </div>
