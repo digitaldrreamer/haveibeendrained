@@ -3,11 +3,8 @@ import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
 import { PublicKey, Connection } from '@solana/web3.js';
 import { HTTPException } from 'hono/http-exception';
-import { HeliusClient } from '../services/helius';
-import { DrainerDetector, DetectionResult } from '../services/detector';
-import { RiskAggregator } from '../services/risk-aggregator';
 import { AnchorClient } from '../services/anchor-client';
-import { getDomainsForAddress } from '../services/drainer-data';
+import { analyzeWallet } from '../services/wallet-analysis';
 import { userAgentParser } from '../middleware/user-agent-parser';
 import { cacheMiddleware } from '../middleware/cache';
 import { createPublicApiRateLimiter } from '../middleware/rate-limiter';
@@ -85,41 +82,12 @@ app.get('/check',
       });
     }
 
-    // Step 2: Perform full wallet analysis
-    const heliusKey = process.env.HELIUS_API_KEY;
-    if (!heliusKey) {
-      throw new HTTPException(500, {
-        message: 'HELIUS_API_KEY is not configured',
-      });
-    }
-
+    // Step 2: Perform full wallet analysis (includes demo mode check)
     try {
-      const heliusClient = new HeliusClient(heliusKey, network);
-      const transactions = await heliusClient.getTransactionsForAddress(address, { limit });
-
-      const detections: DetectionResult[] = [];
-
-      for (const tx of transactions) {
-        const setAuthority = DrainerDetector.detectSetAuthority(tx);
-        if (setAuthority) detections.push(setAuthority);
-
-        const unlimitedApproval = DrainerDetector.detectUnlimitedApproval(tx);
-        if (unlimitedApproval) detections.push(unlimitedApproval);
-
-        // Check against on-chain drainer registry
-        const known = await DrainerDetector.detectKnownDrainer(
-          tx,
-          async (addr: string) => await anchorClient.isKnownDrainer(addr),
-          getDomainsForAddress
-        );
-        if (known) detections.push(known);
-      }
-
-      const report = RiskAggregator.aggregateRisk(detections, {
-        walletAddress: address,
-        transactionCount: transactions.length,
-        transactions: transactions,
+      const report = await analyzeWallet(address, {
+        limit,
         includeExperimental: experimental,
+        network,
       });
 
       return c.json({
@@ -215,47 +183,13 @@ app.get('/analyze/:address',
       });
     }
 
-    const heliusKey = process.env.HELIUS_API_KEY;
-    if (!heliusKey) {
-      throw new HTTPException(500, {
-        message: 'HELIUS_API_KEY is not configured',
-      });
-    }
-
     const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet';
 
     try {
-      const heliusClient = new HeliusClient(heliusKey, network);
-      const transactions = await heliusClient.getTransactionsForAddress(address, { limit });
-
-      const rpcUrl = network === 'mainnet' 
-        ? 'https://api.mainnet-beta.solana.com'
-        : 'https://api.devnet.solana.com';
-      const connection = new Connection(rpcUrl, 'confirmed');
-      const anchorClient = new AnchorClient(connection, process.env.ANCHOR_WALLET);
-
-      const detections: DetectionResult[] = [];
-
-      for (const tx of transactions) {
-        const setAuthority = DrainerDetector.detectSetAuthority(tx);
-        if (setAuthority) detections.push(setAuthority);
-
-        const unlimitedApproval = DrainerDetector.detectUnlimitedApproval(tx);
-        if (unlimitedApproval) detections.push(unlimitedApproval);
-
-        const known = await DrainerDetector.detectKnownDrainer(
-          tx,
-          async (addr: string) => await anchorClient.isKnownDrainer(addr),
-          getDomainsForAddress
-        );
-        if (known) detections.push(known);
-      }
-
-      const report = RiskAggregator.aggregateRisk(detections, {
-        walletAddress: address,
-        transactionCount: transactions.length,
-        transactions: transactions,
+      const report = await analyzeWallet(address, {
+        limit,
         includeExperimental: experimental,
+        network,
       });
 
       return c.json({

@@ -14,7 +14,9 @@
     "frontend:dev": "cd packages/frontend && bun run dev",
     "db:generate": "cd packages/api && bun run db:generate",
     "db:migrate": "cd packages/api && bun run db:migrate",
-    "db:studio": "cd packages/api && bun run db:studio"
+    "db:studio": "cd packages/api && bun run db:studio",
+    "verify:setup": "bun run scripts/verify-setup.ts",
+    "verify:runtime": "bun run scripts/verify-runtime.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

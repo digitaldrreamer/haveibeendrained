@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import idl from '@haveibeendrained/shared/idl/drainer_registry.json';
 import { PROGRAM_ID } from '@haveibeendrained/shared/constants';
+import { getDemoDrainerReport } from './demo-mode';
 
 export interface DrainerReport {
   drainerAddress: PublicKey;
@@ -102,10 +103,17 @@ export class AnchorClient {
 
   /**
    * Get a drainer report from the on-chain registry
+   * Checks demo mode first, then queries on-chain
    * @param drainerAddress - The drainer address to query
    * @returns DrainerReport or null if not found
    */
   async getDrainerReport(drainerAddress: string | PublicKey): Promise<DrainerReport | null> {
+    // Check demo mode first (before any on-chain queries)
+    const demoReport = getDemoDrainerReport(drainerAddress);
+    if (demoReport) {
+      return demoReport;
+    }
+
     try {
       const pubkey = typeof drainerAddress === 'string' 
         ? new PublicKey(drainerAddress) 

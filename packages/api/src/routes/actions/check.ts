@@ -1,10 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { PublicKey, Transaction, Connection } from '@solana/web3.js'
-import { RiskAggregator } from '../../services/risk-aggregator'
-import { HeliusClient } from '../../services/helius'
-import { DrainerDetector } from '../../services/detector'
-import { AnchorClient } from '../../services/anchor-client'
+import { analyzeWallet } from '../../services/wallet-analysis'
 
 const app = new Hono()
 
@@ -14,7 +11,7 @@ app.use('/api/actions/*', cors({
   origin: '*', // Allow all origins for Blinks
   allowMethods: ['GET', 'POST', 'PUT', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization', 'Content-Encoding', 'Accept-Encoding'],
-  exposeHeaders: ['Content-Type'],
+  exposeHeaders: ['Content-Type', 'X-Action-Version', 'X-Blockchain-Ids'],
   credentials: false, // Blinks don't use credentials
 }))
 
@@ -54,6 +51,11 @@ app.get('/api/actions/check', (c) => {
     // Additional metadata (optional)
     tags: ['security', 'wallet', 'solana', 'drainer-detection'],
     group: 'Security Tools'
+  }, {
+    headers: {
+      'X-Action-Version': '1.0', // Solana Actions API version
+      'X-Blockchain-Ids': '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9H', // Solana mainnet chain ID
+    }
   })
 })
 
@@ -93,51 +95,27 @@ app.post('/api/actions/check', async (c) => {
       }, { status: 400 })
     }
 
-    // Initialize Helius client
-    const heliusKey = process.env.HELIUS_API_KEY
-    if (!heliusKey) {
+    // Analyze wallet (includes demo mode check)
+    const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet'
+    
+    let riskReport
+    try {
+      riskReport = await analyzeWallet(walletAddress, {
+        limit: 20,
+        network,
+      })
+    } catch (error: any) {
       return c.json({ 
-        error: 'HELIUS_API_KEY not configured',
-        message: 'Server configuration error. Please contact support.'
+        error: 'Failed to analyze wallet',
+        message: error.message || 'Server configuration error. Please contact support.'
       }, { status: 500 })
     }
 
-    const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet'
-    const heliusClient = new HeliusClient(heliusKey, network)
-
-    // Get recent transactions for the wallet
-    const transactions = await heliusClient.getTransactionsForAddress(walletAddress, { limit: 20 })
-
-    // Initialize RPC connection and Anchor client for known drainer checks
+    // Initialize RPC connection for transaction creation
     const rpcUrl = network === 'mainnet' 
       ? 'https://api.mainnet-beta.solana.com'
       : 'https://api.devnet.solana.com'
     const connection = new Connection(rpcUrl, 'confirmed')
-    const anchorClient = new AnchorClient(connection, process.env.ANCHOR_WALLET)
-
-    // Run real detection on transactions
-    const detections = []
-
-    for (const tx of transactions) {
-      const setAuthority = DrainerDetector.detectSetAuthority(tx)
-      if (setAuthority) detections.push(setAuthority)
-
-      const unlimitedApproval = DrainerDetector.detectUnlimitedApproval(tx)
-      if (unlimitedApproval) detections.push(unlimitedApproval)
-
-      // Check against on-chain drainer registry
-      const known = await DrainerDetector.detectKnownDrainer(
-        tx, 
-        async (addr: string) => await anchorClient.isKnownDrainer(addr)
-      )
-      if (known) detections.push(known)
-    }
-
-    // Aggregate risk
-    const riskReport = RiskAggregator.aggregateRisk(detections, {
-      walletAddress,
-      transactionCount: transactions.length,
-    })
 
     // Get recent blockhash (REQUIRED for Solana transactions)
     // This ensures the transaction is valid and can be processed
@@ -188,6 +166,11 @@ app.post('/api/actions/check', async (c) => {
         severity: riskReport.severity,
         detectionsCount: riskReport.detections.length,
         recommendations: riskReport.recommendations.slice(0, 3) // Limit to 3 for blinks
+      }
+    }, {
+      headers: {
+        'X-Action-Version': '1.0', // Solana Actions API version
+        'X-Blockchain-Ids': '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9H', // Solana mainnet chain ID
       }
     })
 

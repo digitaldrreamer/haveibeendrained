@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { PublicKey, Connection, Keypair } from '@solana/web3.js';
 import { AnchorClient } from '../services/anchor-client';
+import { isDemoDrainerAddress } from '../services/demo-mode';
 import { z } from 'zod';
 
 const app = new Hono();
@@ -85,6 +86,15 @@ app.post('/api/report', async (c) => {
       new PublicKey(validated.drainerAddress);
     } catch (_err) {
       return c.json({ success: false, error: 'Invalid drainer address', timestamp: Date.now() }, 400);
+    }
+
+    // Prevent submitting reports for demo wallets
+    if (isDemoDrainerAddress(validated.drainerAddress)) {
+      return c.json({
+        success: false,
+        error: 'Cannot submit reports for demo/test wallets',
+        timestamp: Date.now(),
+      }, 400);
     }
 
     // Check if wallet is configured

@@ -418,6 +418,9 @@ ANCHOR_PROVIDER_URL=https://api.devnet.solana.com
 ANCHOR_WALLET=~/.config/solana/id.json
 PROGRAM_ID=  # Fill after deployment
 
+# Demo Mode (Optional - for testing/demos)
+DEMO_MODE=true  # Enable demo mode - returns test data for specific wallet addresses
+
 # API
 PORT=3000
 NODE_ENV=development

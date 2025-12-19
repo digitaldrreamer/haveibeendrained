@@ -11,7 +11,7 @@ app.use('/api/actions/report', cors({
   origin: '*', // Allow all origins for Blinks
   allowMethods: ['GET', 'POST', 'PUT', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization', 'Content-Encoding', 'Accept-Encoding'],
-  exposeHeaders: ['Content-Type'],
+  exposeHeaders: ['Content-Type', 'X-Action-Version', 'X-Blockchain-Ids'],
   credentials: false, // Blinks don't use credentials
 }))
 
@@ -58,6 +58,11 @@ app.get('/api/actions/report', (c) => {
     // Additional metadata (optional)
     tags: ['security', 'report', 'drainer', 'community'],
     group: 'Security Tools'
+  }, {
+    headers: {
+      'X-Action-Version': '1.0', // Solana Actions API version
+      'X-Blockchain-Ids': '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9H', // Solana mainnet chain ID
+    }
   })
 })
 
