@@ -23,7 +23,9 @@ import Footer from '../components/Footer.astro';
 	</head>
 	<body class="flex flex-col min-h-screen">
 		<Navigation />
-		<slot />
+		<main class="flex-1 pb-16">
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

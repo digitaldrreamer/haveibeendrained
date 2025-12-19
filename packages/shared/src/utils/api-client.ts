@@ -53,9 +53,11 @@ export class ApiClient {
    */
   async analyzeWallet(request: AnalyzeWalletRequest & { experimental?: boolean }): Promise<AnalyzeWalletResponse> {
     try {
-      // Use internal, CORS-protected, non-rate-limited endpoint for the frontend
-      // Mirrors the public /api/v1/check behavior but without public rate limits
-      const url = new URL('/api/internal/check', this.config.baseUrl);
+      // * Use public /api/v1/check endpoint for client-side requests
+      // * This endpoint works from any origin (no CORS restrictions) and is rate-limited
+      // * The /api/internal/check endpoint is CORS-protected and only works from same origin
+      // * Since this client runs in the browser, we must use the public endpoint
+      const url = new URL('/api/v1/check', this.config.baseUrl);
       url.searchParams.set('address', request.address);
 
       if (request.options?.limit) {
@@ -90,8 +92,8 @@ export class ApiClient {
 
       const json = await response.json();
 
-      // Internal /api/internal/check returns:
-      // { success: boolean, type: 'drainer' | 'wallet_analysis', data: RiskReport, ... }
+      // * Public /api/v1/check returns:
+      // * { success: boolean, type: 'drainer' | 'wallet_analysis', data: RiskReport, ... }
       return {
         success: json.success ?? true,
         data: (json.data ?? json) as RiskReport,
