@@ -1,68 +1,80 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Have I Been Drained?",
+  "description": "First decentralized, community-powered wallet security checker on Solana",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3E5FFF",
+    "light": "#5B7FFF",
+    "dark": "#2E4FFF"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "User Guide",
         "groups": [
           {
             "group": "Getting started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "user-guide/getting-started",
+              "user-guide/checking-your-wallet"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Understanding results",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "user-guide/understanding-results",
+              "user-guide/risk-scores",
+              "user-guide/recovery-guide"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Community",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "user-guide/reporting-drainers",
+              "user-guide/solana-actions"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Developer Guide",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Getting started",
             "pages": [
-              "api-reference/introduction"
+              "developer-guide/quickstart",
+              "developer-guide/authentication",
+              "developer-guide/rate-limits"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Integration",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "developer-guide/api-integration",
+              "developer-guide/widget-integration"
+            ]
+          },
+          {
+            "group": "API Reference",
+            "pages": [
+              "api-reference/introduction"
+            ],
+            "openapi": "https://api.haveibeendrained.com/api/openapi.json"
+          }
+        ]
+      },
+      {
+        "tab": "Contributing",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "contributing",
+              "contributing/local-setup",
+              "contributing/guide"
             ]
           }
         ]
@@ -71,52 +83,63 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GitHub",
+          "href": "https://github.com/digitaldrreamer/haveibeendrained",
+          "icon": "github"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Check Wallet",
+          "href": "https://haveibeendrained.com",
+          "icon": "shield"
         }
       ]
     }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@haveibeendrained.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Check Wallet",
+      "href": "https://haveibeendrained.com"
     }
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/haveibeendrained",
+      "github": "https://github.com/digitaldrreamer/haveibeendrained"
+    }
+  },
+  "api": {
+    "openapi": {
+      "source": "https://api.haveibeendrained.com/api/openapi.json"
+    },
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": [
+        "javascript",
+        "curl",
+        "python",
+        "go"
+      ]
     }
   }
 }

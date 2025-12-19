@@ -1,80 +1,93 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Get started with Have I Been Drained? - Choose your path"
 ---
 
-## Get started in three steps
+## Choose Your Path
 
-Get your documentation site running locally and make your first customization.
+Have I Been Drained serves two types of users. Choose the path that fits you:
 
-### Step 1: Set up your local environment
+<Columns cols={2}>
+  <Card
+    title="I'm a User"
+    icon="user"
+    href="/user-guide/getting-started"
+  >
+    I want to check my wallet security and understand the results.
+  </Card>
+  <Card
+    title="I'm a Developer"
+    icon="code"
+    href="/developer-guide/quickstart"
+  >
+    I want to integrate wallet security checking into my application.
+  </Card>
+</Columns>
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+## For Users
 
-### Step 2: Deploy your changes
+<Steps>
+<Step title="Visit the website">
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+Go to [haveibeendrained.com](https://haveibeendrained.com) in your browser.
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+</Step>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+<Step title="Enter your wallet address">
 
-### Step 3: Go live
+Paste your Solana wallet address into the search field.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+</Step>
 
-## Next steps
+<Step title="View results">
 
-Now that you have your docs running, explore these key features:
+Get your risk score and security recommendations in seconds.
+
+</Step>
+</Steps>
+
+<Card title="User Guide" icon="book" href="/user-guide/getting-started">
+  Learn more about checking your wallet and understanding results.
+</Card>
+
+## For Developers
+
+<Steps>
+<Step title="Make your first API call">
+
+```bash
+curl "https://api.haveibeendrained.com/api/v1/check?address=WALLET_ADDRESS" \
+  -H "User-Agent: MyApp/1.0.0 (contact@example.com)"
+```
+
+</Step>
+
+<Step title="Understand the response">
+
+The API returns either a drainer report or wallet analysis with risk score.
+
+</Step>
+
+<Step title="Integrate into your app">
+
+Use our REST API or embeddable widget in your application.
+
+</Step>
+</Steps>
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
+  <Card title="API Quickstart" icon="rocket" href="/developer-guide/quickstart">
+    Get started with the API.
 </Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
+  <Card title="Widget Integration" icon="window-maximize" href="/developer-guide/widget-integration">
+    Embed our widget.
 </Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
 </CardGroup>
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+## Contributing to the Project
+
+If you want to contribute code to Have I Been Drained:
+
+<Card title="Contributing Guide" icon="code-branch" href="/contributing">
+  Learn how to contribute to the codebase.
+</Card>

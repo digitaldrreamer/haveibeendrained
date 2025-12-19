@@ -1,0 +1,142 @@
+---
+title: "Understanding Results"
+description: "Learn how to interpret your wallet security analysis results"
+---
+
+## Result Overview
+
+After checking your wallet, you'll see a comprehensive security analysis with:
+
+- **Overall Risk Status** - SAFE, AT_RISK, or DRAINED
+- **Risk Score** - A number from 0-100
+- **Detected Threats** - List of specific security issues found
+- **Recommendations** - Actionable steps to secure your wallet
+
+## Risk Status Levels
+
+### SAFE ✅
+
+Your wallet shows no signs of compromise. This means:
+- No known drainer interactions detected
+- No suspicious authority changes
+- No unlimited token approvals found
+- Transaction patterns appear normal
+
+<Note>
+  Even if your wallet is SAFE, it's good practice to check regularly and follow security best practices.
+</Note>
+
+### AT_RISK ⚠️
+
+Your wallet has potential security issues that should be addressed:
+- Suspicious approvals detected
+- Unusual transaction patterns
+- Interactions with potentially risky addresses
+- Recommendations provided to improve security
+
+<Warning>
+  If your wallet is AT_RISK, follow the recommendations immediately to prevent potential compromise.
+</Warning>
+
+### DRAINED 🚨
+
+Your wallet has been compromised:
+- Known drainer interactions detected
+- Assets may have been stolen
+- Immediate action required
+
+<Danger>
+  If your wallet is DRAINED, follow the [Recovery Guide](/user-guide/recovery-guide) immediately. Do not use this wallet for new transactions.
+</Danger>
+
+## Risk Score Breakdown
+
+The risk score (0-100) is calculated based on:
+
+| Score Range | Meaning |
+|------------|---------|
+| 0-20 | Very Safe - No threats detected |
+| 21-40 | Safe - Minor concerns, low risk |
+| 41-60 | Moderate Risk - Some security issues |
+| 61-80 | High Risk - Significant threats detected |
+| 81-100 | Critical Risk - Wallet likely compromised |
+
+## Detected Threat Types
+
+### Known Drainer
+
+**Severity:** CRITICAL
+
+A known drainer address has interacted with your wallet. This is the most serious threat.
+
+**What to do:**
+- Immediately stop using the wallet
+- Follow the [Recovery Guide](/user-guide/recovery-guide)
+- Report the drainer if not already reported
+
+### SetAuthority Attack
+
+**Severity:** CRITICAL
+
+An unauthorized authority change was detected. This can allow attackers to control your assets.
+
+**What to do:**
+- Revoke all token approvals immediately
+- Transfer remaining assets to a new wallet
+- Review all recent transactions
+
+### Unlimited Approval
+
+**Severity:** HIGH
+
+A token approval with unlimited spending was detected. Attackers can drain approved tokens.
+
+**What to do:**
+- Revoke the unlimited approval immediately
+- Use specific amount approvals instead
+- Monitor for unauthorized transactions
+
+### Suspicious Pattern
+
+**Severity:** MODERATE to HIGH
+
+Unusual transaction patterns detected that may indicate compromise.
+
+**What to do:**
+- Review the flagged transactions
+- Verify all transactions are legitimate
+- Consider revoking approvals as a precaution
+
+## Recommendations
+
+Each result includes specific recommendations based on detected threats:
+
+- **Immediate Actions** - Steps to take right away
+- **Preventive Measures** - How to avoid future threats
+- **Best Practices** - General security guidelines
+
+<Info>
+  Always follow recommendations in order of priority. Critical recommendations should be addressed immediately.
+</Info>
+
+## Transaction Evidence
+
+For each detected threat, you'll see:
+- **Transaction signatures** - Links to view on Solscan
+- **Timestamps** - When the threat occurred
+- **Affected assets** - Which tokens or SOL were involved
+
+Use this information to:
+- Verify the threat is real
+- Understand what happened
+- Report to authorities if needed
+
+## False Positives
+
+If you believe a result is incorrect:
+
+1. **Review the evidence** - Check transaction links
+2. **Verify the transactions** - Confirm they're legitimate
+3. **Report the issue** - Contact support with details
+4. **Help improve detection** - Your feedback helps us improve
+

@@ -1,33 +1,122 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Public API for checking Solana wallet security and drainer addresses'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The Have I Been Drained? API provides REST endpoints for checking wallet security and querying the on-chain drainer registry. All endpoints are documented below with interactive playgrounds for testing.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="OpenAPI Specification"
+  icon="file-code"
+  href="https://github.com/digitaldrreamer/haveibeendrained/blob/main/packages/api/src/lib/openapi-spec.ts"
 >
-  View the OpenAPI specification file
+  View the complete OpenAPI specification source code
 </Card>
+
+## Base URLs
+
+- **Production**: `https://api.haveibeendrained.com`
+- **Development**: `http://localhost:3001`
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+Most endpoints are public and don't require authentication. For enterprise tier with higher rate limits, API keys are available.
+
+API keys can be provided via:
+- `X-API-Key` header
+- `User-Agent` header (for programmatic access)
+
+See the [Authentication guide](/developer-guide/authentication) for detailed information.
+
+## Rate Limits
+
+Rate limits are tier-based and tracked via User-Agent headers:
+
+| Tier | User-Agent Format | Rate Limit |
+|------|------------------|------------|
+| Unregistered | Missing or invalid | 10 req/hour |
+| Registered | `AppName/Version (contact@example.com)` | 100 req/hour |
+| Enterprise | Includes API key | 1000+ req/hour |
+
+Rate limit headers are included in all responses:
+- `RateLimit-Limit`: Maximum requests per window
+- `RateLimit-Remaining`: Requests remaining
+- `RateLimit-Reset`: Unix timestamp when limit resets
+- `Retry-After`: Seconds until limit resets (when exceeded)
+
+<Info>
+  Cached responses do not count toward rate limits. See the [Rate Limits guide](/developer-guide/rate-limits) for more details.
+</Info>
+
+## Response Formats
+
+All responses follow a consistent format:
+
+### Success Response
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "success": true,
+  "type": "drainer" | "wallet_analysis",
+  "data": { ... },
+  "timestamp": 1702224000000
+}
 ```
+
+### Error Response
+
+```json
+{
+  "success": false,
+  "error": "Error code",
+  "message": "Human-readable error message",
+  "timestamp": 1702224000000
+}
+```
+
+## Detection Patterns
+
+The API detects the following security threats:
+
+1. **SetAuthority Attacks** (CRITICAL)
+   - Account ownership transfers
+   - 95% confidence
+
+2. **Unlimited Approvals** (HIGH)
+   - Max uint64 token approvals
+   - 90% confidence
+
+3. **Known Drainers** (CRITICAL)
+   - Addresses in on-chain registry
+   - 100% confidence
+
+## Endpoints
+
+All API endpoints are documented below with interactive playgrounds. Click on any endpoint to view detailed documentation, try requests, and see example responses.
+
+<Note>
+  The endpoints below are automatically generated from our OpenAPI specification. Use the interactive playgrounds to test requests directly in your browser.
+</Note>
+
+## Getting Started
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/developer-guide/quickstart">
+    Get started with your first API call
+  </Card>
+  <Card title="API Integration" icon="plug" href="/developer-guide/api-integration">
+    Learn how to integrate the API
+  </Card>
+  <Card title="Authentication" icon="key" href="/developer-guide/authentication">
+    Understand authentication and API keys
+  </Card>
+  <Card title="Rate Limits" icon="gauge" href="/developer-guide/rate-limits">
+    Manage rate limits effectively
+  </Card>
+</CardGroup>
+
+## Support
+
+For API support, contact: **support@haveibeendrained.com**
