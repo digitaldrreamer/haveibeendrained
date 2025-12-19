@@ -150,6 +150,47 @@ export class AnchorClient {
   }
 
   /**
+   * Build a report drainer instruction (unsigned, for user signing)
+   * Used for Blinks and other scenarios where the user signs the transaction
+   * @param drainerAddress - The drainer address to report
+   * @param reporterPublicKey - The public key of the reporter (will sign)
+   * @param amountStolen - Optional amount stolen in lamports
+   * @returns Instruction that can be added to a transaction
+   */
+  async buildReportDrainerInstruction(
+    drainerAddress: string | PublicKey,
+    reporterPublicKey: PublicKey,
+    amountStolen?: number
+  ) {
+    const pubkey = typeof drainerAddress === 'string' 
+      ? new PublicKey(drainerAddress) 
+      : drainerAddress;
+
+    // Derive PDA
+    const [drainerReportPda] = PublicKey.findProgramAddressSync(
+      [Buffer.from('drainer'), pubkey.toBuffer()],
+      this.program.programId
+    );
+
+    // Get program authority (for receiving fees)
+    // Use configured wallet's public key if available, otherwise use reporter
+    const programAuthority = this.wallet?.publicKey || reporterPublicKey;
+
+    // Build instruction (unsigned)
+    const instruction = await this.program.methods
+      .reportDrainer(pubkey, amountStolen ? new BN(amountStolen) : null)
+      .accounts({
+        drainerReport: drainerReportPda,
+        reporter: reporterPublicKey,
+        programAuthority,
+        systemProgram: SystemProgram.programId,
+      })
+      .instruction();
+
+    return instruction;
+  }
+
+  /**
    * Submit a drainer report to the on-chain registry
    * Note: This requires a wallet with SOL to pay the anti-spam fee
    * @param drainerAddress - The drainer address to report

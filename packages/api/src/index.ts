@@ -1,6 +1,9 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import checkAction from './routes/actions/check';
+import reportAction from './routes/actions/report';
 import analyzeRoutes from './routes/analyze';
 import reportRoutes from './routes/report';
 import publicApiRoutes from './routes/public-api';
@@ -68,11 +71,70 @@ app.get('/', (c) => {
   return c.text('Hello Hono!');
 });
 
+// GET /actions.json - Solana Actions root configuration
+// Required for Blinks to map action URLs
+// Must have CORS headers for cross-origin access
+app.get('/actions.json', (c) => {
+  return c.json({
+    rules: [
+      {
+        pathPattern: '/check',
+        apiPath: '/api/actions/check'
+      },
+      {
+        pathPattern: '/report',
+        apiPath: '/api/actions/report'
+      }
+    ]
+  }, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Content-Type': 'application/json',
+    }
+  });
+});
+
+// OPTIONS handler for actions.json (CORS preflight)
+app.options('/actions.json', (c) => {
+  return c.text('', 204, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    }
+  });
+});
+
+// GET /icon.png - Solana Actions icon
+// Serves the converted 512x512 PNG logo
+// Must have CORS headers for cross-origin access
+app.get('/icon.png', (c) => {
+  // Serve the static PNG file (converted from logo.svg)
+  const pngPath = join(process.cwd(), 'packages/api/public/icon.png');
+  
+  try {
+    const pngBuffer = readFileSync(pngPath);
+    return c.body(pngBuffer, 200, {
+      headers: {
+        'Content-Type': 'image/png',
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'public, max-age=86400', // Cache for 24 hours
+      }
+    });
+  } catch (error) {
+    console.error('Failed to read PNG icon:', error);
+    return c.json({ error: 'Icon not found' }, 404);
+  }
+});
+
 // Mount routes
 // Public routes (NO CORS - accessible from anywhere, WITH rate limiting):
 app.route('/', publicApiRoutes); // Public API v1 routes (/api/v1/*)
 app.route('/', openApiRoutes); // OpenAPI specification (/api/openapi.*)
 app.route('/', checkAction); // Solana Actions API (/api/actions/check)
+app.route('/', reportAction); // Solana Actions API (/api/actions/report)
 app.route('/', apiKeysRoutes); // API key management (/api/v1/keys/*) - public but requires auth
 app.route('/', reportRoutes); // Report routes - POST is public, GET /:address is internal
 // Internal routes (WITH CORS - restricted to frontend domain, NO rate limiting):

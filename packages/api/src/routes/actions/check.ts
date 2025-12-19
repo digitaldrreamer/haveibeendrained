@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
-import { PublicKey, Transaction, SystemProgram, Connection } from '@solana/web3.js'
+import { cors } from 'hono/cors'
+import { PublicKey, Transaction, Connection } from '@solana/web3.js'
 import { RiskAggregator } from '../../services/risk-aggregator'
 import { HeliusClient } from '../../services/helius'
 import { DrainerDetector } from '../../services/detector'
@@ -7,17 +8,30 @@ import { AnchorClient } from '../../services/anchor-client'
 
 const app = new Hono()
 
+// Apply CORS middleware to all actions routes
+// Required for Solana Blinks to work across platforms (Twitter, Discord, etc.)
+app.use('/api/actions/*', cors({
+  origin: '*', // Allow all origins for Blinks
+  allowMethods: ['GET', 'POST', 'PUT', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Content-Encoding', 'Accept-Encoding'],
+  exposeHeaders: ['Content-Type'],
+  credentials: false, // Blinks don't use credentials
+}))
+
 // GET /api/actions/check - Returns Solana Actions metadata
-// Follows Solana Actions API specification
+// Follows Solana Actions API specification v1.0
 app.get('/api/actions/check', (c) => {
-  const baseUrl = process.env.API_BASE_URL || 'http://localhost:3001'
+  // Get base URL from request or environment
+  const url = new URL(c.req.url)
+  const baseUrl = process.env.API_BASE_URL || `${url.protocol}//${url.host}`
   
+  // Solana Actions spec requires 'type: action' field
   return c.json({
-    // Required fields for Solana Actions
-    icon: `${baseUrl}/icon.png`, // TODO: Add icon file
-    label: 'Check Wallet Security',
-    title: 'Have I Been Drained?',
-    description: 'Analyze your Solana wallet for security threats, unlimited approvals, and known drainer signatures.',
+    type: 'action', // Required by Solana Actions spec
+    icon: `${baseUrl}/icon.png`, // Icon for the action card
+    label: 'Check Wallet Security', // Button text (max 5 words, starts with verb)
+    title: 'Have I Been Drained?', // Max 60 characters
+    description: 'Analyze your Solana wallet for security threats, unlimited approvals, and known drainer signatures.', // Max 200 characters
     
     // Action links
     links: {
@@ -30,26 +44,31 @@ app.get('/api/actions/check', (c) => {
               name: 'address',
               label: 'Wallet Address',
               required: true,
+              type: 'string',
             }
           ]
         }
       ]
     },
     
-    // Additional metadata
+    // Additional metadata (optional)
     tags: ['security', 'wallet', 'solana', 'drainer-detection'],
     group: 'Security Tools'
   })
 })
 
 // POST /api/actions/check - Handle the action and return transaction
+// Follows Solana Actions API specification v1.0
 app.post('/api/actions/check', async (c) => {
   try {
     const body = await c.req.json()
     const { account, data } = body
 
     if (!account) {
-      return c.json({ error: 'Account is required' }, { status: 400 })
+      return c.json({ 
+        error: 'Account is required',
+        message: 'Wallet account address is required to process the check'
+      }, { status: 400 })
     }
 
     // Extract wallet address from data or account
@@ -63,16 +82,24 @@ app.post('/api/actions/check', async (c) => {
     }
 
     // Validate the wallet address
+    let userPublicKey: PublicKey
     try {
-      new PublicKey(walletAddress)
+      userPublicKey = new PublicKey(account)
+      new PublicKey(walletAddress) // Validate the wallet address too
     } catch (error) {
-      return c.json({ error: 'Invalid wallet address' }, { status: 400 })
+      return c.json({ 
+        error: 'Invalid wallet address',
+        message: 'The provided wallet address is not a valid Solana address'
+      }, { status: 400 })
     }
 
     // Initialize Helius client
     const heliusKey = process.env.HELIUS_API_KEY
     if (!heliusKey) {
-      return c.json({ error: 'HELIUS_API_KEY not configured' }, { status: 500 })
+      return c.json({ 
+        error: 'HELIUS_API_KEY not configured',
+        message: 'Server configuration error. Please contact support.'
+      }, { status: 500 })
     }
 
     const network = (process.env.SOLANA_NETWORK || 'devnet') as 'mainnet' | 'devnet'
@@ -81,7 +108,7 @@ app.post('/api/actions/check', async (c) => {
     // Get recent transactions for the wallet
     const transactions = await heliusClient.getTransactionsForAddress(walletAddress, { limit: 20 })
 
-    // Initialize Anchor client for known drainer checks
+    // Initialize RPC connection and Anchor client for known drainer checks
     const rpcUrl = network === 'mainnet' 
       ? 'https://api.mainnet-beta.solana.com'
       : 'https://api.devnet.solana.com'
@@ -112,26 +139,50 @@ app.post('/api/actions/check', async (c) => {
       transactionCount: transactions.length,
     })
 
-    // Create a simple memo transaction that records the check
-    const memoInstruction = {
-      keys: [
-        { pubkey: new PublicKey(account), isSigner: true, isWritable: true }
-      ],
-      programId: new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'), // Memo program
-      data: Buffer.from(`HaveIBeenDrained Check: Risk Score ${riskReport.overallRisk}% - ${riskReport.severity}`)
+    // Get recent blockhash (REQUIRED for Solana transactions)
+    // This ensures the transaction is valid and can be processed
+    let blockhash: string
+    try {
+      const { blockhash: recentBlockhash } = await connection.getLatestBlockhash('finalized')
+      blockhash = recentBlockhash
+    } catch (error) {
+      console.error('Error fetching blockhash:', error)
+      return c.json({ 
+        error: 'Failed to fetch recent blockhash',
+        message: 'Unable to create transaction. Please try again.'
+      }, { status: 500 })
     }
 
-    const transaction = new Transaction()
-    transaction.add({
-      keys: memoInstruction.keys,
-      programId: memoInstruction.programId,
-      data: memoInstruction.data
+    // Create a memo transaction that records the check
+    // This is a read-only action that doesn't transfer funds, just records the check on-chain
+    const memoProgramId = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr')
+    const memoMessage = `HaveIBeenDrained Check: Risk Score ${riskReport.overallRisk}% - ${riskReport.severity}`
+
+    const transaction = new Transaction({
+      recentBlockhash: blockhash,
+      feePayer: userPublicKey,
     })
 
-    // Return the transaction for signing
+    // Add memo instruction
+    transaction.add({
+      keys: [
+        { pubkey: userPublicKey, isSigner: true, isWritable: false }
+      ],
+      programId: memoProgramId,
+      data: Buffer.from(memoMessage)
+    })
+
+    // Serialize transaction (without signatures - wallet will sign)
+    const serializedTransaction = transaction.serialize({ 
+      requireAllSignatures: false,
+      verifySignatures: false 
+    }).toString('base64')
+
+    // Return response according to Solana Actions spec
     return c.json({
-      transaction: transaction.serialize({ requireAllSignatures: false }).toString('base64'),
+      transaction: serializedTransaction,
       message: `Wallet security analysis complete. Risk Score: ${riskReport.overallRisk}% (${riskReport.severity})`,
+      // Include risk report in response (optional, but useful for display)
       riskReport: {
         score: riskReport.overallRisk,
         severity: riskReport.severity,
@@ -142,7 +193,11 @@ app.post('/api/actions/check', async (c) => {
 
   } catch (error) {
     console.error('Error in check action:', error)
-    return c.json({ error: 'Failed to process wallet check' }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    return c.json({ 
+      error: 'Failed to process wallet check',
+      message: errorMessage
+    }, { status: 500 })
   }
 })
 
