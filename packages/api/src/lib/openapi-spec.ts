@@ -94,14 +94,7 @@ export const openApiSpec = {
             content: {
               'application/json': {
                 schema: {
-                  oneOf: [
-                    {
-                      $ref: '#/components/schemas/DrainerResponse',
-                    },
-                    {
-                      $ref: '#/components/schemas/WalletAnalysisResponse',
-                    },
-                  ],
+                  $ref: '#/components/schemas/CheckResponse',
                 },
                 examples: {
                   drainer: {
@@ -360,6 +353,12 @@ export const openApiSpec = {
       },
     },
     schemas: {
+      CheckResponse: {
+        oneOf: [
+          { $ref: '#/components/schemas/DrainerResponse' },
+          { $ref: '#/components/schemas/WalletAnalysisResponse' },
+        ],
+      },
       DrainerResponse: {
         type: 'object',
         required: ['success', 'type', 'data', 'timestamp'],
@@ -374,25 +373,19 @@ export const openApiSpec = {
             example: 'drainer',
           },
           data: {
-            oneOf: [
-              {
-                type: 'object',
-                properties: {
-                  drainerAddress: { type: 'string' },
-                  reportCount: { type: 'integer' },
-                  firstSeen: { type: 'string', format: 'date-time' },
-                  lastSeen: { type: 'string', format: 'date-time' },
-                  totalSolReported: { type: 'number' },
-                  recentReporters: {
-                    type: 'array',
-                    items: { type: 'string' },
-                  },
-                },
+            nullable: true,
+            type: 'object',
+            properties: {
+              drainerAddress: { type: 'string' },
+              reportCount: { type: 'integer' },
+              firstSeen: { type: 'string', format: 'date-time' },
+              lastSeen: { type: 'string', format: 'date-time' },
+              totalSolReported: { type: 'number' },
+              recentReporters: {
+                type: 'array',
+                items: { type: 'string' },
               },
-              {
-                type: 'null',
-              },
-            ],
+            },
           },
           message: {
             type: 'string',

@@ -96,8 +96,23 @@ jobs:
       with:
         node-version: '20'
     
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+    
+    - name: Install Dependencies
+      run: bun install
+    
     - name: Install Mintlify CLI
       run: npm install -g mint
+    
+    - name: Export OpenAPI spec
+      working-directory: packages/api
+      run: bun run scripts/export-openapi.ts
+    
+    - name: Validate OpenAPI spec
+      run: mint openapi-check packages/api/openapi.json
     
     - name: Check for broken links
       working-directory: docs

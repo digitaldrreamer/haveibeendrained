@@ -10,6 +10,7 @@
     "populate:drainers": "bun run scripts/populate-drainers.ts",
     "scrape:chainabuse": "bun run scripts/chainabuse-sol.ts",
     "analyze:sync": "bun run scripts/analyze-and-sync-drainers.ts",
+    "export:openapi": "bun run scripts/export-openapi.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
