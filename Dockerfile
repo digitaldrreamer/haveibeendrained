@@ -10,7 +10,8 @@ COPY packages/shared/package.json ./packages/shared/
 
 # Install dependencies (Bun will handle workspace linking)
 # Omit --production flag to install all dependencies including devDependencies
-RUN bun install --frozen-lockfile
+# Note: Not using --frozen-lockfile to allow lockfile updates during build
+RUN bun install
 
 # Stage 2: Runtime
 FROM oven/bun:latest AS runtime
