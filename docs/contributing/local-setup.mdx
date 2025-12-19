@@ -1,0 +1,171 @@
+---
+title: "Local Setup"
+description: "Set up your local development environment"
+---
+
+## Prerequisites
+
+- [Bun](https://bun.sh) (v1.2+) or Node.js 19+
+- [Docker](https://www.docker.com/) and Docker Compose
+- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools) (for Anchor)
+- [Anchor](https://www.anchor-lang.com/) (v0.32.1+)
+
+## Quick Setup
+
+<Steps>
+<Step title="Clone the repository">
+
+```bash
+git clone https://github.com/digitaldrreamer/haveibeendrained.git
+cd haveibeendrained
+```
+
+</Step>
+
+<Step title="Install dependencies">
+
+```bash
+bun install
+```
+
+</Step>
+
+<Step title="Set up environment variables">
+
+Copy example files:
+
+```bash
+cp .env.example .env
+cp packages/api/.env.example packages/api/.env
+cp packages/frontend/.env.example packages/frontend/.env
+```
+
+Edit the `.env` files with your values:
+- `HELIUS_API_KEY` - Get from [Helius](https://helius.dev)
+- `ANCHOR_WALLET` - Path to your Solana keypair
+
+</Step>
+
+<Step title="Start infrastructure">
+
+```bash
+docker compose up -d
+```
+
+This starts PostgreSQL, Redis, and other required services.
+
+</Step>
+
+<Step title="Run development servers">
+
+**API Server:**
+```bash
+cd packages/api
+bun run dev
+```
+
+**Frontend:**
+```bash
+cd packages/frontend
+bun run dev
+```
+
+**Anchor Program:**
+```bash
+cd packages/anchor
+anchor build
+anchor test
+```
+
+</Step>
+</Steps>
+
+## Project Structure
+
+```
+haveibeendrained/
+├── packages/
+│   ├── anchor/          # Anchor program (Rust)
+│   ├── api/             # API server (TypeScript + Hono)
+│   ├── frontend/        # Frontend (Astro + Svelte)
+│   └── shared/          # Shared types and utilities
+├── docker-compose.yml   # Local development stack
+└── docs/                # Documentation
+```
+
+## Development Workflow
+
+1. **Start infrastructure**: `docker compose up -d`
+2. **Run API in watch mode**: `cd packages/api && bun run dev`
+3. **Run frontend in watch mode**: `cd packages/frontend && bun run dev`
+4. **Build Anchor program**: `cd packages/anchor && anchor build`
+
+## Access Services
+
+- **Frontend:** http://localhost:3000
+- **API:** http://localhost:3001
+- **API Health:** http://localhost:3001/api/health
+- **PostgreSQL:** localhost:5432
+- **Redis:** localhost:6379
+
+## Testing
+
+Run all tests:
+```bash
+bun test
+```
+
+Test individual packages:
+```bash
+# Shared utilities
+cd packages/shared && bun test
+
+# API services
+cd packages/api && bun test
+
+# Anchor program
+cd packages/anchor && anchor test
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Docker issues">
+
+    If Docker services fail to start:
+    1. Check Docker is running: `docker ps`
+    2. Check ports are available (3000, 3001, 5432, 6379)
+    3. Restart Docker: `docker compose down && docker compose up -d`
+
+  </Accordion>
+
+  <Accordion title="Anchor build errors">
+
+    If Anchor build fails:
+    1. Ensure Solana CLI is installed: `solana --version`
+    2. Set Solana config: `solana config set --url devnet`
+    3. Check Anchor version: `anchor --version` (should be 0.32.1+)
+
+  </Accordion>
+
+  <Accordion title="API connection errors">
+
+    If API can't connect to services:
+    1. Verify Docker services are running: `docker compose ps`
+    2. Check environment variables are set correctly
+    3. Verify Helius API key is valid
+
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Contributing Guide" icon="code-branch" href="/contributing/guide">
+    Learn how to contribute to the project.
+  </Card>
+  <Card title="Contributing Overview" icon="book" href="/contributing">
+    Full contributing documentation.
+  </Card>
+</CardGroup>
+

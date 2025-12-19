@@ -1,0 +1,338 @@
+---
+title: "Rate Limits"
+description: "Understanding API rate limits and how to manage them"
+---
+
+## Rate Limit Tiers
+
+### Unregistered Tier
+
+**Rate Limit:** 10 requests/hour per IP
+
+**Use case:** Testing, personal projects, low-volume usage
+
+**Requirements:** None
+
+**Limitations:**
+- Lowest rate limit
+- IP-based tracking
+- No User-Agent required
+
+### Registered Tier
+
+**Rate Limit:** 100 requests/hour
+
+**Use case:** Small applications, moderate usage
+
+**Requirements:** Valid User-Agent header
+
+**Format:**
+```
+AppName/Version (contact@example.com)
+```
+
+**Benefits:**
+- 10x higher rate limit
+- Better support
+- Usage tracking
+
+### Enterprise Tier
+
+**Rate Limit:** 1000+ requests/hour
+
+**Use case:** Production applications, high-volume usage
+
+**Requirements:** API key + User-Agent
+
+**Benefits:**
+- 100x+ higher rate limit
+- Priority support
+- Custom rate limits available
+- Usage analytics
+
+## Rate Limit Windows
+
+Rate limits are calculated per hour (3600 seconds):
+
+- **Window:** Rolling 1-hour period
+- **Reset:** Continuous (not fixed hourly)
+- **Tracking:** Per User-Agent or API key
+
+**Example:**
+```
+Request at 10:00 AM → Window: 10:00 AM - 11:00 AM
+Request at 10:30 AM → Window: 10:30 AM - 11:30 AM
+```
+
+## Cached Responses
+
+<Info>
+  Cached responses do not count toward rate limits. This means repeated checks of the same address won't consume your quota.
+</Info>
+
+**Cache behavior:**
+- Same address checked multiple times → Only first request counts
+- Different addresses → Each counts toward limit
+- Cache duration varies by endpoint
+
+## Rate Limit Headers
+
+Every response includes rate limit information:
+
+```http
+RateLimit-Limit: 100
+RateLimit-Remaining: 95
+RateLimit-Reset: 1702227600
+Retry-After: 3600
+```
+
+### Header Details
+
+| Header | Description | Example |
+|--------|-------------|---------|
+| `RateLimit-Limit` | Maximum requests per window | `100` |
+| `RateLimit-Remaining` | Requests remaining | `95` |
+| `RateLimit-Reset` | Unix timestamp when limit resets | `1702227600` |
+| `Retry-After` | Seconds until reset (when exceeded) | `3600` |
+
+## Handling Rate Limits
+
+### Monitoring
+
+Always check rate limit headers:
+
+```javascript
+const response = await fetch(url);
+const remaining = response.headers.get('RateLimit-Remaining');
+
+if (parseInt(remaining) < 10) {
+  console.warn('Rate limit low, consider caching');
+}
+```
+
+### Exponential Backoff
+
+When rate limited (429 status):
+
+```javascript
+async function makeRequestWithBackoff(url, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    const response = await fetch(url);
+    
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After');
+      await sleep(parseInt(retryAfter) * 1000);
+      continue;
+    }
+    
+    return response;
+  }
+  
+  throw new Error('Rate limit exceeded after retries');
+}
+```
+
+### Caching Strategy
+
+Implement response caching:
+
+```javascript
+const cache = new Map();
+
+async function checkWallet(address) {
+  // Check cache first
+  if (cache.has(address)) {
+    const cached = cache.get(address);
+    if (Date.now() - cached.timestamp < 3600000) { // 1 hour
+      return cached.data;
+    }
+  }
+  
+  // Make API request
+  const response = await fetch(`/api/v1/check?address=${address}`);
+  const data = await response.json();
+  
+  // Cache response
+  cache.set(address, {
+    data,
+    timestamp: Date.now()
+  });
+  
+  return data;
+}
+```
+
+## Best Practices
+
+### 1. Use Appropriate Tier
+
+- **Testing:** Unregistered tier is fine
+- **Small apps:** Registered tier (add User-Agent)
+- **Production:** Enterprise tier (request API key)
+
+### 2. Implement Caching
+
+- Cache responses for repeated addresses
+- Set appropriate cache TTL
+- Invalidate cache when needed
+
+### 3. Monitor Usage
+
+- Track rate limit headers
+- Log rate limit status
+- Alert when approaching limits
+
+### 4. Handle Errors Gracefully
+
+- Implement exponential backoff
+- Show user-friendly error messages
+- Queue requests when rate limited
+
+### 5. Optimize Requests
+
+- Batch requests when possible
+- Use specific endpoints when appropriate
+- Avoid unnecessary requests
+
+## Upgrading Tiers
+
+### To Registered Tier
+
+Simply add a User-Agent header:
+
+```bash
+User-Agent: MyApp/1.0.0 (contact@example.com)
+```
+
+No approval needed - automatic upgrade.
+
+### To Enterprise Tier
+
+1. Email support@haveibeendrained.com
+2. Describe your use case
+3. Provide contact information
+4. Receive API key via email
+
+## Rate Limit Exceeded Response
+
+**Status:** `429 Too Many Requests`
+
+**Response Body:**
+```json
+{
+  "success": false,
+  "error": "Rate limit exceeded",
+  "message": "You have exceeded the rate limit for this endpoint. Please try again later.",
+  "retryAfter": 3600,
+  "timestamp": 1702224000000
+}
+```
+
+**Headers:**
+```http
+Retry-After: 3600
+RateLimit-Limit: 100
+RateLimit-Remaining: 0
+RateLimit-Reset: 1702227600
+```
+
+## Fair Use Policy
+
+<Warning>
+  Excessive requests per second may trigger stricter limits affecting all consumers. Good faith usage is expected.
+</Warning>
+
+**Guidelines:**
+- Don't make rapid-fire requests
+- Respect rate limit headers
+- Use caching appropriately
+- Contact support for high-volume needs
+
+## Examples
+
+### JavaScript
+
+```javascript
+class RateLimitedClient {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.cache = new Map();
+  }
+  
+  async check(address) {
+    // Check cache
+    if (this.cache.has(address)) {
+      return this.cache.get(address);
+    }
+    
+    // Make request
+    const response = await fetch(
+      `https://api.haveibeendrained.com/api/v1/check?address=${address}`,
+      {
+        headers: {
+          'User-Agent': 'MyApp/1.0.0 (contact@example.com)',
+          'X-API-Key': this.apiKey
+        }
+      }
+    );
+    
+    // Check rate limit
+    const remaining = parseInt(response.headers.get('RateLimit-Remaining'));
+    if (remaining < 10) {
+      console.warn('Rate limit low');
+    }
+    
+    // Handle rate limit
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After');
+      throw new Error(`Rate limited. Retry after ${retryAfter} seconds`);
+    }
+    
+    const data = await response.json();
+    
+    // Cache response
+    this.cache.set(address, data);
+    
+    return data;
+  }
+}
+```
+
+### Python
+
+```python
+import time
+from collections import defaultdict
+
+class RateLimitedClient:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.cache = {}
+        self.request_times = defaultdict(list)
+    
+    def check(self, address):
+        # Check cache
+        if address in self.cache:
+            cached_time, data = self.cache[address]
+            if time.time() - cached_time < 3600:  # 1 hour
+                return data
+        
+        # Check rate limit
+        now = time.time()
+        recent_requests = [
+            t for t in self.request_times[address]
+            if now - t < 3600
+        ]
+        
+        if len(recent_requests) >= 100:  # Rate limit
+            raise Exception("Rate limit exceeded")
+        
+        # Make request (implementation here)
+        # ...
+        
+        # Track request
+        self.request_times[address].append(now)
+        
+        return data
+```
+

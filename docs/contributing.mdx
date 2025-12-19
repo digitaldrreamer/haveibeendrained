@@ -1,0 +1,57 @@
+---
+title: 'Contributing'
+description: 'Contribute to the Have I Been Drained? codebase'
+---
+
+## Overview
+
+This section is for developers who want to contribute code to the Have I Been Drained? project. If you're looking to **use** the API or integrate it into your application, see the [Developer Guide](/developer-guide/quickstart) instead.
+
+<CardGroup cols={2}>
+  <Card title="Local Setup" icon="server" href="/contributing/local-setup">
+    Set up your local development environment.
+  </Card>
+  <Card title="Contributing Guide" icon="code-branch" href="/contributing/contributing">
+    Learn how to contribute to the project.
+  </Card>
+</CardGroup>
+
+## Quick Start
+
+<Info>
+  **Prerequisites**:
+  - Node.js version 19 or higher (or Bun v1.2+)
+  - Docker and Docker Compose
+  - Solana CLI (for Anchor development)
+  - Anchor v0.32.1+
+</Info>
+
+For detailed setup instructions, see the [Local Setup](/contributing/local-setup) guide.
+
+## Project Structure
+
+```
+haveibeendrained/
+├── packages/
+│   ├── anchor/          # Anchor program (Rust)
+│   ├── api/             # API server (TypeScript + Hono)
+│   ├── frontend/        # Frontend (Astro + Svelte)
+│   └── shared/          # Shared types and utilities
+├── docker-compose.yml   # Local development stack
+└── docs/                # Documentation
+```
+
+## Development Workflow
+
+1. **Start infrastructure**: `docker compose up -d`
+2. **Run API in watch mode**: `cd packages/api && bun run dev`
+3. **Run frontend in watch mode**: `cd packages/frontend && bun run dev`
+4. **Build Anchor program**: `cd packages/anchor && anchor build`
+
+## Resources
+
+- [Project README](https://github.com/digitaldrreamer/haveibeendrained)
+- [Solana Documentation](https://docs.solana.com)
+- [Anchor Documentation](https://www.anchor-lang.com/docs)
+- [Helius Documentation](https://docs.helius.dev)
+

@@ -1,0 +1,104 @@
+---
+title: "Developer Quickstart"
+description: "Get started with the Have I Been Drained API in minutes"
+---
+
+## Overview
+
+The Have I Been Drained API provides programmatic access to wallet security analysis. Check if addresses are known drainers or perform comprehensive wallet security analysis.
+
+## Quick Start
+
+### Step 1: Make Your First Request
+
+Check if an address is a known drainer:
+
+```bash
+curl "https://api.haveibeendrained.com/api/v1/check?address=YOUR_WALLET_ADDRESS" \
+  -H "User-Agent: MyApp/1.0.0 (contact@example.com)"
+```
+
+### Step 2: Understand the Response
+
+**If address is a known drainer:**
+```json
+{
+  "success": true,
+  "type": "drainer",
+  "data": {
+    "drainerAddress": "ABC123...",
+    "reportCount": 42,
+    "firstSeen": "2024-01-15T10:30:00Z",
+    "lastSeen": "2024-12-10T14:20:00Z",
+    "totalSolReported": 150.5
+  },
+  "timestamp": 1702224000000
+}
+```
+
+**If address needs analysis:**
+```json
+{
+  "success": true,
+  "type": "wallet_analysis",
+  "data": {
+    "walletAddress": "ABC123...",
+    "overallRisk": "AT_RISK",
+    "riskScore": 65,
+    "factors": [...],
+    "recommendations": [...]
+  },
+  "timestamp": 1702224000000
+}
+```
+
+### Step 3: Set Up Authentication
+
+For higher rate limits, include your User-Agent:
+
+```bash
+User-Agent: MyApp/1.0.0 (contact@example.com)
+```
+
+For enterprise tier, include API key:
+
+```bash
+User-Agent: MyApp/1.0.0 (contact@example.com; API Key: hibd_...)
+# OR
+X-API-Key: hibd_...
+```
+
+## Base URLs
+
+- **Production:** `https://api.haveibeendrained.com`
+- **Development:** `http://localhost:3001`
+
+## Rate Limits
+
+| Tier | User-Agent Format | Rate Limit |
+|------|------------------|------------|
+| Unregistered | Missing or invalid | 10 req/hour |
+| Registered | `AppName/Version (contact@example.com)` | 100 req/hour |
+| Enterprise | `AppName/Version (contact@example.com; API Key: hibd_...)` | 1000 req/hour |
+
+<Info>
+  Cached responses don't count toward rate limits. Good faith usage is expected.
+</Info>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/developer-guide/authentication">
+    Learn about API authentication and rate limits.
+  </Card>
+  <Card title="API Integration" icon="plug" href="/developer-guide/api-integration">
+    Integrate wallet checking into your application.
+  </Card>
+  <Card title="Widget Integration" icon="window-maximize" href="/developer-guide/widget-integration">
+    Embed our widget into your website.
+  </Card>
+  <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
+    Complete API documentation.
+  </Card>
+</CardGroup>
+

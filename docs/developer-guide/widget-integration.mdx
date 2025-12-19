@@ -1,0 +1,351 @@
+---
+title: "Widget Integration"
+description: "Embed a wallet security checker widget into your website"
+---
+
+## Overview
+
+The Have I Been Drained HTML widget allows you to embed a ready-to-use wallet security checker into your website with minimal configuration.
+
+## Installation
+
+### Basic Setup
+
+Add the widget script to your HTML page:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+</head>
+<body>
+  <h1>Check Wallet Security</h1>
+  
+  <!-- Widget container -->
+  <div id="hibd-widget"></div>
+  
+  <!-- Widget script -->
+  <script src="https://widget.haveibeendrained.com/v1/widget.js"></script>
+  <script>
+    HIBDWidget.init({
+      containerId: 'hibd-widget'
+    });
+  </script>
+</body>
+</html>
+```
+
+## Configuration Options
+
+### Basic Configuration
+
+```javascript
+HIBDWidget.init({
+  containerId: 'hibd-widget',  // Required: DOM element ID
+  theme: 'dark',                // Optional: 'light' or 'dark'
+  apiUrl: 'https://api.haveibeendrained.com'  // Optional: API endpoint
+});
+```
+
+### Advanced Configuration
+
+```javascript
+HIBDWidget.init({
+  containerId: 'hibd-widget',
+  theme: 'dark',
+  apiUrl: 'https://api.haveibeendrained.com',
+  showPoweredBy: true,  // Show attribution
+  onResult: function(result) {
+    // Callback when analysis completes
+    console.log('Analysis result:', result);
+    
+    if (result.status === 'drained') {
+      alert('Warning: This wallet has been drained!');
+    }
+  }
+});
+```
+
+## Configuration Reference
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `containerId` | string | required | ID of the DOM element where widget will render |
+| `theme` | string | `'dark'` | Color theme: `'light'` or `'dark'` |
+| `apiUrl` | string | `'https://api.haveibeendrained.com'` | Base URL for API endpoint |
+| `showPoweredBy` | boolean | `true` | Show "Powered by Have I Been Drained" attribution |
+| `onResult` | function | `undefined` | Callback function called when analysis completes |
+
+## Callback Function
+
+The `onResult` callback receives a result object:
+
+```javascript
+{
+  status: 'safe' | 'at_risk' | 'drained',
+  riskScore: 0-100,
+  details: {
+    overallRisk: 'SAFE' | 'AT_RISK' | 'DRAINED',
+    factors: [...],
+    recommendations: [...]
+  }
+}
+```
+
+**Example:**
+```javascript
+HIBDWidget.init({
+  containerId: 'hibd-widget',
+  onResult: function(result) {
+    // Handle result based on status
+    switch(result.status) {
+      case 'safe':
+        console.log('✅ Wallet is safe');
+        break;
+      case 'at_risk':
+        console.log('⚠️ Wallet at risk');
+        showWarning(result.details);
+        break;
+      case 'drained':
+        console.log('🚨 Wallet has been drained!');
+        showAlert(result.details);
+        break;
+    }
+  }
+});
+```
+
+## Styling
+
+### Custom CSS
+
+The widget uses CSS classes with the `hibd-widget` prefix:
+
+```css
+/* Widget container */
+#hibd-widget {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Input field */
+.hibd-widget-input {
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Button */
+.hibd-widget-button {
+  background-color: #3E5FFF;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+
+/* Results container */
+.hibd-widget-results {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+}
+```
+
+### Theme Customization
+
+Override theme colors:
+
+```css
+:root {
+  --hibd-primary: #3E5FFF;
+  --hibd-success: #10B981;
+  --hibd-warning: #F59E0B;
+  --hibd-danger: #EF4444;
+}
+
+#hibd-widget {
+  --hibd-primary: #your-color;
+}
+```
+
+## Examples
+
+### React Integration
+
+```jsx
+import { useEffect, useRef } from 'react';
+
+function WalletChecker() {
+  const widgetRef = useRef(null);
+  
+  useEffect(() => {
+    // Load widget script
+    const script = document.createElement('script');
+    script.src = 'https://widget.haveibeendrained.com/v1/widget.js';
+    script.onload = () => {
+      window.HIBDWidget.init({
+        containerId: 'hibd-widget',
+        theme: 'dark',
+        onResult: (result) => {
+          console.log('Result:', result);
+        }
+      });
+    };
+    document.body.appendChild(script);
+    
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+  
+  return <div id="hibd-widget" ref={widgetRef} />;
+}
+```
+
+### Vue Integration
+
+```vue
+<template>
+  <div id="hibd-widget"></div>
+</template>
+
+<script>
+export default {
+  mounted() {
+    const script = document.createElement('script');
+    script.src = 'https://widget.haveibeendrained.com/v1/widget.js';
+    script.onload = () => {
+      window.HIBDWidget.init({
+        containerId: 'hibd-widget',
+        theme: 'dark'
+      });
+    };
+    document.body.appendChild(script);
+  }
+}
+</script>
+```
+
+### WordPress Integration
+
+Add to your theme's `functions.php`:
+
+```php
+function enqueue_hibd_widget() {
+    wp_enqueue_script(
+        'hibd-widget',
+        'https://widget.haveibeendrained.com/v1/widget.js',
+        array(),
+        '1.0.0',
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'enqueue_hibd_widget');
+```
+
+Add to your template:
+
+```html
+<div id="hibd-widget"></div>
+<script>
+  HIBDWidget.init({
+    containerId: 'hibd-widget'
+  });
+</script>
+```
+
+## Advanced Usage
+
+### Multiple Widgets
+
+You can have multiple widgets on the same page:
+
+```html
+<div id="widget-1"></div>
+<div id="widget-2"></div>
+
+<script>
+  HIBDWidget.init({
+    containerId: 'widget-1',
+    theme: 'dark'
+  });
+  
+  HIBDWidget.init({
+    containerId: 'widget-2',
+    theme: 'light'
+  });
+</script>
+```
+
+### Pre-fill Address
+
+Pre-fill the widget with an address:
+
+```javascript
+HIBDWidget.init({
+  containerId: 'hibd-widget',
+  prefillAddress: 'ABC123...'  // Optional: pre-fill address
+});
+```
+
+### Custom API Endpoint
+
+Use a custom API endpoint (for development):
+
+```javascript
+HIBDWidget.init({
+  containerId: 'hibd-widget',
+  apiUrl: 'http://localhost:3001'  // Development API
+});
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Widget not loading">
+
+    - Check that the script URL is correct
+    - Verify the container element exists
+    - Check browser console for errors
+    - Ensure JavaScript is enabled
+
+  </Accordion>
+
+  <Accordion title="Styling issues">
+
+    - Check CSS class names
+    - Verify container ID is correct
+    - Ensure no conflicting styles
+    - Try different theme option
+
+  </Accordion>
+
+  <Accordion title="API errors">
+
+    - Verify API URL is correct
+    - Check network connectivity
+    - Review browser console for errors
+    - Test API endpoint directly
+
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+1. **Load script asynchronously** - Don't block page load
+2. **Handle errors gracefully** - Show user-friendly messages
+3. **Respect user privacy** - Don't track addresses
+4. **Customize styling** - Match your site's design
+5. **Test thoroughly** - Test on different browsers
+
+## Support
+
+<CardGroup cols={2}>
+  <Card title="API Documentation" icon="code" href="/developer-guide/api-integration">
+    Learn about the API.
+  </Card>
+  <Card title="Contact Support" icon="envelope" href="mailto:support@haveibeendrained.com">
+    Get help with widget integration.
+  </Card>
+</CardGroup>
+

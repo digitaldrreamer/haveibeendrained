@@ -1,0 +1,161 @@
+---
+title: "Risk Scores Explained"
+description: "Understanding how risk scores are calculated and what they mean"
+---
+
+## Risk Score Overview
+
+The risk score is a number from **0 to 100** that represents the overall security status of your wallet. Higher scores indicate greater risk.
+
+## Score Calculation
+
+Risk scores are calculated by aggregating multiple factors:
+
+### Factor Weights
+
+| Threat Type | Weight | Max Contribution |
+|-----------|--------|------------------|
+| Known Drainer | 100% | 100 points |
+| SetAuthority Attack | 95% | 95 points |
+| Unlimited Approval | 90% | 90 points |
+| Suspicious Pattern | 70% | 70 points |
+| High-Value Transfers | 50% | 50 points |
+
+### Aggregation Method
+
+- Multiple threats are combined using weighted averaging
+- Recent threats have higher impact
+- Critical threats (drainers) override other factors
+
+## Score Ranges
+
+### 0-20: Very Safe ✅
+
+**Status:** SAFE
+
+No threats detected. Your wallet appears secure.
+
+**What this means:**
+- No known drainer interactions
+- No suspicious approvals
+- Normal transaction patterns
+- Low risk of compromise
+
+### 21-40: Safe ✅
+
+**Status:** SAFE
+
+Minor concerns detected, but overall low risk.
+
+**What this means:**
+- Some unusual patterns
+- Low-value suspicious transactions
+- Recommendations for improvement
+- Generally safe to use
+
+### 41-60: Moderate Risk ⚠️
+
+**Status:** AT_RISK
+
+Significant security concerns detected.
+
+**What this means:**
+- Suspicious approvals present
+- Unusual transaction patterns
+- Potential compromise indicators
+- Action recommended
+
+**Recommended actions:**
+- Review all recent transactions
+- Revoke suspicious approvals
+- Consider creating a new wallet
+- Monitor closely
+
+### 61-80: High Risk ⚠️
+
+**Status:** AT_RISK
+
+Serious security threats detected.
+
+**What this means:**
+- Multiple threat types present
+- High-value suspicious transactions
+- Strong indicators of compromise
+- Immediate action required
+
+**Recommended actions:**
+- Stop using the wallet immediately
+- Revoke all approvals
+- Transfer assets to a new wallet
+- Follow recovery procedures
+
+### 81-100: Critical Risk 🚨
+
+**Status:** DRAINED
+
+Wallet likely compromised.
+
+**What this means:**
+- Known drainer interactions
+- Authority changes detected
+- Assets may be stolen
+- Immediate recovery needed
+
+**Required actions:**
+- Do not use this wallet
+- Follow [Recovery Guide](/user-guide/recovery-guide)
+- Report the drainer
+- Create new wallet for future use
+
+## Factors Affecting Score
+
+### Time Decay
+
+Older threats contribute less to the score:
+- **Recent (0-7 days):** Full weight
+- **Recent (8-30 days):** 75% weight
+- **Older (31-90 days):** 50% weight
+- **Old (90+ days):** 25% weight
+
+### Transaction Volume
+
+Wallets with more transactions may show:
+- Higher baseline scores (more activity = more risk)
+- More accurate detection (more data)
+- Better pattern recognition
+
+### Asset Value
+
+High-value wallets may have:
+- More sophisticated attacks
+- Higher stakes for attackers
+- More comprehensive analysis
+
+## Improving Your Score
+
+To improve your risk score:
+
+1. **Revoke suspicious approvals** - Remove unlimited or risky token approvals
+2. **Review transactions** - Verify all transactions are legitimate
+3. **Use new wallet** - If compromised, create a fresh wallet
+4. **Follow best practices** - Implement security recommendations
+5. **Check regularly** - Monitor your wallet security over time
+
+## Score Limitations
+
+<Warning>
+  Risk scores are estimates based on available data. They cannot guarantee absolute security or detect all threats.
+</Warning>
+
+**Limitations:**
+- Based on transaction history only
+- Cannot detect future threats
+- May miss very recent attacks
+- False positives are possible
+
+**Best practices:**
+- Use scores as guidance, not absolute truth
+- Review evidence for each threat
+- Follow recommendations regardless of score
+- Check regularly for new threats
+

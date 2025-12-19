@@ -1,97 +1,113 @@
 ---
 title: "Introduction"
-description: "Welcome to the new home for your documentation"
+description: "Welcome to Have I Been Drained? - The first decentralized, community-powered wallet security checker on Solana"
 ---
 
-## Setting up
+## What is Have I Been Drained?
 
-Get your documentation site up and running in minutes.
+**Have I Been Drained?** is the first decentralized, on-chain drainer registry that helps protect Solana wallets from security threats.
 
 <Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
+  title="Check Your Wallet"
+  icon="shield"
+  href="/user-guide/getting-started"
   horizontal
 >
-  Follow our three step quickstart guide.
+  Start protecting your Solana assets today.
 </Card>
 
-## Make it yours
+## The Problem
 
-Design a docs site that looks great and empowers your users.
+In 2024-2025, Solana wallet drainers stole **$300+ million** from **324,000+ users**. Current security solutions are:
+- ❌ **Centralized** - Single points of failure
+- ❌ **Slow** - Delayed threat detection
+- ❌ **Incomplete** - Missing many attack patterns
+- ❌ **Not community-driven** - No way for users to contribute
+
+## The Solution
+
+**Have I Been Drained?** provides:
 
 <Columns cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
+    title="On-Chain Registry"
+    icon="database"
+    href="/user-guide/reporting-drainers"
   >
-    Edit your docs locally and preview them in real time.
+    Immutable, permissionless drainer reports via Anchor program on Solana.
   </Card>
   <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
+    title="Real-Time Analysis"
+    icon="bolt"
+    href="/user-guide/checking-your-wallet"
   >
-    Customize the design and colors of your site to match your brand.
+    Instant wallet security scanning using Helius RPC and transaction analysis.
   </Card>
     <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
+    title="Multi-Pattern Detection"
+    icon="shield"
+    href="/user-guide/understanding-results"
   >
-    Organize your docs to help users find what they need and succeed with your product.
+    Detects SetAuthority, unlimited approvals, and known drainers.
   </Card>
   <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
+    title="Community-Powered"
+    icon="users"
+    href="/user-guide/reporting-drainers"
   >
-    Auto-generate API documentation from OpenAPI specifications.
+    Anyone can report drainers with anti-spam protection.
   </Card>
 </Columns>
 
-## Create beautiful pages
+## For Users
 
-Everything you need to create world-class documentation.
+<CardGroup cols={2}>
+  <Card title="Getting Started" icon="rocket" href="/user-guide/getting-started">
+    Learn how to check your wallet security.
+  </Card>
+  <Card title="Understanding Results" icon="chart" href="/user-guide/understanding-results">
+    Learn what your risk score means.
+  </Card>
+  <Card title="Recovery Guide" icon="life-ring" href="/user-guide/recovery-guide">
+    Steps to secure a compromised wallet.
+  </Card>
+  <Card title="Report Drainers" icon="flag" href="/user-guide/reporting-drainers">
+    Help protect others by reporting drainers.
+  </Card>
+</CardGroup>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## For Developers
 
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
+<CardGroup cols={2}>
+  <Card title="API Quickstart" icon="code" href="/developer-guide/quickstart">
+    Get started with our REST API.
+  </Card>
+  <Card title="API Integration" icon="plug" href="/developer-guide/api-integration">
+    Integrate wallet security checks into your app.
+  </Card>
+  <Card title="Widget Integration" icon="window-maximize" href="/developer-guide/widget-integration">
+    Embed our widget into your website.
+  </Card>
+  <Card title="API Reference" icon="terminal" href="/api-reference/introduction">
+    Complete API documentation.
 </Card>
+</CardGroup>
+
+## Key Features
+
+- ✅ **On-Chain Registry** - Immutable, verifiable drainer reports
+- ✅ **Real-Time Analysis** - Instant wallet security scanning
+- ✅ **Multi-Pattern Detection** - SetAuthority, approvals, known drainers
+- ✅ **Community-Powered** - Permissionless reporting with anti-spam
+- ✅ **Solana Actions (Blinks)** - Check wallets directly from Twitter/Discord
+- ✅ **Free API** - Public API for developers with rate limiting
+- ✅ **Open Source** - Transparent, auditable code
+
+## Architecture
+
+The system consists of:
+
+1. **Anchor Program** - On-chain drainer registry using PDAs
+2. **API Server** - Transaction analysis via Helius RPC
+3. **Frontend** - Modern UI with real-time wallet analysis
+4. **Shared Package** - TypeScript types and utilities
