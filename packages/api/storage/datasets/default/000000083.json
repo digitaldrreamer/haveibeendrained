@@ -1,0 +1,16 @@
+{
+	"reportId": "9d97a4ba-116a-4c2e-93be-ee35fa245729",
+	"title": "",
+	"description": "Eating with family and then I received multiple transaction notifications on my phone by the Trust wallet, where I kept the money I have saved up. I looked it up and after 2 minutes since I have received the notifications, the money was gone.\n\nEating with family and then I received multiple transaction notifications on my phone by the Trust wallet, where I kept the money I have saved up. I looked it up and after 2 minutes since I have received the notifications, the money was gone.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://solscan.io/account/d3x8WZRqBtZBkUmSxGSg63EFqpvDbdstoraw282h2Ua\n\nhttps://solscan.io/account/d3x8WZRqBtZBkUmSxGSg63EFqpvDbdstoraw282h2Ua",
+	"amountLost": "472.98 USD",
+	"addresses": [
+		"d3x8WZRqBtZBkUmSxGSg63EFqpvDbdstoraw282h2Ua"
+	],
+	"domains": [
+		"https://solscan.io/account/d3x8WZRqBtZBkUmSxGSg63EFqpvDbdstoraw282h2Ua"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/9d97a4ba-116a-4c2e-93be-ee35fa245729?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:04:31.807Z"
+}

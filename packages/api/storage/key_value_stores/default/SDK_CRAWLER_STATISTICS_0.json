@@ -1,0 +1,82 @@
+{
+  "requestsFinished": 0,
+  "requestsFailed": 1,
+  "requestsRetries": 1,
+  "requestsFailedPerMinute": 0,
+  "requestsFinishedPerMinute": 0,
+  "requestMinDurationMillis": null,
+  "requestMaxDurationMillis": 0,
+  "requestTotalFailedDurationMillis": 694,
+  "requestTotalFinishedDurationMillis": 0,
+  "crawlerStartedAt": "2025-12-14T20:06:08.023Z",
+  "crawlerFinishedAt": null,
+  "statsPersistedAt": "2025-12-15T12:18:19.305Z",
+  "crawlerRuntimeMillis": 58331670,
+  "crawlerLastStartTimestamp": 1765742767635,
+  "requestRetryHistogram": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1
+  ],
+  "statsId": 0,
+  "requestAvgFailedDurationMillis": 694,
+  "requestAvgFinishedDurationMillis": null,
+  "requestTotalDurationMillis": 694,
+  "requestsTotal": 1,
+  "requestsWithStatusCode": {},
+  "errors": {
+    "native:7:39": {
+      "missing error code": {
+        "Error": {
+          "goto: Target page, context or browser has been closed": {
+            "count": 1
+          }
+        }
+      }
+    }
+  },
+  "retryErrors": {
+    "native:7:39": {
+      "missing error code": {
+        "Error": {
+          "Detected a session error, rotating session... ": {
+            "count": 35
+          }
+        }
+      }
+    }
+  }
+}

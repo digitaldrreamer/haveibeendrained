@@ -1,0 +1,17 @@
+{
+	"reportId": "d22b8083-e026-4753-8b32-a7fae0c3223b",
+	"title": "",
+	"description": "I was Scammed through a Telegram bot called\"Drift Bot\", pretending to sell new tokens ( SONIC). I was asked to enter my seed phrase. After that, my wallet was emptied. Attached is a Screenshot of the conversations.\n\nI was Scammed through a Telegram bot called\"Drift Bot\", pretending to sell new tokens ( SONIC). I was asked to enter my seed phrase. After that, my wallet was emptied. Attached is a Screenshot of the conversations.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttp://driftbot.trade\n\nhttp://t.me/DriftBotChat\n\nhttp://driftbot.trade\n\nhttp://t.me/DriftBotChat",
+	"amountLost": "700.00 USD",
+	"addresses": [
+		"3HZBDLfqr94HTjVsqe4VvZvFBCkvgrb7UoReukzWSQP8"
+	],
+	"domains": [
+		"http://driftbot.trade",
+		"http://t.me/DriftBotChat"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/d22b8083-e026-4753-8b32-a7fae0c3223b?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:55:59.885Z"
+}

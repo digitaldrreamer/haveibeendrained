@@ -1,0 +1,9 @@
+{
+	"id": "gJFT8h7EPNIceLt",
+	"json": "{\"id\":\"gJFT8h7EPNIceLt\",\"url\":\"https://chainabuse.com/chain/SOL?page=4\",\"loadedUrl\":\"https://chainabuse.com/chain/SOL?page=4\",\"uniqueKey\":\"https://chainabuse.com/chain/SOL?page=4\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"LIST\"},\"handledAt\":\"2025-12-14T22:58:30.025Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://chainabuse.com/chain/SOL?page=4",
+	"url": "https://chainabuse.com/chain/SOL?page=4"
+}

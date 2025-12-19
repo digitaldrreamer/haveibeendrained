@@ -1,0 +1,23 @@
+{
+	"reportId": "cd779f1b-6382-41b3-8395-7953ffb64771",
+	"title": "",
+	"description": "The scammer somehow gained unauthorized access to my Ethereum wallet and initiated the following transaction:https://etherscan.io/tx/0x433ff05b86d2b346f4e8d27b468f73d6c5f3dbbd7947dee47097ca51b1be2693The stolen tokens were transferred to a newly created Ethereum account:https://etherscan.io/address/0xc62635f348347464b885b79cfd10382e6c20ccd5From there, the funds were routed through relay.link to swap onto another chain:https://www.relay.link/transactions?address=7FeBL5D5BAkQaEReFuCkYpxGEuFipReUEktrzt9MM9ZmThe final destination is a Solana account holding the stolen funds in USDC:https://solscan.io/tx/4nLtfndauTDKTLwtofR5e4rWVcySLrxQMzHsbfsyBChfsp67LsgT61v1nNiNK1iUqM7pDEYEMEfgkGMA4iw1dS7GAt the time of writing, the stolen funds remain in this Solana wallet.\n\nThe scammer somehow gained unauthorized access to my Ethereum wallet and initiated the following transaction:\n\nhttps://etherscan.io/tx/0x433ff05b86d2b346f4e8d27b468f73d6c5f3dbbd7947dee47097ca51b1be2693\n\nThe stolen tokens were transferred to a newly created Ethereum account:\n\nhttps://etherscan.io/address/0xc62635f348347464b885b79cfd10382e6c20ccd5\n\nFrom there, the funds were routed through relay.link to swap onto another chain:\n\nhttps://www.relay.link/transactions?address=7FeBL5D5BAkQaEReFuCkYpxGEuFipReUEktrzt9MM9Zm\n\nThe final destination is a Solana account holding the stolen funds in USDC:\n\nhttps://solscan.io/tx/4nLtfndauTDKTLwtofR5e4rWVcySLrxQMzHsbfsyBChfsp67LsgT61v1nNiNK1iUqM7pDEYEMEfgkGMA4iw1dS7G\n\nAt the time of writing, the stolen funds remain in this Solana wallet.\n\nAmount lost\n\n33000.00 USD",
+	"amountLost": "33000.00 USD",
+	"addresses": [
+		"7FeBL5D5BAkQaEReFuCkYpxGEuFipReUEktrzt9MM9Zm"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://etherscan.io/tx/0x433ff05b86d2b346f4e8d27b468f73d6c5f3dbbd7947dee47097ca51b1be2693",
+		"https://etherscan.io/address/0xc62635f348347464b885b79cfd10382e6c20ccd5",
+		"https://www.relay.link/transactions?address=7FeBL5D5BAkQaEReFuCkYpxGEuFipReUEktrzt9MM9Zm",
+		"https://solscan.io/tx/4nLtfndauTDKTLwtofR5e4rWVcySLrxQMzHsbfsyBChfsp67LsgT61v1nNiNK1iUqM7pDEYEMEfgkGMA4iw1dS7G",
+		"https://solana.fm/address/7FeBL5D5BAkQaEReFuCkYpxGEuFipReUEktrzt9MM9Zm",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "1 day ago",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/cd779f1b-6382-41b3-8395-7953ffb64771?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:54:05.089Z"
+}

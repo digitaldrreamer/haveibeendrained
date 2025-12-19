@@ -1,0 +1,21 @@
+{
+	"reportId": "628ec1f1-cafc-4a1b-bf5c-fbc6f8757f1f",
+	"title": "",
+	"description": "I am a victim of physical phone theft that occurred in the United Kingdom. Following the theft, the perpetrators managed to compromise my Apple ID (iCloud) and gain unauthorized access to my device data.Through this access, they obtained my login credentials for the Gate.io exchange and likely compromised the private keys/seed phrases stored on the device for my Solana wallet.On December 5, 2025, the thieves executed multiple unauthorized transactions:Gate.io Breach (Ethereum Chain): They withdrew USDT (ERC20) from my exchange account to an external attacker address.Solana Wallet Drain: They transferred SOL from my personal wallet to two different attacker addresses.The total loss is approximately $2,880 USD. This case has been reported to the UK Police (Action Fraud).--- INCIDENT 1: Ethereum (USDT via Gate.io) ---Attacker Address: 0x6AB9B93A555ee86e110496c9A09020fD8F5fA927Stolen Asset: USDT (ERC20)Total Amount: 1,214.37 USDTTransaction Hashes (TxIDs):0x668381a46bbc6cb54356d3d0df627b5306a412af66bf2c1b7e85313d17075b67 (698.33 USDT)0xe7cf10913a5ac006e5ba58ae56bd9ab34b726dc43b33e1abc5c94d9f90e94e01 (516.03 USDT)--- INCIDENT 2: Solana (Wallet Drain) ---Victim Wallet Address: 7DeihD6suFJPGcpA17UUVDaxBaCGrQoPUUZuSRuY1oo6Stolen Asset: SOLTotal Amount: 12.4432 SOLAttacker Address 1: HkfrNWPFyKLy73j1xtAEHJmtU4VkFt71roqX11WdCn93Amount: 9.1232 SOLSignature: 5CFR1K41oCWXSJbG9jeQeYLccukcPkaUddAaEpywohJDPbo1gxiLdqC7QWWKW7VtXG7bvKADSqhvz6Kkpagx4bvpAttacker Address 2: 7NmSWaSUCco7oVEUvm6v7zFZCAhwQDvrXULqipXF8wgeAmount: 3.32 SOLSignature: 2BSrrJGPdZ53AidmdTtJ9i32yNUm73iy4KR8qqXywQnqvcSpjsAkgNfmWwxz5YR85LUJ9YP7n6okiNqhfmJvEKej\n\nI am a victim of physical phone theft that occurred in the United Kingdom. Following the theft, the perpetrators managed to compromise my Apple ID (iCloud) and gain unauthorized access to my device data.\n\nThrough this access, they obtained my login credentials for the Gate.io exchange and likely compromised the private keys/seed phrases stored on the device for my Solana wallet.\n\nOn December 5, 2025, the thieves executed multiple unauthorized transactions:\n\nGate.io Breach (Ethereum Chain): They withdrew USDT (ERC20) from my exchange account to an external attacker address.\n\nSolana Wallet Drain: They transferred SOL from my personal wallet to two different attacker addresses.\n\nThe total loss is approximately $2,880 USD. This case has been reported to the UK Police (Action Fraud).--- INCIDENT 1: Ethereum (USDT via Gate.io) ---\n\n--- INCIDENT 2: Solana (Wallet Drain) ---\n\nAmount lost\n\n2880.25 USD",
+	"amountLost": "2880.25 USD",
+	"addresses": [
+		"7NmSWaSUCco7oVEUvm6v7zFZCAhwQDvrXULqipXF8wge",
+		"HkfrNWPFyKLy73j1xtAEHJmtU4VkFt71roqX11WdCn93"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/7NmSWaSUCco7oVEUvm6v7zFZCAhwQDvrXULqipXF8wge",
+		"https://solana.fm/address/HkfrNWPFyKLy73j1xtAEHJmtU4VkFt71roqX11WdCn93",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/628ec1f1-cafc-4a1b-bf5c-fbc6f8757f1f?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:55:26.253Z"
+}

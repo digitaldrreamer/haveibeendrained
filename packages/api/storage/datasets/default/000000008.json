@@ -1,0 +1,18 @@
+{
+	"reportId": "945d65e5-6211-4e13-874c-56799b0133f7",
+	"title": "",
+	"description": "I mistakenly entered my private keys into a phishing scam for Snorter Bot on telegram and they drained my Phantom wallet\n\nI mistakenly entered my private keys into a phishing scam for Snorter Bot on telegram and they drained my Phantom wallet\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://t.me/SnorterTradingBot\n\nhttps://t.me/snortertradingbot?start=ref_01z8ia\n\nhttps://t.me/SnorterTradingBot\n\nhttps://t.me/snortertradingbot?start=ref_01z8ia",
+	"amountLost": "61.00 USD",
+	"addresses": [
+		"7ck92B5QjpJwmZKqyKN6SsXC9REPDMSCKnJTo1TwkEY2",
+		"HiGZpZbPAVbmf1iuqLkdBowT54qqp9YiVjhuUqBjx6vq"
+	],
+	"domains": [
+		"https://t.me/SnorterTradingBot",
+		"https://t.me/snortertradingbot?start=ref_01z8ia"
+	],
+	"submitted": "2 days ago",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/945d65e5-6211-4e13-874c-56799b0133f7?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:54:13.755Z"
+}

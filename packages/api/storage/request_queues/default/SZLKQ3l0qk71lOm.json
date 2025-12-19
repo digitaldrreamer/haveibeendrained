@@ -1,0 +1,9 @@
+{
+	"id": "SZLKQ3l0qk71lOm",
+	"json": "{\"id\":\"SZLKQ3l0qk71lOm\",\"url\":\"https://chainabuse.com/report/800d5ce3-d79a-4ef4-907f-2c07191fc007?context=browse-chain&chain=SOL\",\"loadedUrl\":\"https://chainabuse.com/report/800d5ce3-d79a-4ef4-907f-2c07191fc007?context=browse-chain&chain=SOL\",\"uniqueKey\":\"https://chainabuse.com/report/800d5ce3-d79a-4ef4-907f-2c07191fc007?chain=SOL&context=browse-chain\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"DETAIL\"},\"handledAt\":\"2025-12-14T23:04:24.164Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://chainabuse.com/report/800d5ce3-d79a-4ef4-907f-2c07191fc007?chain=SOL&context=browse-chain",
+	"url": "https://chainabuse.com/report/800d5ce3-d79a-4ef4-907f-2c07191fc007?context=browse-chain&chain=SOL"
+}

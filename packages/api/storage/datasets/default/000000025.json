@@ -1,0 +1,20 @@
+{
+	"reportId": "ad584d89-a3d8-4ea1-aaa4-8bee00e340b0",
+	"title": "",
+	"description": "I was hacked via a fake \"Hyperliquid\" app on Google Play (developer: SPINUTRI NUTRITION JSC). I imported my seed phrase, leading to unauthorized transactions starting Dec 1, 2025 ~17:16 UTC. Stolen assets: - SOL/USDC/JUP to 3BsUKtTkVNSaf3YD6qvMmwwuueb1Fk781ThjSyTMbMtd (~$50-100) - BTC 0.024 to bc1pqwd09m3rfd62eueu26y2wmsvwzdyvyjujxntl34zfaqhwyxd0x7uqyty (~$2000) - HYPE 20 to internal bridge 0xF2a1e66e...b8265 (tx: 0x1e4959da50fce955d7319970c2ec4bf65c1203c0efa6b80, ~$689)\n\nI was hacked via a fake \"Hyperliquid\" app on Google Play (developer: SPINUTRI NUTRITION JSC). I imported my seed phrase, leading to unauthorized transactions starting Dec 1, 2025 ~17:16 UTC. Stolen assets: - SOL/USDC/JUP to 3BsUKtTkVNSaf3YD6qvMmwwuueb1Fk781ThjSyTMbMtd (~$50-100) - BTC 0.024 to bc1pqwd09m3rfd62eueu26y2wmsvwzdyvyjujxntl34zfaqhwyxd0x7uqyty (~$2000) - HYPE 20 to internal bridge 0xF2a1e66e...b8265 (tx: 0x1e4959da50fce955d7319970c2ec4bf65c1203c0efa6b80, ~$689)\n\nAmount lost\n\n2000.00 USD",
+	"amountLost": "2000.00 USD",
+	"addresses": [
+		"3BsUKtTkVNSaf3YD6qvMmwwuueb1Fk781ThjSyTMbMtd",
+		"bc1p5zqeykm3hgmes2wx45p5nqmvzdtdha6m5vqjvxj6"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/3BsUKtTkVNSaf3YD6qvMmwwuueb1Fk781ThjSyTMbMtd",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/ad584d89-a3d8-4ea1-aaa4-8bee00e340b0?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:57:00.118Z"
+}

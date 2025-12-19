@@ -1,0 +1,17 @@
+{
+	"reportId": "d2ec91de-5ebb-4177-90a3-8d3490858b11",
+	"title": "",
+	"description": "I contacted the official Discord jpool link with a question about the protocol.The fraudster, taking advantage of my lack of knowledge about Discord, contacted me with a “ticket” marked ‘admin’ “sup” and convinced me of the need for additional wallet validation. They sent me a link where I transferred my wallet key.Yesterday, my funds were withdrawn from my wallet.\n\nI contacted the official Discord jpool link with a question about the protocol.\n\nThe fraudster, taking advantage of my lack of knowledge about Discord, contacted me with a “ticket” marked ‘admin’ “sup” and convinced me of the need for additional wallet validation. They sent me a link where I transferred my wallet key.\n\nYesterday, my funds were withdrawn from my wallet.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://discord.com/invite/qR4BA9QXVR\n\nhttps://www.dexcon.sbs/",
+	"amountLost": "250.00 USD",
+	"addresses": [
+		"GhAUuzzLmumtB1CTSbXyj6EbWUsqyu1HdfV4pYng92BR"
+	],
+	"domains": [
+		"https://discord.com/invite/qR4BA9QXVR",
+		"https://www.dexcon.sbs/"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/d2ec91de-5ebb-4177-90a3-8d3490858b11?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T23:06:25.723Z"
+}

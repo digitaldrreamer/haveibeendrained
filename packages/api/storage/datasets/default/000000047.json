@@ -1,0 +1,19 @@
+{
+	"reportId": "72b8c85e-7cf1-4643-82ad-c3079706b446",
+	"title": "",
+	"description": "el dia 23/11 me di cuenta que de mi billetera de Metalmax me habian desaparecido los tokens que tenia de 21BTC en la red de solana. alguien hizo una transacion el dia 22/11 que yo no autorice ni vi.\n\nel dia 23/11 me di cuenta que de mi billetera de Metalmax me habian desaparecido los tokens que tenia de 21BTC en la red de solana. alguien hizo una transacion el dia 22/11 que yo no autorice ni vi.\n\nAmount lost",
+	"amountLost": "600.00 USD",
+	"addresses": [
+		"C3YRodBFB6CkAEa8b3tk87HNTSeAD23s1u8noTn2deCP"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/C3YRodBFB6CkAEa8b3tk87HNTSeAD23s1u8noTn2deCP",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/72b8c85e-7cf1-4643-82ad-c3079706b446?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:59:17.903Z"
+}

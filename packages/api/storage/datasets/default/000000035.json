@@ -1,0 +1,16 @@
+{
+	"reportId": "a3678728-6e64-4447-8221-a2d0e3dd51f7",
+	"title": "",
+	"description": "My Phantom wallet was compromised and my funds were transferred without my authorization. I did not share my seed phrase anywhere, but it appears that the attacker gained access to my wallet, possibly through malware or a phishing attempt.The scammer transferred my funds to the blockchain address listed above. I have also attached the transaction hash that shows the unauthorized transfer. My wallet was accessed both on mobile and desktop at the time.I have already contacted Phantom Support and followed all security steps, including malware scanning and securing my devices. I am submitting this report to help identify the scammer’s address and track the movement of the stolen funds.Please investigate the activity linked to the scammer’s wallet address and the related transactions. Thank you.\n\nMy Phantom wallet was compromised and my funds were transferred without my authorization. I did not share my seed phrase anywhere, but it appears that the attacker gained access to my wallet, possibly through malware or a phishing attempt.\n\nThe scammer transferred my funds to the blockchain address listed above. I have also attached the transaction hash that shows the unauthorized transfer. My wallet was accessed both on mobile and desktop at the time.\n\nI have already contacted Phantom Support and followed all security steps, including malware scanning and securing my devices. I am submitting this report to help identify the scammer’s address and track the movement of the stolen funds.\n\nPlease investigate the activity linked to the scammer’s wallet address and the related transactions. Thank you.\n\nAmount lost\n\nThe following sites have been reported by users as potentially fraudulent. These links are provided for reference and investigative purposes only, not as endorsements.\n\nhttps://judas.blog/\n\nhttps://judas.blog/",
+	"amountLost": "420.00 USD",
+	"addresses": [
+		"hTx18Ue21yveDhFDaaJZ7QpWCQ2bj7F2N3vsCu1WVFB"
+	],
+	"domains": [
+		"https://judas.blog/"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/a3678728-6e64-4447-8221-a2d0e3dd51f7?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:57:37.034Z"
+}

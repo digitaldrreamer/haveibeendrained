@@ -1,0 +1,19 @@
+{
+	"reportId": "6c43a1fb-1f9a-4589-aa3b-50de68aecc16",
+	"title": "",
+	"description": "My PC was infected with the \"Rhadamanthys\" Infostealer malware on Oct 18, 2025, via a fake TradingView download link from a YouTube advertisement (Video ID: 7faWhx-bh30). The malware compromised my system and stole credentials/cookies.On Oct 25, 2025, the attacker drained my Phantom Wallet (Solana). They bypassed biometric security by using the stolen browser extension vault from my PC.Technical Details:Malware: Rhadamanthys Stealer & NetSupport Manager RAT.The funds (approx. 24.4 JitoSOL) represent a total loss. Please flag this address to prevent cash-out at centralized exchanges.\n\nMy PC was infected with the \"Rhadamanthys\" Infostealer malware on Oct 18, 2025, via a fake TradingView download link from a YouTube advertisement (Video ID: 7faWhx-bh30). The malware compromised my system and stole credentials/cookies.\n\nOn Oct 25, 2025, the attacker drained my Phantom Wallet (Solana). They bypassed biometric security by using the stolen browser extension vault from my PC.\n\nTechnical Details:\n\nMalware: Rhadamanthys Stealer & NetSupport Manager RAT.\n\nThe funds (approx. 24.4 JitoSOL) represent a total loss. Please flag this address to prevent cash-out at centralized exchanges.\n\nAmount lost\n\n5800.00 USD",
+	"amountLost": "5800.00 USD",
+	"addresses": [
+		"RaynRVQXkq1mgTVF4HqE5Cj9TR6WrXjDsRCsANdQUUZ"
+	],
+	"domains": [
+		"https://www.trmlabs.com/policies/privacy-policy",
+		"https://solana.fm/address/RaynRVQXkq1mgTVF4HqE5Cj9TR6WrXjDsRCsANdQUUZ",
+		"https://twitter.com/chainabuse",
+		"https://www.trmlabs.com/policies/cookie-policy"
+	],
+	"submitted": "",
+	"submittedBy": "Anonymous",
+	"url": "https://chainabuse.com/report/6c43a1fb-1f9a-4589-aa3b-50de68aecc16?context=browse-chain&chain=SOL",
+	"scrapedAt": "2025-12-14T22:57:29.992Z"
+}
