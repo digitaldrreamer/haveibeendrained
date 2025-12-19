@@ -3,6 +3,8 @@ import checkAction from './routes/actions/check';
 import analyzeRoutes from './routes/analyze';
 import reportRoutes from './routes/report';
 import publicApiRoutes from './routes/public-api';
+import apiKeysRoutes from './routes/api-keys';
+import openApiRoutes from './routes/openapi';
 
 const app = new Hono();
 
@@ -15,6 +17,8 @@ app.route('/', analyzeRoutes);
 app.route('/', reportRoutes);
 app.route('/', checkAction);
 app.route('/', publicApiRoutes); // Public API v1 routes
+app.route('/', apiKeysRoutes); // API key management routes
+app.route('/', openApiRoutes); // OpenAPI specification
 
 // Start server
 const port = parseInt(process.env.API_PORT || '3001', 10);
