@@ -1,0 +1,165 @@
+---
+title: Email Alerts
+description: Learn how to set up free email alerts to get notified when your Solana wallet is compromised
+---
+
+# Email Alerts
+
+Have I Been Drained offers **free email alerts** to notify you immediately if your Solana wallet is compromised or interacts with known drainer addresses.
+
+## Overview
+
+Email alerts are a proactive security feature that monitors your wallet and sends you instant notifications when:
+
+- Your wallet interacts with known drainer addresses
+- Suspicious transaction patterns are detected
+- High-risk wallet activity is identified
+
+**All email alerts are completely free** - no payment or subscription required.
+
+## Setting Up Email Alerts
+
+### Step 1: Connect Your Wallet
+
+1. Click the **"Get Email Alert"** button in the navigation bar
+2. Select your Solana wallet (Phantom, Solflare, Backpack, etc.)
+3. Approve the connection request in your wallet
+
+### Step 2: Verify Wallet Ownership
+
+1. After connecting, you'll be prompted to sign a message
+2. This signature verifies that you own the wallet
+3. The signature is used only for verification - it doesn't grant any permissions
+
+### Step 3: Provide Your Email Address
+
+1. Enter your email address when prompted
+2. Click **"Register Email Alerts"**
+3. You'll receive a verification email
+
+### Step 4: Verify Your Email
+
+1. Check your inbox for the verification email
+2. Click the verification link in the email
+3. Your email alerts are now active!
+
+## How It Works
+
+### Signature Verification
+
+We use **Ed25519 signature verification** to ensure only the wallet owner can register alerts:
+
+1. Our server generates a unique nonce (one-time code)
+2. You sign the nonce with your wallet's private key
+3. We verify the signature matches your wallet address
+4. This proves you own the wallet without exposing your private key
+
+### Email Verification
+
+Email verification ensures alerts are sent to valid addresses:
+
+- Verification links expire after 24 hours
+- Only verified emails receive alerts
+- You can register multiple emails for the same wallet
+
+### Alert Delivery
+
+When a drain is detected:
+
+1. Our system analyzes your wallet's transaction history
+2. If a drainer interaction or high-risk activity is found, alerts are triggered
+3. All verified email addresses for your wallet receive an alert
+4. Alerts include details about the detected threat and recommended actions
+
+## Managing Your Alerts
+
+### Viewing Your Status
+
+- When connected, click your wallet address in the navigation bar
+- A dropdown will show:
+  - Your wallet address
+  - Your registered email address
+  - Verification status
+
+### Disconnecting
+
+To stop receiving alerts:
+
+1. Click your wallet address in the navigation bar
+2. Click **"Disconnect"** in the dropdown
+3. You'll need to sign a message to confirm disconnection
+4. All alerts for your wallet will be removed
+
+### Multiple Emails
+
+You can register multiple email addresses for the same wallet:
+
+- Each email must be verified separately
+- All verified emails receive alerts
+- Emails are not unique - multiple wallets can use the same email
+
+## Privacy and Security
+
+### What We Store
+
+- **Wallet Address**: Your Solana public key (public information)
+- **Email Address**: For sending alerts only
+- **Verification Status**: Whether your email is verified
+
+### What We Don't Store
+
+- Private keys or seed phrases
+- Transaction history (analyzed in real-time, not stored)
+- Personal information beyond your email
+
+### Security Features
+
+- **Signature Verification**: Only wallet owners can register alerts
+- **Email Verification**: Prevents spam and ensures valid addresses
+- **No Private Key Access**: We never request or store private keys
+- **CORS Protection**: API endpoints are protected for frontend use only
+
+## Troubleshooting
+
+### Email Not Received
+
+- Check your spam/junk folder
+- Verify your email address is correct
+- Check if the verification link has expired (24 hours)
+- Try disconnecting and reconnecting your wallet
+
+### Alerts Not Working
+
+- Ensure your email is verified (check the dropdown status)
+- Make sure your wallet is connected
+- Check that you're using the same wallet address you registered
+
+### Connection Issues
+
+- Ensure your wallet is on the correct network (Devnet for testing, Mainnet for production)
+- Try disconnecting and reconnecting
+- Clear your browser cache and try again
+
+## Best Practices
+
+1. **Use a Dedicated Email**: Consider using a dedicated email for crypto-related alerts
+2. **Keep Email Verified**: Make sure your email stays verified to receive alerts
+3. **Monitor Regularly**: Check your wallet status periodically
+4. **Act Quickly**: If you receive an alert, take immediate action to secure your wallet
+
+## Support
+
+If you encounter issues or have questions:
+
+- Visit our [Documentation](/docs)
+- Check our [Safety Education](/safety-education) guides
+- Contact support through our website
+
+---
+
+**Remember**: Email alerts are a proactive security measure, but they should complement (not replace) other security practices like:
+- Using hardware wallets for large holdings
+- Never sharing your private keys or seed phrases
+- Regularly reviewing token approvals
+- Staying informed about common attack vectors
+
