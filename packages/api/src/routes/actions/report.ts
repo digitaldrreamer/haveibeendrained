@@ -61,7 +61,7 @@ app.get('/api/actions/report', (c) => {
   }, {
     headers: {
       'X-Action-Version': '1.0', // Solana Actions API version
-      'X-Blockchain-Ids': '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9H', // Solana mainnet chain ID
+      'X-Blockchain-Ids': 'solana', // Solana blockchain identifier
     }
   })
 })
