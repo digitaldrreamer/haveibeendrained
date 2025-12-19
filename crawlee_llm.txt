@@ -1,0 +1,555 @@
+# Crawlee - Web Scraping and Browser Automation Library
+
+## Overview
+Crawlee is a modern, open-source web scraping and browser automation library available for both JavaScript/TypeScript and Python. Built by Apify, it provides a unified interface for HTTP-based and headless browser crawling with built-in anti-blocking features, automatic scaling, and robust error handling.
+
+## Core Architecture
+
+### 1. Crawlers
+The main orchestrating component that manages the entire crawling process.
+
+**Base Class:**
+- `BasicCrawler` - Foundation for all crawlers, handles core functionality
+
+**HTTP Crawlers (Fast, no JavaScript rendering):**
+- `CheerioCrawler` (JS/TS) - Uses Cheerio HTML parser
+- `BeautifulSoupCrawler` (Python) - Uses BeautifulSoup parser
+- `ParselCrawler` (Python) - Uses Parsel parser
+- `HttpCrawler` (Python) - Raw HTTP without parsing
+- `JSDOMCrawler` (JS/TS) - Uses JSDOM parser
+
+**Browser Crawlers (JavaScript rendering, full browser automation):**
+- `PlaywrightCrawler` - Uses Playwright library (both JS/TS and Python)
+- `PuppeteerCrawler` (JS/TS only) - Uses Puppeteer library
+
+**Adaptive Crawler:**
+- `AdaptivePlaywrightCrawler` - Automatically switches between HTTP and browser modes based on heuristics
+
+**Key Crawler Features:**
+- Manages storages, request handlers, retries, and concurrency
+- Automatic scaling with available system resources
+- Integrated proxy rotation and session management
+- Persistent request queue (breadth-first or depth-first)
+- Configurable request routing and error handling
+- Zero-configuration browser fingerprinting
+
+### 2. Crawling Contexts
+Objects that encapsulate state and data for each request being processed.
+
+**Context Types:**
+- `BasicCrawlingContext` - Base context
+- `HttpCrawlingContext` - For HTTP crawlers
+- `BeautifulSoupCrawlingContext` - For BeautifulSoup crawler
+- `ParselCrawlingContext` - For Parsel crawler
+- `PlaywrightCrawlingContext` - For Playwright crawler
+- `PlaywrightPreNavCrawlingContext` - Before page navigation
+- `AdaptivePlaywrightCrawlingContext` - For adaptive crawler
+
+**Context Provides:**
+- Request and response data
+- Session information
+- Helper methods for data extraction
+- Storage interaction methods
+- Link enqueueing functionality
+
+### 3. Storages
+Three built-in storage types for data management:
+
+**Dataset:**
+- Append-only tabular storage for structured data
+- Ideal for storing scraping results
+- Methods: `push_data()`, `get_data()`, `export_data()`
+- Supports CSV and JSON export
+- Each item must have consistent schema
+
+**KeyValueStore:**
+- Key-value storage for arbitrary data
+- Use cases: screenshots, PDFs, images, configs, HTML snapshots
+- Methods: `set_value()`, `get_value()`
+- Supports binary data with content types
+- Updates only possible by replacement
+
+**RequestQueue:**
+- Managed queue for pending and completed requests
+- Automatic deduplication via `uniqueKey`
+- Dynamic addition of new URLs
+- Methods: `add_request()`, `fetch_next_request()`, `mark_request_handled()`
+- Supports breadth-first and depth-first crawling
+
+### 4. Storage Clients
+Backend implementations for storage systems:
+
+- `MemoryStorageClient` - In-memory (no persistence, testing)
+- `FileSystemStorageClient` - Local file system with caching (default)
+- `ApifyStorageClient` - Cloud-based Apify platform storage
+
+**Default Storage Location:** `./storage/` directory
+- `./storage/datasets/`
+- `./storage/key_value_stores/`
+- `./storage/request_queues/`
+
+### 5. Request Router
+Central component managing request flow and routing.
+
+**Router Features:**
+- `default_handler` - Fallback for requests without labels
+- Label-based routing - Handlers for specific request types
+- `error_handler` - Handles errors during processing
+- `failed_request_handler` - Handles requests exceeding retry limits
+- `pre_navigation_hook` - Execute logic before URL navigation
+
+**Example Pattern:**
+```python
+@crawler.router.default_handler
+async def default_handler(context):
+    # Handle all non-labeled requests
+    pass
+
+@crawler.router.handler('DETAIL')
+async def detail_handler(context):
+    # Handle requests with label 'DETAIL'
+    pass
+```
+
+### 6. Session Management
+Simulates individual users to avoid blocking.
+
+**SessionPool:**
+- Manages collection of sessions
+- Automatic rotation of cookies, IPs (proxies), and fingerprints
+- Session lifecycle: mark_good(), mark_bad(), retire()
+- Error tracking and usage limits
+- State persistence across restarts
+
+**Session Attributes:**
+- Unique cookies
+- Proxy assignment
+- Browser fingerprints
+- Error scores and usage counts
+- Expiration handling
+
+### 7. Proxy Management (ProxyConfiguration)
+Built-in proxy rotation system.
+
+**Features:**
+- Static proxy list with round-robin rotation
+- Custom proxy selection functions
+- Session-proxy pairing (same session = same proxy)
+- Support for proxy URLs with authentication
+- Integration with SessionPool
+
+**Example:**
+```python
+proxy_config = ProxyConfiguration(
+    proxy_urls=['http://proxy1.com', 'http://proxy2.com', None]
+)
+```
+
+### 8. Autoscaling and Concurrency
+Automatic resource management based on system availability.
+
+**AutoscaledPool:**
+- Monitors CPU and memory usage
+- Dynamically adjusts concurrency
+- Configuration: `min_concurrency`, `max_concurrency`, `desired_concurrency`
+- System status options: `max_used_memory_ratio`, `max_used_cpu_ratio`
+
+**Concurrency Settings:**
+- `max_requests_per_crawl` - Total request limit
+- `max_concurrency` - Maximum parallel requests
+- `max_request_retries` - Retry attempts per request (default: 3)
+
+### 9. Event Manager
+Coordinates internal events and custom hooks.
+
+**Built-in Events:**
+- `PERSIST_STATE` - Periodic state persistence
+- `SYSTEM_INFO` - CPU and memory metrics
+- `MIGRATING` - Environment migration
+- `ABORTING` - Crawler abort
+- `EXIT` - Crawler exit
+- `CRAWLER_STATUS` - Status updates
+
+**Implementations:**
+- `EventManager` - Base class
+- `LocalEventManager` - Local environments with system metrics
+- `ApifyEventManager` - Apify platform events
+
+### 10. Service Locator
+Central registry for global services.
+
+**Manages:**
+- `Configuration` - Application-wide settings
+- `StorageClient` - Backend storage implementation
+- `EventManager` - Event coordination
+
+**Features:**
+- Conflict prevention mechanisms
+- Global service registration
+- Consistent configuration across components
+
+### 11. Request Loaders
+Specialized components for reading request streams.
+
+**RequestList:**
+- Lightweight in-memory URL management
+- Static list of URLs
+- Read-only access
+
+**SitemapRequestLoader:**
+- Reads URLs from XML/text sitemaps
+- Follows Sitemaps protocol
+- Filtering capabilities
+
+**RequestManagerTandem:**
+- Combines RequestLoader with RequestManager
+- Processes static URLs first, then dynamic additions
+- Hybrid scenario support
+
+### 12. Statistics and Monitoring
+Runtime performance tracking.
+
+**Statistics Class:**
+- Request counts (total, handled, failed)
+- Processing times
+- Retry attempts
+- Error patterns
+
+**ErrorTracker:**
+- Groups similar errors
+- Wildcard pattern matching
+- HTML snapshots and screenshots for debugging
+- Retry-specific error tracking
+
+**Output:**
+- Configurable logging intervals
+- Table and inline formats
+- Final summary via `FinalStatistics`
+
+### 13. Browser Fingerprinting
+Zero-configuration human-like fingerprints.
+
+**Features:**
+- Automatic fingerprint generation
+- Based on real browser data
+- Configurable browser types, devices, OS
+- Available in PlaywrightCrawler and PuppeteerCrawler
+- Also works with HTTP crawlers (CheerioCrawler)
+
+**Customization:**
+```javascript
+const crawler = new PlaywrightCrawler({
+    browserPoolOptions: {
+        fingerprintOptions: {
+            fingerprintGeneratorOptions: {
+                browsers: ['chrome', 'firefox'],
+                devices: ['mobile', 'desktop'],
+                operatingSystems: ['windows', 'macos']
+            }
+        }
+    }
+});
+```
+
+### 14. HTTP Clients
+Underlying HTTP communication handlers.
+
+**Python Options:**
+- `httpx` - Standard HTTP library
+- `curl-impersonate` - Mimics real browsers
+- `impit` - Alternative HTTP client
+
+**Features:**
+- Automatic header generation
+- Request/response handling
+- Cookie management
+- Connection pooling
+
+## Key Features
+
+### Anti-Blocking Capabilities
+1. **Proxy Rotation** - Automatic IP rotation
+2. **Session Management** - User-like sessions with cookies
+3. **Browser Fingerprints** - Human-like browser attributes
+4. **Smart Retries** - Automatic retry on failures
+5. **Rate Limiting** - Configurable delays between requests
+6. **Header Generation** - Auto-generated realistic headers
+
+### Data Extraction Helpers
+1. **enqueueLinks()** - Automatically find and add links to queue
+   - Selector-based link discovery
+   - Label assignment for routing
+   - Strategy: 'same-domain', 'same-hostname', 'same-origin', 'all'
+   - Base URL resolution
+
+2. **push_data()** - Store scraped data to dataset
+   - Automatic JSON serialization
+   - Batch operations supported
+   - Size limit: 9MB per item
+
+3. **export_data()** - Export dataset to file
+   - Formats: CSV, JSON
+   - Entire dataset in single file
+   - Location: `./storage/key_value_stores/default/`
+
+### Error Handling
+1. **Automatic Retries** - Failed requests retried up to `max_request_retries` times
+2. **Error Handlers** - Custom error handling logic
+3. **Failed Request Handlers** - Handle requests exceeding retry limits
+4. **Error Tracking** - Statistics and logging
+5. **Request Reclaim** - Return failed requests to queue
+
+### Lifecycle Hooks
+**Browser Pool Hooks:**
+- `preLaunchHooks` - Before browser launch
+- `postLaunchHooks` - After browser launch
+- `postPageCreateHooks` - After page creation
+- `prePageCloseHooks` - Before page close
+
+**Purpose:**
+- Dynamic launch option changes
+- Global page modifications (inject JavaScript)
+- Custom logging
+- State snapshots
+
+## Installation
+
+### JavaScript/TypeScript
+```bash
+npm install crawlee
+```
+
+### Python
+```bash
+pip install 'crawlee[all]'
+playwright install
+```
+
+### Crawlee CLI
+```bash
+# JavaScript
+npx crawlee create my-crawler
+
+# Python
+uvx 'crawlee[cli]' create my-crawler
+```
+
+## Basic Usage Patterns
+
+### JavaScript/TypeScript Example
+```javascript
+import { PlaywrightCrawler } from 'crawlee';
+
+const crawler = new PlaywrightCrawler({
+    async requestHandler({ page, request, enqueueLinks, pushData }) {
+        const title = await page.title();
+        await pushData({ url: request.url, title });
+        await enqueueLinks({ selector: 'a', label: 'DETAIL' });
+    },
+    maxRequestsPerCrawl: 50,
+});
+
+await crawler.run(['https://example.com']);
+```
+
+### Python Example
+```python
+import asyncio
+from crawlee.crawlers import PlaywrightCrawler, PlaywrightCrawlingContext
+
+async def main():
+    crawler = PlaywrightCrawler(max_requests_per_crawl=50)
+
+    @crawler.router.default_handler
+    async def request_handler(context: PlaywrightCrawlingContext):
+        title = await context.page.title()
+        await context.push_data({'url': context.request.url, 'title': title})
+        await context.enqueue_links(selector='a', label='DETAIL')
+
+    await crawler.run(['https://example.com'])
+
+if __name__ == '__main__':
+    asyncio.run(main())
+```
+
+## Crawler Type Selection Guide
+
+### Use CheerioCrawler/BeautifulSoupCrawler when:
+- Scraping static HTML content
+- No JavaScript rendering needed
+- Maximum speed required (10-50x faster)
+- Low memory footprint critical (90% less memory)
+- Simple HTML parsing sufficient
+
+### Use PlaywrightCrawler/PuppeteerCrawler when:
+- JavaScript rendering required
+- Dynamic content loading
+- User interactions needed (clicks, scrolling)
+- Screenshots or PDFs needed
+- Complex SPA (Single Page Applications)
+
+### Use AdaptivePlaywrightCrawler when:
+- Mixed content types (static and dynamic)
+- Optimization for performance and compatibility
+- Automatic mode selection preferred
+
+## Configuration Options
+
+### Common Crawler Options
+- `request_handler` - Main processing function
+- `request_handler_timeout` - Handler timeout duration
+- `max_request_retries` - Retry attempts (default: 3)
+- `max_requests_per_crawl` - Total request limit
+- `max_concurrency` - Parallel request limit
+- `proxy_configuration` - Proxy settings
+- `session_pool_options` - Session management
+- `use_session_pool` - Enable session pooling
+- `persist_cookies_per_session` - Cookie persistence
+
+### Browser-Specific Options
+- `headless` - Headless mode (default: true)
+- `browser_type` - 'chromium', 'firefox', 'webkit'
+- `launch_options` - Browser launch configuration
+- `browser_pool_options` - Browser pool settings
+- `fingerprint_options` - Fingerprint generation
+
+### Storage Configuration
+- `storage_dir` - Storage location (default: './storage')
+- `persist_storage` - Persist between runs
+- `purge_on_start` - Clear storage before run
+- `write_metadata` - Enable metadata writing
+
+### Autoscaling Configuration
+- `autoscaled_pool_options`:
+  - `min_concurrency` - Minimum parallel tasks
+  - `max_concurrency` - Maximum parallel tasks
+  - `desired_concurrency` - Initial concurrency
+  - `system_status_options`:
+    - `max_used_memory_ratio` - Memory threshold (0-1)
+    - `max_used_cpu_ratio` - CPU threshold (0-1)
+
+## Data Management Best Practices
+
+### For Large Datasets
+1. **Batch Writing** - Use arrays in `push_data()` for multiple items
+2. **Streaming** - Process and write in chunks to reduce memory
+3. **Pagination** - Read large datasets in chunks with `offset` and `limit`
+4. **Memory Management** - Configure `max_used_memory_ratio`
+5. **Disable Metadata** - Set `write_metadata: false` for performance
+
+### Storage Strategies
+1. **Datasets** - Structured tabular data (JSON records)
+2. **Key-Value Store** - Binary files, large objects, screenshots
+3. **Request Queue** - URL management with deduplication
+
+## Advanced Patterns
+
+### Multi-Stage Crawling
+```javascript
+router.addDefaultHandler(async ({ enqueueLinks }) => {
+    await enqueueLinks({ selector: 'a.product', label: 'DETAIL' });
+});
+
+router.addHandler('DETAIL', async ({ $, pushData }) => {
+    const data = { title: $('h1').text() };
+    await pushData(data);
+});
+```
+
+### Custom Fingerprints
+```python
+from crawlee.fingerprint_generator import DefaultFingerprintGenerator
+
+fingerprint_generator = DefaultFingerprintGenerator(
+    header_options=HeaderGeneratorOptions(browsers=['chrome']),
+    screen_options=ScreenOptions(min_width=400)
+)
+
+crawler = PlaywrightCrawler(
+    fingerprint_generator=fingerprint_generator
+)
+```
+
+### Screenshot Capture
+```python
+kvs = await KeyValueStore.open()
+screenshot = await context.page.screenshot(full_page=True)
+await kvs.set_value(
+    key=f'screenshot-{name}',
+    value=screenshot,
+    content_type='image/png'
+)
+```
+
+### Request Prioritization
+```javascript
+await requestQueue.addRequest({
+    url: 'https://example.com',
+    userData: { label: 'DETAIL' }
+}, { forefront: true }); // Add to front of queue
+```
+
+## Performance Optimization
+
+1. **Choose Right Crawler** - HTTP crawlers when possible
+2. **Adjust Concurrency** - Based on target site and resources
+3. **Use Session Pool** - Better than raw proxy rotation
+4. **Batch Operations** - Group data writes
+5. **Disable Unnecessary Features** - Metadata, screenshots if not needed
+6. **Monitor Resources** - CPU/memory thresholds
+7. **Request Filtering** - Use `enqueue_strategy` to limit scope
+
+## Docker Deployment
+Crawlee includes ready-to-use Dockerfiles for deployment:
+```bash
+docker build -t my-crawler .
+docker run my-crawler
+```
+
+## Community and Support
+- GitHub: https://github.com/apify/crawlee
+- Documentation: https://crawlee.dev
+- Discord: Community support channel
+- API Reference: Comprehensive TypeScript/Python API docs
+- Examples: Extensive example collection in docs
+
+## Language-Specific Notes
+
+### JavaScript/TypeScript
+- Full TypeScript support with type definitions
+- Async/await throughout
+- ES Modules and CommonJS support
+- npm package: `crawlee`
+
+### Python
+- Type hints for Python 3.10+
+- Async/await with asyncio
+- PyPI package: `crawlee[all]`
+- Optional extras: `crawlee[beautifulsoup]`, `crawlee[playwright]`
+
+## Common Use Cases
+1. E-commerce product scraping
+2. Price monitoring and comparison
+3. Content aggregation
+4. Market research and data analysis
+5. SEO and website auditing
+6. Job board scraping
+7. Real estate listing collection
+8. News and article aggregation
+9. Social media data extraction
+10. Research data collection
+
+## Important Limits and Constraints
+- Dataset item size: 9MB max
+- Request queue: Automatic deduplication via `uniqueKey`
+- Default retries: 3 attempts
+- Storage cleared by default before each run
+- Browser pool manages browser lifecycle automatically
+- Session expiration based on error score and usage count
+
+## Integration with Apify Platform
+- Seamless cloud deployment
+- ApifyStorageClient for cloud storage
+- Actor integration
+- Automatic scaling on Apify infrastructure
+- Shared request queues and datasets
