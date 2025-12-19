@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Developer Resources</h1>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto mb-8">
+          Integrate Have I Been Drained into your applications with our API and widgets
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- API Documentation Card -->
+        <a href="/developers/api" class="group">
+          <div class="bg-surface rounded-xl border border-slate-700/50 p-8 hover:border-primary/50 transition-all hover:shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-primary/30 transition-colors">
+                <span class="text-2xl">📡</span>
+              </div>
+              <h2 class="text-2xl font-bold">API Documentation</h2>
+            </div>
+            <p class="text-text-muted mb-4">
+              Comprehensive REST API for programmatic access to wallet security analysis. 
+              Check drainer status, perform full wallet analysis, and integrate security checks into your applications.
+            </p>
+            <div class="flex items-center text-primary group-hover:underline">
+              <span>View API Docs</span>
+              <span class="ml-2">→</span>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-slate-900/50 rounded-full text-xs text-text-muted">REST API</span>
+              <span class="px-3 py-1 bg-slate-900/50 rounded-full text-xs text-text-muted">OpenAPI</span>
+              <span class="px-3 py-1 bg-slate-900/50 rounded-full text-xs text-text-muted">Rate Limited</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- HTML Widget Card -->
+        <a href="/developers/html-widget" class="group">
+          <div class="bg-surface rounded-xl border border-slate-700/50 p-8 hover:border-primary/50 transition-all hover:shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-primary/30 transition-colors">
+                <span class="text-2xl">🔌</span>
+              </div>
+              <h2 class="text-2xl font-bold">HTML Widget</h2>
+            </div>
+            <p class="text-text-muted mb-4">
+              Embed a ready-to-use wallet security checker widget into your website. 
+              Simple copy-paste integration with customizable styling and no backend required.
+            </p>
+            <div class="flex items-center text-primary group-hover:underline">
+              <span>View Widget Docs</span>
+              <span class="ml-2">→</span>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-slate-900/50 rounded-full text-xs text-text-muted">Embeddable</span>
+              <span class="px-3 py-1 bg-slate-900/50 rounded-full text-xs text-text-muted">Customizable</span>
+              <span class="px-3 py-1 bg-slate-900/50 rounded-full text-xs text-text-muted">Zero Config</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Quick Start Section -->
+      <section class="max-w-4xl mx-auto mt-16">
+        <div class="bg-surface rounded-xl border border-slate-700/50 p-8">
+          <h2 class="text-2xl font-bold mb-4">Quick Start</h2>
+          <p class="text-text-muted mb-6">
+            Get started with our API in minutes. Check if an address is a known drainer:
+          </p>
+          <div class="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-sm"><code>curl -X GET "https://api.haveibeendrained.com/check?address=YOUR_WALLET_ADDRESS" \
+  -H "User-Agent: MyApp/1.0.0 (contact@example.com)"</code></pre>
+          </div>
+          <p class="text-sm text-text-muted mt-4">
+            For more examples and detailed documentation, visit the <a href="/developers/api" class="text-primary hover:underline">API Documentation</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="max-w-5xl mx-auto mt-16">
+        <h2 class="text-3xl font-bold text-center mb-8">Why Integrate?</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="text-center p-6 bg-slate-900/50 rounded-xl">
+            <div class="text-3xl mb-3">⚡</div>
+            <h3 class="font-semibold mb-2">Fast & Reliable</h3>
+            <p class="text-sm text-text-muted">
+              Sub-second response times with 99.9% uptime SLA
+            </p>
+          </div>
+          <div class="text-center p-6 bg-slate-900/50 rounded-xl">
+            <div class="text-3xl mb-3">🛡️</div>
+            <h3 class="font-semibold mb-2">Secure by Default</h3>
+            <p class="text-sm text-text-muted">
+              Built-in rate limiting and authentication options
+            </p>
+          </div>
+          <div class="text-center p-6 bg-slate-900/50 rounded-xl">
+            <div class="text-3xl mb-3">📊</div>
+            <h3 class="font-semibold mb-2">Comprehensive</h3>
+            <p class="text-sm text-text-muted">
+              Full wallet analysis with detailed risk scoring
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
