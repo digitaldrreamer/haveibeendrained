@@ -8,6 +8,11 @@
     "light": "#5B7FFF",
     "dark": "#2E4FFF"
   },
+  "logo": {
+    "light": "/logo/logo.svg",
+    "dark": "/logo/logo.svg",
+    "href": "https://haveibeendrained.org"
+  },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
