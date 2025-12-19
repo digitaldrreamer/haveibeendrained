@@ -41,6 +41,12 @@
               "user-guide/reporting-drainers",
               "user-guide/solana-actions"
             ]
+          },
+          {
+            "group": "Browser Extensions",
+            "pages": [
+              "user-guide/browser-extensions"
+            ]
           }
         ]
       },

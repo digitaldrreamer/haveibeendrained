@@ -68,9 +68,7 @@ packages/frontend/
 │   ├── layouts/        # Page layouts
 │   │   └── Layout.astro
 │   ├── pages/          # Route pages
-│   │   ├── index.astro
-│   │   └── developers/
-│   │       └── index.astro
+│   │   └── index.astro
 │   └── styles/         # Global styles
 │       └── global.css
 └── package.json
@@ -99,13 +97,12 @@ Main landing page with:
 - Features showcase
 - Call-to-action sections
 
-### Developers (`/developers`)
+### Documentation
 
-Developer resources page with:
-- API documentation
-- Integration guides
-- Code examples
-- HTML widget documentation
+Developer resources are available at:
+- [Documentation](https://docs.haveibeendrained.org) - Full documentation site
+- [API Reference](https://docs.haveibeendrained.org/api-reference) - API endpoints and integration guides
+- [Safety Education](https://docs.haveibeendrained.org/safety-education) - Learn about security threats
 
 ## 🎨 Styling
 

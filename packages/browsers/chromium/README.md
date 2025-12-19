@@ -13,20 +13,69 @@ A simple Chrome extension to check Solana wallet addresses for security threats 
 
 ## Installation
 
-### From Source (Development)
+### Method 1: From Chrome Web Store (Recommended)
 
-1. Clone the repository and navigate to the extension directory:
+🚧 **Coming Soon** - The extension will be available on the Chrome Web Store soon.
+
+### Method 2: From Source (Development)
+
+Follow these steps to install the extension from source:
+
+#### Step 1: Get the Extension Files
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/digitaldrreamer/haveibeendrained.git
+   cd haveibeendrained/packages/browsers/chromium
+   ```
+
+   Or if you already have the repository:
    ```bash
    cd packages/browsers/chromium
    ```
 
-2. Open Chrome and navigate to `chrome://extensions/`
+#### Step 2: Open Chrome Extensions Page
 
-3. Enable "Developer mode" (toggle in top right)
+1. Open Google Chrome (or any Chromium-based browser)
+2. Navigate to the extensions page using one of these methods:
+   - Type `chrome://extensions/` in the address bar
+   - Or go to Menu (⋮) → Extensions → Manage extensions
 
-4. Click "Load unpacked" and select this directory
+#### Step 3: Enable Developer Mode
 
-5. The extension should now appear in your extensions list
+1. Look for the "Developer mode" toggle in the top-right corner
+2. Toggle it **ON** (it should turn blue/highlighted)
+
+#### Step 4: Load the Extension
+
+1. Click the **"Load unpacked"** button (appears after enabling Developer mode)
+2. Navigate to and select the `chromium` directory:
+   ```
+   packages/browsers/chromium
+   ```
+3. Click **"Select Folder"** (or "Open" on Mac/Linux)
+
+#### Step 5: Verify Installation
+
+1. The extension should now appear in your extensions list
+2. You should see "Have I Been Drained?" with version 1.0.0
+3. The extension icon should appear in your browser toolbar
+
+#### Troubleshooting
+
+**Extension not appearing?**
+- Make sure you selected the `chromium` folder (not the parent `browsers` folder)
+- Check that `manifest.json` exists in the selected folder
+- Try refreshing the extensions page
+
+**Errors in console?**
+- Open the extension details and check "Errors" section
+- Ensure all files (popup.html, popup.js, popup.css) are present
+- Check that icons are in the `icons/` folder
+
+**Can't find "Load unpacked"?**
+- Make sure Developer mode is enabled (toggle should be ON)
+- Try refreshing the extensions page
 
 ### Usage
 

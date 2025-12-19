@@ -373,7 +373,7 @@ function showResults(data) {
   document.getElementById('viewDetails').addEventListener('click', () => {
     const address = elements.addressInput.value.trim();
     chrome.tabs.create({
-      url: `https://haveibeendrained.org/check?address=${encodeURIComponent(address)}`
+      url: `https://haveibeendrained.org/?address=${encodeURIComponent(address)}`
     });
   });
 }

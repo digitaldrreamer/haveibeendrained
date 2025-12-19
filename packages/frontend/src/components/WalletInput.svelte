@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import ResultCard from './ResultCard.svelte';
   import { ApiClient, isValidSolanaAddress, type RiskReport } from '@haveibeendrained/shared';
 
@@ -48,6 +49,26 @@
     showResults = !!result;
     isLoading = false;
   }
+
+  // Read query parameter and auto-check on mount
+  onMount(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const addressParam = urlParams.get('address');
+      
+      if (addressParam) {
+        address = addressParam.trim();
+        isValid = address.length > 0 && isValidSolanaAddress(address);
+        
+        // Auto-check if address is valid
+        if (isValid) {
+          handleSubmit();
+        } else {
+          error = 'Invalid Solana address in URL';
+        }
+      }
+    }
+  });
 </script>
 
 <div class="w-full max-w-md mx-auto transition-all duration-500" class:max-w-2xl={showResults}>

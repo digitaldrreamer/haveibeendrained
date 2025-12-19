@@ -1,0 +1,299 @@
+---
+title: "Browser Extensions"
+description: "Install and use browser extensions to check wallet security directly from your browser"
+---
+
+## Overview
+
+Have I Been Drained? offers browser extensions that let you quickly check Solana wallet addresses for security threats without leaving your browser. The extensions provide the same powerful security analysis as the web interface, right at your fingertips.
+
+<Card
+  title="Quick Check"
+  icon="bolt"
+  href="#installation"
+>
+  Install the extension and check wallets in seconds.
+</Card>
+
+## Available Extensions
+
+<CardGroup cols={2}>
+  <Card
+    title="Chrome Extension"
+    icon="chrome"
+    href="#chrome-installation"
+  >
+    ✅ Available now for Chrome, Edge, Brave, and Opera
+  </Card>
+  <Card
+    title="Firefox Extension"
+    icon="firefox"
+    href="#firefox-extension"
+  >
+    🚧 Coming soon
+  </Card>
+</CardGroup>
+
+## Chrome Extension
+
+### Features
+
+- ✅ **Instant Wallet Checking** - Check any Solana wallet address in seconds
+- 🎨 **Clean Interface** - Modern, accessible UI that follows Chrome best practices
+- 🌙 **Dark Mode** - Automatically respects your system theme preferences
+- ⚡ **Lightweight** - Minimal permissions, no background scripts running
+- ♿ **Accessible** - Full keyboard navigation and screen reader support
+- ⚙️ **Configurable** - Set custom API endpoints for development
+
+### Installation
+
+#### From Chrome Web Store (Recommended)
+
+🚧 **Coming Soon** - The extension will be available on the Chrome Web Store for easy one-click installation.
+
+#### From Source (Development)
+
+If you want to install the extension from source (for development or before the Chrome Web Store release):
+
+<Steps>
+<Step title="Get the extension files">
+
+Clone the repository or navigate to the extension directory:
+
+```bash
+git clone https://github.com/digitaldrreamer/haveibeendrained.git
+cd haveibeendrained/packages/browsers/chromium
+```
+
+</Step>
+
+<Step title="Open Chrome Extensions page">
+
+1. Open Google Chrome (or Edge, Brave, Opera)
+2. Navigate to `chrome://extensions/`
+   - Or: Menu (⋮) → Extensions → Manage extensions
+
+</Step>
+
+<Step title="Enable Developer mode">
+
+1. Find the "Developer mode" toggle in the top-right corner
+2. Toggle it **ON** (it will turn blue/highlighted)
+
+</Step>
+
+<Step title="Load the extension">
+
+1. Click the **"Load unpacked"** button
+2. Navigate to and select the `chromium` folder:
+   ```
+   packages/browsers/chromium
+   ```
+3. Click **"Select Folder"**
+
+</Step>
+
+<Step title="Verify installation">
+
+1. The extension should appear in your extensions list
+2. The extension icon should appear in your browser toolbar
+3. Click the icon to open the extension popup
+
+</Step>
+</Steps>
+
+### Usage
+
+<Steps>
+<Step title="Open the extension">
+
+Click the "Have I Been Drained?" icon in your browser toolbar.
+
+</Step>
+
+<Step title="Enter wallet address">
+
+1. Type or paste a Solana wallet address into the input field
+2. Or click the paste button (📋) to paste from clipboard
+
+</Step>
+
+<Step title="Check address">
+
+Click the "Check Address" button to start the security analysis.
+
+</Step>
+
+<Step title="View results">
+
+The extension will display:
+- Overall risk score (0-100)
+- Severity level (SAFE, AT_RISK, DRAINED)
+- Detected threats and suspicious activities
+- Actionable recommendations
+
+</Step>
+</Steps>
+
+### Configuration
+
+#### Custom API Endpoint
+
+For local development or custom API deployments:
+
+1. Click the settings icon (⚙️) in the extension popup
+2. Enter your custom API endpoint (e.g., `http://localhost:3001`)
+3. Click "Save"
+
+**Default endpoint:** `https://api.haveibeendrained.org`
+
+<Warning>
+Only change the API endpoint if you're running a local development server or have a custom deployment. The default endpoint is the production API.
+</Warning>
+
+### Browser Compatibility
+
+The Chrome extension works with all Chromium-based browsers:
+
+- ✅ **Chrome** 88+
+- ✅ **Microsoft Edge** 88+
+- ✅ **Brave** (all versions)
+- ✅ **Opera** (Chromium-based versions)
+
+### Permissions
+
+The extension requests minimal permissions:
+
+- **Storage** - Saves your API endpoint preference locally
+- **Host Permissions** - Access to `api.haveibeendrained.org` and `localhost:3001` for wallet checks
+
+<Info>
+The extension does not:
+- Run background scripts
+- Track your browsing
+- Collect personal data
+- Access your wallet or private keys
+</Info>
+
+### Security
+
+The extension is designed with security and privacy in mind:
+
+- ✅ No background scripts or persistent connections
+- ✅ API calls only when you initiate a check
+- ✅ Settings stored locally in your browser
+- ✅ No data collection or tracking
+- ✅ Open source code for transparency
+
+## Firefox Extension
+
+<Warning>
+The Firefox extension is currently in development and will be available soon. Check back for updates!
+</Warning>
+
+### Coming Features
+
+The Firefox extension will include:
+
+- Same features as the Chrome extension
+- Firefox-specific optimizations
+- Full compatibility with Firefox's extension architecture
+
+<Card
+  title="Get Notified"
+  icon="bell"
+  href="https://github.com/digitaldrreamer/haveibeendrained"
+>
+  Star the repository to get notified when the Firefox extension is released.
+</Card>
+
+## Troubleshooting
+
+### Extension Not Loading
+
+**Problem:** Extension doesn't appear after loading
+
+**Solutions:**
+- Make sure you selected the `chromium` folder (not the parent `browsers` folder)
+- Verify `manifest.json` exists in the selected folder
+- Check that all required files are present (popup.html, popup.js, popup.css)
+- Try refreshing the extensions page (`chrome://extensions/`)
+
+### Can't Find "Load Unpacked" Button
+
+**Problem:** "Load unpacked" button is missing
+
+**Solutions:**
+- Ensure Developer mode is enabled (toggle should be ON and highlighted)
+- Try refreshing the extensions page
+- Make sure you're using Chrome 88+ or a compatible Chromium browser
+
+### API Errors
+
+**Problem:** Getting errors when checking addresses
+
+**Solutions:**
+- Verify your internet connection
+- Check that the API endpoint is correct in settings
+- Try the default endpoint: `https://api.haveibeendrained.org`
+- Check the browser console for detailed error messages
+
+### Extension Icon Not Appearing
+
+**Problem:** Extension is installed but icon doesn't show in toolbar
+
+**Solutions:**
+- Click the puzzle piece icon (🧩) in Chrome toolbar
+- Find "Have I Been Drained?" in the list
+- Click the pin icon to pin it to the toolbar
+- Or drag it to your preferred position
+
+## Keyboard Shortcuts
+
+The extension supports full keyboard navigation:
+
+- **Tab** - Navigate between elements
+- **Enter** - Submit the form or activate buttons
+- **Escape** - Close the popup
+- **Ctrl/Cmd + V** - Paste address from clipboard
+
+## Support
+
+Need help with the browser extension?
+
+<CardGroup cols={2}>
+  <Card
+    title="GitHub Issues"
+    icon="github"
+    href="https://github.com/digitaldrreamer/haveibeendrained/issues"
+  >
+    Report bugs or request features
+  </Card>
+  <Card
+    title="Email Support"
+    icon="mail"
+    href="mailto:support@haveibeendrained.org"
+  >
+    Get help via email
+  </Card>
+</CardGroup>
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card
+    title="Checking Your Wallet"
+    icon="shield"
+    href="/user-guide/checking-your-wallet"
+  >
+    Learn how to check wallets on the web
+  </Card>
+  <Card
+    title="Understanding Results"
+    icon="chart-line"
+    href="/user-guide/understanding-results"
+  >
+    Understand what your risk score means
+  </Card>
+</CardGroup>
+
