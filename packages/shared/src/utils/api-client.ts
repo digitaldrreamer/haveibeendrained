@@ -132,8 +132,19 @@ export class ApiClient {
 }
 
 /**
- * Default API client instance
+ * Create an API client instance for browser environments
+ * Use import.meta.env in Astro/Vite projects
+ * 
+ * @example
+ * ```typescript
+ * // In browser/Astro/Vite:
+ * const apiClient = new ApiClient({
+ *   baseUrl: import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost:3001'
+ * });
+ * 
+ * // In Node.js:
+ * const apiClient = new ApiClient({
+ *   baseUrl: process.env.API_BASE_URL || 'http://localhost:3001'
+ * });
+ * ```
  */
-export const defaultApiClient = new ApiClient({
-  baseUrl: process.env.API_BASE_URL || 'http://localhost:3001',
-});
