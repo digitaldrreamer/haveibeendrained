@@ -47,8 +47,8 @@ const DEMO_WALLETS = {
   },
 
   // At-risk wallet (unlimited approvals)
-  'ATRISK1111111111111111111111111111111': {
-    address: 'ATRISK1111111111111111111111111111111',
+  '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU': {
+    address: '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU',
     riskScore: 65,
     severity: 'AT_RISK',
     transactionCount: 12,
@@ -57,8 +57,8 @@ const DEMO_WALLETS = {
         type: 'UNLIMITED_APPROVAL',
         severity: 'HIGH',
         confidence: 90,
-        affectedAccounts: ['TokenAccount1111111111111111111111111'],
-        suspiciousRecipients: ['DrainerAddress111111111111111111111111'],
+        affectedAccounts: ['EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'],
+        suspiciousRecipients: ['5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1'],
         recommendations: [
           '⚠️ Revoke unlimited approvals immediately',
           'Check token approvals in your wallet',
@@ -81,8 +81,8 @@ const DEMO_WALLETS = {
   },
 
   // Drained wallet (SetAuthority attack + known drainer)
-  'DRAINED111111111111111111111111111111': {
-    address: 'DRAINED111111111111111111111111111111',
+  '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM': {
+    address: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
     riskScore: 95,
     severity: 'DRAINED',
     transactionCount: 8,
@@ -91,8 +91,8 @@ const DEMO_WALLETS = {
         type: 'SET_AUTHORITY',
         severity: 'CRITICAL',
         confidence: 95,
-        affectedAccounts: ['TokenAccount2222222222222222222222222'],
-        suspiciousRecipients: ['DrainerAddress222222222222222222222222'],
+        affectedAccounts: ['EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'],
+        suspiciousRecipients: ['9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'],
         recommendations: [
           '🚨 CRITICAL: Account ownership transferred',
           'Your token account ownership has been transferred',
@@ -106,7 +106,7 @@ const DEMO_WALLETS = {
         severity: 'CRITICAL',
         confidence: 100,
         affectedAccounts: [],
-        suspiciousRecipients: ['DrainerAddress222222222222222222222222'],
+        suspiciousRecipients: ['9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'],
         domains: ['malicious-drainer.com'],
         recommendations: [
           '🚨 CRITICAL: Interacted with known drainer',
@@ -131,8 +131,8 @@ const DEMO_WALLETS = {
   },
 
   // Known drainer interaction
-  'DRAINER111111111111111111111111111111': {
-    address: 'DRAINER111111111111111111111111111111',
+  '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1': {
+    address: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
     riskScore: 85,
     severity: 'AT_RISK',
     transactionCount: 15,
@@ -142,7 +142,7 @@ const DEMO_WALLETS = {
         severity: 'CRITICAL',
         confidence: 100,
         affectedAccounts: [],
-        suspiciousRecipients: ['DrainerAddress333333333333333333333333'],
+        suspiciousRecipients: ['5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1'],
         domains: ['phishing-site.com', 'fake-solana-wallet.com'],
         recommendations: [
           '🚨 CRITICAL: Interacted with known drainer',
@@ -312,6 +312,59 @@ async function handleCheck() {
     }
 
     const data = await response.json();
+    
+    // * Convert drainer response to RiskReport format if needed
+    if (data.type === 'drainer' && data.data) {
+      const drainerData = data.data;
+      const riskReport = {
+        overallRisk: 100,
+        severity: 'DRAINED',
+        detections: [
+          {
+            type: 'KNOWN_DRAINER',
+            severity: 'CRITICAL',
+            confidence: 100,
+            affectedAccounts: [],
+            suspiciousRecipients: [drainerData.drainerAddress],
+            recommendations: [
+              '🚨 CRITICAL: This address is a known drainer',
+              `This address has ${drainerData.reportCount} report(s) in our on-chain registry`,
+              `Total SOL reported stolen: ${drainerData.totalSolReported?.toFixed(4) || '0'} SOL`,
+              'DO NOT interact with this address',
+              'DO NOT approve any transactions from this address',
+            ],
+            timestamp: drainerData.lastSeen ? new Date(drainerData.lastSeen).getTime() / 1000 : Math.floor(Date.now() / 1000),
+            drainerAddress: drainerData.drainerAddress,
+          },
+        ],
+        recommendations: [
+          '🚨 CRITICAL: This address is a known drainer',
+          'DO NOT interact with this address under any circumstances',
+          'DO NOT approve any transactions from this address',
+          'Report any suspicious activity involving this address',
+        ],
+        walletAddress: drainerData.drainerAddress,
+        transactionCount: 0,
+        affectedAssets: {
+          tokens: [],
+          nfts: [],
+          sol: drainerData.totalSolReported || 0,
+        },
+        analyzedAt: Date.now(),
+      };
+      
+      // Format to match expected structure
+      data = {
+        success: true,
+        data: riskReport,
+        overallRisk: riskReport.overallRisk,
+        severity: riskReport.severity,
+        detections: riskReport.detections,
+        recommendations: riskReport.recommendations,
+        timestamp: data.timestamp || Date.now(),
+      };
+    }
+    
     showResults(data);
   } catch (err) {
     console.error('Check failed:', err);
