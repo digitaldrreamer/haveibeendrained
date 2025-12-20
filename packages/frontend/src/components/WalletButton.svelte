@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import WalletConnectIsland from './WalletConnectIsland.astro';
   import ProfileDropdown from './ProfileDropdown.svelte';
 
   let walletAddress: string | null = null;
@@ -23,14 +22,45 @@
       }
     }
 
+    // Show wallet connect island if no wallet connected
+    // Use setTimeout to ensure DOM is ready after client:load
+    const updateWalletDisplay = () => {
+      if (!walletAddress) {
+        const desktopContainer = document.getElementById('wallet-connect-desktop');
+        const mobileContainer = document.getElementById('wallet-connect-mobile');
+        if (desktopContainer) desktopContainer.style.display = 'flex';
+        if (mobileContainer) mobileContainer.style.display = 'flex';
+      } else {
+        const desktopContainer = document.getElementById('wallet-connect-desktop');
+        const mobileContainer = document.getElementById('wallet-connect-mobile');
+        if (desktopContainer) desktopContainer.style.display = 'none';
+        if (mobileContainer) mobileContainer.style.display = 'none';
+      }
+    };
+    
+    // Try immediately and also after a delay
+    updateWalletDisplay();
+    setTimeout(updateWalletDisplay, 100);
+    setTimeout(updateWalletDisplay, 500);
+
     // Listen for wallet connection events
     const handleWalletConnected = (event: CustomEvent) => {
       const { walletAddress: addr, email: em } = event.detail;
       handleConnected(addr, em);
+      // Hide wallet connect islands
+      const desktopContainer = document.getElementById('wallet-connect-desktop');
+      const mobileContainer = document.getElementById('wallet-connect-mobile');
+      if (desktopContainer) desktopContainer.style.display = 'none';
+      if (mobileContainer) mobileContainer.style.display = 'none';
     };
 
     const handleWalletDisconnected = () => {
       handleDisconnected();
+      // Show wallet connect islands
+      const desktopContainer = document.getElementById('wallet-connect-desktop');
+      const mobileContainer = document.getElementById('wallet-connect-mobile');
+      if (desktopContainer) desktopContainer.style.display = 'flex';
+      if (mobileContainer) mobileContainer.style.display = 'flex';
     };
 
     window.addEventListener('wallet-connected', handleWalletConnected as EventListener);
@@ -87,17 +117,7 @@
       {verified}
       onDisconnect={handleDisconnected}
     />
-  {:else}
-    <div class="wallet-button-wrapper">
-      <WalletConnectIsland client:load />
-    </div>
   {/if}
 {/if}
 
-<style>
-  .wallet-button-wrapper {
-    display: flex;
-    align-items: center;
-  }
-</style>
 

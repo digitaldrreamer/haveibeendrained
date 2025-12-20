@@ -113,7 +113,56 @@ export class ApiClient {
       const json = await response.json();
 
       // * Public /api/v1/check returns:
-      // * { success: boolean, type: 'drainer' | 'wallet_analysis', data: RiskReport, ... }
+      // * { success: boolean, type: 'drainer' | 'wallet_analysis', data: RiskReport | DrainerReport, ... }
+      
+      // * If the response type is 'drainer', convert it to RiskReport format
+      if (json.type === 'drainer' && json.data) {
+        const drainerData = json.data;
+        const riskReport: RiskReport = {
+          overallRisk: 100,
+          severity: 'DRAINED',
+          detections: [
+            {
+              type: 'KNOWN_DRAINER',
+              severity: 'CRITICAL',
+              confidence: 100,
+              affectedAccounts: [],
+              suspiciousRecipients: [drainerData.drainerAddress],
+              recommendations: [
+                '🚨 CRITICAL: This address is a known drainer',
+                `This address has ${drainerData.reportCount} report(s) in our on-chain registry`,
+                `Total SOL reported stolen: ${drainerData.totalSolReported?.toFixed(4) || '0'} SOL`,
+                'DO NOT interact with this address',
+                'DO NOT approve any transactions from this address',
+              ],
+              timestamp: drainerData.lastSeen ? new Date(drainerData.lastSeen).getTime() / 1000 : Math.floor(Date.now() / 1000),
+              drainerAddress: drainerData.drainerAddress,
+            },
+          ],
+          recommendations: [
+            '🚨 CRITICAL: This address is a known drainer',
+            'DO NOT interact with this address under any circumstances',
+            'DO NOT approve any transactions from this address',
+            'Report any suspicious activity involving this address',
+          ],
+          walletAddress: drainerData.drainerAddress,
+          transactionCount: 0,
+          affectedAssets: {
+            tokens: [],
+            nfts: [],
+            sol: drainerData.totalSolReported || 0,
+          },
+          analyzedAt: Date.now(),
+        };
+        
+        return {
+          success: json.success ?? true,
+          data: riskReport,
+          timestamp: json.timestamp ?? Date.now(),
+        };
+      }
+      
+      // * Normal wallet analysis response
       return {
         success: json.success ?? true,
         data: (json.data ?? json) as RiskReport,

@@ -40,9 +40,14 @@
     'text-red-500';
     
   $: borderColor = 
-    severity === 'SAFE' ? 'border-green-500/50' :
-    severity === 'AT_RISK' ? 'border-yellow-500/50' :
-    'border-red-500/50';
+    severity === 'SAFE' ? 'border-success' :
+    severity === 'AT_RISK' ? 'border-warning' :
+    'border-danger';
+    
+  $: shadowColor = 
+    severity === 'SAFE' ? 'shadow-brutal-success' :
+    severity === 'AT_RISK' ? 'shadow-brutal' :
+    'shadow-brutal-danger';
 
   $: bgGradient = 
     severity === 'SAFE' ? 'from-green-500/10 to-transparent' :
@@ -52,11 +57,11 @@
   $: hasAffectedAssets = affectedAssets.tokens.length > 0 || affectedAssets.nfts.length > 0 || affectedAssets.sol > 0;
 </script>
 
-<div class="w-full max-w-2xl mx-auto bg-surface border {borderColor} rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm">
+<div class="w-full max-w-2xl mx-auto bg-surface border-4 {borderColor} overflow-hidden {shadowColor} card-brutal mb-8 break-words">
   <!-- Header / Risk Score -->
-  <div class="p-8 bg-gradient-to-b {bgGradient} text-center relative">
-    <div class="text-sm uppercase tracking-wider text-text-muted mb-2">Security Status</div>
-    <h2 class="text-4xl font-bold {severityColor} mb-4">{severity.replace('_', ' ')}</h2>
+  <div class="p-8 bg-gradient-to-b {bgGradient} text-center relative border-b-4 border-black">
+    <div class="text-sm uppercase tracking-wider text-text-muted mb-2 font-black">Security Status</div>
+    <h2 class="text-5xl font-black {severityColor} mb-4 uppercase">{severity.replace('_', ' ')}</h2>
     
     <div class="relative w-32 h-32 mx-auto flex items-center justify-center">
       <!-- Circular Progress (Simplified CSS) -->
@@ -68,7 +73,7 @@
           stroke-linecap="round"
         />
       </svg>
-      <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold">
+      <div class="absolute inset-0 flex items-center justify-center text-4xl font-black">
         {riskScore}
       </div>
     </div>
@@ -76,17 +81,17 @@
 
   <!-- Detections List -->
   {#if detections.length > 0}
-    <div class="p-6 border-t border-slate-700/50">
-      <h3 class="text-lg font-semibold mb-4 text-white">Threats Detected</h3>
-      <div class="space-y-3">
+    <div class="p-6 border-t-4 border-black">
+      <h3 class="text-xl font-black mb-4 text-white uppercase tracking-wide">Threats Detected</h3>
+      <div class="space-y-4">
         {#each detections as detection, index}
-          <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700">
+          <div class="p-4 bg-surface-elevated border-3 border-black shadow-brutal-sm">
             <div class="flex items-start gap-3">
             <span class="text-2xl">
               {detection.severity === 'CRITICAL' ? '🔴' : detection.severity === 'HIGH' ? '🟠' : '🟡'}
             </span>
               <div class="flex-1 space-y-2">
-              <div class="font-medium text-white">{detection.type.replace('_', ' ')}</div>
+              <div class="font-black text-white text-lg uppercase">{detection.type.replace('_', ' ')}</div>
                 
                 {#if detection.suspiciousRecipients?.length}
                   <div class="text-sm text-text-muted">
@@ -95,12 +100,12 @@
                       {#if detection.suspiciousRecipients.length === 1}
                         <!-- Single address -->
                         <div class="flex items-center gap-2 flex-wrap">
-                          <span class="font-mono text-white">
+                          <span class="font-mono text-white break-all break-words max-w-full">
                             {formatAddress(detection.suspiciousRecipients[0])}
                           </span>
                           <button
                             on:click={() => copyAddress(detection.suspiciousRecipients[0])}
-                            class="text-primary hover:text-primary-hover text-xs px-2 py-1 rounded border border-primary/50 hover:border-primary transition-colors"
+                            class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                             title="Copy full address"
                           >
                             Copy
@@ -109,9 +114,19 @@
                             href="https://solana.fm/address/{detection.suspiciousRecipients[0]}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="text-primary hover:text-primary-hover text-xs underline"
+                            class="inline-block"
+                            title="View on SolanaFM"
                           >
-                            View on SolanaFM
+                            <img src="https://off-chain.haveibeendrained.org/solanafm.png" alt="SolanaFM" class="h-4 w-auto" />
+                          </a>
+                          <a
+                            href="https://chainabuse.com/address/{detection.suspiciousRecipients[0]}?chain=SOL"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-block"
+                            title="View on ChainAbuse"
+                          >
+                            <img src="https://off-chain.haveibeendrained.org/chainabuse.png" alt="ChainAbuse" class="h-4 w-auto" />
                           </a>
                         </div>
                       {:else}
@@ -119,12 +134,12 @@
                         <div class="space-y-1">
                           <!-- First address (always shown) -->
                           <div class="flex items-center gap-2 flex-wrap">
-                            <span class="font-mono text-white">
+                            <span class="font-mono text-white break-all break-words max-w-full">
                               {formatAddress(detection.suspiciousRecipients[0])}
                             </span>
                             <button
                               on:click={() => copyAddress(detection.suspiciousRecipients[0])}
-                              class="text-primary hover:text-primary-hover text-xs px-2 py-1 rounded border border-primary/50 hover:border-primary transition-colors"
+                              class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                               title="Copy full address"
                             >
                               Copy
@@ -133,22 +148,32 @@
                               href="https://solana.fm/address/{detection.suspiciousRecipients[0]}"
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="text-primary hover:text-primary-hover text-xs underline"
+                              class="inline-block"
+                              title="View on SolanaFM"
                             >
-                              View on SolanaFM
+                              <img src="https://off-chain.haveibeendrained.org/solanafm.png" alt="SolanaFM" class="h-4 w-auto" />
+                            </a>
+                            <a
+                              href="https://chainabuse.com/address/{detection.suspiciousRecipients[0]}?chain=SOL"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-block"
+                              title="View on ChainAbuse"
+                            >
+                              <img src="https://off-chain.haveibeendrained.org/chainabuse.png" alt="ChainAbuse" class="h-4 w-auto" />
                             </a>
                           </div>
                           
                           {#if expandedAddresses.has(index)}
                             <!-- Expanded: Show all addresses -->
                             {#each detection.suspiciousRecipients.slice(1) as addr}
-                              <div class="flex items-center gap-2 flex-wrap pl-4 border-l-2 border-slate-700">
-                                <span class="font-mono text-white">
+                              <div class="flex items-center gap-2 flex-wrap pl-4 border-l-4 border-black">
+                                <span class="font-mono text-white break-all break-words max-w-full">
                                   {formatAddress(addr)}
                                 </span>
                                 <button
                                   on:click={() => copyAddress(addr)}
-                                  class="text-primary hover:text-primary-hover text-xs px-2 py-1 rounded border border-primary/50 hover:border-primary transition-colors"
+                                  class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                                   title="Copy full address"
                                 >
                                   Copy
@@ -157,9 +182,19 @@
                                   href="https://solana.fm/address/{addr}"
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  class="text-primary hover:text-primary-hover text-xs underline"
+                                  class="inline-block"
+                                  title="View on SolanaFM"
                                 >
-                                  View on SolanaFM
+                                  <img src="https://off-chain.haveibeendrained.org/solanafm.png" alt="SolanaFM" class="h-4 w-auto" />
+                                </a>
+                                <a
+                                  href="https://chainabuse.com/address/{addr}?chain=SOL"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  class="inline-block"
+                                  title="View on ChainAbuse"
+                                >
+                                  <img src="https://off-chain.haveibeendrained.org/chainabuse.png" alt="ChainAbuse" class="h-4 w-auto" />
                                 </a>
                               </div>
                             {/each}
@@ -200,7 +235,7 @@
                           </a>
                           <button
                             on:click={() => copyAddress(domain)}
-                            class="text-primary hover:text-primary-hover text-xs px-2 py-1 rounded border border-primary/50 hover:border-primary transition-colors"
+                            class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                             title="Copy domain"
                           >
                             Copy
@@ -218,9 +253,11 @@
                       href="https://solana.fm/tx/{detection.signature}"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-primary hover:text-primary-hover font-mono text-xs underline"
+                      class="inline-flex items-center gap-2 font-mono text-xs break-all break-words max-w-full"
+                      title="View transaction on SolanaFM"
                     >
-                      {formatAddress(detection.signature)}
+                      <span class="text-primary hover:text-primary-hover underline">{formatAddress(detection.signature)}</span>
+                      <img src="https://off-chain.haveibeendrained.org/solanafm.png" alt="SolanaFM" class="h-4 w-auto" />
                     </a>
                   </div>
                 {/if}
@@ -234,38 +271,46 @@
 
   <!-- Affected Assets -->
   {#if hasAffectedAssets}
-    <div class="p-6 border-t border-slate-700/50">
-      <h3 class="text-lg font-semibold mb-4 text-white">Affected Assets</h3>
+    <div class="p-6 border-t-4 border-black">
+      <h3 class="text-xl font-black mb-4 text-white uppercase tracking-wide">Affected Assets</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {#if affectedAssets.sol > 0}
-          <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700 text-center">
+          <div class="p-4 bg-surface-elevated border-3 border-black shadow-brutal-sm text-center">
             <div class="text-2xl mb-2">💰</div>
-            <div class="font-medium text-white">SOL</div>
-            <div class="text-lg text-primary">{affectedAssets.sol.toFixed(4)}</div>
+            <div class="font-black text-white uppercase">SOL</div>
+            <div class="text-xl text-primary font-black">{affectedAssets.sol.toFixed(4)}</div>
           </div>
         {/if}
         {#if affectedAssets.tokens.length > 0}
-          <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700 text-center">
+          <div class="p-4 bg-surface-elevated border-3 border-black shadow-brutal-sm text-center">
             <div class="text-2xl mb-2">🪙</div>
-            <div class="font-medium text-white">Tokens</div>
-            <div class="text-lg text-primary">{affectedAssets.tokens.length}</div>
-            <div class="text-xs text-text-muted mt-1">
-              {affectedAssets.tokens.slice(0, 2).join(', ')}
+            <div class="font-black text-white uppercase">Tokens</div>
+            <div class="text-xl text-primary font-black">{affectedAssets.tokens.length}</div>
+            <div class="text-xs text-text-muted mt-1 space-y-1">
+              {#each affectedAssets.tokens.slice(0, 2) as token}
+                <div class="font-mono break-all break-words overflow-hidden text-ellipsis max-w-full" title={token}>
+                  {token}
+                </div>
+              {/each}
               {#if affectedAssets.tokens.length > 2}
-                +{affectedAssets.tokens.length - 2} more
+                <div class="mt-1 font-bold">+{affectedAssets.tokens.length - 2} more</div>
               {/if}
             </div>
           </div>
         {/if}
         {#if affectedAssets.nfts.length > 0}
-          <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700 text-center">
+          <div class="p-4 bg-surface-elevated border-3 border-black shadow-brutal-sm text-center">
             <div class="text-2xl mb-2">🎨</div>
-            <div class="font-medium text-white">NFTs</div>
-            <div class="text-lg text-primary">{affectedAssets.nfts.length}</div>
-            <div class="text-xs text-text-muted mt-1">
-              {affectedAssets.nfts.slice(0, 2).join(', ')}
+            <div class="font-black text-white uppercase">NFTs</div>
+            <div class="text-xl text-primary font-black">{affectedAssets.nfts.length}</div>
+            <div class="text-xs text-text-muted mt-1 space-y-1">
+              {#each affectedAssets.nfts.slice(0, 2) as nft}
+                <div class="font-mono break-all break-words overflow-hidden text-ellipsis max-w-full" title={nft}>
+                  {nft}
+                </div>
+              {/each}
               {#if affectedAssets.nfts.length > 2}
-                +{affectedAssets.nfts.length - 2} more
+                <div class="mt-1 font-bold">+{affectedAssets.nfts.length - 2} more</div>
               {/if}
             </div>
           </div>
@@ -276,12 +321,12 @@
 
   <!-- Recommendations -->
   {#if recommendations.length > 0}
-    <div class="p-6 border-t border-slate-700/50 bg-slate-900/30">
-      <h3 class="text-lg font-semibold mb-4 text-white">Recommended Actions</h3>
-      <ul class="space-y-2">
+    <div class="p-6 border-t-4 border-black bg-surface-elevated">
+      <h3 class="text-xl font-black mb-4 text-white uppercase tracking-wide">Recommended Actions</h3>
+      <ul class="space-y-3">
         {#each recommendations as rec}
-          <li class="flex items-start gap-2 text-sm text-slate-300">
-            <span class="text-primary mt-1">➜</span>
+          <li class="flex items-start gap-3 text-sm text-white font-bold">
+            <span class="text-primary mt-1 font-black text-lg">➜</span>
             <span>{rec}</span>
           </li>
         {/each}
@@ -290,12 +335,12 @@
   {/if}
   
   <!-- Share / Action Buttons -->
-  <div class="p-6 border-t border-slate-700/50 flex justify-center gap-4">
-    <button class="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg font-medium transition-colors">
+  <div class="p-6 border-t-4 border-black flex justify-center gap-4">
+    <button class="px-6 py-3 bg-surface-elevated hover:bg-surface border-4 border-black text-white font-black shadow-brutal-sm hover:shadow-brutal btn-brutal">
       Share Result
     </button>
     {#if severity !== 'SAFE'}
-      <a href="https://solrevoke.cash" target="_blank" rel="noopener noreferrer" class="px-6 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium transition-colors">
+      <a href="https://solrevoker.com" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-primary hover:bg-primary-hover text-white border-4 border-black font-black shadow-brutal-sm hover:shadow-brutal btn-brutal">
         Revoke Approvals
       </a>
     {/if}

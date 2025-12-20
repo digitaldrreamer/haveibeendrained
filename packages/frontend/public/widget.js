@@ -51,8 +51,8 @@
     },
 
     // At-risk wallet (unlimited approvals)
-    'ATRISK1111111111111111111111111111111': {
-      address: 'ATRISK1111111111111111111111111111111',
+    '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU': {
+      address: '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU',
       riskScore: 65,
       severity: 'AT_RISK',
       transactionCount: 12,
@@ -61,8 +61,8 @@
           type: 'UNLIMITED_APPROVAL',
           severity: 'HIGH',
           confidence: 90,
-          affectedAccounts: ['TokenAccount1111111111111111111111111'],
-          suspiciousRecipients: ['DrainerAddress111111111111111111111111'],
+          affectedAccounts: ['EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'],
+          suspiciousRecipients: ['5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1'],
           recommendations: [
             '⚠️ Revoke unlimited approvals immediately',
             'Check token approvals in your wallet',
@@ -85,8 +85,8 @@
     },
 
     // Drained wallet (SetAuthority attack + known drainer)
-    'DRAINED111111111111111111111111111111': {
-      address: 'DRAINED111111111111111111111111111111',
+    '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM': {
+      address: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
       riskScore: 95,
       severity: 'DRAINED',
       transactionCount: 8,
@@ -95,8 +95,8 @@
           type: 'SET_AUTHORITY',
           severity: 'CRITICAL',
           confidence: 95,
-          affectedAccounts: ['TokenAccount2222222222222222222222222'],
-          suspiciousRecipients: ['DrainerAddress222222222222222222222222'],
+          affectedAccounts: ['EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'],
+          suspiciousRecipients: ['9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'],
           recommendations: [
             '🚨 CRITICAL: Account ownership transferred',
             'Your token account ownership has been transferred',
@@ -110,7 +110,7 @@
           severity: 'CRITICAL',
           confidence: 100,
           affectedAccounts: [],
-          suspiciousRecipients: ['DrainerAddress222222222222222222222222'],
+          suspiciousRecipients: ['9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'],
           domains: ['malicious-drainer.com'],
           recommendations: [
             '🚨 CRITICAL: Interacted with known drainer',
@@ -135,8 +135,8 @@
     },
 
     // Known drainer interaction
-    'DRAINER111111111111111111111111111111': {
-      address: 'DRAINER111111111111111111111111111111',
+    '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1': {
+      address: '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
       riskScore: 85,
       severity: 'AT_RISK',
       transactionCount: 15,
@@ -146,7 +146,7 @@
           severity: 'CRITICAL',
           confidence: 100,
           affectedAccounts: [],
-          suspiciousRecipients: ['DrainerAddress333333333333333333333333'],
+          suspiciousRecipients: ['5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1'],
           domains: ['phishing-site.com', 'fake-solana-wallet.com'],
           recommendations: [
             '🚨 CRITICAL: Interacted with known drainer',

@@ -2,23 +2,24 @@
 import WalletInput from './WalletInput.svelte';
 ---
 
+
 <section id="hero" class="flex flex-col items-center justify-center px-4 py-16 md:py-24">
-  <div class="max-w-2xl mx-auto text-center space-y-6">
-    <h1 class="text-4xl md:text-5xl font-bold">
-      <span class="text-white">Have I Been</span>{' '}
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">Drained?</span>
+  <div class="max-w-2xl mx-auto text-center space-y-8">
+    <h1 class="text-5xl md:text-7xl font-black text-white uppercase tracking-tight leading-tight">
+      <span class="block">Have I Been</span>
+      <span class="block text-primary">Drained?</span>
     </h1>
-    <p class="text-lg md:text-xl text-text-muted">
+    <p class="text-xl md:text-2xl text-text-muted font-bold">
       Check if your Solana wallet has been compromised by drainers
     </p>
     
-    <div class="pt-4 w-full">
+    <div class="pt-6 w-full">
       <WalletInput client:load />
     </div>
     
-    <p class="text-sm text-text-muted pt-2">
+    <p class="text-sm text-text-muted pt-4 font-semibold">
       Using Have I Been Drained is subject to the{' '}
-      <a href="https://docs.haveibeendrained.org" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+      <a href="https://docs.haveibeendrained.org" class="text-primary hover:text-primary-hover font-black border-b-2 border-primary" target="_blank" rel="noopener noreferrer">
         terms of use
       </a>
     </p>

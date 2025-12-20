@@ -11,18 +11,18 @@
   "dependencies": {
     "@astrojs/react": "^3.6.0",
     "@astrojs/svelte": "^7.2.2",
+    "@haveibeendrained/shared": "workspace:*",
     "@solana/wallet-adapter-base": "^0.9.23",
-    "@solana/wallet-adapter-react": "^0.15.35",
-    "@solana/wallet-adapter-react-ui": "^0.9.35",
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.95.0",
+    "@svelte-on-solana/wallet-adapter-core": "^1.0.11-alpha.0",
+    "@svelte-on-solana/wallet-adapter-ui": "^1.0.21-alpha.0",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.4",
     "bs58": "^5.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "svelte": "^5.45.6",
-    "@haveibeendrained/shared": "workspace:*"
+    "svelte": "^5.45.6"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",

@@ -8,6 +8,9 @@ import Footer from '../components/Footer.astro';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 		<link rel="icon" type="image/png" href="/favicon-32x32.png" />
 		<link rel="apple-touch-icon" sizes="48x48" href="/favicon-48x48.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="/favicon-72x72.png" />
@@ -21,9 +24,9 @@ import Footer from '../components/Footer.astro';
 		<meta name="generator" content={Astro.generator} />
 		<title>Have I Been Drained? - Solana Wallet Security Checker</title>
 	</head>
-	<body class="flex flex-col min-h-screen">
+	<body class="min-h-screen flex flex-col bg-background">
 		<Navigation />
-		<main class="flex-1 pb-16">
+		<main class="flex-1 pb-32">
 			<slot />
 		</main>
 		<Footer />

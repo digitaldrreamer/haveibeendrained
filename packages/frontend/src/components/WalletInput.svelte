@@ -60,24 +60,24 @@
 
 <div class="w-full max-w-md mx-auto transition-all duration-500" class:max-w-2xl={showResults}>
   {#if !showResults}
-    <div class="space-y-3">
+    <div class="space-y-4">
     <div class="relative">
       <input
         type="text"
         bind:value={address}
         on:input={handleInput}
         placeholder="Enter Solana Wallet Address"
-        class="w-full px-6 py-4 bg-surface border-2 border-slate-700 rounded-xl text-lg text-white placeholder-text-muted focus:outline-none focus:border-primary transition-colors"
-        class:border-red-500={error}
+        class="w-full px-6 py-4 bg-surface border-4 border-black text-lg text-white placeholder-text-muted focus:outline-none focus:border-primary font-bold shadow-brutal-sm"
+        class:border-danger={error}
       />
       
       <button
         on:click={handleSubmit}
         disabled={!address.trim() || isLoading}
-        class="absolute right-2 top-2 bottom-2 px-6 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[100px]"
+        class="absolute right-2 top-2 bottom-2 px-6 bg-primary hover:bg-primary-hover text-white font-black border-4 border-black shadow-brutal-sm hover:shadow-brutal transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[100px] btn-brutal"
       >
         {#if isLoading}
-          <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          <div class="w-5 h-5 border-3 border-white border-t-transparent animate-spin"></div>
         {:else}
           Check
         {/if}
@@ -85,24 +85,24 @@
     </div>
       
       <!-- Experimental Mode Toggle -->
-      <label class="flex items-center gap-2 text-sm text-text-muted cursor-pointer hover:text-white transition-colors">
+      <label class="flex items-center gap-3 text-sm text-text-muted cursor-pointer hover:text-white transition-colors font-bold">
         <input
           type="checkbox"
           bind:checked={includeExperimental}
-          class="w-4 h-4 rounded border-slate-600 bg-slate-800 text-primary focus:ring-primary focus:ring-2"
+          class="w-5 h-5 border-3 border-black bg-surface text-primary focus:ring-2 focus:ring-primary accent-primary"
         />
         <span>
-          <span class="font-medium">Experimental:</span> Include token & NFT detection
-          <span class="text-xs text-slate-500 ml-1">(may be slower)</span>
+          <span class="font-black">Experimental:</span> Include token & NFT detection
+          <span class="text-xs text-text-muted ml-1 font-normal">(may be slower)</span>
         </span>
       </label>
     
     {#if error}
-        <p class="text-red-400 text-sm text-center">{error}</p>
+        <p class="text-danger text-sm text-center font-black border-2 border-danger px-4 py-2 bg-danger/10">{error}</p>
     {/if}
     </div>
   {:else if result}
-    <div class="space-y-6">
+    <div class="space-y-6 pb-8">
       <ResultCard 
         riskScore={result.overallRisk}
         severity={result.severity}
@@ -118,12 +118,12 @@
           error = '';
           result = null;
         }}
-        class="w-full py-3 text-text-muted hover:text-white transition-colors"
+        class="w-full py-4 text-text-muted hover:text-white transition-colors font-black border-4 border-black bg-surface shadow-brutal-sm hover:shadow-brutal btn-brutal"
       >
         Check Another Wallet
       </button>
     </div>
   {:else}
-    <div class="text-center text-text-muted">No results to display.</div>
+    <div class="text-center text-text-muted font-bold">No results to display.</div>
   {/if}
 </div>
