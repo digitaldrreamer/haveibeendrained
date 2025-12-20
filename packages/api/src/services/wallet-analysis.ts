@@ -58,6 +58,50 @@ export async function analyzeWallet(
   const connection = new Connection(rpcUrl, 'confirmed');
   const anchorClient = new AnchorClient(connection, process.env.ANCHOR_WALLET);
 
+  // * Check if the address itself is a known drainer
+  // * This is critical - if someone checks a drainer address, we should detect it
+  const drainerReport = await anchorClient.getDrainerReport(address);
+  if (drainerReport && drainerReport.reportCount > 0) {
+    // Create a critical detection for the address being a drainer itself
+    const drainerDetection: DetectionResult = {
+      type: 'KNOWN_DRAINER',
+      severity: 'CRITICAL',
+      confidence: 100,
+      affectedAccounts: [],
+      suspiciousRecipients: [address],
+      recommendations: [
+        '🚨 CRITICAL: This address is a known drainer',
+        `This address has ${drainerReport.reportCount} report(s) in our on-chain registry`,
+        `Total SOL reported stolen: ${(drainerReport.totalSolReported / 1e9).toFixed(4)} SOL`,
+        'DO NOT interact with this address',
+        'DO NOT approve any transactions from this address',
+      ],
+      timestamp: drainerReport.lastSeen,
+      drainerAddress: address,
+    };
+
+    // Return a critical risk report
+    return {
+      overallRisk: 100,
+      severity: 'DRAINED',
+      detections: [drainerDetection],
+      recommendations: [
+        '🚨 CRITICAL: This address is a known drainer',
+        'DO NOT interact with this address under any circumstances',
+        'DO NOT approve any transactions from this address',
+        'Report any suspicious activity involving this address',
+      ],
+      walletAddress: address,
+      transactionCount: 0,
+      affectedAssets: {
+        tokens: [],
+        nfts: [],
+        sol: drainerReport.totalSolReported / 1e9,
+      },
+      analyzedAt: Date.now(),
+    };
+  }
+
   // Fetch transactions
   const transactions = await heliusClient.getTransactionsForAddress(address, { limit });
 
