@@ -7,12 +7,12 @@
     baseUrl: import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost:3001'
   });
   
-  let address = '';
-  let isLoading = false;
-  let error = '';
-  let showResults = false;
-  let result: RiskReport | null = null;
-  let includeExperimental = false;
+  let address = $state('');
+  let isLoading = $state(false);
+  let error = $state('');
+  let showResults = $state(false);
+  let result: RiskReport | null = $state(null);
+  let includeExperimental = $state(false);
 
   function handleInput() {
     error = '';
@@ -65,14 +65,14 @@
       <input
         type="text"
         bind:value={address}
-        on:input={handleInput}
+        oninput={handleInput}
         placeholder="Enter Solana Wallet Address"
         class="w-full px-6 py-4 bg-surface border-4 border-black text-lg text-white placeholder-text-muted focus:outline-none focus:border-primary font-bold shadow-brutal-sm"
         class:border-danger={error}
       />
       
       <button
-        on:click={handleSubmit}
+        onclick={handleSubmit}
         disabled={!address.trim() || isLoading}
         class="absolute right-2 top-2 bottom-2 px-6 bg-primary hover:bg-primary-hover text-white font-black border-4 border-black shadow-brutal-sm hover:shadow-brutal transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[100px] btn-brutal"
       >
@@ -112,7 +112,7 @@
       />
       
       <button 
-        on:click={() => { 
+        onclick={() => { 
           showResults = false; 
           address = ''; 
           error = '';

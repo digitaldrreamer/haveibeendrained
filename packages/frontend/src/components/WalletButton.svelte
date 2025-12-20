@@ -2,10 +2,10 @@
   import { onMount } from 'svelte';
   import ProfileDropdown from './ProfileDropdown.svelte';
 
-  let walletAddress: string | null = null;
-  let email: string | undefined;
-  let verified: boolean | undefined;
-  let isClient = false;
+  let walletAddress: string | null = $state(null);
+  let email: string | undefined = $state();
+  let verified: boolean | undefined = $state();
+  let isClient = $state(false);
 
   onMount(() => {
     isClient = true;

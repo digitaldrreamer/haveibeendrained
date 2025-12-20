@@ -1,13 +1,22 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
 
-  export let walletAddress: string;
-  export let email: string | undefined;
-  export let verified: boolean | undefined;
-  export let onDisconnect: () => void;
+  interface Props {
+    walletAddress: string;
+    email: string | undefined;
+    verified: boolean | undefined;
+    onDisconnect: () => void;
+  }
 
-  let isOpen = false;
-  let dropdownElement: HTMLDivElement;
+  let {
+    walletAddress,
+    email,
+    verified,
+    onDisconnect
+  }: Props = $props();
+
+  let isOpen = $state(false);
+  let dropdownElement: HTMLDivElement = $state();
 
   function toggleDropdown() {
     isOpen = !isOpen;
@@ -35,7 +44,7 @@
 
 <div class="relative" bind:this={dropdownElement}>
   <button
-    on:click={toggleDropdown}
+    onclick={toggleDropdown}
     class="flex items-center gap-2 px-4 py-2 bg-surface hover:bg-slate-700 text-white rounded-lg border border-slate-600 transition-colors"
   >
     <span class="text-sm font-medium">{truncateAddress(walletAddress)}</span>
@@ -76,7 +85,7 @@
         {/if}
 
         <button
-          on:click={() => {
+          onclick={() => {
             onDisconnect();
             isOpen = false;
           }}

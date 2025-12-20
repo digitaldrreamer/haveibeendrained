@@ -1,12 +1,22 @@
 <script lang="ts">
-  export let riskScore: number = 0;
-  export let severity: 'SAFE' | 'AT_RISK' | 'DRAINED' = 'SAFE';
-  export let detections: any[] = [];
-  export let recommendations: string[] = [];
-  export let affectedAssets: { tokens: string[], nfts: string[], sol: number } = { tokens: [], nfts: [], sol: 0 };
+  interface Props {
+    riskScore?: number;
+    severity?: 'SAFE' | 'AT_RISK' | 'DRAINED';
+    detections?: any[];
+    recommendations?: string[];
+    affectedAssets?: { tokens: string[], nfts: string[], sol: number };
+  }
+
+  let {
+    riskScore = 0,
+    severity = 'SAFE',
+    detections = [],
+    recommendations = [],
+    affectedAssets = { tokens: [], nfts: [], sol: 0 }
+  }: Props = $props();
 
   // Track expanded addresses per detection
-  let expandedAddresses: Set<number> = new Set();
+  let expandedAddresses: Set<number> = $state(new Set());
 
   // Helper function to format address (first 8 + last 4)
   function formatAddress(address: string): string {
@@ -34,27 +44,27 @@
     expandedAddresses = expandedAddresses; // Trigger reactivity
   }
 
-  $: severityColor = 
-    severity === 'SAFE' ? 'text-green-400' :
+  let severityColor = 
+    $derived(severity === 'SAFE' ? 'text-green-400' :
     severity === 'AT_RISK' ? 'text-yellow-400' :
-    'text-red-500';
+    'text-red-500');
     
-  $: borderColor = 
-    severity === 'SAFE' ? 'border-success' :
+  let borderColor = 
+    $derived(severity === 'SAFE' ? 'border-success' :
     severity === 'AT_RISK' ? 'border-warning' :
-    'border-danger';
+    'border-danger');
     
-  $: shadowColor = 
-    severity === 'SAFE' ? 'shadow-brutal-success' :
+  let shadowColor = 
+    $derived(severity === 'SAFE' ? 'shadow-brutal-success' :
     severity === 'AT_RISK' ? 'shadow-brutal' :
-    'shadow-brutal-danger';
+    'shadow-brutal-danger');
 
-  $: bgGradient = 
-    severity === 'SAFE' ? 'from-green-500/10 to-transparent' :
+  let bgGradient = 
+    $derived(severity === 'SAFE' ? 'from-green-500/10 to-transparent' :
     severity === 'AT_RISK' ? 'from-yellow-500/10 to-transparent' :
-    'from-red-500/10 to-transparent';
+    'from-red-500/10 to-transparent');
 
-  $: hasAffectedAssets = affectedAssets.tokens.length > 0 || affectedAssets.nfts.length > 0 || affectedAssets.sol > 0;
+  let hasAffectedAssets = $derived(affectedAssets.tokens.length > 0 || affectedAssets.nfts.length > 0 || affectedAssets.sol > 0);
 </script>
 
 <div class="w-full max-w-2xl mx-auto bg-surface border-4 {borderColor} overflow-hidden {shadowColor} card-brutal mb-8 break-words">
@@ -104,7 +114,7 @@
                             {formatAddress(detection.suspiciousRecipients[0])}
                           </span>
                           <button
-                            on:click={() => copyAddress(detection.suspiciousRecipients[0])}
+                            onclick={() => copyAddress(detection.suspiciousRecipients[0])}
                             class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                             title="Copy full address"
                           >
@@ -138,7 +148,7 @@
                               {formatAddress(detection.suspiciousRecipients[0])}
                             </span>
                             <button
-                              on:click={() => copyAddress(detection.suspiciousRecipients[0])}
+                              onclick={() => copyAddress(detection.suspiciousRecipients[0])}
                               class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                               title="Copy full address"
                             >
@@ -172,7 +182,7 @@
                                   {formatAddress(addr)}
                                 </span>
                                 <button
-                                  on:click={() => copyAddress(addr)}
+                                  onclick={() => copyAddress(addr)}
                                   class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                                   title="Copy full address"
                                 >
@@ -199,7 +209,7 @@
                               </div>
                             {/each}
                             <button
-                              on:click={() => toggleAddresses(index)}
+                              onclick={() => toggleAddresses(index)}
                               class="text-primary hover:text-primary-hover text-xs mt-1 underline"
                             >
                               Show less
@@ -207,7 +217,7 @@
                           {:else}
                             <!-- Collapsed: Show "and X other addresses" -->
                             <button
-                              on:click={() => toggleAddresses(index)}
+                              onclick={() => toggleAddresses(index)}
                               class="text-primary hover:text-primary-hover text-xs underline"
                             >
                               and {detection.suspiciousRecipients.length - 1} other address{detection.suspiciousRecipients.length - 1 > 1 ? 'es' : ''}
@@ -234,7 +244,7 @@
                             {domain}
                           </a>
                           <button
-                            on:click={() => copyAddress(domain)}
+                            onclick={() => copyAddress(domain)}
                             class="text-primary hover:text-primary-hover text-xs px-3 py-1 border-2 border-black bg-surface font-black shadow-brutal-sm hover:shadow-brutal btn-brutal"
                             title="Copy domain"
                           >

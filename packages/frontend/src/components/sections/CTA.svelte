@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { createBubbler, stopPropagation } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import { onMount } from 'svelte';
 
-  let isWalletConnected = false;
-  let showEmailAlertsModal = false;
+  let isWalletConnected = $state(false);
+  let showEmailAlertsModal = $state(false);
 
   onMount(() => {
     // Check localStorage for wallet connection
@@ -70,7 +73,7 @@
           Analyze My Wallet
         </a>
         <button
-          on:click={openEmailAlertsModal}
+          onclick={openEmailAlertsModal}
           class="px-8 py-4 bg-gradient-to-r from-primary to-purple-500 hover:from-primary-hover hover:to-purple-600 text-white font-bold rounded-xl transition-colors text-lg"
         >
           Get Email Alerts (Free)
@@ -95,19 +98,19 @@
 {#if showEmailAlertsModal}
   <div
     class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-    on:click={closeEmailAlertsModal}
+    onclick={closeEmailAlertsModal}
     role="button"
     tabindex="0"
-    on:keydown={(e) => e.key === 'Escape' && closeEmailAlertsModal()}
+    onkeydown={(e) => e.key === 'Escape' && closeEmailAlertsModal()}
   >
     <div
       class="bg-surface border border-slate-600 rounded-xl p-6 max-w-md w-full"
-      on:click|stopPropagation
+      onclick={stopPropagation(bubble('click'))}
     >
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-2xl font-bold text-white">Get Email Alerts</h3>
         <button
-          on:click={closeEmailAlertsModal}
+          onclick={closeEmailAlertsModal}
           class="text-text-muted hover:text-white transition-colors"
           aria-label="Close"
         >
@@ -124,7 +127,7 @@
           Click the <strong class="text-white">"Get Email Alert"</strong> button in the navigation bar to connect your wallet and set up email alerts.
         </p>
         <button
-          on:click={closeEmailAlertsModal}
+          onclick={closeEmailAlertsModal}
           class="w-full px-4 py-2 bg-primary hover:bg-primary-hover text-white font-medium rounded-lg transition-colors"
         >
           Got it
