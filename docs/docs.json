@@ -96,14 +96,103 @@
             ]
           },
           {
-            "group": "Stories & Case Studies",
+            "group": "Phishing & Social Engineering",
             "pages": [
               "safety-education/articles/grant-phishing-lisa",
               "safety-education/articles/typosquatting-domains",
+              "safety-education/articles/qr-code-phishing-ngozi",
+              "safety-education/articles/2fa-bypass-social-engineering-blessing",
+              "safety-education/articles/impersonated-influencer-giveaway-folake",
+              "safety-education/articles/social-support-impersonation-adebayo"
+            ]
+          },
+          {
+            "group": "Romance & Pig Butchering Scams",
+            "pages": [
               "safety-education/articles/pig-butchering-romance",
+              "safety-education/articles/pig-butchering-whatsapp-dami",
+              "safety-education/articles/romance-investment-kunle",
+              "safety-education/articles/wrong-number-pig-butchering-sola",
+              "safety-education/articles/wrong-number-friendship-jamal"
+            ]
+          },
+          {
+            "group": "Fake Wallets & Apps",
+            "pages": [
+              "safety-education/articles/fake-wallet-app-sola",
+              "safety-education/articles/fake-wallet-import-tool-kofi",
+              "safety-education/articles/fake-wallet-login-tunde",
+              "safety-education/articles/fake-trading-app-tunde",
+              "safety-education/articles/fake-lido-staking-bukola",
+              "safety-education/articles/joint-future-wallet-zainab"
+            ]
+          },
+          {
+            "group": "NFT Scams",
+            "pages": [
+              "safety-education/articles/nft-drainer-mint",
+              "safety-education/articles/nft-approval-drainer-ifeoma",
+              "safety-education/articles/nft-rugpull-evolutionaryapes-tunde"
+            ]
+          },
+          {
+            "group": "DeFi & Exchange Scams",
+            "pages": [
+              "safety-education/articles/dex-drainer-pancakeswap-chioma",
+              "safety-education/articles/defi-yield-farm-drainer-adekunle",
+              "safety-education/articles/uniswap-v4-fake-router-ngozi",
+              "safety-education/articles/liquidity-rugpull-greenyield-emeka",
+              "safety-education/articles/stealth-launch-trap-safeinvest-adanna",
+              "safety-education/articles/withdrawal-trap-chidi"
+            ]
+          },
+          {
+            "group": "Malware & Keyloggers",
+            "pages": [
+              "safety-education/articles/keylogger-rat-emeka",
+              "safety-education/articles/clipboard-hijacker-marcus",
+              "safety-education/articles/malicious-browser-extension-ngozi",
+              "safety-education/articles/api-key-theft-amara"
+            ]
+          },
+          {
+            "group": "Recovery & Support Scams",
+            "pages": [
               "safety-education/articles/recovery-scam-trap",
-              "safety-education/articles/dusting-attack-privacy",
-              "safety-education/articles/nft-drainer-mint"
+              "safety-education/articles/mentor-guru-coach-ifeoma"
+            ]
+          },
+          {
+            "group": "Giveaways & Airdrops",
+            "pages": [
+              "safety-education/articles/fake-airdrop-site-chinedu",
+              "safety-education/articles/send-to-receive-giveaway-ola",
+              "safety-education/articles/telegram-bot-airdrop-oyekunle"
+            ]
+          },
+          {
+            "group": "Account Takeover",
+            "pages": [
+              "safety-education/articles/email-takeover-ada",
+              "safety-education/articles/email-domain-spoofing-marcus",
+              "safety-education/articles/sim-swap-kunle",
+              "safety-education/articles/shared-device-takeover-tunde"
+            ]
+          },
+          {
+            "group": "Privacy & Tracking",
+            "pages": [
+              "safety-education/articles/dusting-attack-privacy"
+            ]
+          },
+          {
+            "group": "Other Scams",
+            "pages": [
+              "safety-education/articles/pump-dump-moonrocket-chioma",
+              "safety-education/articles/social-media-pump-dump-blessing",
+              "safety-education/articles/signal-group-scam-amara",
+              "safety-education/articles/mlm-crypto-wealth-kemi",
+              "safety-education/articles/youtube-livestream-scam-marcus"
             ]
           }
         ]
