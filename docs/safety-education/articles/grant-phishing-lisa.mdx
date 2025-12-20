@@ -249,6 +249,36 @@ Her business cannot make payroll. Supplier payments are missed. One of her ventu
 6. **Automated drainage:** Once approved, a backend script calls `transferFrom()` repeatedly to move all ERC-20 tokens.
 7. **Laundering:** The stolen tokens are moved through mixers (Tornado Cash, TornadoRouter) or immediately swapped to other coins, then cashed out at decentralized exchanges.
 
+**Attack Sequence:**
+
+```mermaid
+sequenceDiagram
+    participant V as Victim (Lisa)
+    participant E as Email/Phishing Site
+    participant W as Fake Website
+    participant M as MetaMask Wallet
+    participant C as Malicious Contract
+    participant B as Backend Script
+    participant L as Laundering Service
+    
+    E->>V: 9:47 AM - Phishing Email<br/>"Grant Approved"
+    V->>W: 9:51 AM - Clicks Link<br/>Visits Fake Site
+    W->>V: Displays Cloned UI<br/>Looks Legitimate
+    V->>W: Enters Wallet Address<br/>"Verify Wallet"
+    W->>M: 10:08 AM - Request Approval<br/>setApprovalForAll()
+    M->>V: Shows Signature Request<br/>(Obfuscated)
+    V->>M: Signs Approval
+    M->>C: Approval Granted<br/>Unlimited Access
+    C->>B: 10:09 AM - Trigger Drain
+    B->>C: transferFrom() Calls<br/>(Repeated)
+    C->>B: Transfer All Tokens<br/>$180,000 USDC
+    B->>L: 10:12 AM - Send to Mixer<br/>Tornado Cash
+    L->>L: Launder Funds<br/>Swap & Cash Out
+    W->>W: 10:15 AM - Site Goes Offline
+    
+    Note over V,L: Entire attack: 28 minutes
+```
+
 **Timeline:**
 - Email sent at 9:47 AM
 - User clicks at 9:51 AM

@@ -82,16 +82,56 @@ anchor test
 
 ## Project Structure
 
-```
-haveibeendrained/
-├── packages/
-│   ├── anchor/          # Anchor program (Rust)
-│   ├── api/             # API server (TypeScript + Hono)
-│   ├── frontend/        # Frontend (Astro + Svelte)
-│   └── shared/          # Shared types and utilities
-├── docker-compose.yml   # Local development stack
-└── docs/                # Documentation
-```
+<Tree>
+  <Tree.Folder name="packages" defaultOpen>
+    <Tree.Folder name="anchor">
+      <Tree.File name="Anchor.toml" />
+      <Tree.File name="Cargo.toml" />
+      <Tree.Folder name="programs">
+        <Tree.Folder name="drainer-registry">
+          <Tree.Folder name="src">
+            <Tree.File name="lib.rs" />
+            <Tree.Folder name="instructions" />
+            <Tree.Folder name="state" />
+          </Tree.Folder>
+        </Tree.Folder>
+      </Tree.Folder>
+      <Tree.Folder name="tests" />
+      <Tree.File name="package.json" />
+    </Tree.Folder>
+    <Tree.Folder name="api">
+      <Tree.Folder name="src">
+        <Tree.Folder name="routes" />
+        <Tree.Folder name="services" />
+        <Tree.Folder name="middleware" />
+        <Tree.File name="index.ts" />
+      </Tree.Folder>
+      <Tree.Folder name="scripts" />
+      <Tree.File name="package.json" />
+      <Tree.File name="drizzle.config.ts" />
+    </Tree.Folder>
+    <Tree.Folder name="frontend">
+      <Tree.Folder name="src">
+        <Tree.Folder name="components" />
+        <Tree.Folder name="pages" />
+        <Tree.Folder name="layouts" />
+      </Tree.Folder>
+      <Tree.File name="astro.config.mjs" />
+      <Tree.File name="package.json" />
+    </Tree.Folder>
+    <Tree.Folder name="shared">
+      <Tree.Folder name="src">
+        <Tree.Folder name="types" />
+        <Tree.Folder name="utils" />
+        <Tree.Folder name="constants" />
+      </Tree.Folder>
+      <Tree.File name="package.json" />
+    </Tree.Folder>
+  </Tree.Folder>
+  <Tree.File name="docker-compose.yml" />
+  <Tree.File name="package.json" />
+  <Tree.Folder name="docs" />
+</Tree>
 
 ## Development Workflow
 

@@ -7,6 +7,40 @@ description: "Steps to secure a compromised Solana wallet"
 
 If your wallet shows as **DRAINED** or **AT_RISK**, follow these steps immediately:
 
+**Recovery Decision Flow:**
+
+```mermaid
+flowchart TD
+    A[Wallet Check Results] --> B{Status?}
+    B -->|DRAINED| C[Stop All Transactions]
+    B -->|AT_RISK| C
+    B -->|SAFE| Z[Monitor Regularly]
+    
+    C --> D[Assess Damage]
+    D --> E{Attack Type?}
+    
+    E -->|Known Drainer| F[Revoke All Approvals]
+    E -->|SetAuthority| G[Check Wallet Control<br/>Revoke Approvals]
+    E -->|Unlimited Approval| H[Revoke Specific Approval]
+    
+    F --> I[Transfer Remaining Assets]
+    G --> I
+    H --> I
+    
+    I --> J[Create New Wallet]
+    J --> K[Transfer Assets to New Wallet]
+    K --> L[Report Drainer Address]
+    L --> M[Review Attack Vector]
+    M --> N[Update Security Practices]
+    
+    style C fill:#ff6b6b
+    style F fill:#ffd93d
+    style G fill:#ffd93d
+    style H fill:#ffd93d
+    style I fill:#6bcf7f
+    style J fill:#6bcf7f
+```
+
 <Steps>
 <Step title="Stop using the wallet">
 

@@ -26,6 +26,37 @@ You can also check wallets directly from Twitter, Discord, or other platforms us
 
 ## What Happens During Analysis?
 
+The wallet analysis process follows this flow:
+
+```mermaid
+flowchart TD
+    A[User Enters Wallet Address] --> B[Fetch Transactions from Helius RPC]
+    B --> C[Analyze Last 50-200 Transactions]
+    C --> D{Check for Known Drainers}
+    D -->|Found| E[Mark as DRAINED]
+    D -->|Not Found| F[Pattern Detection]
+    F --> G[Check SetAuthority Instructions]
+    F --> H[Check Unlimited Approvals]
+    F --> I[Check Suspicious Patterns]
+    G --> J[Risk Aggregation]
+    H --> J
+    I --> J
+    J --> K{Calculate Risk Score}
+    K -->|0-20| L[SAFE Status]
+    K -->|21-60| M[AT_RISK Status]
+    K -->|61-100| N[DRAINED Status]
+    E --> O[Generate Recommendations]
+    L --> O
+    M --> O
+    N --> O
+    O --> P[Display Results to User]
+    
+    style E fill:#ff6b6b
+    style N fill:#ff6b6b
+    style M fill:#ffd93d
+    style L fill:#6bcf7f
+```
+
 <AccordionGroup>
   <Accordion title="Transaction Fetching">
 
