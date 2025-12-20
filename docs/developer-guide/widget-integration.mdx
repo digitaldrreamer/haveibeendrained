@@ -5,7 +5,9 @@ description: "Embed a wallet security checker widget into your website"
 
 ## Overview
 
-The Have I Been Drained HTML widget allows you to embed a ready-to-use wallet security checker into your website with minimal configuration.
+The Have I Been Drained HTML widget allows you to embed a ready-to-use wallet security checker into your website with minimal configuration. The widget features a captcha-like interface that users can interact with to check their wallet security.
+
+![Widget Loading State](/images/widget-loading.png)
 
 ## Installation
 
@@ -26,7 +28,7 @@ Add the widget script to your HTML page:
   <div id="hibd-widget"></div>
   
   <!-- Widget script -->
-  <script src="https://widget.haveibeendrained.org/v1/widget.js"></script>
+  <script src="https://haveibeendrained.org/widget.js"></script>
   <script>
     HIBDWidget.init({
       containerId: 'hibd-widget'
@@ -43,7 +45,7 @@ Add the widget script to your HTML page:
 ```javascript
 HIBDWidget.init({
   containerId: 'hibd-widget',  // Required: DOM element ID
-  theme: 'dark',                // Optional: 'light' or 'dark'
+  theme: 'light',              // Optional: 'light' or 'dark' (default: 'light')
   apiUrl: 'https://api.haveibeendrained.org'  // Optional: API endpoint
 });
 ```
@@ -53,9 +55,9 @@ HIBDWidget.init({
 ```javascript
 HIBDWidget.init({
   containerId: 'hibd-widget',
-  theme: 'dark',
+  theme: 'light',              // 'light' or 'dark'
   apiUrl: 'https://api.haveibeendrained.org',
-  showPoweredBy: true,  // Show attribution
+  showPoweredBy: true,          // Show "Powered by Have I Been Drained" attribution
   onResult: function(result) {
     // Callback when analysis completes
     console.log('Analysis result:', result);
@@ -72,7 +74,7 @@ HIBDWidget.init({
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `containerId` | string | required | ID of the DOM element where widget will render |
-| `theme` | string | `'dark'` | Color theme: `'light'` or `'dark'` |
+| `theme` | string | `'light'` | Color theme: `'light'` or `'dark'` |
 | `apiUrl` | string | `'https://api.haveibeendrained.org'` | Base URL for API endpoint |
 | `showPoweredBy` | boolean | `true` | Show "Powered by Have I Been Drained" attribution |
 | `onResult` | function | `undefined` | Callback function called when analysis completes |
@@ -83,12 +85,21 @@ The `onResult` callback receives a result object:
 
 ```javascript
 {
-  status: 'safe' | 'at_risk' | 'drained',
-  riskScore: 0-100,
+  status: 'safe' | 'at_risk' | 'drained' | 'unknown',
+  type: 'wallet_analysis' | 'drainer' | 'unknown',
+  message: string,
   details: {
-    overallRisk: 'SAFE' | 'AT_RISK' | 'DRAINED',
-    factors: [...],
-    recommendations: [...]
+    overallRisk: number,           // Risk score 0-100
+    severity: 'SAFE' | 'AT_RISK' | 'DRAINED',
+    walletAddress: string,
+    transactionCount: number,
+    detections: [...],             // Array of detected issues
+    recommendations: [...],        // Array of recommendation strings
+    affectedAssets: {
+      tokens: [...],
+      nfts: [...],
+      sol: number
+    }
   }
 }
 ```
@@ -116,55 +127,34 @@ HIBDWidget.init({
 });
 ```
 
+## Widget States
+
+The widget displays different states based on the verification status:
+
+- **Idle**: Initial state with "Check wallet security" button
+- **Loading**: Shows spinner while analyzing the wallet
+- **Verified**: Shows result status (safe/at_risk/drained) with option to see detailed results
+- **Error**: Shows error message if verification fails
+
+Users can click "See Results" to view a detailed modal with:
+- Risk score
+- Detections (if any)
+- Recommendations
+- Affected assets information
+
 ## Styling
 
-### Custom CSS
+The widget is self-contained with its own styles. The widget container has a maximum width of 320px and is centered by default. All styles are scoped to the `.hibd-widget` class to avoid conflicts with your site's CSS.
 
-The widget uses CSS classes with the `hibd-widget` prefix:
+### Custom Container Styling
+
+You can style the container element:
 
 ```css
 /* Widget container */
 #hibd-widget {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Input field */
-.hibd-widget-input {
-  border-radius: 8px;
-  padding: 12px;
-}
-
-/* Button */
-.hibd-widget-button {
-  background-color: #3E5FFF;
-  border-radius: 8px;
-  padding: 12px 24px;
-}
-
-/* Results container */
-.hibd-widget-results {
-  margin-top: 20px;
-  padding: 16px;
-  border-radius: 8px;
-}
-```
-
-### Theme Customization
-
-Override theme colors:
-
-```css
-:root {
-  --hibd-primary: #3E5FFF;
-  --hibd-success: #10B981;
-  --hibd-warning: #F59E0B;
-  --hibd-danger: #EF4444;
-}
-
-#hibd-widget {
-  --hibd-primary: #your-color;
+  max-width: 320px;  /* Widget default max-width */
+  margin: 0 auto;     /* Center the widget */
 }
 ```
 
@@ -181,11 +171,11 @@ function WalletChecker() {
   useEffect(() => {
     // Load widget script
     const script = document.createElement('script');
-    script.src = 'https://widget.haveibeendrained.org/v1/widget.js';
+    script.src = 'https://haveibeendrained.org/widget.js';
     script.onload = () => {
       window.HIBDWidget.init({
         containerId: 'hibd-widget',
-        theme: 'dark',
+        theme: 'light',
         onResult: (result) => {
           console.log('Result:', result);
         }
@@ -213,11 +203,11 @@ function WalletChecker() {
 export default {
   mounted() {
     const script = document.createElement('script');
-    script.src = 'https://widget.haveibeendrained.org/v1/widget.js';
+    script.src = 'https://haveibeendrained.org/widget.js';
     script.onload = () => {
       window.HIBDWidget.init({
         containerId: 'hibd-widget',
-        theme: 'dark'
+        theme: 'light'
       });
     };
     document.body.appendChild(script);
@@ -234,7 +224,7 @@ Add to your theme's `functions.php`:
 function enqueue_hibd_widget() {
     wp_enqueue_script(
         'hibd-widget',
-        'https://widget.haveibeendrained.org/v1/widget.js',
+        'https://haveibeendrained.org/widget.js',
         array(),
         '1.0.0',
         true
@@ -267,25 +257,14 @@ You can have multiple widgets on the same page:
 <script>
   HIBDWidget.init({
     containerId: 'widget-1',
-    theme: 'dark'
+    theme: 'light'
   });
   
   HIBDWidget.init({
     containerId: 'widget-2',
-    theme: 'light'
+    theme: 'dark'
   });
 </script>
-```
-
-### Pre-fill Address
-
-Pre-fill the widget with an address:
-
-```javascript
-HIBDWidget.init({
-  containerId: 'hibd-widget',
-  prefillAddress: 'ABC123...'  // Optional: pre-fill address
-});
 ```
 
 ### Custom API Endpoint

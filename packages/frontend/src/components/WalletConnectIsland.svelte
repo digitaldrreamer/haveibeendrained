@@ -11,8 +11,12 @@
 
   // * Create wrapper functions that emit window events
   function handleConnected(walletAddress: string, email?: string) {
-    if (onConnected) {
-      onConnected(walletAddress, email);
+    try {
+      if (onConnected) {
+        onConnected(walletAddress, email);
+      }
+    } catch (error) {
+      console.error('Error in onConnected callback:', error);
     }
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('wallet-connected', { 
@@ -22,8 +26,12 @@
   }
 
   function handleDisconnected() {
-    if (onDisconnected) {
-      onDisconnected();
+    try {
+      if (onDisconnected) {
+        onDisconnected();
+      }
+    } catch (error) {
+      console.error('Error in onDisconnected callback:', error);
     }
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('wallet-disconnected'));

@@ -23,11 +23,10 @@ flowchart TD
     E -->|SetAuthority| G[Check Wallet Control<br/>Revoke Approvals]
     E -->|Unlimited Approval| H[Revoke Specific Approval]
     
-    F --> I[Transfer Remaining Assets]
-    G --> I
-    H --> I
+    F --> J[Create New Wallet]
+    G --> J
+    H --> J
     
-    I --> J[Create New Wallet]
     J --> K[Transfer Assets to New Wallet]
     K --> L[Report Drainer Address]
     L --> M[Review Attack Vector]
@@ -37,8 +36,8 @@ flowchart TD
     style F fill:#ffd93d
     style G fill:#ffd93d
     style H fill:#ffd93d
-    style I fill:#6bcf7f
     style J fill:#6bcf7f
+    style K fill:#6bcf7f
 ```
 
 <Steps>

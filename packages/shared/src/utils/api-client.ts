@@ -118,6 +118,17 @@ export class ApiClient {
       // * If the response type is 'drainer', convert it to RiskReport format
       if (json.type === 'drainer' && json.data) {
         const drainerData = json.data;
+        // * LAMPORTS_PER_SOL constant: 1 SOL = 1,000,000,000 lamports
+        const LAMPORTS_PER_SOL = 1_000_000_000;
+        // * Convert totalSolReported from lamports to SOL
+        const totalSolAmount = drainerData.totalSolReported 
+          ? drainerData.totalSolReported / LAMPORTS_PER_SOL 
+          : 0;
+        // * lastSeen is in seconds (Unix timestamp), use directly
+        const timestamp = drainerData.lastSeen 
+          ? (typeof drainerData.lastSeen === 'number' ? drainerData.lastSeen : Math.floor(Date.now() / 1000))
+          : Math.floor(Date.now() / 1000);
+        
         const riskReport: RiskReport = {
           overallRisk: 100,
           severity: 'DRAINED',
@@ -131,11 +142,11 @@ export class ApiClient {
               recommendations: [
                 '🚨 CRITICAL: This address is a known drainer',
                 `This address has ${drainerData.reportCount} report(s) in our on-chain registry`,
-                `Total SOL reported stolen: ${drainerData.totalSolReported?.toFixed(4) || '0'} SOL`,
+                `Total SOL reported stolen: ${totalSolAmount.toFixed(4)} SOL`,
                 'DO NOT interact with this address',
                 'DO NOT approve any transactions from this address',
               ],
-              timestamp: drainerData.lastSeen ? new Date(drainerData.lastSeen).getTime() / 1000 : Math.floor(Date.now() / 1000),
+              timestamp: timestamp,
               drainerAddress: drainerData.drainerAddress,
             },
           ],
@@ -150,7 +161,7 @@ export class ApiClient {
           affectedAssets: {
             tokens: [],
             nfts: [],
-            sol: drainerData.totalSolReported || 0,
+            sol: totalSolAmount,
           },
           analyzedAt: Date.now(),
         };

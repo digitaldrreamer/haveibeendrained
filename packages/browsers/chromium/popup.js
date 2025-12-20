@@ -311,8 +311,8 @@ async function handleCheck() {
       throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
     }
 
-    const data = await response.json();
-    
+    let data = await response.json();
+
     // * Convert drainer response to RiskReport format if needed
     if (data.type === 'drainer' && data.data) {
       const drainerData = data.data;
@@ -352,7 +352,7 @@ async function handleCheck() {
         },
         analyzedAt: Date.now(),
       };
-      
+
       // Format to match expected structure
       data = {
         success: true,
@@ -364,7 +364,7 @@ async function handleCheck() {
         timestamp: data.timestamp || Date.now(),
       };
     }
-    
+
     showResults(data);
   } catch (err) {
     console.error('Check failed:', err);

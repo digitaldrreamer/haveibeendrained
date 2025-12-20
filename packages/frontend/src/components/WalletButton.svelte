@@ -109,15 +109,21 @@
   }
 </script>
 
-{#if isClient}
-  {#if walletAddress}
-    <ProfileDropdown
-      {walletAddress}
-      {email}
-      {verified}
-      onDisconnect={handleDisconnected}
-    />
+  {#if isClient}
+    {#if walletAddress}
+      <ProfileDropdown
+        {walletAddress}
+        {email}
+        {verified}
+        onDisconnect={handleDisconnected}
+        onEmailUpdated={(newEmail) => {
+          email = newEmail;
+          verified = false;
+          localStorage.setItem('wallet_alert_state', JSON.stringify({ walletAddress, email: newEmail, verified: false }));
+          checkWalletStatus(walletAddress);
+        }}
+      />
+    {/if}
   {/if}
-{/if}
 
 
