@@ -10,10 +10,7 @@
 
 ## 🎥 Demo
 
-<video width="100%" controls>
-  <source src="https://off-chain.haveibeendrained.org/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag. [Watch the demo here](https://off-chain.haveibeendrained.org/demo.mp4)
-</video>
+https://off-chain.haveibeendrained.org/demo.mp4
 
 ## 🎯 The Problem
 
