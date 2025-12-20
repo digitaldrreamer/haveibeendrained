@@ -8,6 +8,13 @@
 
 > **Built for Solana Student Hackathon Fall 2025**
 
+## 🎥 Demo
+
+<video width="100%" controls>
+  <source src="https://off-chain.haveibeendrained.org/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag. [Watch the demo here](https://off-chain.haveibeendrained.org/demo.mp4)
+</video>
+
 ## 🎯 The Problem
 
 In 2024-2025, Solana wallet drainers stole **$300+ million** from **324,000+ users**. Current security solutions are:
