@@ -8,6 +8,23 @@
 
 > **Built for Solana Student Hackathon Fall 2025**
 
+## ⚠️ Current Status & Demo Wallets
+
+My personal servers are currently **overloaded with multiple production apps**, so I had to temporarily cut down some infrastructure for this project. **Live wallet checks may be flaky or unavailable right now**, especially during peak traffic. The **demo addresses below are guaranteed to work** and exercise the full detection engine end-to-end. Sorry in advance if your real wallet check fails or times out while the hackathon is live — the underlying architecture and detection logic are production-ready, but I am resource-constrained on infra.
+
+**Demo / Test Wallets (for reliable checks):**
+
+- **Safe wallet (no issues)**  
+  `11111111111111111111111111111111`
+- **At-risk wallet – unlimited approvals pattern**  
+  `7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU`
+- **Fully drained wallet – SetAuthority + known drainer**  
+  `9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM`
+- **High-risk wallet – interaction with known drainer**  
+  `5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1`
+
+These wallets map to the internal demo-mode fixtures used by the API, so they will always return rich, realistic analysis results even if live RPC or database resources are under pressure.
+
 ## ⚡ Quick Stats
 
 | Metric | Value |

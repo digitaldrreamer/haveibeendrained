@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Root README status section documenting overloaded servers and demo/test wallets
+- Publicly documented demo wallet addresses for safe, at-risk, drained, and known-drainer scenarios
 - Drainer address population script (`packages/api/scripts/populate-drainers.ts`)
 - Comprehensive guide for finding and populating drainer addresses (`DRAINER_ADDRESSES_GUIDE.md`)
 - `populate:drainers` npm script for easy execution
