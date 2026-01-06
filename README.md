@@ -6,7 +6,6 @@
 [![Anchor](https://img.shields.io/badge/Anchor-0.32.1-3E5FFF?style=flat)](https://www.anchor-lang.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> **Built for Solana Student Hackathon Fall 2025**
 
 ## ⚠️ Current Status & Demo Wallets
 
