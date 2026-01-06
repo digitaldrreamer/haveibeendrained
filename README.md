@@ -453,7 +453,7 @@ docker compose -f docker-compose.prod.yml up -d
 
 ## 🤝 Contributing
 
-This project was built for the Solana Student Hackathon. Contributions welcome!
+This project was built for the Solana Hackathon. Contributions welcome!
 
 1. Fork the repository
 2. Create a feature branch
